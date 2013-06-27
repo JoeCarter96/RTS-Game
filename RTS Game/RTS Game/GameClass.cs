@@ -36,7 +36,6 @@ namespace RTS_Game
             IsMouseVisible = true;
         }
 
-
         protected override void Initialize()
         {
             //Set the size of the game window
@@ -77,9 +76,9 @@ namespace RTS_Game
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             spriteBatch.Begin();
-
-            //TODO: draw code.
-
+            {
+                //TODO: draw code.
+            }
             spriteBatch.End();
 
             base.Draw(gameTime);

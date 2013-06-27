@@ -5,8 +5,13 @@ using System.Text;
 
 namespace RTS_Game
 {
-    class Tile
+    class TileMap
     {
+        private Tile[] TileArray;
 
+        public TileMap()
+        {
+
+        }
     }
 }
