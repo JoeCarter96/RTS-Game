@@ -16,20 +16,24 @@ namespace RTS_Game
     /// </summary>
     public class GameClass : Microsoft.Xna.Framework.Game
     {
+        //Game constants
         public const int Game_Width = 800;
         public const int Game_Height = 600;
 
-
+        //Game objects
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
-
         private KeyboardState keyboard;
         private MouseState mouse;
 
         public GameClass()
         {
+            //Content setup
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+
+            //make the mouse visible
+            IsMouseVisible = true;
         }
 
 
