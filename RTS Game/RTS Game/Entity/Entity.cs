@@ -1,9 +1,10 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace RTS_Game
 {
@@ -15,8 +16,6 @@ namespace RTS_Game
         protected Vector2 position;
         protected Vector2 velocity = new Vector2(0, 0);
         protected Vector2 origin;
-        
-        //Implement properties as needed.
 
         public Entity(Vector2 position, Texture2D texture)
         {
@@ -36,9 +35,6 @@ namespace RTS_Game
 
         public virtual void Update(GameTime gameTime)
         {
-            //may not be needed
-            position += velocity;
-
 
         }
 
