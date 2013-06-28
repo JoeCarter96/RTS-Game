@@ -1,0 +1,6 @@
+C:\Users\Pritchy\Documents\GitHub\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\RTS Game.exe
+C:\Users\Pritchy\Documents\GitHub\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\RTS Game.pdb
+C:\Users\Pritchy\Documents\GitHub\RTS-Game\RTS Game\RTS Game\obj\x86\Debug\RTS Game.csprojResolveAssemblyReference.cache
+C:\Users\Pritchy\Documents\GitHub\RTS-Game\RTS Game\RTS Game\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Users\Pritchy\Documents\GitHub\RTS-Game\RTS Game\RTS Game\obj\x86\Debug\RTS Game.exe
+C:\Users\Pritchy\Documents\GitHub\RTS-Game\RTS Game\RTS Game\obj\x86\Debug\RTS Game.pdb

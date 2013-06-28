@@ -19,12 +19,15 @@ namespace RTS_Game
         //Game constants
         public const int Game_Width = 800;
         public const int Game_Height = 600;
+        public const int Tile_Width = 40;
 
         //Game objects
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
         private KeyboardState keyboard;
         private MouseState mouse;
+
+        public TileMap world = new TileMap();
 
         public GameClass()
         {
@@ -50,6 +53,10 @@ namespace RTS_Game
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
             // TODO: use this.Content to load your game content here
+
+            
+            //Initialise Array
+            world.AfterContentLoad(Game_Width, Game_Height, Tile_Width);
         }
 
         protected override void UnloadContent()
@@ -78,6 +85,7 @@ namespace RTS_Game
             spriteBatch.Begin();
             {
                 //TODO: draw code.
+                world.Draw(spriteBatch);
             }
             spriteBatch.End();
 
