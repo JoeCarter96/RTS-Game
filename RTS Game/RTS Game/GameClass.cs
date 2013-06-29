@@ -52,7 +52,10 @@ namespace RTS_Game
             spriteBatch = new SpriteBatch(GraphicsDevice);
             // TODO: use this.Content to load your game content here
 
-            
+            //Background Textures.
+            Texture2D Grass01 = Content.Load<Texture2D>("Grass01");
+            Resources.AddBackgroundTexture(Grass01);
+
             //Initialise Array
             world.AfterContentLoad(Game_Width, Game_Height, Tile_Width);
         }

@@ -83,6 +83,7 @@
     <Compile Include="GameClass.cs" />
     <Compile Include="Level\Tile.cs" />
     <Compile Include="Level\TileMap.cs" />
+    <Compile Include="Resources.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />
