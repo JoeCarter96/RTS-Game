@@ -63,16 +63,8 @@ namespace RTS_Game
             Road01.Name = "Road01";
             Resources.AddBackgroundTexture(Road01);
 
-            button = new Button(new Vector2(100, 100), Grass01, Road01, Grass01);
-            button.LeftClick += button_LeftClick;
-
             //Initialise Array
             //world.AfterContentLoad(Game_Width, Game_Height, Tile_Width);
-        }
-
-        void button_LeftClick(object sender, EventArgs e)
-        {
-            Console.WriteLine("button was clicked");
         }
 
         protected override void UnloadContent()
@@ -90,7 +82,7 @@ namespace RTS_Game
             if (keyboard.IsKeyDown(Keys.Escape))
                 this.Exit();
 
-            button.Update(gameTime, mouse);
+            StateManager.Instance.Update(gameTime, keyboard, mouse);
 
             base.Update(gameTime);
         }
@@ -103,7 +95,7 @@ namespace RTS_Game
             {
                 //TODO: draw code.
                 //world.Draw(spriteBatch);
-                button.Draw(spriteBatch);
+                StateManager.Instance.Draw(spriteBatch);
             }
             spriteBatch.End();
 

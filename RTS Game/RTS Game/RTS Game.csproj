@@ -73,7 +73,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GameState\BasicGameState.cs" />
-    <Compile Include="GameState\GameStateManager.cs" />
+    <Compile Include="GameState\StateManager.cs" />
+    <Compile Include="GameState\InGameState.cs" />
+    <Compile Include="GameState\MainMenuState.cs" />
+    <Compile Include="GameState\SplashState.cs" />
     <Compile Include="GameState\States.cs" />
     <Compile Include="GUI\Button.cs" />
     <Compile Include="GUI\Component.cs" />
