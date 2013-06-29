@@ -72,6 +72,9 @@
     <Reference Include="System.Net" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GameState\BasicGameState.cs" />
+    <Compile Include="GameState\GameStateManager.cs" />
+    <Compile Include="GameState\States.cs" />
     <Compile Include="GUI\Button.cs" />
     <Compile Include="GUI\Component.cs" />
     <Compile Include="Entity\Entity.cs" />
