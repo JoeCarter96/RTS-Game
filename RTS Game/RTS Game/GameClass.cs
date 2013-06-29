@@ -17,7 +17,7 @@ namespace RTS_Game
         //Game constants
         public const int Game_Width = 800;
         public const int Game_Height = 600;
-        public const int Tile_Width = 40;
+        public const int Tile_Width = 80;
 
         //Game objects
         private GraphicsDeviceManager graphics;
