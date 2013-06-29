@@ -25,7 +25,9 @@ namespace RTS_Game
         private KeyboardState keyboard;
         private MouseState mouse;
 
-        public TileMap world = new TileMap();
+        //texting stuff
+        //public TileMap world = new TileMap();
+        Button button;
 
         public GameClass()
         {
@@ -54,10 +56,23 @@ namespace RTS_Game
 
             //Background Textures.
             Texture2D Grass01 = Content.Load<Texture2D>("Grass01");
+            Grass01.Name = "Grass01";
             Resources.AddBackgroundTexture(Grass01);
 
+            Texture2D Road01 = Content.Load<Texture2D>("Road01");
+            Road01.Name = "Road01";
+            Resources.AddBackgroundTexture(Road01);
+
+            button = new Button(new Vector2(100, 100), Grass01, Road01, Grass01);
+            button.LeftClick += button_LeftClick;
+
             //Initialise Array
-            world.AfterContentLoad(Game_Width, Game_Height, Tile_Width);
+            //world.AfterContentLoad(Game_Width, Game_Height, Tile_Width);
+        }
+
+        void button_LeftClick(object sender, EventArgs e)
+        {
+            Console.WriteLine("button was clicked");
         }
 
         protected override void UnloadContent()
@@ -75,6 +90,7 @@ namespace RTS_Game
             if (keyboard.IsKeyDown(Keys.Escape))
                 this.Exit();
 
+            button.Update(gameTime, mouse);
 
             base.Update(gameTime);
         }
@@ -86,7 +102,8 @@ namespace RTS_Game
             spriteBatch.Begin();
             {
                 //TODO: draw code.
-                world.Draw(spriteBatch);
+                //world.Draw(spriteBatch);
+                button.Draw(spriteBatch);
             }
             spriteBatch.End();
 

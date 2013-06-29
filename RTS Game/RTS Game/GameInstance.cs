@@ -30,12 +30,12 @@ namespace RTS_Game
 
         }
 
-        protected override void Update(GameTime gameTime, KeyboardState keyboard, MouseState mouse)
+        protected void Update(GameTime gameTime, KeyboardState keyboard, MouseState mouse)
         {
 
         }
 
-        protected override void Draw(SpriteBatch spriteBatch)
+        protected void Draw(SpriteBatch spriteBatch)
         {
 
         }

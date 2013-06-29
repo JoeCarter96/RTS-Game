@@ -16,6 +16,7 @@ namespace RTS_Game
         #region Background Textures
         public static void AddBackgroundTexture(Texture2D textureToAdd)
         {
+            
             BackgroundTextures.Add(textureToAdd.Name, textureToAdd);
         }
 
