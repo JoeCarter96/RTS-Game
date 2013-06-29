@@ -12,6 +12,7 @@ namespace RTS_Game
         private static Dictionary<String, Texture2D> LevelImages = new Dictionary<string, Texture2D>();
         private static Dictionary<String, Texture2D> UnitTextures = new Dictionary<string, Texture2D>();
         private static Dictionary<String, Texture2D> BuildingTextures = new Dictionary<string, Texture2D>();
+        private static Dictionary<String, Texture2D> GUITextures = new Dictionary<string, Texture2D>();
 
         #region Background Textures
         public static void AddBackgroundTexture(Texture2D textureToAdd)
@@ -62,5 +63,16 @@ namespace RTS_Game
         }
         #endregion
 
+        #region GUI Textures
+        public static void AddGUITexture(Texture2D textureToAdd)
+        {
+            GUITextures.Add(textureToAdd.Name, textureToAdd);
+        }
+
+        public static Texture2D GetGUITextures(String requestedTextureName)
+        {
+            return GUITextures[requestedTextureName];
+        }
+        #endregion
     }
 }

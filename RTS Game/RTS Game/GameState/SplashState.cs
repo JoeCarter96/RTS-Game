@@ -20,8 +20,10 @@ namespace RTS_Game
         //Bool to state if the splash screen has been up for the specificed amount of time
         private bool TimeFinished = false;
 
-        //
+        //The time at which the state was entered
         private long StartTime;
+
+        //The time the splash screen will stay for(in milli seconds)
         private long Duration = 5000;
 
         public SplashState(StateManager manager)
@@ -42,18 +44,25 @@ namespace RTS_Game
 
         public override void Update(GameTime gameTime, KeyboardState keyboard, MouseState mouse)
         {
+            //On the first call of the loop in this game state, we set the start time
             if (FirstTick)
             {
                 StartTime = gameTime.TotalGameTime.Milliseconds;
                 FirstTick = false;
             }
 
-            
+            TimeFinished = gameTime.TotalGameTime.TotalMilliseconds > (StartTime + Duration);
+            SkipScreen = keyboard.IsKeyDown(Keys.Space);
+
+            if (SkipScreen || TimeFinished)
+            {
+                EnterState(States.MainMenu);
+            }
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            
+            spriteBatch.Draw(Resources.GetGUITextures("SplashScreen"), new Vector2(0, 0), Color.White);
         }
     }
 }

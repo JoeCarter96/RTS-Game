@@ -72,12 +72,12 @@
     <Reference Include="System.Net" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GameState\BasicGameState.cs" />
-    <Compile Include="GameState\StateManager.cs" />
+    <Compile Include="Core\BasicGameState.cs" />
+    <Compile Include="Core\StateManager.cs" />
     <Compile Include="GameState\InGameState.cs" />
     <Compile Include="GameState\MainMenuState.cs" />
     <Compile Include="GameState\SplashState.cs" />
-    <Compile Include="GameState\States.cs" />
+    <Compile Include="Core\States.cs" />
     <Compile Include="GUI\Button.cs" />
     <Compile Include="GUI\Component.cs" />
     <Compile Include="Entity\Entity.cs" />
@@ -87,11 +87,11 @@
     <Compile Include="GUI\MouseButton.cs" />
     <Compile Include="Level\LevelLoad.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Program.cs" />
-    <Compile Include="GameClass.cs" />
+    <Compile Include="Core\Program.cs" />
+    <Compile Include="Core\GameClass.cs" />
     <Compile Include="Level\Tile.cs" />
     <Compile Include="Level\TileMap.cs" />
-    <Compile Include="Resources.cs" />
+    <Compile Include="Core\Resources.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />

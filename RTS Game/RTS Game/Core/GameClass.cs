@@ -25,10 +25,6 @@ namespace RTS_Game
         private KeyboardState keyboard;
         private MouseState mouse;
 
-        //texting stuff
-        //public TileMap world = new TileMap();
-        Button button;
-
         public GameClass()
         {
             //Content setup
@@ -63,8 +59,10 @@ namespace RTS_Game
             Road01.Name = "Road01";
             Resources.AddBackgroundTexture(Road01);
 
-            //Initialise Array
-            //world.AfterContentLoad(Game_Width, Game_Height, Tile_Width);
+            Texture2D SplashScreen = Content.Load<Texture2D>("Splash");
+            SplashScreen.Name = "SplashScreen";
+            Resources.AddGUITexture(SplashScreen);
+
         }
 
         protected override void UnloadContent()
@@ -78,10 +76,6 @@ namespace RTS_Game
             keyboard = Keyboard.GetState();
             mouse = Mouse.GetState();
 
-            //Debug code which closes the game when escape is pressed
-            if (keyboard.IsKeyDown(Keys.Escape))
-                this.Exit();
-
             StateManager.Instance.Update(gameTime, keyboard, mouse);
 
             base.Update(gameTime);
@@ -89,14 +83,10 @@ namespace RTS_Game
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.White);
 
             spriteBatch.Begin();
-            {
-                //TODO: draw code.
-                //world.Draw(spriteBatch);
-                StateManager.Instance.Draw(spriteBatch);
-            }
+            StateManager.Instance.Draw(spriteBatch);
             spriteBatch.End();
 
             base.Draw(gameTime);

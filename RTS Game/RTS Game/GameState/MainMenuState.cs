@@ -19,7 +19,7 @@ namespace RTS_Game
 
         public override void OnEnter()
         {
-            
+            Console.WriteLine("Entered the main menu state");
         }
 
         public override void OnExit()
