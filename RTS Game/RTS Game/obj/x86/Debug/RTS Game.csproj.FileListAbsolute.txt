@@ -9,3 +9,15 @@ C:\Users\Pritchy\Documents\GitHub\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Conte
 C:\Users\Pritchy\Documents\GitHub\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\Level_Test.xnb
 C:\Users\Pritchy\Documents\GitHub\RTS-Game\RTS Game\RTS Game\obj\x86\Debug\RTS Game.csprojResolveAssemblyReference.cache
 C:\Users\Pritchy\Documents\GitHub\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\Water01.xnb
+C:\Git Projects\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\Grass01.xnb
+C:\Git Projects\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\Road01.xnb
+C:\Git Projects\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\Splash.xnb
+C:\Git Projects\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\Level_Test.xnb
+C:\Git Projects\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\Water01.xnb
+C:\Git Projects\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\RTS Game.exe
+C:\Git Projects\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\RTS Game.pdb
+C:\Git Projects\RTS-Game\RTS Game\RTS Game\obj\x86\Debug\RTS Game.csprojResolveAssemblyReference.cache
+C:\Git Projects\RTS-Game\RTS Game\RTS Game\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Git Projects\RTS-Game\RTS Game\RTS Game\obj\x86\Debug\RTS Game.exe
+C:\Git Projects\RTS-Game\RTS Game\RTS Game\obj\x86\Debug\RTS Game.pdb
+C:\Git Projects\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\TestFont.xnb

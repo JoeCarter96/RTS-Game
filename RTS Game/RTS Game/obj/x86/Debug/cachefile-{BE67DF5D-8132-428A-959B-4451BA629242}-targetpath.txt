@@ -3,3 +3,4 @@ Content\Road01.xnb
 Content\Splash.xnb
 Content\Level_Test.xnb
 Content\Water01.xnb
+Content\TestFont.xnb

@@ -16,6 +16,19 @@ namespace RTS_Game
         private int height;
         private int tilewidth;
 
+
+        //NOTE: the width and height might be the wrong way around...
+        //I'm too lazy to test it though from Joe
+        public int Width
+        {
+            get { return TileArray.GetLength(0); }
+        }
+
+        public int Height
+        {
+            get { return TileArray.GetLength(1); }
+        }
+
         #region Function Explanation
         //Creates TileArray, complete with Textured Background.
         #endregion

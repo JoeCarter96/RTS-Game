@@ -22,6 +22,10 @@ namespace RTS_Game
         //Zoom variable represents how far zoomed in the camera is
         private float zoom = 1f;
 
+        //We initially assume a 30 x 30 tilemap
+        //We have methods that re-workout these values
+        private int WorldWidth = 2400;
+        private int WorldHeight = 2400;
 
         #region Properties
         public Matrix CameraMatrix
@@ -65,10 +69,23 @@ namespace RTS_Game
             Position = new Vector2(0, 0);
         }
 
+        //This allows the camera to know the width and height of the map in pixels
+        //By default the camera assumes the map is 30 x 30
+        //For now all our maps are 30 x 30, but that might change
+        public void GiveTilemap(TileMap tilemap)
+        {
+            WorldHeight = tilemap.Width * GameClass.Tile_Width;
+            WorldWidth = tilemap.Height * GameClass.Tile_Width;
+        }
+
         //Returns a vector2 that is within the gamefield
         private Vector2 ClampCamera(Vector2 vector)
         {
             //Unfinished
+            if (vector.X < 0) { vector.X = 0; }
+            if (vector.X > (WorldWidth - GameClass.Game_Width)) { vector.X = (WorldWidth - GameClass.Game_Width); }
+            if (vector.Y < 0) { vector.Y = 0; }
+            if (vector.Y > (WorldHeight - GameClass.Game_Height)) { vector.Y = (WorldHeight - GameClass.Game_Height); }
             return vector;
         }
 
@@ -105,12 +122,6 @@ namespace RTS_Game
             {
                 movementVector.Normalize();
                 Position += (movementVector * CameraSpeed);
-            }
-
-            //Debug code
-            if (keyboard.IsKeyDown(Keys.Space))
-            {
-                Position = new Vector2(0, 0);
             }
 
             //Set the matrix

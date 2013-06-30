@@ -29,6 +29,9 @@ namespace RTS_Game
 
             //Build the tilemap using the level
             world = new TileMap(level, 800, 600, 80);
+
+            //we tell the camera the size of the tilemap so it can adjust its range
+            camera.GiveTilemap(world);
         }
 
         public void Update(GameTime gameTime, Camera camera, KeyboardState keyboard, MouseState mouse)
@@ -43,6 +46,7 @@ namespace RTS_Game
         }
 
         //Draw method that is not effected by the camera, used for UIs
+        //These will bw draw on top of the tile map and be unaffected by movement of the camera
         public void StaticDraw(SpriteBatch spriteBatch)
         {
             spriteBatch.DrawString(Resources.TestFont, camera.Position.ToString(), new Vector2(0 ,0), Color.Black);

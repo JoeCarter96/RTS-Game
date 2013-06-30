@@ -1,1 +1,2 @@
 C:\Users\Pritchy\Documents\GitHub\RTS-Game\RTS Game\RTS GameContent\obj\x86\Debug\RTS GameContent.contentprojResolveAssemblyReference.cache
+C:\Git Projects\RTS-Game\RTS Game\RTS GameContent\obj\x86\Debug\RTS GameContent.contentprojResolveAssemblyReference.cache
