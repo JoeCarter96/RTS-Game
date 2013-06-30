@@ -35,8 +35,8 @@ namespace RTS_Game
 
         public int ID
         {
-            get { return ID; }
-            set { ID = value; }
+            get { return iD; }
+            set { iD = value; }
         }
     }
 }

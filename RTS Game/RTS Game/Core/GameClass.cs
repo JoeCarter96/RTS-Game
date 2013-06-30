@@ -49,25 +49,31 @@ namespace RTS_Game
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            //Background Textures.
+            #region Background Textures.
+            //Grass01
             Texture2D Grass01 = Content.Load<Texture2D>("Grass01");
             Grass01.Name = "Grass01";
             Resources.AddBackgroundTexture(Grass01);
 
+            //Road01
             Texture2D Road01 = Content.Load<Texture2D>("Road01");
             Road01.Name = "Road01";
             Resources.AddBackgroundTexture(Road01);
+            #endregion
 
-            //Level Textures/Images
+            #region Level Objects.
+            //Test
             Texture2D Level_Test = Content.Load<Texture2D>("Level_Test");
-            Level_Test.Name = "Level_Test";
-            Resources.AddLevelImage(Level_Test);
+            Level Level00 = new Level("Test", Level_Test, 0);
+            Resources.AddLevelObject(Level00);
+            #endregion
 
-
+            #region GUI Textures
             //Splash Screen
             Texture2D SplashScreen = Content.Load<Texture2D>("Splash");
             SplashScreen.Name = "SplashScreen";
             Resources.AddGUITexture(SplashScreen);
+            #endregion
 
         }
 

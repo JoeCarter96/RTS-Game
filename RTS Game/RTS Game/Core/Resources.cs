@@ -9,10 +9,10 @@ namespace RTS_Game
     public static class Resources
     {   
         private static Dictionary<String, Texture2D> BackgroundTextures = new Dictionary<string,Texture2D>();
-        private static Dictionary<String, Texture2D> LevelImages = new Dictionary<string, Texture2D>();
         private static Dictionary<String, Texture2D> UnitTextures = new Dictionary<string, Texture2D>();
         private static Dictionary<String, Texture2D> BuildingTextures = new Dictionary<string, Texture2D>();
         private static Dictionary<String, Texture2D> GUITextures = new Dictionary<string, Texture2D>();
+        private static Dictionary<int, Level> LevelObjects = new Dictionary<int, Level>();
 
         #region Background Textures
         public static void AddBackgroundTexture(Texture2D textureToAdd)
@@ -27,15 +27,16 @@ namespace RTS_Game
         }
         #endregion
 
-        #region Level Images
-        public static void AddLevelImage(Texture2D imageToAdd)
+        #region Level Objects
+
+        public static void AddLevelObject(Level LevedToAdd)
         {
-            LevelImages.Add(imageToAdd.Name, imageToAdd);
+            LevelObjects.Add(LevedToAdd.ID, LevedToAdd);
         }
 
-        public static Texture2D GetLevelImage(String requestedImageName)
+        public static Level GetLevelObject(int requestedLevelID)
         {
-            return LevelImages[requestedImageName];
+            return LevelObjects[requestedLevelID];
         }
         #endregion
 

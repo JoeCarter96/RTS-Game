@@ -27,10 +27,8 @@ namespace RTS_Game
             //Create a new camera
             camera = new Camera();
 
-            //This needs to be created in the Menu state and then passed here, but I got impatient :D
-            //Level will be passed to this state somehow
-            Level Level00 = new Level("Test", Resources.GetLevelImage("Level_Test"), 0);
-            game = new GameInstance(Level00, camera);
+            //Level ID will be passed to this state somehow
+            game = new GameInstance(Resources.GetLevelObject(00), camera);
 
         }
 
