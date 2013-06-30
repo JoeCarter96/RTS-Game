@@ -22,7 +22,7 @@ namespace RTS_Game
         public override void OnEnter()
         {
             Console.WriteLine("Entered Game!");
-            Level.Level Level00 = new Level.Level("Test", Resources.GetLevelImage("Level_Test"), 0);    //This needs to be created in the Menu state and then passed here, but I got impatient :D
+            Level Level00 = new Level("Test", Resources.GetLevelImage("Level_Test"), 0);    //This needs to be created in the Menu state and then passed here, but I got impatient :D
             World = new TileMap(Level00, 800, 600, 80);
         }
 

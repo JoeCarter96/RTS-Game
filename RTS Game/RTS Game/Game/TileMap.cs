@@ -19,10 +19,10 @@ namespace RTS_Game
         #region Function Explanation
         //Creates TileArray, complete with Textured Background.
         #endregion
-        public TileMap(Level.Level level, int Width, int Height, int TileWidth)
+        public TileMap(Level level, int Width, int Height, int TileWidth)
         {
             //Creates Array of textures.
-            Texture2D[,] TextureArray = Level.LevelLoad.Load(level.LevelImage);
+            Texture2D[,] TextureArray = LevelLoad.Load(level.LevelImage);
 
             //Sets TileArray to level size.
             TileArray = new Tile[TextureArray.GetLength(0), TextureArray.GetLength(1)];
