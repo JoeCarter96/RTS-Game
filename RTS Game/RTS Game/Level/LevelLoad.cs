@@ -22,7 +22,10 @@ namespace RTS_Game.Level
         #endregion
         public static Texture2D[,] Load(Texture2D Level)
         {
-            //Array of Colours of each pixel.
+            AddColours();
+
+            //Array of Colours of each pixel. 
+            //Goes from top left to bottom right.
             Color[] pixelRGBValues = new Color[Level.Width * Level.Height];
 
             //Array of each Pixel Colours texture.
@@ -37,7 +40,11 @@ namespace RTS_Game.Level
                 {
                     String textureName;
                     //Tries to find matching colour key, if it does sets it to textureName.
-                    Colours.TryGetValue(pixelRGBValues[i * j], out textureName);
+                    //Array2DTo1D converts from 2D to 1D by adding up all the full rows 
+                    // (30 * I, would normally be 30*(i-1) but i starts at 0 so no need)
+                    // and then adding the remaining amount on the current row.
+                    int Array2DTo1D = 30 * j + i;
+                    Colours.TryGetValue(pixelRGBValues[Array2DTo1D], out textureName);
 
                     //Tries to find texture in Resources dictionary, if it can't defaults to grass texture.
                     try

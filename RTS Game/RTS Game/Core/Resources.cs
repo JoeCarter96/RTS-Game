@@ -35,7 +35,7 @@ namespace RTS_Game
 
         public static Texture2D GetLevelImage(String requestedImageName)
         {
-            return BackgroundTextures[requestedImageName];
+            return LevelImages[requestedImageName];
         }
         #endregion
 

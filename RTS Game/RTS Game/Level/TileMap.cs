@@ -16,16 +16,16 @@ namespace RTS_Game
         private int height;
         private int tilewidth;
 
-        public TileMap()
+        #region Function Explanation
+        //Creates TileArray, complete with Textured Background.
+        #endregion
+        public TileMap(Level.Level level, int Width, int Height, int TileWidth)
         {
+            //Creates Array of textures.
+            Texture2D[,] TextureArray = Level.LevelLoad.Load(level.LevelImage);
 
-        }
-
-        //Initialises Array, after Content load as textures are needed.
-        public void AfterContentLoad(int Width, int Height, int TileWidth)
-        {
-            //Amount of tiles.
-            TileArray = new Tile[(Width / TileWidth), (Height / TileWidth)];
+            //Sets TileArray to level size.
+            TileArray = new Tile[TextureArray.GetLength(0), TextureArray.GetLength(1)];
 
             //Used for loop
             int X = 0;
@@ -37,7 +37,7 @@ namespace RTS_Game
                 for (int j = 0; j < TileArray.GetLength(0); j++)
                 {
                     //Creates new tile.
-                    TileArray[j, i] = new Tile(new Vector2(i * TileWidth, j * TileWidth), new Vector2(i, j), null); 
+                    TileArray[j, i] = new Tile(new Vector2(i * TileWidth, j * TileWidth), new Vector2(i, j), TextureArray[i, j]);
                     //Increases X for next tile.
                     X += TileWidth;
                 }
@@ -45,12 +45,11 @@ namespace RTS_Game
                 Y += TileWidth;
                 X = 0;
             }
-
-            this.width = Width;
-            this.height = Height;
-            this.tilewidth = TileWidth;
         }
 
+        #region Function Explanation
+        //Draws Each Tile.
+        #endregion
         public void Draw(SpriteBatch spriteBatch)
         {
             //Is this the best way to do it?

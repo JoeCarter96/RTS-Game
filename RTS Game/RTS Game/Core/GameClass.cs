@@ -59,8 +59,17 @@ namespace RTS_Game
             Road01.Name = "Road01";
             Resources.AddBackgroundTexture(Road01);
 
+            //Level Textures/Images
+            Texture2D Level_Test = Content.Load<Texture2D>("Level_Test");
+            Level_Test.Name = "Level_Test";
+            Resources.AddLevelImage(Level_Test);
+
+
+            //Splash Screen
             Texture2D SplashScreen = Content.Load<Texture2D>("Splash");
             SplashScreen.Name = "SplashScreen";
+
+
             Resources.AddGUITexture(SplashScreen);
 
         }

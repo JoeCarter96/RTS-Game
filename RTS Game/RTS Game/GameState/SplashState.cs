@@ -24,7 +24,7 @@ namespace RTS_Game
         private long StartTime;
 
         //The time the splash screen will stay for(in milli seconds)
-        private long Duration = 5000;
+        private long Duration = 1000;
 
         public SplashState(StateManager manager)
             : base(manager)

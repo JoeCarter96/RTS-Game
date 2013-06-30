@@ -11,6 +11,8 @@ namespace RTS_Game
 {
     class InGameState : BasicGameState
     {
+        TileMap World;
+
         public InGameState(StateManager manager)
             : base(manager)
         {
@@ -19,7 +21,9 @@ namespace RTS_Game
 
         public override void OnEnter()
         {
-            
+            Console.WriteLine("Entered Game!");
+            Level.Level Level00 = new Level.Level("Test", Resources.GetLevelImage("Level_Test"), 0);    //This needs to be created in the Menu state and then passed here, but I got impatient :D
+            World = new TileMap(Level00, 800, 600, 80);
         }
 
         public override void OnExit()
@@ -34,7 +38,7 @@ namespace RTS_Game
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            
+            World.Draw(spriteBatch);    //Hope I did this right.
         }
     }
 }

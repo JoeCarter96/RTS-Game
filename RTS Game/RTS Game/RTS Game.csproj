@@ -85,6 +85,7 @@
     <Compile Include="Entity\Unit.cs" />
     <Compile Include="GameInstance.cs" />
     <Compile Include="GUI\MouseButton.cs" />
+    <Compile Include="Level\Level.cs" />
     <Compile Include="Level\LevelLoad.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Core\Program.cs" />
