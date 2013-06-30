@@ -28,7 +28,7 @@ namespace RTS_Game
             camera = new Camera();
 
             //Level ID will be passed to this state somehow
-            game = new GameInstance(Resources.GetLevelObject(00), camera);
+            game = new GameInstance(Resources.GetLevelObject(manager.LevelID), camera);
 
         }
 

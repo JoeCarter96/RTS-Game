@@ -31,7 +31,15 @@ namespace RTS_Game
         private Dictionary<States, BasicGameState> GameStateDictionary = new Dictionary<States, BasicGameState>();
         private BasicGameState CurrentGameState = null;
         private States CurrentState = States.NullState;
-        
+
+        private int LEVELID = 0;
+
+        public int LevelID
+        {
+            get { return LEVELID; }
+            set { LEVELID = value; }
+        }
+
         public StateManager()
         {
             AddState(States.SplashScreen, new SplashState(this));

@@ -14,18 +14,17 @@ namespace RTS_Game
         public MainMenuState(StateManager manager)
             : base(manager)
         {
-
         }
 
         public override void OnEnter()
         {
             Console.WriteLine("Entered the main menu state");
-            EnterState(States.InGame);  //TEMP.
+            EnterState(States.InGame);  //TEMP, jumps to game straight away.
         }
 
         public override void OnExit()
         {
-            
+            manager.LevelID = 0;    //TEMP, gives it a level without messing with GUI.
         }
 
         public override void Update(GameTime gameTime, KeyboardState keyboard, MouseState mouse)

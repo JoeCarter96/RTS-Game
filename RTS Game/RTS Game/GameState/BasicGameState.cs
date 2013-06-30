@@ -13,7 +13,7 @@ namespace RTS_Game
     //that will be called by the game state manager when switching states
     abstract class BasicGameState
     {
-        private StateManager manager;
+        protected StateManager manager;
         public BasicGameState(StateManager manager)
         {
             this.manager = manager;
