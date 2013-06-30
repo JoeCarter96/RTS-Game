@@ -59,6 +59,11 @@ namespace RTS_Game
             Texture2D Road01 = Content.Load<Texture2D>("Road01");
             Road01.Name = "Road01";
             Resources.AddBackgroundTexture(Road01);
+
+            //Water01
+            Texture2D Water01 = Content.Load<Texture2D>("Water01");
+            Water01.Name = "Water01";
+            Resources.AddBackgroundTexture(Water01);
             #endregion
 
             #region Level Objects.

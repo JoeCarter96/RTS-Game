@@ -8,3 +8,4 @@ C:\Users\Pritchy\Documents\GitHub\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Conte
 C:\Users\Pritchy\Documents\GitHub\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\Splash.xnb
 C:\Users\Pritchy\Documents\GitHub\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\Level_Test.xnb
 C:\Users\Pritchy\Documents\GitHub\RTS-Game\RTS Game\RTS Game\obj\x86\Debug\RTS Game.csprojResolveAssemblyReference.cache
+C:\Users\Pritchy\Documents\GitHub\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\Water01.xnb

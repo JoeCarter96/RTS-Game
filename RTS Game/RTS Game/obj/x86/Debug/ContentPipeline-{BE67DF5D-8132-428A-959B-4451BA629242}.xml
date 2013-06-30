@@ -35,7 +35,16 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Pritchy\Documents\GitHub\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\Level_Test.xnb</Output>
-      <Time>2013-06-30T12:53:31.4820179+01:00</Time>
+      <Time>2013-06-30T16:54:55.6351452+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Water01.png</Source>
+      <Name>Water01</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Pritchy\Documents\GitHub\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\Water01.xnb</Output>
+      <Time>2013-06-30T17:00:09.9281217+01:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
