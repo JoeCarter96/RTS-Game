@@ -11,7 +11,8 @@ namespace RTS_Game
 {
     class InGameState : BasicGameState
     {
-        TileMap World;
+        private GameInstance game;
+        private Camera camera;
 
         public InGameState(StateManager manager)
             : base(manager)
@@ -21,9 +22,16 @@ namespace RTS_Game
 
         public override void OnEnter()
         {
-            Console.WriteLine("Entered Game!");
-            Level Level00 = new Level("Test", Resources.GetLevelImage("Level_Test"), 0);    //This needs to be created in the Menu state and then passed here, but I got impatient :D
-            World = new TileMap(Level00, 800, 600, 80);
+            Console.WriteLine("Entered Game State");
+
+            //Create a new camera
+            camera = new Camera();
+
+            //This needs to be created in the Menu state and then passed here, but I got impatient :D
+            //Level will be passed to this state somehow
+            Level Level00 = new Level("Test", Resources.GetLevelImage("Level_Test"), 0);
+            game = new GameInstance(Level00, camera);
+
         }
 
         public override void OnExit()
@@ -33,12 +41,16 @@ namespace RTS_Game
 
         public override void Update(GameTime gameTime, KeyboardState keyboard, MouseState mouse)
         {
-            
+            camera.Update(keyboard, mouse);
+            game.Update(gameTime, camera, keyboard, mouse);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            World.Draw(spriteBatch);    //Hope I did this right.
+            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, 
+                              null, null, null, null, camera.CameraMatrix);
+            game.Draw(spriteBatch);
+            spriteBatch.End();
         }
     }
 }

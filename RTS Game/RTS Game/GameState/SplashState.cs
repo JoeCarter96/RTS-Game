@@ -62,7 +62,9 @@ namespace RTS_Game
 
         public override void Draw(SpriteBatch spriteBatch)
         {
+            spriteBatch.Begin();
             spriteBatch.Draw(Resources.GetGUITextures("SplashScreen"), new Vector2(0, 0), Color.White);
+            spriteBatch.End();
         }
     }
 }

@@ -31,7 +31,7 @@ namespace RTS_Game
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
 
-            //make the mouse visible
+            //make the mouse visible, we want to see the mouse
             IsMouseVisible = true;
         }
 
@@ -48,7 +48,6 @@ namespace RTS_Game
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            // TODO: use this.Content to load your game content here
 
             //Background Textures.
             Texture2D Grass01 = Content.Load<Texture2D>("Grass01");
@@ -68,8 +67,6 @@ namespace RTS_Game
             //Splash Screen
             Texture2D SplashScreen = Content.Load<Texture2D>("Splash");
             SplashScreen.Name = "SplashScreen";
-
-
             Resources.AddGUITexture(SplashScreen);
 
         }
@@ -85,6 +82,7 @@ namespace RTS_Game
             keyboard = Keyboard.GetState();
             mouse = Mouse.GetState();
 
+            //Update the StateManager
             StateManager.Instance.Update(gameTime, keyboard, mouse);
 
             base.Update(gameTime);
@@ -93,11 +91,7 @@ namespace RTS_Game
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.White);
-
-            spriteBatch.Begin();
             StateManager.Instance.Draw(spriteBatch);
-            spriteBatch.End();
-
             base.Draw(gameTime);
         }
     }

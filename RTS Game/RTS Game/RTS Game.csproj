@@ -78,6 +78,7 @@
     <Compile Include="GameState\MainMenuState.cs" />
     <Compile Include="GameState\SplashState.cs" />
     <Compile Include="GameState\States.cs" />
+    <Compile Include="Game\Camera.cs" />
     <Compile Include="GUI\Button.cs" />
     <Compile Include="GUI\Component.cs" />
     <Compile Include="Entity\Entity.cs" />

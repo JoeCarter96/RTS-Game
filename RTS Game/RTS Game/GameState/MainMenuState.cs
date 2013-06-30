@@ -35,7 +35,9 @@ namespace RTS_Game
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            
+            spriteBatch.Begin();
+
+            spriteBatch.End();
         }
     }
 }
