@@ -38,6 +38,11 @@ namespace RTS_Game
                 {
                     position.X = viewport.Width / 2;
                 }
+
+                if (position.Y < viewport.Height / 2)
+                {
+                    position.Y = viewport.Height / 2;
+                }
             }
         }
         public float Zoom
@@ -58,7 +63,7 @@ namespace RTS_Game
 
         public Camera()
         {
-            Position = new Vector2(0,0);
+            Position = new Vector2(viewport.Width / 2, viewport.Width / 2);
         }
 
         public Camera(Vector2 startPosition)
@@ -69,22 +74,29 @@ namespace RTS_Game
         //This is where we change the camera depending on our inputs
         public void Update(KeyboardState keyboard, MouseState mouse)
         {
+            Vector2 movementVector = new Vector2(0, 0);
             //camera movement logic
             if (keyboard.IsKeyDown(Keys.Left))
             {
-                position.X--;
+                movementVector.X--;
             }
             if (keyboard.IsKeyDown(Keys.Right))
             {
-                position.X++;
+                movementVector.X++;
             }
             if (keyboard.IsKeyDown(Keys.Up))
             {
-                position.Y--;
+                movementVector.Y--;
             }
             if (keyboard.IsKeyDown(Keys.Down))
             {
-                position.Y++;
+                movementVector.Y++;
+            }
+
+            if (movementVector != Vector2.Zero)
+            {
+                movementVector.Normalize();
+                Position += (movementVector * 5);
             }
 
             //Debug code
