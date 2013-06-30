@@ -36,9 +36,16 @@ namespace RTS_Game
 
         }
 
+        //The drawmethod that will be offset and scaled by the camera
         public void Draw(SpriteBatch spriteBatch)
         {
-            world.Draw(spriteBatch);
+            world.Draw(spriteBatch);      
+        }
+
+        //Draw method that is not effected by the camera, used for UIs
+        public void StaticDraw(SpriteBatch spriteBatch)
+        {
+            spriteBatch.DrawString(Resources.TestFont, camera.Position.ToString(), new Vector2(0 ,0), Color.Black);
         }
     }
 }

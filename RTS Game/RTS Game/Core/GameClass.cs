@@ -80,6 +80,7 @@ namespace RTS_Game
             Resources.AddGUITexture(SplashScreen);
             #endregion
 
+            Resources.TestFont = Content.Load<SpriteFont>("TestFont");
         }
 
         protected override void UnloadContent()

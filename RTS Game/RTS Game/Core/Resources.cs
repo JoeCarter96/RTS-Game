@@ -8,6 +8,9 @@ namespace RTS_Game
 {
     public static class Resources
     {   
+        //DEBUG: Font used for testing
+        public static SpriteFont TestFont;
+
         private static Dictionary<String, Texture2D> BackgroundTextures = new Dictionary<string,Texture2D>();
         private static Dictionary<String, Texture2D> UnitTextures = new Dictionary<string, Texture2D>();
         private static Dictionary<String, Texture2D> BuildingTextures = new Dictionary<string, Texture2D>();

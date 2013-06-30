@@ -49,6 +49,11 @@ namespace RTS_Game
                               null, null, null, null, camera.CameraMatrix);
             game.Draw(spriteBatch);
             spriteBatch.End();
+
+            //Drawing without the camera
+            spriteBatch.Begin();
+            game.StaticDraw(spriteBatch);
+            spriteBatch.End();
         }
     }
 }

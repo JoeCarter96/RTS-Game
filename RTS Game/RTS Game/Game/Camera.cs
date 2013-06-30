@@ -11,12 +11,14 @@ namespace RTS_Game
 {
     class Camera
     {
-        //The cameras matrix
+        public const float CameraSpeed = 6;
+
+        //The cameras matrix that will be used in spriteBatch.Begin()
         private Matrix matrix = new Matrix();
-        //The position the camera is focused on(center of screen)
+
+        //The position of the top left corner of the screen relative to the camera
         private Vector2 position = new Vector2(0,0);
-        //Viewport which represents the bounds of the screen
-        private Viewport viewport = new Viewport(0,0,GameClass.Game_Width, GameClass.Game_Height);
+
         //Zoom variable represents how far zoomed in the camera is
         private float zoom = 1f;
 
@@ -26,25 +28,23 @@ namespace RTS_Game
         {
             get { return matrix; }
         }
+
         public Vector2 Position
         {
             get { return position; }
             set 
-            { 
-                position = value;
-                //Limiter logic to stop the camera going outside the bounds of the tilemap
-
-                if (position.X < viewport.Width / 2)
-                {
-                    position.X = viewport.Width / 2;
-                }
-
-                if (position.Y < viewport.Height / 2)
-                {
-                    position.Y = viewport.Height / 2;
-                }
+            {
+                position = ClampCamera(value);
             }
         }
+
+        /*public float X
+        {
+            get { return X; }
+
+            set { Position = }
+        }*/
+
         public float Zoom
         {
             get { return zoom; }
@@ -60,15 +60,23 @@ namespace RTS_Game
         }
         #endregion
 
-
         public Camera()
         {
-            Position = new Vector2(viewport.Width / 2, viewport.Width / 2);
+            Position = new Vector2(0, 0);
         }
 
-        public Camera(Vector2 startPosition)
+        //Returns a vector2 that is within the gamefield
+        private Vector2 ClampCamera(Vector2 vector)
         {
-            Position = startPosition;
+            //Unfinished
+            return vector;
+        }
+
+
+        //Offsets the target position by half of the screen so we can center on it
+        public void CenterCameraOn(Vector2 target)
+        {
+            Position = target - new Vector2(GameClass.Game_Width / 2, GameClass.Game_Height / 2);
         }
 
         //This is where we change the camera depending on our inputs
@@ -96,19 +104,18 @@ namespace RTS_Game
             if (movementVector != Vector2.Zero)
             {
                 movementVector.Normalize();
-                Position += (movementVector * 5);
+                Position += (movementVector * CameraSpeed);
             }
 
             //Debug code
             if (keyboard.IsKeyDown(Keys.Space))
             {
-                Console.WriteLine(Position.ToString());
+                Position = new Vector2(0, 0);
             }
 
             //Set the matrix
-            matrix = Matrix.CreateScale(new Vector3(Zoom, Zoom, 0)) * 
-                     Matrix.CreateTranslation(new Vector3(-Position.X, -Position.Y, 0)) * 
-                     Matrix.CreateTranslation(new Vector3(viewport.Width / 2, viewport.Height / 2, 0));
+            matrix = Matrix.CreateScale(new Vector3(Zoom, Zoom, 0)) *
+                     Matrix.CreateTranslation(new Vector3(-Position.X, -Position.Y, 0));
             
             
             //Giving Credit

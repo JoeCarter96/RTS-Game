@@ -17,10 +17,16 @@ namespace RTS_Game
             get { return index; }
         }
 
+        public Rectangle Rectangle
+        {
+            get { return new Rectangle((int)position.X, (int)position.Y, GameClass.Tile_Width, GameClass.Tile_Width); }
+        }
+
         public Tile(Vector2 position, Vector2 index, Texture2D texture)
             :base(position, texture)
         {
             this.index = index;
+            this.position = position;
         }
     }
 }

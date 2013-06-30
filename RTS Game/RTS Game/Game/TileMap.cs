@@ -47,6 +47,18 @@ namespace RTS_Game
             }
         }
 
+        //DEBUG: function to print all the positions of every tile
+        public void PrintPositions()
+        {
+            Console.WriteLine("Begining Position Print:");
+            Console.WriteLine("------------------------");
+
+            foreach (Tile t in TileArray)
+            {
+                Console.WriteLine(t.Position);
+            }
+        }
+
         #region Function Explanation
         //Draws Each Tile.
         #endregion

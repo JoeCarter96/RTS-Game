@@ -17,6 +17,12 @@ namespace RTS_Game
         protected Vector2 velocity = new Vector2(0, 0);
         protected Vector2 origin;
 
+        public Vector2 Position
+        {
+            get { return position; }
+            set { position = value; }
+        }
+
         public Entity(Vector2 position, Texture2D texture)
         {
             this.position = position;
