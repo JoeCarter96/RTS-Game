@@ -21,3 +21,4 @@ C:\Git Projects\RTS-Game\RTS Game\RTS Game\obj\x86\Debug\Microsoft.Xna.Framework
 C:\Git Projects\RTS-Game\RTS Game\RTS Game\obj\x86\Debug\RTS Game.exe
 C:\Git Projects\RTS-Game\RTS Game\RTS Game\obj\x86\Debug\RTS Game.pdb
 C:\Git Projects\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\TestFont.xnb
+C:\Users\Pritchy\Documents\GitHub\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\TestFont.xnb

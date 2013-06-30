@@ -101,19 +101,19 @@ namespace RTS_Game
         {
             Vector2 movementVector = new Vector2(0, 0);
             //camera movement logic
-            if (keyboard.IsKeyDown(Keys.Left))
+            if (keyboard.IsKeyDown(Keys.Left) || mouse.X < (GameClass.Game_Width/6))
             {
                 movementVector.X--;
             }
-            if (keyboard.IsKeyDown(Keys.Right))
+            if (keyboard.IsKeyDown(Keys.Right) || mouse.X > GameClass.Game_Width - (GameClass.Game_Width/6))
             {
                 movementVector.X++;
             }
-            if (keyboard.IsKeyDown(Keys.Up))
+            if (keyboard.IsKeyDown(Keys.Up) || mouse.Y < (GameClass.Game_Height / 6))
             {
                 movementVector.Y--;
             }
-            if (keyboard.IsKeyDown(Keys.Down))
+            if (keyboard.IsKeyDown(Keys.Down) || mouse.Y > GameClass.Game_Height - (GameClass.Game_Height / 6))
             {
                 movementVector.Y++;
             }
