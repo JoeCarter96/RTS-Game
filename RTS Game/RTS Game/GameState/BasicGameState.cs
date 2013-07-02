@@ -13,9 +13,11 @@ namespace RTS_Game
     //that will be called by the game state manager when switching states
     abstract class BasicGameState
     {
-        protected Point MousePosition = new Point(0, 0);
+        //GUI components to be drawn on the screen
+        private List<Component> GuiComponents = new List<Component>();
 
-        //Mouse click variables to keep track of which buttons are down on the mouse
+        //Mouse position and imformation
+        protected Point MousePosition = new Point(0, 0);
         protected bool isLeftDown = false;
         protected bool isRightDown = false;
 
@@ -39,8 +41,7 @@ namespace RTS_Game
 
         public BasicGameState()
         {
-            //Stops any chance of mouse de-sync
-            //MousePosition = StateManager.Instance.MousePosition;
+            
         }
 
         //an overridable method that shows which mouse button was clicked
@@ -78,6 +79,17 @@ namespace RTS_Game
             //Storing the first frame's mouse state so we can check for clicks
             MouseStateLastFrame = mouse;
         }
+
+
+        public void DrawCenterString(SpriteBatch spriteBatch, string text, Vector2 position, Color color, float scale)
+        {
+            SpriteFont font = Resources.TestFont;
+            Vector2 length = font.MeasureString(text);
+
+            spriteBatch.DrawString(font, text, position, color, 0, length / 2, scale, SpriteEffects.None, 0);
+
+        }
+
 
         //The game draw method
         public virtual void Draw(SpriteBatch spriteBatch)

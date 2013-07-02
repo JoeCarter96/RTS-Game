@@ -13,7 +13,7 @@ namespace RTS_Game
     class StateManager
     {
         #region Singleton class variables
-        private static StateManager manager;
+        private static StateManager manager = null;
         public static StateManager Instance
         {
             get
@@ -28,7 +28,7 @@ namespace RTS_Game
         }
         #endregion
 
-        private BasicGameState currentGameState = new SplashState();
+        private BasicGameState currentGameState;
         private Point mousePosition = new Point(0, 0);
 
         public BasicGameState CurrentGameState
@@ -45,18 +45,18 @@ namespace RTS_Game
         public StateManager()
         {
             //we start the game is a splash screen state
-            
+            currentGameState = new SplashState();
         }
 
         public void Update(GameTime gameTime, KeyboardState keyboard, MouseState mouse)
         {
             mousePosition = GetMousePosition(mouse);
-            CurrentGameState.Update(gameTime, keyboard, mouse);
+            currentGameState.Update(gameTime, keyboard, mouse);
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            CurrentGameState.Draw(spriteBatch);
+            currentGameState.Draw(spriteBatch);
         }
 
         //converts the X and Y variables of the mouse state to a point and returns it
