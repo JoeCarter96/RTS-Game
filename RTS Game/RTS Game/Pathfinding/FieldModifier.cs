@@ -20,12 +20,12 @@ namespace RTS_Game
         #endregion
 
         //Reference of the tileArray.
-        static int[,] tileArray;
+        static Tile[,] tileArray;
 
         #region Function Description
         //Passes a reference of the tileArray.
         #endregion
-        public static void setup(int[,] passedTileArray)
+        public static void setup(Tile[,] passedTileArray)
         {
             tileArray = passedTileArray;
         }
