@@ -44,7 +44,7 @@ namespace RTS_Game
                     //Array2DTo1D converts from 2D to 1D by adding up all the full rows 
                     // (30 * I, would normally be 30*(i-1) but i starts at 0 so no need)
                     // and then adding the remaining amount on the current row.
-                    int Array2DTo1D = 30 * j + i;
+                    int Array2DTo1D = Level.Width * j + i;
                     Colours.TryGetValue(pixelRGBValues[Array2DTo1D], out textureName);
 
                     //Tries to find texture in Resources dictionary, if it can't defaults to grass texture.

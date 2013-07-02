@@ -45,12 +45,12 @@ namespace RTS_Game
             int Y = 0;
 
             //Initialisation loop.
-            for (int i = 0; i < TileArray.GetLength(1); i++)
+            for (int i = 0; i < TileArray.GetLength(0); i++)
             {
-                for (int j = 0; j < TileArray.GetLength(0); j++)
+                for (int j = 0; j < TileArray.GetLength(1); j++)
                 {
                     //Creates new tile.
-                    TileArray[j, i] = new Tile(new Vector2(i * TileWidth, j * TileWidth), new Vector2(i, j), TextureArray[i, j]);
+                    TileArray[i, j] = new Tile(new Vector2(i * TileWidth, j * TileWidth), new Vector2(i, j), TextureArray[i, j]);
                     //Increases X for next tile.
                     X += TileWidth;
                 }

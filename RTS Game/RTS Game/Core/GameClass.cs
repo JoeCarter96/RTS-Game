@@ -72,9 +72,30 @@ namespace RTS_Game
 
             #region Level Objects.
             //Test
-            Texture2D Level_Test = Content.Load<Texture2D>("Level_Test");
-            Level Level00 = new Level("Test", Level_Test, 0);
+            Texture2D Test = Content.Load<Texture2D>("Levels/Test");
+            Level Level00 = new Level("Level_Test", Test, 0);
             Resources.AddLevelObject(Level00);
+
+            //Island
+            Texture2D Island = Content.Load<Texture2D>("Levels/Island");
+            Level Level01 = new Level("Island", Island, 1);
+            Resources.AddLevelObject(Level01);
+
+            //Snow Test
+            Texture2D Snow_Test = Content.Load<Texture2D>("Levels/Snow_Test");
+            Level Level02 = new Level("Snow Test", Snow_Test, 2);
+            Resources.AddLevelObject(Level02);
+
+            //Desert Test
+            Texture2D Desert_Test = Content.Load<Texture2D>("Levels/Desert_Test");
+            Level Level03 = new Level("Desert Test", Desert_Test, 3);
+            Resources.AddLevelObject(Level03);
+
+            //Ocean Combat
+            Texture2D Ocean_Combat = Content.Load<Texture2D>("Levels/Ocean_Combat");
+            Level Level04 = new Level("Ocean Combat", Ocean_Combat, 4);
+            Resources.AddLevelObject(Level04);
+
             #endregion
 
             #region GUI Textures

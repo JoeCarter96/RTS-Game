@@ -6,7 +6,6 @@ C:\Users\Pritchy\Documents\GitHub\RTS-Game\RTS Game\RTS Game\obj\x86\Debug\RTS G
 C:\Users\Pritchy\Documents\GitHub\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\Grass01.xnb
 C:\Users\Pritchy\Documents\GitHub\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\Road01.xnb
 C:\Users\Pritchy\Documents\GitHub\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\Splash.xnb
-C:\Users\Pritchy\Documents\GitHub\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\Level_Test.xnb
 C:\Users\Pritchy\Documents\GitHub\RTS-Game\RTS Game\RTS Game\obj\x86\Debug\RTS Game.csprojResolveAssemblyReference.cache
 C:\Users\Pritchy\Documents\GitHub\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\Water01.xnb
 C:\Git Projects\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\Grass01.xnb
@@ -22,3 +21,9 @@ C:\Git Projects\RTS-Game\RTS Game\RTS Game\obj\x86\Debug\RTS Game.exe
 C:\Git Projects\RTS-Game\RTS Game\RTS Game\obj\x86\Debug\RTS Game.pdb
 C:\Git Projects\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\TestFont.xnb
 C:\Users\Pritchy\Documents\GitHub\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\TestFont.xnb
+C:\Users\Pritchy\Documents\GitHub\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\Levels\Desert_Test.xnb
+C:\Users\Pritchy\Documents\GitHub\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\Levels\Island.xnb
+C:\Users\Pritchy\Documents\GitHub\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\Levels\Level_Test.xnb
+C:\Users\Pritchy\Documents\GitHub\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\Levels\Ocean_Combat.xnb
+C:\Users\Pritchy\Documents\GitHub\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\Levels\Snow_Test.xnb
+C:\Users\Pritchy\Documents\GitHub\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\Levels\Test.xnb

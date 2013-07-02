@@ -1,6 +1,11 @@
 Content\Grass01.xnb
 Content\Road01.xnb
 Content\Splash.xnb
-Content\Level_Test.xnb
 Content\Water01.xnb
 Content\TestFont.xnb
+Content\Levels\Desert_Test.xnb
+Content\Levels\Island.xnb
+Content\Levels\Level_Test.xnb
+Content\Levels\Ocean_Combat.xnb
+Content\Levels\Snow_Test.xnb
+Content\Levels\Test.xnb
