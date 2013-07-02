@@ -90,8 +90,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Levels\Test.png">
-      <Name>Test</Name>
+    <Compile Include="Levels\MegaMap.png">
+      <Name>MegaMap</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

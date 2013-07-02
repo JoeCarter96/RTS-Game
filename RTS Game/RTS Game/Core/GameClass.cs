@@ -77,7 +77,7 @@ namespace RTS_Game
             #endregion
 
             #region Level Objects.
-            //Test
+            //Debug
             Texture2D Debug = Content.Load<Texture2D>("Levels/Debug");
             Level Level00 = new Level("Level_Test", Debug, 0);
             Resources.AddLevelObject(Level00);
@@ -102,9 +102,9 @@ namespace RTS_Game
             Level Level04 = new Level("Ocean Combat", Ocean_Combat, 4);
             Resources.AddLevelObject(Level04);
 
-            //Test
-            Texture2D Test = Content.Load<Texture2D>("Levels/Test");
-            Level Level05 = new Level("Level_Test", Test, 5);
+            //MegaMap
+            Texture2D MegaMap = Content.Load<Texture2D>("Levels/MegaMap");
+            Level Level05 = new Level("MegaMap", MegaMap, 5);
             Resources.AddLevelObject(Level05);
             #endregion
 

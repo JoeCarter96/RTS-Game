@@ -67,8 +67,8 @@ namespace RTS_Game
         //For now all our maps are 30 x 30, but that might change
         public void GiveTilemap(TileMap tilemap)
         {
-            WorldHeight = tilemap.Width * GameClass.Tile_Width;
-            WorldWidth = tilemap.Height * GameClass.Tile_Width;
+            WorldHeight = tilemap.Height * GameClass.Tile_Width;
+            WorldWidth = tilemap.Width * GameClass.Tile_Width;
         }
 
         //Returns a vector2 that is within the gamefield
@@ -77,6 +77,7 @@ namespace RTS_Game
             //Unfinished
             if (vector.X < 0) { vector.X = 0; }
             if (vector.X > (WorldWidth - GameClass.Game_Width)) { vector.X = (WorldWidth - GameClass.Game_Width); }
+
             if (vector.Y < 0) { vector.Y = 0; }
             if (vector.Y > (WorldHeight - GameClass.Game_Height)) { vector.Y = (WorldHeight - GameClass.Game_Height); }
             return vector;

@@ -92,15 +92,6 @@
       <Time>2013-07-02T21:48:17.8148114+01:00</Time>
     </Item>
     <Item>
-      <Source>Levels\Test.png</Source>
-      <Name>Levels\Test</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\Pritchy\Documents\GitHub\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\Levels\Test.xnb</Output>
-      <Time>2013-07-02T21:48:17.8148114+01:00</Time>
-    </Item>
-    <Item>
       <Source>DebugTile.png</Source>
       <Name>DebugTile</Name>
       <Importer>TextureImporter</Importer>
@@ -117,6 +108,15 @@
       <Options>None</Options>
       <Output>C:\Users\Pritchy\Documents\GitHub\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\Levels\Debug.xnb</Output>
       <Time>2013-07-02T21:59:00.886593+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Levels\MegaMap.png</Source>
+      <Name>Levels\MegaMap</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Pritchy\Documents\GitHub\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\Levels\MegaMap.xnb</Output>
+      <Time>2013-07-02T21:48:17.8148114+01:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
