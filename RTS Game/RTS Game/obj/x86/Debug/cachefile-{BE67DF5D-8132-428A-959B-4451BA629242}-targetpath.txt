@@ -9,3 +9,5 @@ Content\Levels\Level_Test.xnb
 Content\Levels\Ocean_Combat.xnb
 Content\Levels\Snow_Test.xnb
 Content\Levels\Test.xnb
+Content\DebugTile.xnb
+Content\Levels\Debug.xnb

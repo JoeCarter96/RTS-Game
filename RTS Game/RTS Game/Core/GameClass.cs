@@ -54,6 +54,12 @@ namespace RTS_Game
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             #region Background Textures.
+
+            //Debug Tile
+            Texture2D DebugTile = Content.Load<Texture2D>("DebugTile");
+            DebugTile.Name = "DebugTile";
+            Resources.AddBackgroundTexture(DebugTile);
+
             //Grass01
             Texture2D Grass01 = Content.Load<Texture2D>("Grass01");
             Grass01.Name = "Grass01";
@@ -72,8 +78,8 @@ namespace RTS_Game
 
             #region Level Objects.
             //Test
-            Texture2D Test = Content.Load<Texture2D>("Levels/Test");
-            Level Level00 = new Level("Level_Test", Test, 0);
+            Texture2D Debug = Content.Load<Texture2D>("Levels/Debug");
+            Level Level00 = new Level("Level_Test", Debug, 0);
             Resources.AddLevelObject(Level00);
 
             //Island
@@ -96,6 +102,10 @@ namespace RTS_Game
             Level Level04 = new Level("Ocean Combat", Ocean_Combat, 4);
             Resources.AddLevelObject(Level04);
 
+            //Test
+            Texture2D Test = Content.Load<Texture2D>("Levels/Test");
+            Level Level05 = new Level("Level_Test", Test, 5);
+            Resources.AddLevelObject(Level05);
             #endregion
 
             #region GUI Textures

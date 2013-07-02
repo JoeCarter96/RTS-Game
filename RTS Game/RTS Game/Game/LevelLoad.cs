@@ -67,6 +67,7 @@ namespace RTS_Game
         #endregion
         public static void AddColours()
         {
+            Colours.Add(new Color(0, 0, 0), "DebugTile");
             Colours.Add(new Color(0, 178, 0), "Grass01");
             Colours.Add(new Color(191, 191, 191), "Road01");
             Colours.Add(new Color(63, 72, 204), "Water01");
