@@ -20,7 +20,7 @@ namespace RTS_Game
         {
             if (button == MouseButton.Left)
             {
-                StateManager.Instance.CurrentGameState = new InGameState(Resources.GetLevelObject(0), null);
+                StateManager.Instance.CurrentGameState = new InGameState(Resources.GetLevelObject(5), null);
             }
             base.Click(mousePos, button);
         }

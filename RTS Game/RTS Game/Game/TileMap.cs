@@ -53,6 +53,9 @@ namespace RTS_Game
                 Y += TileWidth;
                 X = 0;
             }
+
+            //Passes reference of tileArray.
+            FieldModifer.setup(TileArray);
         }
 
         //DEBUG: function to print all the positions of every tile
