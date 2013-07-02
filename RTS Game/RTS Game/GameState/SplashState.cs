@@ -26,20 +26,9 @@ namespace RTS_Game
         //The time the splash screen will stay for(in milli seconds)
         private long Duration = 1000;
 
-        public SplashState(StateManager manager)
-            : base(manager)
+        public SplashState()
         {
 
-        }
-
-        public override void OnEnter()
-        {
-            Console.WriteLine("Splash State has been entered");
-        }
-
-        public override void OnExit()
-        {
-            
         }
 
         public override void Update(GameTime gameTime, KeyboardState keyboard, MouseState mouse)
@@ -56,7 +45,7 @@ namespace RTS_Game
 
             if (SkipScreen || TimeFinished)
             {
-                EnterState(States.MainMenu);
+                StateManager.Instance.CurrentGameState = new MainMenuState();
             }
         }
 

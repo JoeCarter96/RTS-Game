@@ -28,75 +28,41 @@ namespace RTS_Game
         }
         #endregion
 
-        private Dictionary<States, BasicGameState> GameStateDictionary = new Dictionary<States, BasicGameState>();
-        private BasicGameState CurrentGameState = null;
-        private States CurrentState = States.NullState;
+        private BasicGameState currentGameState = new SplashState();
+        private Point mousePosition = new Point(0, 0);
 
-        private int LEVELID = 0;
-
-        public int LevelID
+        public BasicGameState CurrentGameState
         {
-            get { return LEVELID; }
-            set { LEVELID = value; }
+            get { return currentGameState; }
+            set { currentGameState = value; }
+        }
+
+        public Point MousePosition
+        {
+            get { return mousePosition; }
         }
 
         public StateManager()
         {
-            AddState(States.SplashScreen, new SplashState(this));
-            AddState(States.MainMenu, new MainMenuState(this));
-            AddState(States.InGame, new InGameState(this));
-
-            EnterState(States.SplashScreen);
-        }
-
-        private void AddState(States state, BasicGameState GameState)
-        {
-            //If there is no GameState for the given state enum entry 
-            //then add the new state
-            if (!GameStateDictionary.ContainsKey(state))
-            {
-                GameStateDictionary.Add(state, GameState);
-            }
-        }
-
-        public void EnterState(States state)
-        {
-            //we dont want the game returning to the null state, that is just 
-            //to lower the complexities of initialisation
-            if (state == States.NullState || state == CurrentState)
-            {
-                Console.WriteLine("ERROR: attempted to enter an invalid state: {0}", state.ToString());
-                return;
-            }
-
-            //tell the state we are currently in that we are exiting from it
-            if (CurrentGameState != null)
-            {
-                CurrentGameState.OnExit();
-            }
-
-            //Stops us from entering a state that has been been added yet
-            if (GameStateDictionary[state] == null)
-            {
-                Console.WriteLine("Attempted to change to a a state that has not been implemented full yet.");
-                return;
-            }
-
-            //Change the state
-            CurrentGameState = GameStateDictionary[state];
-
-            //tell the new state that we are now in that we are entering it
-            CurrentGameState.OnEnter();
+            //we start the game is a splash screen state
+            
         }
 
         public void Update(GameTime gameTime, KeyboardState keyboard, MouseState mouse)
         {
+            mousePosition = GetMousePosition(mouse);
             CurrentGameState.Update(gameTime, keyboard, mouse);
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
             CurrentGameState.Draw(spriteBatch);
+        }
+
+        //converts the X and Y variables of the mouse state to a point and returns it
+        public static Point GetMousePosition(MouseState mouse)
+        {
+            return new Point(mouse.X, mouse.Y);
         }
     }
 }

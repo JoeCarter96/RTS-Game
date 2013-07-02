@@ -25,6 +25,10 @@ namespace RTS_Game
         private KeyboardState keyboard;
         private MouseState mouse;
 
+        //fps stuff
+        private double LastFrameTime = 0;
+        private double FPS = 0;
+
         public GameClass()
         {
             //Content setup

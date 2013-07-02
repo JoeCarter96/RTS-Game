@@ -14,13 +14,7 @@ namespace RTS_Game
         private GameInstance game;
         private Camera camera;
 
-        public InGameState(StateManager manager)
-            : base(manager)
-        {
-
-        }
-
-        public override void OnEnter()
+        public InGameState(Level level, GameOptions options)
         {
             Console.WriteLine("Entered Game State");
 
@@ -28,13 +22,8 @@ namespace RTS_Game
             camera = new Camera();
 
             //Level ID will be passed to this state somehow
-            game = new GameInstance(Resources.GetLevelObject(manager.LevelID), camera);
+            game = new GameInstance(Resources.GetLevelObject(0), camera);
 
-        }
-
-        public override void OnExit()
-        {
-            
         }
 
         public override void Update(GameTime gameTime, KeyboardState keyboard, MouseState mouse)
