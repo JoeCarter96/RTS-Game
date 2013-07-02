@@ -12,11 +12,6 @@ namespace RTS_Game
     {
         private Tile[,] TileArray;
 
-        private int width;
-        private int height;
-        private int tilewidth;
-
-
         //NOTE: the width and height might be the wrong way around...
         //I'm too lazy to test it though from Joe
         public int Width

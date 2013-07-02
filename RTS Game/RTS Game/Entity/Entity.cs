@@ -27,7 +27,8 @@ namespace RTS_Game
         {
             this.position = position;
             this.texture = texture;
-            origin = new Vector2(texture.Width / 2, texture.Height / 2);
+
+            origin = new Vector2(0, 0);
         }
 
         //Returns the center of the texture

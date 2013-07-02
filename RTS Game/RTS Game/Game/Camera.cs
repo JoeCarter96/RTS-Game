@@ -42,13 +42,6 @@ namespace RTS_Game
             }
         }
 
-        /*public float X
-        {
-            get { return X; }
-
-            set { Position = }
-        }*/
-
         public float Zoom
         {
             get { return zoom; }
