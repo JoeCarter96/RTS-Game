@@ -47,6 +47,7 @@ namespace RTS_Game
 
         //Draw method that is not effected by the camera, used for UIs
         //These will bw draw on top of the tile map and be unaffected by movement of the camera
+
         public void StaticDraw(SpriteBatch spriteBatch)
         {
             spriteBatch.DrawString(Resources.TestFont, camera.Position.ToString(), new Vector2(0 ,0), Color.Black);
