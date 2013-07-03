@@ -18,16 +18,16 @@ namespace RTS_Game
         protected bool alive = true;
 
         //Assuming the unit is spawned with full health
-        public HealthEntity(Vector2 position, Texture2D texture, double maxHealth)
-            :base(position, texture)
+        public HealthEntity(TileMap world, Vector2 position, Texture2D texture, double maxHealth)
+            : base(world, position, texture)
         {
             this.maxHealth = maxHealth;
             health = maxHealth;
         }
 
         //Allows for a different start health
-        public HealthEntity(Vector2 position, Texture2D texture, double maxHealth, double startHealth)
-            : base(position, texture)
+        public HealthEntity(TileMap world, Vector2 position, Texture2D texture, double maxHealth, double startHealth)
+            : base(world, position, texture)
         {
             this.maxHealth = maxHealth;
             this.health = startHealth;

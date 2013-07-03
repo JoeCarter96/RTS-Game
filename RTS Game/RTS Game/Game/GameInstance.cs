@@ -21,7 +21,7 @@ namespace RTS_Game
     {
         private Camera camera;
         private TileMap world;
-
+        private Game.Player player;
 
         public GameInstance(Level level, Camera camera)
         {
@@ -31,7 +31,7 @@ namespace RTS_Game
             //Build the tilemap using the level
             world = new TileMap(level, 800, 600, 80);
 
-            Game.Player player = new Game.Player(world);
+            player = new Game.Player(world);
 
             //we tell the camera the size of the tilemap so it can adjust its range
             camera.GiveTilemap(world);
@@ -39,7 +39,11 @@ namespace RTS_Game
 
         public void Update(GameTime gameTime, Camera camera, KeyboardState keyboard, MouseState mouse)
         {
-
+            //Moving every moving unit.
+            foreach (Unit u in player.MovingUnits)
+            {
+                u.Move();
+            }
         }
 
         //The drawmethod that will be offset and scaled by the camera

@@ -11,7 +11,7 @@ namespace RTS_Game
     public class Tile : Entity
     {
         private Vector2 index;
-        public bool occupied;
+        private bool occupied;
 
         public bool Occupied
         {
@@ -29,8 +29,8 @@ namespace RTS_Game
             get { return new Rectangle((int)position.X, (int)position.Y, GameClass.Tile_Width, GameClass.Tile_Width); }
         }
 
-        public Tile(Vector2 position, Vector2 index, Texture2D texture)
-            :base(position, texture)
+        public Tile(TileMap world, Vector2 position, Vector2 index, Texture2D texture)
+            : base(world, position, texture)
         {
             this.index = index;
             this.position = position;

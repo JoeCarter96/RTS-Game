@@ -7,8 +7,22 @@ namespace RTS_Game.Game
 {
     class Player
     {
-        private List<Unit> Units;
-        private List<Unit> movingUnits;
+        private List<Unit> units = new List<Unit>();
+        private List<Unit> movingUnits = new List<Unit>();
+
+        public List<Unit> MovingUnits
+        {
+            get { return movingUnits; }
+            set { movingUnits = value; }
+        }
+
+        public List<Unit> Units
+        {
+            get { return units; }
+            set { units = value; }
+        }
+
+
         private TileMap world;
 
         public Player(TileMap world)

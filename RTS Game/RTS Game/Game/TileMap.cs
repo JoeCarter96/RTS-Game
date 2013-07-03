@@ -51,7 +51,7 @@ namespace RTS_Game
                 for (int j = 0; j < tileArray.GetLength(1); j++)
                 {
                     //Creates new tile.
-                    tileArray[i, j] = new Tile(new Vector2(i * TileWidth, j * TileWidth), new Vector2(i, j), TextureArray[i, j]);
+                    tileArray[i, j] = new Tile(this, new Vector2(i * TileWidth, j * TileWidth), new Vector2(i, j), TextureArray[i, j]);
                     //Increases X for next tile.
                     X += TileWidth;
                 }

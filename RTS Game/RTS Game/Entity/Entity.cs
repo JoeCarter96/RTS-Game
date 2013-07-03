@@ -16,6 +16,7 @@ namespace RTS_Game
         protected Vector2 position;
         protected Vector2 velocity = new Vector2(0, 0);
         protected Vector2 origin;
+        TileMap world;
 
         public Vector2 Position
         {
@@ -23,8 +24,9 @@ namespace RTS_Game
             set { position = value; }
         }
 
-        public Entity(Vector2 position, Texture2D texture)
+        public Entity(TileMap world, Vector2 position, Texture2D texture)
         {
+            this.world = world;
             this.position = position;
             this.texture = texture;
 
