@@ -8,9 +8,16 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace RTS_Game
 {
-    class Tile : Entity
+    public class Tile : Entity
     {
         private Vector2 index;
+        public bool occupied;
+
+        public bool Occupied
+        {
+            get { return occupied; }
+            set { occupied = value; }
+        }
 
         public Vector2 Index
         {

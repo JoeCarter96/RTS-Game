@@ -22,6 +22,7 @@ namespace RTS_Game
         int POSX;
         int POSY;
         Point TARGET = new Point();
+        Tile[,] tileArray;
 
         public int PosX
         {
@@ -42,6 +43,7 @@ namespace RTS_Game
         public Unit(Tile[,] tileArray, Vector2 position, Texture2D texture, double maxHealth)
             :base(position, texture, maxHealth)
         {
+            this.tileArray = tileArray;
             PFARRAY = new int[tileArray.GetLength(0), tileArray.GetLength(1)];
         }
 
@@ -164,11 +166,8 @@ namespace RTS_Game
                 PFARRAY[POSX, POSY] -= 100;
 
                 //Moving unit
-                tileArray[POSX, POSY].occupied = false;
-                tileArray[newPosX, newPosY].occupied = true;
                 POSX = newPosX;
                 POSY = newPosY;
-                FieldModifer.updateField(PFARRAY);
 
             }
             else    //When the unit is on the source tile.
@@ -179,13 +178,11 @@ namespace RTS_Game
 
         public override void Update(GameTime gameTime)
         {
-            
             base.Update(gameTime);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
-        {
-            
+        {   
             base.Draw(spriteBatch);
         }
     }

@@ -22,6 +22,7 @@ namespace RTS_Game
         private Camera camera;
         private TileMap world;
 
+
         public GameInstance(Level level, Camera camera)
         {
             //Store the camera in a local variable so we can get its position later
@@ -29,6 +30,8 @@ namespace RTS_Game
 
             //Build the tilemap using the level
             world = new TileMap(level, 800, 600, 80);
+
+            Game.Player player = new Game.Player(world);
 
             //we tell the camera the size of the tilemap so it can adjust its range
             camera.GiveTilemap(world);

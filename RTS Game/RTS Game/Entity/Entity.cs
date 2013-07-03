@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace RTS_Game
 {
-    class Entity
+    public class Entity
     {
         protected Texture2D texture;
         protected float rotation = 0f;
