@@ -37,7 +37,7 @@ namespace RTS_Game
             camera.GiveTilemap(world);
 
             Unit test = new Unit(world, player, new Vector2(10, 10), Resources.GetBackgroundTextures("DebugTile"), 100);
-            test.FinalTarget = new Vector2(20, 30);
+            test.FinalTarget = new Vector2(69, 0);
             player.MovingUnits.Add(test);
         }
 

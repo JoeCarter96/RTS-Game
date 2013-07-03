@@ -34,6 +34,7 @@ namespace RTS_Game
         {
             this.index = index;
             this.tilePosition = tilePosition;
+            this.pixelPosition = tilePosition * world.TileWidth;
         }
     }
 }

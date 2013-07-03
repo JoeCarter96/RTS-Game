@@ -72,7 +72,9 @@ namespace RTS_Game
                 //Moving the unit.
                 //Stand in code until i can be arsed moving stuff nicely.
                 base.tilePosition.X = NEXT_TARGET.X;
+                base.pixelPosition.X = NEXT_TARGET.X * 80;
                 base.tilePosition.Y = NEXT_TARGET.Y;
+                base.pixelPosition.Y = NEXT_TARGET.Y * 80;  //TEMP.
             }
         }
 
@@ -89,10 +91,22 @@ namespace RTS_Game
                 int highest = -int.MaxValue;
                 Vector2 nextTarget = new Vector2(base.TilePosition.X, base.TilePosition.Y);
 
+                //Right
+                try
+                {
+                    if (highest < PF_ARRAY[(int)base.TilePosition.X + 1, (int)base.TilePosition.Y])
+                    {
+                        highest = PF_ARRAY[(int) base.tilePosition.X + 1, (int) base.tilePosition.Y];
+                        nextTarget.X = base.tilePosition.X + 1;
+                        nextTarget.Y = base.tilePosition.Y;
+                    }
+                }
+                catch { Console.WriteLine("Right Limit"); }
+
                 //Left
                 try
                 {
-                    if (highest < PF_ARRAY[(int)base.TilePosition.X - 1, (int)base.TilePosition.Y])
+                    if (highest < PF_ARRAY[(int)base.TilePosition.X - 1, (int)base.TilePosition.Y] && PF_ARRAY[(int)base.TilePosition.X - 1, (int)base.TilePosition.Y] > 0 && world.TileArray[(int)base.TilePosition.X - 1, (int)base.TilePosition.Y].Occupied != true)
                     {
                         highest = PF_ARRAY[(int)base.TilePosition.X - 1, (int)base.TilePosition.Y];
                         nextTarget.X = base.TilePosition.X - 1;
@@ -101,17 +115,6 @@ namespace RTS_Game
                 }
                 catch { Console.WriteLine("Left Limit"); }
 
-                //Right
-                try
-                {
-                    if (highest < PF_ARRAY[(int)base.TilePosition.X + 1, (int)base.TilePosition.Y] && PF_ARRAY[(int)base.TilePosition.X + 1, (int)base.TilePosition.Y] > 0 && world.TileArray[(int)base.TilePosition.X + 1, (int)base.TilePosition.Y].Occupied != true)
-                    {
-                        highest = PF_ARRAY[(int) base.tilePosition.X + 1, (int) base.tilePosition.Y];
-                        nextTarget.X = base.tilePosition.X + 1;
-                        nextTarget.Y = base.tilePosition.Y;
-                    }
-                }
-                catch { Console.WriteLine("Right Limit"); }
 
                 //Down
                 try
