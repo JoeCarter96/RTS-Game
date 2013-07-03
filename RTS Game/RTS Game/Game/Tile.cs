@@ -26,14 +26,14 @@ namespace RTS_Game
 
         public Rectangle Rectangle
         {
-            get { return new Rectangle((int)position.X, (int)position.Y, GameClass.Tile_Width, GameClass.Tile_Width); }
+            get { return new Rectangle((int)pixelPosition.X, (int)pixelPosition.Y, GameClass.Tile_Width, GameClass.Tile_Width); }
         }
 
-        public Tile(TileMap world, Vector2 position, Vector2 index, Texture2D texture)
-            : base(world, position, texture)
+        public Tile(TileMap world, Vector2 tilePosition, Vector2 index, Texture2D texture)
+            : base(world, tilePosition, texture)
         {
             this.index = index;
-            this.position = position;
+            this.tilePosition = tilePosition;
         }
     }
 }

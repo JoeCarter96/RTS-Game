@@ -25,7 +25,7 @@ namespace RTS_Game
 
         public GameInstance(Level level, Camera camera)
         {
-            //Store the camera in a local variable so we can get its position later
+            //Store the camera in a local variable so we can get its pixelPosition later
             this.camera = camera;
 
             //Build the tilemap using the level
@@ -35,6 +35,10 @@ namespace RTS_Game
 
             //we tell the camera the size of the tilemap so it can adjust its range
             camera.GiveTilemap(world);
+
+            Unit test = new Unit(world, player, new Vector2(10, 10), Resources.GetBackgroundTextures("DebugTile"), 100);
+            test.FinalTarget = new Vector2(20, 30);
+            player.MovingUnits.Add(test);
         }
 
         public void Update(GameTime gameTime, Camera camera, KeyboardState keyboard, MouseState mouse)
@@ -49,7 +53,11 @@ namespace RTS_Game
         //The drawmethod that will be offset and scaled by the camera
         public void Draw(SpriteBatch spriteBatch)
         {
-            world.Draw(spriteBatch);      
+            world.Draw(spriteBatch);
+            foreach (Unit u in player.Units)
+            {
+                u.Draw(spriteBatch);
+            }
         }
 
         //Draw method that is not effected by the camera, used for UIs

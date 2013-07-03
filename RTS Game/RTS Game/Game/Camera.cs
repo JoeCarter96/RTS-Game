@@ -16,7 +16,7 @@ namespace RTS_Game
         //The cameras matrix that will be used in spriteBatch.Begin()
         private Matrix matrix = new Matrix();
 
-        //The position of the top left corner of the screen relative to the camera
+        //The pixelPosition of the top left corner of the screen relative to the camera
         private Vector2 position = new Vector2(0,0);
 
         //Zoom variable represents how far zoomed in the camera is
@@ -84,7 +84,7 @@ namespace RTS_Game
         }
 
 
-        //Offsets the target position by half of the screen so we can center on it
+        //Offsets the target pixelPosition by half of the screen so we can center on it
         public void CenterCameraOn(Vector2 target)
         {
             Position = target - new Vector2(GameClass.Game_Width / 2, GameClass.Game_Height / 2);

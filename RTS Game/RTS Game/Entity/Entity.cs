@@ -13,21 +13,32 @@ namespace RTS_Game
         protected Texture2D texture;
         protected float rotation = 0f;
 
-        protected Vector2 position;
+        protected Vector2 pixelPosition;
+        protected Vector2 tilePosition;
         protected Vector2 velocity = new Vector2(0, 0);
         protected Vector2 origin;
         TileMap world;
 
-        public Vector2 Position
+        public Vector2 PixelPosition
         {
-            get { return position; }
-            set { position = value; }
+            get { return pixelPosition; }
+            set { pixelPosition = value;
+                tilePosition = value / world.TileWidth;
+            }
         }
 
-        public Entity(TileMap world, Vector2 position, Texture2D texture)
+        public Vector2 TilePosition
+        {
+            get { return tilePosition; }
+            set { tilePosition = value;
+                pixelPosition = value * world.TileWidth;
+            }
+        }
+
+        public Entity(TileMap world, Vector2 tilePosition, Texture2D texture)
         {
             this.world = world;
-            this.position = position;
+            this.tilePosition = tilePosition;
             this.texture = texture;
 
             origin = new Vector2(0, 0);
@@ -36,8 +47,8 @@ namespace RTS_Game
         //Returns the center of the texture
         public Vector2 GetCenter()
         {
-            float x = position.X + texture.Width / 2;
-            float y = position.Y + texture.Height / 2;
+            float x = pixelPosition.X + texture.Width / 2;
+            float y = pixelPosition.Y + texture.Height / 2;
 
             return new Vector2(x, y);
         }
@@ -50,13 +61,13 @@ namespace RTS_Game
         //Draws the texture without color tint
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, position, null, Color.White, rotation, origin, 1.0f, SpriteEffects.None, 0);
+            spriteBatch.Draw(texture, pixelPosition, null, Color.White, rotation, origin, 1.0f, SpriteEffects.None, 0);
         }
 
         //Draws the texture with color tint
         public virtual void Draw(SpriteBatch spriteBatch, Color color)
         {
-            spriteBatch.Draw(texture, position, null, color, rotation, origin, 1.0f, SpriteEffects.None, 0);
+            spriteBatch.Draw(texture, pixelPosition, null, color, rotation, origin, 1.0f, SpriteEffects.None, 0);
         }
     }
 }

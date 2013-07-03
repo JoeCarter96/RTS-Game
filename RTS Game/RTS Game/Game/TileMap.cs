@@ -17,6 +17,15 @@ namespace RTS_Game
             get { return tileArray; }
         }
 
+        private int TILE_WIDTH;
+
+        public int TileWidth
+        {
+            get { return TILE_WIDTH; }
+            set { TILE_WIDTH = value; }
+        }
+        
+
 
         //NOTE: the width and height might be the wrong way around...
         //I'm too lazy to test it though from Joe
@@ -29,7 +38,7 @@ namespace RTS_Game
         {
             get { return tileArray.GetLength(1); }
         }
-
+            
         #region Function Explanation
         //Creates tileArray, complete with Textured Background.
         #endregion
@@ -37,6 +46,8 @@ namespace RTS_Game
         {
             //Creates Array of textures.
             Texture2D[,] TextureArray = LevelLoad.Load(level.LevelImage);
+
+            TILE_WIDTH = TileWidth;
 
             //Sets tileArray to level size.
             tileArray = new Tile[TextureArray.GetLength(0), TextureArray.GetLength(1)];
@@ -51,7 +62,7 @@ namespace RTS_Game
                 for (int j = 0; j < tileArray.GetLength(1); j++)
                 {
                     //Creates new tile.
-                    tileArray[i, j] = new Tile(this, new Vector2(i * TileWidth, j * TileWidth), new Vector2(i, j), TextureArray[i, j]);
+                    tileArray[i, j] = new Tile(this, new Vector2(i, j), new Vector2(i, j), TextureArray[i, j]);
                     //Increases X for next tile.
                     X += TileWidth;
                 }
@@ -72,7 +83,7 @@ namespace RTS_Game
 
             foreach (Tile t in tileArray)
             {
-                Console.WriteLine(t.Position);
+                Console.WriteLine(t.TilePosition);
             }
         }
 

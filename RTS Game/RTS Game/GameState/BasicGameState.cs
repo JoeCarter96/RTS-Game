@@ -16,7 +16,7 @@ namespace RTS_Game
         //GUI components to be drawn on the screen
         private List<Component> GuiComponents = new List<Component>();
 
-        //Mouse position and imformation
+        //Mouse pixelPosition and imformation
         protected Point MousePosition = new Point(0, 0);
         protected bool isLeftDown = false;
         protected bool isRightDown = false;
@@ -27,7 +27,7 @@ namespace RTS_Game
 
         //Last frame variables to work out changes between frames
         #region MousePositionLastFrame Explained
-        //We store the last frames mouse position so we can generate
+        //We store the last frames mouse pixelPosition so we can generate
         //deltaX and deltaY which are very useful for dragging.
         //We will update this at the end of the run update execution.
         #endregion
@@ -53,7 +53,7 @@ namespace RTS_Game
         //The game update method
         public virtual void Update(GameTime gameTime, KeyboardState keyboard, MouseState mouse)
         {
-            //Store the mouse position
+            //Store the mouse pixelPosition
             MousePosition = StateManager.GetMousePosition(mouse);
 
             //Checking if the right button has been pressed
@@ -74,7 +74,7 @@ namespace RTS_Game
             isRightDown = !(mouse.RightButton == ButtonState.Released);
             isLeftDown = !(mouse.LeftButton == ButtonState.Released);
 
-            //Store the last frame's mouse position into a variable so we can do DY and DX calculations
+            //Store the last frame's mouse pixelPosition into a variable so we can do DY and DX calculations
             MousePositionLastFrame = MousePosition;
             //Storing the first frame's mouse state so we can check for clicks
             MouseStateLastFrame = mouse;
