@@ -36,15 +36,15 @@ namespace RTS_Game
             //we tell the camera the size of the tilemap so it can adjust its range
             camera.GiveTilemap(world);
 
-            Unit test = new Unit(world, player, new Vector2(10, 10), Resources.GetBackgroundTextures("DebugTile"), 100);
-            test.FinalTarget = new Vector2(69, 0);
+            Unit test = new Unit(world, player, new Vector2(0, 0), Resources.GetBackgroundTextures("DebugTile"), 100);
+            test.FinalTarget = new Vector2(10, 0);
             player.MovingUnits.Add(test);
         }
 
         public void Update(GameTime gameTime, Camera camera, KeyboardState keyboard, MouseState mouse)
         {
             //Moving every moving unit.
-            foreach (Unit u in player.MovingUnits)
+            foreach (Unit u in player.MovingUnits.ToList())
             {
                 u.Move();
             }
