@@ -115,11 +115,24 @@ namespace RTS_Game
             Resources.AddGUITexture(SplashScreen);
             #endregion
 
+
             #region Unit Textures
             //Splash Screen
             Texture2D Tank01 = Content.Load<Texture2D>("Tank01");
             Tank01.Name = "Tank01";
             Resources.AddUnitTexture(Tank01);
+            #endregion
+
+            #region Building Textures
+            //Splash Screen
+            Texture2D ConstructionYard = Content.Load<Texture2D>("Construction Yard");
+            ConstructionYard.Name = "Construction Yard";
+            Resources.AddBuildingTexture(ConstructionYard);
+
+            //Splash Screen
+            Texture2D PowerPlant = Content.Load<Texture2D>("PowerPlant");
+            PowerPlant.Name = "PowerPlant";
+            Resources.AddBuildingTexture(PowerPlant);
             #endregion
             
             Resources.TestFont = Content.Load<SpriteFont>("TestFont");

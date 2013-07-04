@@ -11,5 +11,7 @@ Content\Levels\Snow_Test.xnb
 Content\DebugTile.xnb
 Content\Levels\Debug.xnb
 Content\Levels\MegaMap.xnb
-Content\Tanks01.xnb
 Content\Tank01.xnb
+Content\Construction Yard.xnb
+Content\PowerPlant.xnb
+Content\TestBuilding.xnb

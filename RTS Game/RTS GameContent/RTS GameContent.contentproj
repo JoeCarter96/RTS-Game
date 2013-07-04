@@ -111,8 +111,23 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Construction Yard.png">
+      <Name>Construction Yard</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="PowerPlant.png">
+      <Name>PowerPlant</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
     <Compile Include="Tank01.png">
       <Name>Tank01</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="TestBuilding.png">
+      <Name>TestBuilding</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

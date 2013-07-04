@@ -36,12 +36,17 @@ namespace RTS_Game
             //we tell the camera the size of the tilemap so it can adjust its range
             camera.GiveTilemap(world);
 
-            Unit test = new Unit(world, player, new Vector2(11, 4), Resources.GetUnitTextures("Tank01"), 100);
-            Unit test2 = new Unit(world, player, new Vector2(10, 4), Resources.GetUnitTextures("Tank01"), 100);
-            Unit test3 = new Unit(world, player, new Vector2(11, 3), Resources.GetUnitTextures("Tank01"), 100);
-            Unit test4 = new Unit(world, player, new Vector2(10, 3), Resources.GetUnitTextures("Tank01"), 100);
+
+            Unit test2 = new Unit(world, player, new Vector2(10, 4), Resources.GetBuildingTextures("PowerPlant"), 100);
+            Unit test3 = new Unit(world, player, new Vector2(11, 3), Resources.GetBuildingTextures("PowerPlant"), 100);
+            Unit test4 = new Unit(world, player, new Vector2(10, 3), Resources.GetBuildingTextures("PowerPlant"), 100);
+            Unit test5 = new Unit(world, player, new Vector2(11, 4), Resources.GetBuildingTextures("PowerPlant"), 100);
+
+            Unit test6 = new Unit(world, player, new Vector2(13, 4), Resources.GetBuildingTextures("Construction Yard"), 100);
+
+            Unit test = new Unit(world, player, new Vector2(0, 0), Resources.GetUnitTextures("Tank01"), 100);
             test.FinalTarget = new Vector2(10, 0);
-           // player.MovingUnits.Add(test);
+            player.MovingUnits.Add(test);
         }
 
         public void Update(GameTime gameTime, Camera camera, KeyboardState keyboard, MouseState mouse)
