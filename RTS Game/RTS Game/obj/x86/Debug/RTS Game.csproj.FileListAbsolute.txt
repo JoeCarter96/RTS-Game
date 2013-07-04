@@ -11,7 +11,6 @@ C:\Users\Pritchy\Documents\GitHub\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Conte
 C:\Git Projects\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\Grass01.xnb
 C:\Git Projects\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\Road01.xnb
 C:\Git Projects\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\Splash.xnb
-C:\Git Projects\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\Level_Test.xnb
 C:\Git Projects\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\Water01.xnb
 C:\Git Projects\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\RTS Game.exe
 C:\Git Projects\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\RTS Game.pdb
@@ -33,3 +32,17 @@ C:\Users\Pritchy\Documents\GitHub\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Conte
 C:\Users\Pritchy\Documents\GitHub\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\Construction Yard.xnb
 C:\Users\Pritchy\Documents\GitHub\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\PowerPlant.xnb
 C:\Users\Pritchy\Documents\GitHub\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\TestBuilding.xnb
+C:\Git Projects\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\Levels\Desert_Test.xnb
+C:\Git Projects\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\Levels\Island.xnb
+C:\Git Projects\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\Levels\Level_Test.xnb
+C:\Git Projects\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\Levels\Ocean_Combat.xnb
+C:\Git Projects\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\Levels\Snow_Test.xnb
+C:\Git Projects\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\Levels\MegaMap.xnb
+C:\Git Projects\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\DebugTile.xnb
+C:\Git Projects\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\Levels\Debug.xnb
+C:\Git Projects\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\Construction Yard.xnb
+C:\Git Projects\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\PowerPlant.xnb
+C:\Git Projects\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\Tank01.xnb
+C:\Git Projects\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\TestBuilding.xnb
+C:\Git Projects\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\Healthbar_Background.xnb
+C:\Git Projects\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\Healthbar_Foreground.xnb
