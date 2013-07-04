@@ -72,10 +72,7 @@ namespace RTS_Game
             {
                 //Moving the unit.
                 //Stand in code until i can be arsed moving stuff nicely.
-                base.tilePosition.X = NEXT_TARGET.X;
-                base.pixelPosition.X = NEXT_TARGET.X * 80;
-                base.tilePosition.Y = NEXT_TARGET.Y;
-                base.pixelPosition.Y = NEXT_TARGET.Y * 80;  //TEMP.
+                base.TilePosition = new Vector2 (NEXT_TARGET.X, NEXT_TARGET.Y);
             }
         }
 

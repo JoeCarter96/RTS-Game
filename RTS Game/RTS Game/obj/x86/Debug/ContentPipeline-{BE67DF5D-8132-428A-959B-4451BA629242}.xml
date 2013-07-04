@@ -125,7 +125,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Pritchy\Documents\GitHub\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\Tank01.xnb</Output>
-      <Time>2013-07-04T22:39:14.9416944+01:00</Time>
+      <Time>2013-07-04T23:00:02.4740491+01:00</Time>
     </Item>
     <Item>
       <Source>Construction Yard.png</Source>
@@ -134,7 +134,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Pritchy\Documents\GitHub\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\Construction Yard.xnb</Output>
-      <Time>2013-07-04T22:39:14.9206932+01:00</Time>
+      <Time>2013-07-04T23:00:02.4690488+01:00</Time>
     </Item>
     <Item>
       <Source>PowerPlant.png</Source>
@@ -143,7 +143,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Pritchy\Documents\GitHub\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\PowerPlant.xnb</Output>
-      <Time>2013-07-04T22:39:14.9376941+01:00</Time>
+      <Time>2013-07-04T23:00:02.471049+01:00</Time>
     </Item>
     <Item>
       <Source>TestBuilding.png</Source>
@@ -152,7 +152,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Pritchy\Documents\GitHub\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\TestBuilding.xnb</Output>
-      <Time>2013-07-04T22:39:14.9466947+01:00</Time>
+      <Time>2013-07-04T23:00:02.4760493+01:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
