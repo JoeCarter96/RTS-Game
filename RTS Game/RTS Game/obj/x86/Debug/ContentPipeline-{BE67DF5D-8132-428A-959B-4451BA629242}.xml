@@ -118,6 +118,24 @@
       <Output>C:\Users\Pritchy\Documents\GitHub\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\Levels\MegaMap.xnb</Output>
       <Time>2013-07-02T21:48:17.8148114+01:00</Time>
     </Item>
+    <Item>
+      <Source>Tanks01.png</Source>
+      <Name>Tanks01</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Pritchy\Documents\GitHub\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\Tanks01.xnb</Output>
+      <Time>2013-07-04T21:45:18.8105983+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Tank01.png</Source>
+      <Name>Tank01</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Pritchy\Documents\GitHub\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\Tank01.xnb</Output>
+      <Time>2013-07-04T21:46:40.1662515+01:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <ContentProjectGUID>{BE67DF5D-8132-428A-959B-4451BA629242}</ContentProjectGUID>

@@ -115,6 +115,13 @@ namespace RTS_Game
             Resources.AddGUITexture(SplashScreen);
             #endregion
 
+            #region Unit Textures
+            //Splash Screen
+            Texture2D Tank01 = Content.Load<Texture2D>("Tank01");
+            Tank01.Name = "Tank01";
+            Resources.AddUnitTexture(Tank01);
+            #endregion
+            
             Resources.TestFont = Content.Load<SpriteFont>("TestFont");
         }
 

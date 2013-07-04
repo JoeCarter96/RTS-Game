@@ -45,6 +45,7 @@ namespace RTS_Game
 
             this.owner = owner;
             this.world = world;
+            this.TilePosition = tilePosition; 
 
             //Setting PF Array Size to match world.
             PF_ARRAY = new int[world.TileArray.GetLength(0), world.TileArray.GetLength(1)];
