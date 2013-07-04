@@ -17,7 +17,7 @@ namespace RTS_Game
         protected Vector2 tilePosition;
         protected Vector2 velocity = new Vector2(0, 0);
         protected Vector2 origin;
-        TileMap world;
+        protected TileMap world;
 
         public Vector2 PixelPosition
         {

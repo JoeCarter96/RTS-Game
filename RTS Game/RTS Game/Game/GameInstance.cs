@@ -46,6 +46,14 @@ namespace RTS_Game
 
             Unit test = new Unit(world, player, new Vector2(0, 0), Resources.GetUnitTextures("Tank01"), 100);
             test.FinalTarget = new Vector2(10, 0);
+
+            //testing health bars
+            test2.Damage(null, 60);
+            test3.Damage(null, 10);
+            test4.Damage(null, 90);
+
+            test6.Damage(null, 45);
+
             player.MovingUnits.Add(test);
         }
 

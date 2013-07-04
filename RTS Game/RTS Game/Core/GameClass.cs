@@ -25,10 +25,6 @@ namespace RTS_Game
         private KeyboardState keyboard;
         private MouseState mouse;
 
-        //fps stuff
-        private double LastFrameTime = 0;
-        private double FPS = 0;
-
         public GameClass()
         {
             //Content setup
@@ -113,8 +109,17 @@ namespace RTS_Game
             Texture2D SplashScreen = Content.Load<Texture2D>("Splash");
             SplashScreen.Name = "SplashScreen";
             Resources.AddGUITexture(SplashScreen);
-            #endregion
 
+            //Healthbar Background
+            Texture2D HealthBack = Content.Load<Texture2D>("Healthbar_Background");
+            HealthBack.Name = "HealthBack";
+            Resources.AddGUITexture(HealthBack);
+
+            //Healthbar Foreground
+            Texture2D HealthFore = Content.Load<Texture2D>("Healthbar_Foreground");
+            HealthFore.Name = "HealthFore";
+            Resources.AddGUITexture(HealthFore);
+            #endregion
 
             #region Unit Textures
             //Splash Screen

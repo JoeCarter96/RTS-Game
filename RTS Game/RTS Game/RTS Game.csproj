@@ -72,6 +72,8 @@
     <Reference Include="System.Net" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entity\Building.cs" />
+    <Compile Include="Entity\HealthBar.cs" />
     <Compile Include="Game\Player.cs" />
     <Compile Include="Pathfinding\FieldModifier.cs" />
     <Compile Include="GameState\BasicGameState.cs" />
