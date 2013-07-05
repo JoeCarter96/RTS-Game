@@ -14,6 +14,6 @@ Content\Construction Yard.xnb
 Content\PowerPlant.xnb
 Content\Tank01.xnb
 Content\TestBuilding.xnb
-Content\TestFont.xnb
 Content\Healthbar_Background.xnb
 Content\Healthbar_Foreground.xnb
+Content\TestFont.xnb
