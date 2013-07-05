@@ -19,6 +19,7 @@ namespace RTS_Game
     class Unit : HealthEntity
     {
         #region variables
+        float MAX_SPEED = 5;
         //Next Tile unit is moving to.
         Vector2 NEXT_TARGET = new Vector2();
         //Final destination unit wants to reach.
@@ -31,6 +32,12 @@ namespace RTS_Game
         //Reference to Player.
         Game.Player owner;
         #endregion
+
+        public float MaxSpeed
+        {
+            get { return MAX_SPEED; }
+            set { MAX_SPEED = value; }
+        }
 
         public Vector2 FinalTarget
         {
@@ -54,6 +61,12 @@ namespace RTS_Game
             NEXT_TARGET = tilePosition;
         }
 
+        //Gets the Distance to the next target Cell.
+        public float DistanceToDestination
+        {
+            get { return Vector2.Distance(pixelPosition, new Vector2(NEXT_TARGET.X * world.TileWidth, NEXT_TARGET.Y * world.TileWidth)); }
+        }
+
         #region Function Explanation
         //This is the code which moves the unit to the target fluidly.
         //The target is just the next cell/Tile. when it reaches it,
@@ -62,20 +75,20 @@ namespace RTS_Game
         #endregion
         public void Move()
         {
-            //If it is at the Tile, find a new one.
-            if (base.TilePosition == NEXT_TARGET)
+            if (DistanceToDestination < MAX_SPEED)
             {
-                //Find a new one.
                 FindNextCell();
             }
             else
             {
-                //Moving the unit.
-                //Stand in code until i can be arsed moving stuff nicely.
-                base.TilePosition = new Vector2(NEXT_TARGET.X, NEXT_TARGET.Y);
-                  //TEMP.
-            }
-        }
+                Vector2 direction = new Vector2(NEXT_TARGET.X * world.TileWidth, NEXT_TARGET.Y * world.TileWidth) - pixelPosition;
+                direction.Normalize();
+                velocity = Vector2.Multiply(direction, MAX_SPEED);
+                PixelPosition += velocity;
+    }
+}
+
+
 
         #region Function Explanation
         //Finding the Unit a new target by finding the next lowest potential field.
@@ -360,4 +373,43 @@ namespace RTS_Game
             }
         }
 
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+        #region Function Explanation
+        //This is the code which moves the unit to the target fluidly.
+        //The target is just the next cell/Tile. when it reaches it,
+        //it uses FindNextCell to find the next tile to move to until
+        //it reaches it's final Target.
+        #endregion
+        public void Move()
+        {
+            //If it is at the Tile, find a new one.
+            if (base.TilePosition == NEXT_TARGET)
+            {
+                //Find a new one.
+                FindNextCell();
+            }
+            else
+            {
+                //Moving the unit.
+                //Stand in code until i can be arsed moving stuff nicely.
+                base.TilePosition = new Vector2(NEXT_TARGET.X, NEXT_TARGET.Y);
+               
+                  //TEMP.
+            }
+        }
 */

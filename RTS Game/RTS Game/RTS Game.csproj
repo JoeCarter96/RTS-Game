@@ -103,7 +103,6 @@
     <Content Include="GameThumbnail.png">
       <XnaPlatformSpecific>true</XnaPlatformSpecific>
     </Content>
-    <Content Include="GUI\Tank03.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\RTS GameContent\RTS GameContent.contentproj">
