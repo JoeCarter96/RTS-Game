@@ -23,6 +23,8 @@ namespace RTS_Game
 
         //Used to stop the unit from being drawn and updated once it is dead
         protected bool alive = true;
+
+        private bool drawHealthBar = true;
         private HealthBar healthBar;
 
         protected TileMap world;
@@ -31,6 +33,12 @@ namespace RTS_Game
         public bool Alive
         {
             get { return alive; }
+        }
+
+        public bool DrawHealthBar
+        {
+            get { return drawHealthBar; }
+            set { drawHealthBar = value; }
         }
 
         //Assuming the unit is spawned with full health
@@ -99,8 +107,10 @@ namespace RTS_Game
                 //remove this to stop units dying :D
                 Damage(null, 0.1);
 
-
-                healthBar.Update(gameTime);
+                if (drawHealthBar)
+                {
+                    healthBar.Update(gameTime);
+                }
                 base.Update(gameTime);
             }
         }
@@ -110,7 +120,10 @@ namespace RTS_Game
             if (alive)
             {
                 base.Draw(spriteBatch);
-                healthBar.Draw(spriteBatch);
+                if (drawHealthBar)
+                {
+                    healthBar.Draw(spriteBatch);
+                }
             }
         }
     }

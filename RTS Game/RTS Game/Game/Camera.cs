@@ -11,7 +11,12 @@ namespace RTS_Game
 {
     class Camera
     {
-        public const float CameraSpeed = 6;
+        //Camera constants
+        private const float CameraSpeed = 6F;
+
+        private const float MinZoom = 0.5F;
+        private const float MaxZoom = 2F;
+        private const float ZoomSpeed = 0.05F;
 
         //The cameras matrix that will be used in spriteBatch.Begin()
         private Matrix matrix = new Matrix();
@@ -22,12 +27,18 @@ namespace RTS_Game
         //Zoom variable represents how far zoomed in the camera is
         private float zoom = 1f;
 
+        //TODO: add support for full screen game
+        private Viewport viewport = new Viewport(new Rectangle(0 ,0 ,800 ,600));
+
+        //The value of the mouses scroll from the last frame.
+        //Used to find if the mouse has beens crolled since the last frame.
+        private int ScrollValueLastFrame = 0;
+
         //We initially assume a 30 x 30 tilemap
         //We have methods that re-workout these values
         private int WorldWidth = 2400;
         private int WorldHeight = 2400;
 
-        #region Properties
         public Matrix CameraMatrix
         {
             get { return matrix; }
@@ -36,26 +47,14 @@ namespace RTS_Game
         public Vector2 Position
         {
             get { return position; }
-            set 
-            {
-                position = ClampCamera(value);
-            }
+            set { position = ClampCamera(value); }
         }
 
         public float Zoom
         {
             get { return zoom; }
-            set 
-            { 
-                zoom = value;
-                if (zoom < 0.5f)
-                {
-                    //A limiter to stop zoom going too low
-                    zoom = 0.5f;
-                }
-            }
+            set { zoom = ClampZoom(value); }
         }
-        #endregion
 
         public Camera()
         {
@@ -72,17 +71,25 @@ namespace RTS_Game
         }
 
         //Returns a vector2 that is within the gamefield
-        private Vector2 ClampCamera(Vector2 vector)
+        private Vector2 ClampCamera(Vector2 value)
         {
             //Unfinished
-            if (vector.X < 0) { vector.X = 0; }
-            if (vector.X > (WorldWidth - GameClass.Game_Width)) { vector.X = (WorldWidth - GameClass.Game_Width); }
+            if (value.X < 0) { value.X = 0; }
+            if (value.X > (WorldWidth - GameClass.Game_Width)) { value.X = (WorldWidth - GameClass.Game_Width); }
 
-            if (vector.Y < 0) { vector.Y = 0; }
-            if (vector.Y > (WorldHeight - GameClass.Game_Height)) { vector.Y = (WorldHeight - GameClass.Game_Height); }
-            return vector;
+            if (value.Y < 0) { value.Y = 0; }
+            if (value.Y > (WorldHeight - GameClass.Game_Height)) { value.Y = (WorldHeight - GameClass.Game_Height); }
+            return value;
         }
 
+        //Returns a float that is within our zoom limits
+        public float ClampZoom(float value)
+        {
+            if (value < MinZoom) { value = MinZoom; }
+            if (value > MaxZoom) { value = MaxZoom; }
+
+            return value;
+        }
 
         //Offsets the target pixelPosition by half of the screen so we can center on it
         public void CenterCameraOn(Vector2 target)
@@ -93,6 +100,7 @@ namespace RTS_Game
         //This is where we change the camera depending on our inputs
         public void Update(KeyboardState keyboard, MouseState mouse)
         {
+            #region Camera movement logic
             Vector2 movementVector = new Vector2(0, 0);
             //camera movement logic
             if (keyboard.IsKeyDown(Keys.Left) || mouse.X < (GameClass.Game_Width/6))
@@ -117,12 +125,43 @@ namespace RTS_Game
                 movementVector.Normalize();
                 Position += (movementVector * CameraSpeed);
             }
+            #endregion
 
-            //Set the matrix
-            matrix = Matrix.CreateScale(new Vector3(Zoom, Zoom, 0)) *
-                     Matrix.CreateTranslation(new Vector3(-Position.X, -Position.Y, 0));
+            #region Camera zoom logic - WIP
+            int scrollValue = mouse.ScrollWheelValue;
+
+            //the difference in the scroll values between this frame ans last frame
+            int deltaScroll = scrollValue - ScrollValueLastFrame;
+            
+            //if deltaScroll == 0 there has been no change
+            if (deltaScroll != 0)
+            {
+                Vector2 PositionInitial = position;
+
+                if (deltaScroll > 0)
+                {
+                    //Scroll up
+                    Zoom += ZoomSpeed;
+                }
+                else if (deltaScroll < 0)
+                {
+                    //Scroll Down
+                    Zoom -= ZoomSpeed;
+                }
+
+                //position += (new Vector2(viewport.Width / 2, viewport.Height / 2));
+            }
+
+            ScrollValueLastFrame = scrollValue;
+            #endregion
+
+            //Update the matrix
+            matrix =
+                Matrix.CreateScale(new Vector3(Zoom, Zoom, 1)) *
+                Matrix.CreateTranslation(new Vector3(-Position.X, -Position.Y, 0));
             
             
+
             //Giving Credit
             //I understand some of this, but most came from this tutorial:
             //http://www.youtube.com/watch?v=c_SPRT7DAeM
