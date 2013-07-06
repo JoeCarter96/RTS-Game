@@ -12,18 +12,19 @@ namespace RTS_Game
     {
         protected Texture2D texture;
         protected float rotation = 0f;
+        
+        protected Vector2 origin = Vector2.Zero;
+        protected Vector2 velocity = Vector2.Zero;
 
+        //positioning variables.
         protected Vector2 pixelPosition;
         protected Vector2 tilePosition;
-        protected Vector2 velocity = new Vector2(0, 0);
-        protected Vector2 origin;
-        protected TileMap world;
 
         public Vector2 PixelPosition
         {
             get { return pixelPosition; }
             set { pixelPosition = value;
-                tilePosition = value / world.TileWidth;
+                tilePosition = value / GameClass.Tile_Width;
             }
         }
 
@@ -31,17 +32,21 @@ namespace RTS_Game
         {
             get { return tilePosition; }
             set { tilePosition = value;
-                pixelPosition = value * world.TileWidth;
+            pixelPosition = value * GameClass.Tile_Width;
             }
         }
 
-        public Entity(TileMap world, Vector2 tilePosition, Texture2D texture)
+        public float Rotation
         {
-            this.world = world;
-            this.tilePosition = tilePosition;
-            this.texture = texture;
+            get { return rotation; }
+            set { rotation = value; }
+        }
 
-            origin = new Vector2(0, 0);
+        public Entity(Vector2 tilePosition, Texture2D texture)
+        {
+            //we assign it to the property to also have it calculate the pixel position
+            TilePosition = tilePosition;
+            this.texture = texture;
         }
 
         //Returns the center of the texture

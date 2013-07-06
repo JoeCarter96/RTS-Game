@@ -10,34 +10,42 @@ namespace RTS_Game
 {
     //TODO: make this an entity when the entity tree is cleaned up
     //TOFO: Use a single texture for health bars with colour tinting
-    class HealthBar
+    class HealthBar : Entity
     {
-        private HealthEntity target;
         private const int HeightOffset = 70;
 
+        private HealthEntity target;
+        private double percentage = 1;
+        private Rectangle destRectangle = Rectangle.Empty;
+
         public HealthBar(HealthEntity target)
+            :base(target.TilePosition, Resources.GetGUITextures("HealthFore"))
         {
             this.target = target;
+            Update(null);
         }
 
-        private void DrawForeground(SpriteBatch spriteBatch)
+
+        public override void Update(GameTime gameTime)
         {
-            Texture2D texture = Resources.GetGUITextures("HealthFore");
-            
-            double percentage = target.GetHealthPercentage();
-            int width = (int)Math.Floor(texture.Width * percentage);
-            
-            Rectangle destRectangle = new Rectangle((int)target.PixelPosition.X, (int)target.PixelPosition.Y + HeightOffset, width, texture.Height);
-            spriteBatch.Draw(texture, destRectangle, Color.White);
+            if (target.Alive)
+            {
+                percentage = target.GetHealthPercentage();
+                int width = (int)Math.Floor(texture.Width * percentage);
+                destRectangle = new Rectangle((int)target.PixelPosition.X, (int)target.PixelPosition.Y + HeightOffset, width, texture.Height);
+            }
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public override void Draw(SpriteBatch spriteBatch, Color color)
         {
-            //draw the background
-            spriteBatch.Draw(Resources.GetGUITextures("HealthBack"), target.PixelPosition + new Vector2(0, HeightOffset), Color.White);
+            if (target.Alive)
+            {
+                //draw the background
+                spriteBatch.Draw(Resources.GetGUITextures("HealthBack"), target.PixelPosition + new Vector2(0, HeightOffset), Color.White);
 
-            //draw trhe forground
-            DrawForeground(spriteBatch);
+                //draw the forground
+                spriteBatch.Draw(texture, destRectangle, Color.White);
+            }
         }
     }
 }

@@ -21,8 +21,9 @@ namespace RTS_Game
     {
         private Camera camera;
         private TileMap world;
-        private Game.Player player;
+        private Player player;
 
+        private Unit test;
         public GameInstance(Level level, Camera camera)
         {
             //Store the camera in a local variable so we can get its pixelPosition later
@@ -31,7 +32,7 @@ namespace RTS_Game
             //Build the tilemap using the level
             world = new TileMap(level, 800, 600, 80);
 
-            player = new Game.Player(world);
+            player = new Player(world);
 
             //we tell the camera the size of the tilemap so it can adjust its range
             camera.GiveTilemap(world);
@@ -44,7 +45,7 @@ namespace RTS_Game
 
             Unit test6 = new Unit(world, player, new Vector2(13, 4), Resources.GetBuildingTextures("Construction Yard"), 100);
 
-            Unit test = new Unit(world, player, new Vector2(0, 0), Resources.GetUnitTextures("Tank01"), 100);
+            test = new Unit(world, player, new Vector2(0, 0), Resources.GetUnitTextures("Tank01"), 100);
             test.FinalTarget = new Vector2(10, 0);
 
             //testing health bars
@@ -64,6 +65,8 @@ namespace RTS_Game
             {
                 u.Move();
             }
+
+            Console.WriteLine("TilePosition = {0}, PixelPosition = {1}", test.TilePosition, test.PixelPosition);
         }
 
         //The drawmethod that will be offset and scaled by the camera

@@ -62,7 +62,7 @@ namespace RTS_Game
                 for (int j = 0; j < tileArray.GetLength(1); j++)
                 {
                     //Creates new tile.
-                    tileArray[i, j] = new Tile(this, new Vector2(i, j), new Vector2(i, j), TextureArray[i, j]);
+                    tileArray[i, j] = new Tile(new Vector2(i, j), new Vector2(i, j), TextureArray[i, j]);
                     //Increases X for next tile.
                     X += TileWidth;
                 }
@@ -75,18 +75,6 @@ namespace RTS_Game
             FieldModifer.setup(tileArray);
         }
 
-        //DEBUG: function to print all the positions of every tile
-        public void PrintPositions()
-        {
-            Console.WriteLine("Begining Position Print:");
-            Console.WriteLine("------------------------");
-
-            foreach (Tile t in tileArray)
-            {
-                Console.WriteLine(t.TilePosition);
-            }
-        }
-
         #region Function Explanation
         //Draws Each Tile.
         #endregion
@@ -95,7 +83,6 @@ namespace RTS_Game
             //Is this the best way to do it?
             foreach (Tile t in tileArray)
                 t.Draw(spriteBatch);
-
         }
     }
 }

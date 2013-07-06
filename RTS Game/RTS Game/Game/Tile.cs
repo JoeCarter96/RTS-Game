@@ -29,12 +29,12 @@ namespace RTS_Game
             get { return new Rectangle((int)pixelPosition.X, (int)pixelPosition.Y, GameClass.Tile_Width, GameClass.Tile_Width); }
         }
 
-        public Tile(TileMap world, Vector2 tilePosition, Vector2 index, Texture2D texture)
-            : base(world, tilePosition, texture)
+        public Tile(Vector2 tilePosition, Vector2 index, Texture2D texture)
+            : base(tilePosition, texture)
         {
             this.index = index;
             this.tilePosition = tilePosition;
-            this.pixelPosition = tilePosition * world.TileWidth;
+            this.pixelPosition = tilePosition * GameClass.Tile_Width;
         }
     }
 }

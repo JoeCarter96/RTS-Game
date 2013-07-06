@@ -27,10 +27,6 @@ namespace RTS_Game
         Vector2 FINAL_TARGET = new Vector2();
         //Units PF Array for movement.
         public int[,] PF_ARRAY;
-        //Reference to the TileMap class.
-        TileMap world;
-        //Reference to Player.
-        Game.Player owner;
         #endregion
 
         public float MaxSpeed
@@ -45,12 +41,11 @@ namespace RTS_Game
             set { FINAL_TARGET = value; }
         }
 
-        public Unit(TileMap world, Game.Player owner, Vector2 tilePosition, Texture2D texture, double maxHealth)
-            : base(world, tilePosition, texture, maxHealth)
+        public Unit(TileMap world, Player owner, Vector2 tilePosition, Texture2D texture, double maxHealth)
+            : base(world, owner, tilePosition, texture, maxHealth)
         {
             owner.Units.Add(this);
 
-            this.owner = owner;
             this.world = world;
             this.TilePosition = tilePosition; 
 
