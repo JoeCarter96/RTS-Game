@@ -7,8 +7,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Git Projects\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\Grass01.xnb</Output>
-      <Time>2013-07-05T00:19:35.3057403+01:00</Time>
+      <Output>C:\Users\Pritchy\Documents\GitHub\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\Grass01.xnb</Output>
+      <Time>2013-07-06T23:31:20.8069936+01:00</Time>
     </Item>
     <Item>
       <Source>Road01.png</Source>
@@ -16,8 +16,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Git Projects\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\Road01.xnb</Output>
-      <Time>2013-07-05T00:19:35.3167409+01:00</Time>
+      <Output>C:\Users\Pritchy\Documents\GitHub\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\Road01.xnb</Output>
+      <Time>2013-07-06T23:31:22.2720774+01:00</Time>
     </Item>
     <Item>
       <Source>Splash.png</Source>
@@ -25,8 +25,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Git Projects\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\Splash.xnb</Output>
-      <Time>2013-07-05T00:19:35.3187411+01:00</Time>
+      <Output>C:\Users\Pritchy\Documents\GitHub\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\Splash.xnb</Output>
+      <Time>2013-07-06T23:30:19.8085047+01:00</Time>
     </Item>
     <Item>
       <Source>Water01.png</Source>
@@ -34,8 +34,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Git Projects\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\Water01.xnb</Output>
-      <Time>2013-07-05T00:19:35.3267415+01:00</Time>
+      <Output>C:\Users\Pritchy\Documents\GitHub\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\Water01.xnb</Output>
+      <Time>2013-07-06T23:31:22.2850782+01:00</Time>
     </Item>
     <Item>
       <Source>Levels\Desert_Test.png</Source>
@@ -43,8 +43,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Git Projects\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\Levels\Desert_Test.xnb</Output>
-      <Time>2013-07-05T00:19:35.3087405+01:00</Time>
+      <Output>C:\Users\Pritchy\Documents\GitHub\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\Levels\Desert_Test.xnb</Output>
+      <Time>2013-07-06T23:30:19.7915038+01:00</Time>
     </Item>
     <Item>
       <Source>Levels\Island.png</Source>
@@ -52,8 +52,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Git Projects\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\Levels\Island.xnb</Output>
-      <Time>2013-07-05T00:19:35.3097405+01:00</Time>
+      <Output>C:\Users\Pritchy\Documents\GitHub\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\Levels\Island.xnb</Output>
+      <Time>2013-07-06T23:30:19.7925038+01:00</Time>
     </Item>
     <Item>
       <Source>Levels\Level_Test.png</Source>
@@ -61,8 +61,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Git Projects\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\Levels\Level_Test.xnb</Output>
-      <Time>2013-07-05T00:19:35.3097405+01:00</Time>
+      <Output>C:\Users\Pritchy\Documents\GitHub\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\Levels\Level_Test.xnb</Output>
+      <Time>2013-07-06T23:30:19.7935039+01:00</Time>
     </Item>
     <Item>
       <Source>Levels\Ocean_Combat.png</Source>
@@ -70,8 +70,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Git Projects\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\Levels\Ocean_Combat.xnb</Output>
-      <Time>2013-07-05T00:19:35.3127407+01:00</Time>
+      <Output>C:\Users\Pritchy\Documents\GitHub\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\Levels\Ocean_Combat.xnb</Output>
+      <Time>2013-07-06T23:30:19.8035044+01:00</Time>
     </Item>
     <Item>
       <Source>Levels\Snow_Test.png</Source>
@@ -79,8 +79,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Git Projects\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\Levels\Snow_Test.xnb</Output>
-      <Time>2013-07-05T00:19:35.3137408+01:00</Time>
+      <Output>C:\Users\Pritchy\Documents\GitHub\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\Levels\Snow_Test.xnb</Output>
+      <Time>2013-07-06T23:30:19.8045045+01:00</Time>
     </Item>
     <Item>
       <Source>Levels\MegaMap.png</Source>
@@ -88,8 +88,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Git Projects\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\Levels\MegaMap.xnb</Output>
-      <Time>2013-07-05T00:19:35.3107406+01:00</Time>
+      <Output>C:\Users\Pritchy\Documents\GitHub\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\Levels\MegaMap.xnb</Output>
+      <Time>2013-07-06T23:30:19.8035044+01:00</Time>
     </Item>
     <Item>
       <Source>DebugTile.png</Source>
@@ -97,8 +97,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Git Projects\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\DebugTile.xnb</Output>
-      <Time>2013-07-05T00:19:35.3047403+01:00</Time>
+      <Output>C:\Users\Pritchy\Documents\GitHub\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\DebugTile.xnb</Output>
+      <Time>2013-07-06T23:31:22.2980789+01:00</Time>
     </Item>
     <Item>
       <Source>Levels\Debug.png</Source>
@@ -106,8 +106,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Git Projects\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\Levels\Debug.xnb</Output>
-      <Time>2013-07-05T00:19:35.3077404+01:00</Time>
+      <Output>C:\Users\Pritchy\Documents\GitHub\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\Levels\Debug.xnb</Output>
+      <Time>2013-07-06T23:30:19.7905037+01:00</Time>
     </Item>
     <Item>
       <Source>Construction Yard.png</Source>
@@ -115,8 +115,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Git Projects\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\Construction Yard.xnb</Output>
-      <Time>2013-07-05T00:19:35.3027401+01:00</Time>
+      <Output>C:\Users\Pritchy\Documents\GitHub\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\Construction Yard.xnb</Output>
+      <Time>2013-07-06T23:31:22.2930786+01:00</Time>
     </Item>
     <Item>
       <Source>PowerPlant.png</Source>
@@ -124,8 +124,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Git Projects\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\PowerPlant.xnb</Output>
-      <Time>2013-07-05T00:19:35.3147408+01:00</Time>
+      <Output>C:\Users\Pritchy\Documents\GitHub\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\PowerPlant.xnb</Output>
+      <Time>2013-07-06T23:31:22.2670772+01:00</Time>
     </Item>
     <Item>
       <Source>Tank01.png</Source>
@@ -133,8 +133,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Git Projects\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\Tank01.xnb</Output>
-      <Time>2013-07-05T00:19:35.3217412+01:00</Time>
+      <Output>C:\Users\Pritchy\Documents\GitHub\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\Tank01.xnb</Output>
+      <Time>2013-07-06T23:31:22.2800779+01:00</Time>
     </Item>
     <Item>
       <Source>TestBuilding.png</Source>
@@ -142,8 +142,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Git Projects\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\TestBuilding.xnb</Output>
-      <Time>2013-07-05T00:19:35.3247414+01:00</Time>
+      <Output>C:\Users\Pritchy\Documents\GitHub\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\TestBuilding.xnb</Output>
+      <Time>2013-07-06T23:30:19.812505+01:00</Time>
     </Item>
     <Item>
       <Source>Healthbar_Background.png</Source>
@@ -151,8 +151,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Git Projects\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\Healthbar_Background.xnb</Output>
-      <Time>2013-07-04T23:48:45.560941+01:00</Time>
+      <Output>C:\Users\Pritchy\Documents\GitHub\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\Healthbar_Background.xnb</Output>
+      <Time>2013-07-06T23:30:19.7875035+01:00</Time>
     </Item>
     <Item>
       <Source>Healthbar_Foreground.png</Source>
@@ -160,8 +160,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Git Projects\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\Healthbar_Foreground.xnb</Output>
-      <Time>2013-07-04T23:48:06.9157306+01:00</Time>
+      <Output>C:\Users\Pritchy\Documents\GitHub\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\Healthbar_Foreground.xnb</Output>
+      <Time>2013-07-06T23:30:19.7885036+01:00</Time>
     </Item>
     <Item>
       <Source>TestFont.spritefont</Source>
@@ -169,8 +169,8 @@
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
       <Options>None</Options>
-      <Output>C:\Git Projects\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\TestFont.xnb</Output>
-      <Time>2013-07-05T00:19:35.3247414+01:00</Time>
+      <Output>C:\Users\Pritchy\Documents\GitHub\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\TestFont.xnb</Output>
+      <Time>2013-07-06T23:30:19.812505+01:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
@@ -179,39 +179,39 @@
       <TargetProfile>Reach</TargetProfile>
       <BuildConfiguration>Debug</BuildConfiguration>
       <CompressContent>false</CompressContent>
-      <RootDirectory>C:\Git Projects\RTS-Game\RTS Game\RTS GameContent\</RootDirectory>
-      <LoggerRootDirectory>C:\Git Projects\RTS-Game\RTS Game\RTS Game\</LoggerRootDirectory>
-      <IntermediateDirectory>C:\Git Projects\RTS-Game\RTS Game\RTS Game\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>C:\Git Projects\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\</OutputDirectory>
+      <RootDirectory>C:\Users\Pritchy\Documents\GitHub\RTS-Game\RTS Game\RTS GameContent\</RootDirectory>
+      <LoggerRootDirectory>C:\Users\Pritchy\Documents\GitHub\RTS-Game\RTS Game\RTS Game\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\Users\Pritchy\Documents\GitHub\RTS-Game\RTS Game\RTS Game\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\Users\Pritchy\Documents\GitHub\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>
         <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.XImporter.dll</Key>
-        <Value>2011-09-01T16:22:30+01:00</Value>
+        <Value>2011-09-01T17:22:30+01:00</Value>
       </Assembly>
       <Assembly>
         <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.VideoImporters.dll</Key>
-        <Value>2011-09-01T16:22:30+01:00</Value>
+        <Value>2011-09-01T17:22:30+01:00</Value>
       </Assembly>
       <Assembly>
         <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.TextureImporter.dll</Key>
-        <Value>2011-09-01T16:22:30+01:00</Value>
+        <Value>2011-09-01T17:22:30+01:00</Value>
       </Assembly>
       <Assembly>
         <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.FBXImporter.dll</Key>
-        <Value>2011-09-01T16:22:30+01:00</Value>
+        <Value>2011-09-01T17:22:30+01:00</Value>
       </Assembly>
       <Assembly>
         <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.EffectImporter.dll</Key>
-        <Value>2011-09-01T16:22:30+01:00</Value>
+        <Value>2011-09-01T17:22:30+01:00</Value>
       </Assembly>
       <Assembly>
         <Key>C:\Program Files (x86)\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.AudioImporters.dll</Key>
-        <Value>2011-09-01T16:22:30+01:00</Value>
+        <Value>2011-09-01T17:22:30+01:00</Value>
       </Assembly>
       <Assembly>
         <Key>C:\Windows\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
-        <Value>2013-05-27T12:50:13.0233046+01:00</Value>
+        <Value>2013-03-26T22:22:53.7636855+00:00</Value>
       </Assembly>
     </Assemblies>
   </Asset>

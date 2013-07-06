@@ -30,7 +30,7 @@ namespace RTS_Game
             this.camera = camera;
 
             //Build the tilemap using the level
-            world = new TileMap(level, 800, 600, 80);
+            world = new TileMap(level, 800, 600, 20);
 
             player = new Player(world);
 
@@ -38,12 +38,12 @@ namespace RTS_Game
             camera.GiveTilemap(world);
 
 
-            Unit test2 = new Unit(world, player, new Vector2(10, 4), Resources.GetBuildingTextures("PowerPlant"), 100);
-            Unit test3 = new Unit(world, player, new Vector2(11, 3), Resources.GetBuildingTextures("PowerPlant"), 100);
-            Unit test4 = new Unit(world, player, new Vector2(10, 3), Resources.GetBuildingTextures("PowerPlant"), 100);
-            Unit test5 = new Unit(world, player, new Vector2(11, 4), Resources.GetBuildingTextures("PowerPlant"), 100);
+            Unit test2 = new Unit(world, player, new Vector2(10, 3), Resources.GetBuildingTextures("PowerPlant"), 100);
+            Unit test3 = new Unit(world, player, new Vector2(13, 3), Resources.GetBuildingTextures("PowerPlant"), 100);
+            Unit test4 = new Unit(world, player, new Vector2(10, 8), Resources.GetBuildingTextures("PowerPlant"), 100);
+            Unit test5 = new Unit(world, player, new Vector2(13, 8), Resources.GetBuildingTextures("PowerPlant"), 100);
 
-            Unit test6 = new Unit(world, player, new Vector2(13, 4), Resources.GetBuildingTextures("Construction Yard"), 100);
+            Unit test6 = new Unit(world, player, new Vector2(17, 4), Resources.GetBuildingTextures("Construction Yard"), 100);
 
             test = new Unit(world, player, new Vector2(0, 0), Resources.GetUnitTextures("Tank01"), 100);
             test.FinalTarget = new Vector2(10, 0);

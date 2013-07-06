@@ -12,7 +12,7 @@ namespace RTS_Game
     //TOFO: Use a single texture for health bars with colour tinting
     class HealthBar : Entity
     {
-        private const int HeightOffset = 70;
+        private const int HeightOffset = 0;
 
         private HealthEntity target;
         private double percentage = 1;
