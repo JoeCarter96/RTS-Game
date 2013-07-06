@@ -95,6 +95,11 @@ namespace RTS_Game
         {
             if (alive)
             {
+                //DEBUG: testing healthbar damage
+                //remove this to stop units dying :D
+                Damage(null, 0.1);
+
+
                 healthBar.Update(gameTime);
                 base.Update(gameTime);
             }

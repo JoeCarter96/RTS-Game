@@ -25,27 +25,22 @@ namespace RTS_Game
             Update(null);
         }
 
-
         public override void Update(GameTime gameTime)
         {
-            if (target.Alive)
-            {
-                percentage = target.GetHealthPercentage();
-                int width = (int)Math.Floor(texture.Width * percentage);
-                destRectangle = new Rectangle((int)target.PixelPosition.X, (int)target.PixelPosition.Y + HeightOffset, width, texture.Height);
-            }
+            Vector2 position = target.PixelPosition + new Vector2(0, HeightOffset);
+
+            percentage = target.GetHealthPercentage();
+            int width = (int)Math.Floor(texture.Width * percentage);
+            destRectangle = new Rectangle((int)position.X, (int)position.Y, width, texture.Height);
         }
 
-        public override void Draw(SpriteBatch spriteBatch, Color color)
+        public override void Draw(SpriteBatch spriteBatch)
         {
-            if (target.Alive)
-            {
-                //draw the background
-                spriteBatch.Draw(Resources.GetGUITextures("HealthBack"), target.PixelPosition + new Vector2(0, HeightOffset), Color.White);
+            //draw the background
+            spriteBatch.Draw(Resources.GetGUITextures("HealthBack"), target.PixelPosition + new Vector2(0, HeightOffset), Color.White);
 
-                //draw the forground
-                spriteBatch.Draw(texture, destRectangle, Color.White);
-            }
+            //draw the forground
+            spriteBatch.Draw(texture, destRectangle, Color.White);
         }
     }
 }

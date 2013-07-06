@@ -66,7 +66,11 @@ namespace RTS_Game
                 u.Move();
             }
 
-            Console.WriteLine("TilePosition = {0}, PixelPosition = {1}", test.TilePosition, test.PixelPosition);
+            //Update every unit
+            foreach (Unit u in player.Units)
+            {
+                u.Update(gameTime);
+            }
         }
 
         //The drawmethod that will be offset and scaled by the camera
