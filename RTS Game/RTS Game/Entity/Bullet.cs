@@ -28,6 +28,8 @@ namespace RTS_Game
         public void update(GameTime gameTime)
         {
             pixelPosition += velocity;
+
+            base.Update(gameTime);
         }
     }
 }

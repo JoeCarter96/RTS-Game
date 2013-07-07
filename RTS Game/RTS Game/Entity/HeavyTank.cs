@@ -30,6 +30,8 @@ namespace RTS_Game
                 //Firing Code Here
                 bulletTime = 0f;
             }
+
+            base.Update(gametime);
         }
     }
 }
