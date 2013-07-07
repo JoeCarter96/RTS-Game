@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace RTS_Game
 {
-    public class TileMap
+    class TileMap
     {
         private Tile[,] tileArray;
 
@@ -73,6 +73,18 @@ namespace RTS_Game
 
             //Passes reference of tileArray.
             FieldModifer.setup(tileArray);
+        }
+
+        public Tile GetTile(int x, int y)
+        {
+            if (x > Width || y > Height)
+            {
+                return null;
+            }
+            else
+            {
+                return tileArray[x, y];
+            }
         }
 
         #region Function Explanation

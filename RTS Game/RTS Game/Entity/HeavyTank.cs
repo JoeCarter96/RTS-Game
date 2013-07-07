@@ -7,7 +7,7 @@ using System.Text;
 
 namespace RTS_Game
 {
-    public class HeavyTank : Unit
+    class HeavyTank : Unit
     {
         static int maxHealth = 100;
         static Texture2D texture = Resources.GetUnitTextures("HeavyTank");

@@ -15,7 +15,7 @@ namespace RTS_Game
      * is passed in.
      */
     #endregion
-    public class HealthEntity : Entity
+    class HealthEntity : Entity
     {
         //Health variables to deturmine if the unit is dead and also for the health bar
         protected double maxHealth;
@@ -41,6 +41,12 @@ namespace RTS_Game
             set { drawHealthBar = value; }
         }
 
+        public double MaxHealth
+        {
+            get { return maxHealth; }
+            set { maxHealth = value; }
+        }
+
         //Assuming the unit is spawned with full health
         public HealthEntity(TileMap world, Player owner, Vector2 tilePosition, Texture2D texture, double maxHealth)
             : base(tilePosition, texture)
@@ -50,7 +56,7 @@ namespace RTS_Game
             this.maxHealth = maxHealth;
             health = maxHealth;
 
-            healthBar = new HealthBar(this);
+            healthBar = new HealthBar(this, new Rectangle((int)PixelPosition.X, (int)pixelPosition.Y, GameClass.Tile_Width, GameClass.Tile_Width));
         }
 
         //Allows for a different start health
@@ -62,7 +68,7 @@ namespace RTS_Game
             this.maxHealth = maxHealth;
             this.health = startHealth;
 
-            healthBar = new HealthBar(this);
+            healthBar = new HealthBar(this, new Rectangle((int)PixelPosition.X, (int)pixelPosition.Y, GameClass.Tile_Width, GameClass.Tile_Width));
 
             //Stops the health going over its maximum
             if (startHealth > maxHealth)

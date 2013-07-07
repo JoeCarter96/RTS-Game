@@ -112,14 +112,10 @@ namespace RTS_Game
             Resources.AddGUITexture(SplashScreen);
 
             //Healthbar Background
-            Texture2D HealthBack = Content.Load<Texture2D>("Healthbar_Background");
-            HealthBack.Name = "HealthBack";
-            Resources.AddGUITexture(HealthBack);
+            Texture2D HealthBar = Content.Load<Texture2D>("Healthbar");
+            HealthBar.Name = "HealthBar";
+            Resources.AddGUITexture(HealthBar);
 
-            //Healthbar Foreground
-            Texture2D HealthFore = Content.Load<Texture2D>("Healthbar_Foreground");
-            HealthFore.Name = "HealthFore";
-            Resources.AddGUITexture(HealthFore);
             #endregion
 
             #region Unit Textures

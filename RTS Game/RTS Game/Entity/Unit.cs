@@ -16,7 +16,7 @@ namespace RTS_Game
         */
     #endregion
 
-    public class Unit : HealthEntity
+    class Unit : HealthEntity
     {
         #region variables
             #region Unit Attributes

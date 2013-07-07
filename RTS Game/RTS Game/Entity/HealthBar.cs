@@ -12,35 +12,43 @@ namespace RTS_Game
     //TOFO: Use a single texture for health bars with colour tinting
     class HealthBar : Entity
     {
-        private const int HeightOffset = 0;
-
         private HealthEntity target;
-        private double percentage = 1;
-        private Rectangle destRectangle = Rectangle.Empty;
 
-        public HealthBar(HealthEntity target)
-            :base(target.TilePosition, Resources.GetGUITextures("HealthFore"))
+        //The bounding box of the entity we are drawing around
+        private Rectangle BoundingBox;
+
+        //The destination rectangle of the beackground and foreground of the bar
+        private Rectangle DestinationBack = Rectangle.Empty;
+        private Rectangle DestinationFront = Rectangle.Empty;
+
+        public HealthBar(HealthEntity target, Rectangle BoundingBox)
+            :base(target.TilePosition, Resources.GetGUITextures("HealthBar"))
         {
             this.target = target;
-            Update(null);
+            this.BoundingBox = BoundingBox;
         }
 
         public override void Update(GameTime gameTime)
         {
-            Vector2 position = target.PixelPosition + new Vector2(0, HeightOffset);
+            //The targets position + an offset that needs tweeking
+            Vector2 position = target.PixelPosition + new Vector2(0, BoundingBox.Height + BoundingBox.Height / 8);
 
-            percentage = target.GetHealthPercentage();
-            int width = (int)Math.Floor(texture.Width * percentage);
-            destRectangle = new Rectangle((int)position.X, (int)position.Y, width, texture.Height);
+            //DestinationBack logic
+            int width = BoundingBox.Width;
+            DestinationBack = new Rectangle((int)position.X, (int)position.Y, width, texture.Height);
+            
+            //DestinationFront logic
+            width = (int)(BoundingBox.Width * target.GetHealthPercentage());
+            DestinationFront = new Rectangle((int)position.X, (int)position.Y, width, texture.Height);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
             //draw the background
-            //spriteBatch.Draw(Resources.GetGUITextures("HealthBack"), target.PixelPosition + new Vector2(0, HeightOffset), Color.White);
+            spriteBatch.Draw(texture, DestinationBack, Color.Red);
 
-            //draw the forground
-            //spriteBatch.Draw(texture, destRectangle, Color.White);
+            //draw the foreground
+            spriteBatch.Draw(texture, DestinationFront, Color.Green);
         }
     }
 }

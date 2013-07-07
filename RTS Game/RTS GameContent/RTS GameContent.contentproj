@@ -133,13 +133,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Healthbar_Background.png">
-      <Name>Healthbar_Background</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Healthbar_Foreground.png">
-      <Name>Healthbar_Foreground</Name>
+    <Compile Include="Healthbar.png">
+      <Name>Healthbar</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
