@@ -32,8 +32,6 @@ namespace RTS_Game
         }
         #endregion
 
-        
-
         #region Unit Textures
         public static void AddUnitTexture(Texture2D textureToAdd)
         {
