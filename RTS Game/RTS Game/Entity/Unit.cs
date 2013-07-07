@@ -129,8 +129,7 @@ namespace RTS_Game
         public void FindNextCell()
         {
             //If we're not at the final target.
-            if (new Vector2((float)Math.Round(base.TilePosition.X), 
-                (float)Math.Round(base.TilePosition.Y)) != FINAL_TARGET)
+            if (base.TilePosition != FINAL_TARGET)
             {
                 int highest = -int.MaxValue;
                 Vector2 nextTarget = new Vector2(base.TilePosition.X, base.TilePosition.Y);
@@ -141,8 +140,8 @@ namespace RTS_Game
                     if (highest < PF_ARRAY[(int)base.TilePosition.X + 1, (int)base.TilePosition.Y] && PF_ARRAY[(int)base.TilePosition.X + 1, (int)base.TilePosition.Y] > 0 && world.TileArray[(int)base.TilePosition.X + 1, (int)base.TilePosition.Y].Occupied != true)
                     {
                         highest = PF_ARRAY[(int) base.tilePosition.X + 1, (int) base.tilePosition.Y];
-                        nextTarget.X = base.tilePosition.X + 1;
-                        nextTarget.Y = base.tilePosition.Y;
+                        nextTarget.X = base.TilePosition.X + 1;
+                        nextTarget.Y = base.TilePosition.Y;
                     }
                 }
                 catch { Console.WriteLine("Right Limit"); }
@@ -167,8 +166,8 @@ namespace RTS_Game
                     if (highest < PF_ARRAY[(int) base.tilePosition.X, (int) base.tilePosition.Y + 1] && PF_ARRAY[(int)base.tilePosition.X, (int)base.tilePosition.Y + 1] > 0 && world.TileArray[(int)base.tilePosition.X, (int) base.tilePosition.Y + 1].Occupied != true)
                     {
                         highest = PF_ARRAY[(int)base.tilePosition.X, (int) base.tilePosition.Y + 1];
-                        nextTarget.X = base.tilePosition.X;
-                        nextTarget.Y = base.tilePosition.Y + 1;
+                        nextTarget.X = base.TilePosition.X;
+                        nextTarget.Y = base.TilePosition.Y + 1;
                     }
                 }
                 catch { Console.WriteLine("Lower Limit"); }
@@ -181,8 +180,8 @@ namespace RTS_Game
                     if (highest < PF_ARRAY[(int)base.tilePosition.X, (int)base.tilePosition.Y - 1] && PF_ARRAY[(int)base.tilePosition.X, (int)base.tilePosition.Y - 1] > 0 && world.TileArray[(int)base.tilePosition.X, (int) base.tilePosition.Y - 1].Occupied != true)
                     {
                         highest = PF_ARRAY[(int)base.tilePosition.X, (int) base.tilePosition.Y - 1];
-                        nextTarget.X = base.tilePosition.X;
-                        nextTarget.Y = base.tilePosition.Y - 1;
+                        nextTarget.X = base.TilePosition.X;
+                        nextTarget.Y = base.TilePosition.Y - 1;
                     }
                 }
                 catch { Console.WriteLine("Upper Limit"); }
@@ -195,8 +194,8 @@ namespace RTS_Game
                     if (highest < PF_ARRAY[(int)base.tilePosition.X + 1, (int)base.tilePosition.Y - 1] && PF_ARRAY[(int)base.tilePosition.X + 1, (int)base.tilePosition.Y - 1] > 0 && world.TileArray[(int)base.tilePosition.X + 1, (int) base.tilePosition.Y - 1].Occupied != true)
                     {
                         highest = PF_ARRAY[(int)base.tilePosition.X + 1, (int) base.tilePosition.Y - 1];
-                        nextTarget.X = base.tilePosition.X + 1;
-                        nextTarget.Y = base.tilePosition.Y - 1;
+                        nextTarget.X = base.TilePosition.X + 1;
+                        nextTarget.Y = base.TilePosition.Y - 1;
                     }
                 }
                 catch { }
@@ -209,8 +208,8 @@ namespace RTS_Game
                     if (highest < PF_ARRAY[(int)base.tilePosition.X - 1, (int)base.tilePosition.Y - 1] && PF_ARRAY[(int)base.tilePosition.X - 1, (int)base.tilePosition.Y - 1] > 0 && world.TileArray[(int)base.tilePosition.X - 1, (int) base.tilePosition.Y - 1].Occupied != true)
                     {
                         highest = PF_ARRAY[(int)base.tilePosition.X - 1, (int) base.tilePosition.Y - 1];
-                        nextTarget.X = base.tilePosition.X - 1;
-                        nextTarget.Y = base.tilePosition.Y - 1;
+                        nextTarget.X = base.TilePosition.X - 1;
+                        nextTarget.Y = base.TilePosition.Y - 1;
                     }
                 }
                 catch { }
@@ -222,8 +221,8 @@ namespace RTS_Game
                     if (highest < PF_ARRAY[(int)base.tilePosition.X + 1, (int)base.tilePosition.Y + 1] && PF_ARRAY[(int)base.tilePosition.X + 1, (int)base.tilePosition.Y + 1] > 0 && world.TileArray[(int)base.tilePosition.X + 1, (int) base.tilePosition.Y + 1].Occupied != true)
                     {
                         highest = PF_ARRAY[(int)base.tilePosition.X + 1, (int) base.tilePosition.Y + 1];
-                        nextTarget.X = base.tilePosition.X + 1;
-                        nextTarget.Y = base.tilePosition.Y + 1;
+                        nextTarget.X = base.TilePosition.X + 1;
+                        nextTarget.Y = base.TilePosition.Y + 1;
                     }
                 }
                 catch { }
@@ -236,8 +235,8 @@ namespace RTS_Game
                     if (highest < PF_ARRAY[(int)base.tilePosition.X - 1, (int)base.tilePosition.Y + 1] && PF_ARRAY[(int)base.tilePosition.X - 1, (int)base.tilePosition.Y + 1] > 0 && world.TileArray[(int)base.tilePosition.X - 1, (int) base.tilePosition.Y + 1].Occupied != true)
                     {
                         highest = PF_ARRAY[(int)base.tilePosition.X - 1, (int) base.tilePosition.Y + 1];
-                        nextTarget.X = base.tilePosition.X - 1;
-                        nextTarget.Y = base.tilePosition.Y + 1;
+                        nextTarget.X = base.TilePosition.X - 1;
+                        nextTarget.Y = base.TilePosition.Y + 1;
                     }
                 }
                 catch { }

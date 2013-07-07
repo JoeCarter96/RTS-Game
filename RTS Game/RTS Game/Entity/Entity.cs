@@ -24,7 +24,9 @@ namespace RTS_Game
         {
             get { return pixelPosition; }
             set { pixelPosition = value;
-                tilePosition = value / GameClass.Tile_Width;
+            tilePosition = new Vector2((int)Math.Round((decimal)value.X / GameClass.Tile_Width),
+            (int)Math.Round((decimal)value.Y / GameClass.Tile_Width));
+
             }
         }
 

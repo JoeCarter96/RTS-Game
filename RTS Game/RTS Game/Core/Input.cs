@@ -56,7 +56,7 @@ namespace RTS_Game.Core
                         Vector2 tilePos = new Vector2(currentMouse.X / GameClass.Tile_Width,
                             currentMouse.Y / GameClass.Tile_Width);
 
-                        FieldModifer.calculateField(u.PFArray,(int)tilePos.X,(int)tilePos.Y, 100);
+                        FieldModifer.calculateField(u.PFArray,(int)tilePos.X,(int)tilePos.Y, 10000);
                         u.FinalTarget = new Vector2((int)tilePos.X, (int)tilePos.Y);
                         if (u.MaxSpeed == 5)    //TEMP, stops unit buildings moving.
                             movingEntityList.Add(u);
