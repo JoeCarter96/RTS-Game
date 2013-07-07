@@ -9,9 +9,14 @@ namespace RTS_Game
 {
     class HeavyTank : Unit
     {
+        #region Variables
         static int maxHealth = 100;
         static Texture2D texture = Resources.GetUnitTextures("HeavyTank");
+        #endregion
 
+        #region Function Explanation
+        //Constructor.
+        #endregion
         public HeavyTank(Vector2 tilePosition, Player owner, TileMap world) :
             base(world, owner, tilePosition, texture, maxHealth)
         {
@@ -23,6 +28,9 @@ namespace RTS_Game
             ROF = 4;
         }
 
+        #region Function Explanation
+        //Firing code, updates Entity tree for this instance.
+        #endregion
         public override void Update(GameTime gametime)
         {
             if (target != null && bulletTime >= ROF)

@@ -7,10 +7,8 @@ using System.Text;
 namespace RTS_Game
 {
     public static class Resources
-    {   
-        //DEBUG: Font used for testing
-        public static SpriteFont TestFont;
-
+    {
+        #region Variables
         private static Dictionary<String, Texture2D> BackgroundTextures = new Dictionary<string,Texture2D>();
         private static Dictionary<String, Texture2D> UnitTextures = new Dictionary<string, Texture2D>();
         private static Dictionary<String, Texture2D> BuildingTextures = new Dictionary<string, Texture2D>();
@@ -18,6 +16,9 @@ namespace RTS_Game
         private static Dictionary<String, Texture2D> BulletTextures = new Dictionary<String, Texture2D>();
         private static Dictionary<int, Level> LevelObjects = new Dictionary<int, Level>();
         
+        //TEMP: Font used for testing
+        public static SpriteFont TestFont;
+        #endregion
 
         #region Background Textures
         public static void AddBackgroundTexture(Texture2D textureToAdd)

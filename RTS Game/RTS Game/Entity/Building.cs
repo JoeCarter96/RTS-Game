@@ -10,11 +10,13 @@ namespace RTS_Game
 {
     class Building : HealthEntity
     {
+        #region Variables
         private int width = 1;
         private int height = 1;
 
         protected Tile[,] OccupiedTiles = null;
         protected Rectangle boundingBox = Rectangle.Empty;
+        #endregion
 
         public int Width
         {
@@ -38,6 +40,9 @@ namespace RTS_Game
             }
         }
 
+        #region Function Explanation
+        //Constructor.
+        #endregion
         public Building(TileMap world, Player owner, Vector2 TilePosition, Texture2D texture)
             :base(world, owner, TilePosition, texture, 100)
         {
@@ -45,7 +50,9 @@ namespace RTS_Game
             ApplySizeChanges();
         }
 
-        //this method should be called when the width or height are called
+        #region Function Explanation
+        //This method should be called when the width or height are called.
+        #endregion
         protected void ApplySizeChanges()
         {
             //clear out the old occupied tiles
@@ -80,13 +87,16 @@ namespace RTS_Game
             }
         }
 
+        #region Function Explanation
+        //Code called when a building is Destroyed. 
+        //Unoccupies tiles used by the building and removes Entity(?)
+        #endregion
         public override void OnDeath(HealthEntity killer)
         {
             foreach(Tile t in OccupiedTiles)
             {
                 t.Occupied = false;
             }
-
 
             base.OnDeath(killer);
         }

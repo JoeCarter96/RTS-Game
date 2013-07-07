@@ -10,9 +10,21 @@ namespace RTS_Game
 {
     static class LevelLoad
     {
+        #region Variables
         private static Texture2D[,] textureArray;
-
         private static Dictionary<Color, String> Colours = new Dictionary<Color, String>();
+        #endregion
+
+        #region Function Explanation
+        //Constructor, Simply adds all pairs to the Dictionary.
+        #endregion
+        public LevelLoad()
+        {
+            Colours.Add(new Color(0, 0, 0), "DebugTile");
+            Colours.Add(new Color(0, 178, 0), "Grass01");
+            Colours.Add(new Color(191, 191, 191), "Road01");
+            Colours.Add(new Color(63, 72, 204), "Water01");
+        }
 
         #region Function Explanation
         //First gets a 1D Array (PixelRGBValues) of the colours of each pixel in a Texture2D Image (Level). 
@@ -23,8 +35,6 @@ namespace RTS_Game
         #endregion
         public static Texture2D[,] Load(Texture2D Level)
         {
-            AddColours();
-
             //Array of Colours of each pixel. 
             //Goes from top left to bottom right.
             Color[] pixelRGBValues = new Color[Level.Width * Level.Height];
@@ -62,15 +72,5 @@ namespace RTS_Game
             return textureArray;
         }
 
-        #region Function Explanation
-        //Simply adds all pairs to the Dictionary.
-        #endregion
-        public static void AddColours()
-        {
-            Colours.Add(new Color(0, 0, 0), "DebugTile");
-            Colours.Add(new Color(0, 178, 0), "Grass01");
-            Colours.Add(new Color(191, 191, 191), "Road01");
-            Colours.Add(new Color(63, 72, 204), "Water01");
-        }
     }
 }

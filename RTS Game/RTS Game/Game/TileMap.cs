@@ -10,14 +10,15 @@ namespace RTS_Game
 {
     class TileMap
     {
+        #region Variables
         private Tile[,] tileArray;
+        private int TILE_WIDTH;
+        #endregion
 
         public Tile[,] TileArray
         {
             get { return tileArray; }
         }
-
-        private int TILE_WIDTH;
 
         public int TileWidth
         {
@@ -25,10 +26,7 @@ namespace RTS_Game
             set { TILE_WIDTH = value; }
         }
         
-
-
-        //NOTE: the width and height might be the wrong way around...
-        //I'm too lazy to test it though from Joe
+        //NOTE: width and height may be the wrong way around.
         public int Width
         {
             get { return tileArray.GetLength(0); }
@@ -38,7 +36,7 @@ namespace RTS_Game
         {
             get { return tileArray.GetLength(1); }
         }
-            
+         
         #region Function Explanation
         //Creates tileArray, complete with Textured Background.
         #endregion
@@ -75,6 +73,9 @@ namespace RTS_Game
             FieldModifer.setup(tileArray);
         }
 
+        #region Function Explanation
+        //Returns a Tile when fed Coordinates.
+        #endregion
         public Tile GetTile(int x, int y)
         {
             if (x > Width || y > Height)

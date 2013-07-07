@@ -9,18 +9,20 @@ using Microsoft.Xna.Framework.Graphics;
 namespace RTS_Game
 {
     //TODO: make this an entity when the entity tree is cleaned up
-    //TOFO: Use a single texture for health bars with colour tinting
     class HealthBar : Entity
     {
+        #region Variables
         private HealthEntity target;
-
         //The bounding box of the entity we are drawing around
         private Rectangle BoundingBox;
-
         //The destination rectangle of the beackground and foreground of the bar
         private Rectangle DestinationBack = Rectangle.Empty;
         private Rectangle DestinationFront = Rectangle.Empty;
+        #endregion
 
+        #region Function Explanation
+        //Constructor.
+        #endregion
         public HealthBar(HealthEntity target, Rectangle BoundingBox)
             :base(target.TilePosition, Resources.GetGUITextures("HealthBar"))
         {
@@ -28,6 +30,9 @@ namespace RTS_Game
             this.BoundingBox = BoundingBox;
         }
 
+        #region Function Explanation
+        //Recalculates Position and Rectangles.
+        #endregion
         public override void Update(GameTime gameTime)
         {
             //The targets position + an offset that needs tweeking
@@ -42,6 +47,9 @@ namespace RTS_Game
             DestinationFront = new Rectangle((int)position.X, (int)position.Y, width, texture.Height);
         }
 
+        #region Function Explanation
+        //Just draws Healthbar.
+        #endregion
         public override void Draw(SpriteBatch spriteBatch)
         {
             //draw the background

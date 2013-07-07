@@ -7,24 +7,27 @@ namespace RTS_Game
 {
     class Player
     {
-        private List<Unit> playerEntities = new List<Unit>();
-        private List<Unit> playerMovingEntities = new List<Unit>();
+        #region Variables
+        private List<Entity> playerEntities = new List<Entity>();
+        private List<Entity> playerMovingEntities = new List<Entity>();
+        private TileMap world;
+        #endregion
 
-        public List<Unit> MovingUnits
+        public List<Entity> PlayerMovingEntities
         {
             get { return playerMovingEntities; }
             set { playerMovingEntities = value; }
         }
 
-        public List<Unit> Units
+        public List<Entity> Entities
         {
             get { return playerEntities; }
             set { playerEntities = value; }
         }
 
-
-        private TileMap world;
-
+        #region Function Explanation
+        //Constructor.
+        #endregion
         public Player(TileMap world)
         {
             this.world = world;

@@ -19,8 +19,9 @@ namespace RTS_Game
         //which holds a negative field, which can just be added to the array generated here. All in all, there are a lot of possibilities.
         #endregion
 
-        //Reference of the tileArray.
+        #region Variables
         static Tile[,] tileArray;
+        #endregion
 
         #region Function Description
         //Passes a reference of the tileArray.
@@ -47,14 +48,11 @@ namespace RTS_Game
                 }
             }
 
-
             //Creates the positive field.
             addToField(fieldToModify, sourceX, sourceY, true, maxPositiveRange);
 
 
             //Add code for generating negative fields here.
-
-
         }
 
         #region Function Description

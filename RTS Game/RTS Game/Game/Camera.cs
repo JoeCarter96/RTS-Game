@@ -11,9 +11,9 @@ namespace RTS_Game
 {
     class Camera
     {
+        #region Variables
         //Camera constants
         private const float CameraSpeed = 6F;
-
         private const float MinZoom = 0.5F;
         private const float MaxZoom = 2F;
         private const float ZoomSpeed = 0.05F;
@@ -38,6 +38,7 @@ namespace RTS_Game
         //We have methods that re-workout these values
         private int WorldWidth = 2400;
         private int WorldHeight = 2400;
+        #endregion
 
         public Matrix CameraMatrix
         {
@@ -61,16 +62,18 @@ namespace RTS_Game
             Position = new Vector2(0, 0);
         }
 
-        //This allows the camera to know the width and height of the map in pixels
-        //By default the camera assumes the map is 30 x 30
-        //For now all our maps are 30 x 30, but that might change
+        #region Function Explanation
+        //This allows the Camera to know the width and height of the map in pixels.
+        #endregion
         public void GiveTilemap(TileMap tilemap)
         {
             WorldHeight = tilemap.Height * GameClass.Tile_Width;
             WorldWidth = tilemap.Width * GameClass.Tile_Width;
         }
 
-        //Returns a vector2 that is within the gamefield
+        #region Function Explanation
+        //Returns a vector2 that is within the Game field.
+        #endregion
         private Vector2 ClampCamera(Vector2 value)
         {
             //Unfinished
@@ -82,7 +85,9 @@ namespace RTS_Game
             return value;
         }
 
-        //Returns a float that is within our zoom limits
+        #region Function Explanation
+        //Returns a float that is within our zoom limits.
+        #endregion    
         public float ClampZoom(float value)
         {
             if (value < MinZoom) { value = MinZoom; }
@@ -91,13 +96,17 @@ namespace RTS_Game
             return value;
         }
 
-        //Offsets the target pixelPosition by half of the screen so we can center on it
+        #region Function Explanation
+        //Offsets the target pixelPosition by half of the screen so we can center on it.
+        #endregion
         public void CenterCameraOn(Vector2 target)
         {
             Position = target - new Vector2(GameClass.Game_Width / 2, GameClass.Game_Height / 2);
         }
 
-        //This is where we change the camera depending on our inputs
+        #region Function Explanation
+        //Changing the camera depending on our inputs.
+        #endregion   
         public void Update(KeyboardState keyboard, MouseState mouse)
         {
             #region Camera movement logic
@@ -159,8 +168,7 @@ namespace RTS_Game
             matrix =
                 Matrix.CreateScale(new Vector3(Zoom, Zoom, 1)) *
                 Matrix.CreateTranslation(new Vector3(-Position.X, -Position.Y, 0));
-            
-            
+
 
             //Giving Credit
             //I understand some of this, but most came from this tutorial:

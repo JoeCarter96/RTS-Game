@@ -11,11 +11,17 @@ namespace RTS_Game
 {
     class MainMenuState : BasicGameState
     {
+        #region Function Explanation
+        //Constructor.
+        #endregion
         public MainMenuState()
         {
 
         }
 
+        #region Function Explanation
+        //Click code, loading Level. Will eventually be called by Input.
+        #endregion
         protected override void Click(Point mousePos, MouseButton button)
         {
             if (button == MouseButton.Left)
@@ -25,11 +31,17 @@ namespace RTS_Game
             base.Click(mousePos, button);
         }
 
+        #region Function Explanation
+        //Update loop, Updates Basic Game State base.
+        #endregion
         public override void Update(GameTime gameTime, KeyboardState keyboard, MouseState mouse)
         {
             base.Update(gameTime, keyboard, mouse);
         }
 
+        #region Function Explanation
+        //Draws Main Menu GUI.
+        #endregion
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Begin();

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using RTS_Game.Core;
+
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -11,13 +13,18 @@ namespace RTS_Game
 {
     class InGameState : BasicGameState
     {
+        #region Variables
         private GameInstance game;
         private Camera camera;
+        #endregion
 
+        #region Function Explanation
+        //Constructor.
+        #endregion
         public InGameState(Level level, GameOptions options)
         {
             Console.WriteLine("Entered Game State");
-
+            
             //Create a new camera
             camera = new Camera();
 
@@ -26,12 +33,18 @@ namespace RTS_Game
 
         }
 
+        #region Function Explanation
+        //Updates Camera and Game.
+        #endregion
         public override void Update(GameTime gameTime, KeyboardState keyboard, MouseState mouse)
         {
             camera.Update(keyboard, mouse);
             game.Update(gameTime, camera, keyboard, mouse);
         }
 
+        #region Function Explanation
+        //Draw with and without consideration towards the Camera.
+        #endregion
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, 

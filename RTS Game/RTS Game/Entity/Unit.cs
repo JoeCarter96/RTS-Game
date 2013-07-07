@@ -18,7 +18,7 @@ namespace RTS_Game
 
     class Unit : HealthEntity
     {
-        #region variables
+        #region Variables
             #region Unit Attributes
             protected float MAX_SPEED;
             protected float ACCELLERATION;
@@ -44,15 +44,17 @@ namespace RTS_Game
             //Units PF Array for movement.
             protected int[,] PF_ARRAY;
              #endregion
+
+
         #endregion
 
-       public float MaxSpeed
+        public float MaxSpeed
         {
             get { return MAX_SPEED; }
             set { MAX_SPEED = value; }
         }
 
-       public int[,] PFArray
+        public int[,] PFArray
        {
            get { return PF_ARRAY; }
            set { PF_ARRAY = value; }
@@ -64,10 +66,14 @@ namespace RTS_Game
             set { FINAL_TARGET = value; }
         }
 
+        #region Function Explanation
+        //Constructor, Adds Unit to entity list, passes a bunch of variables and then creates a PF array.
+        //Sets Next Target to Tile Position so that when Move() is called it immediately looks for the next tile.
+        #endregion
         public Unit(TileMap world, Player owner, Vector2 tilePosition, Texture2D texture, double maxHealth)
             : base(world, owner, tilePosition, texture, maxHealth)
         {
-            owner.Units.Add(this);
+            owner.Entities.Add(this);
 
             this.world = world;
             this.TilePosition = tilePosition; 
@@ -79,7 +85,9 @@ namespace RTS_Game
             NEXT_TARGET = tilePosition;
         }
 
+        #region Function Explanation
         //Gets the Distance to the next target Cell.
+        #endregion
         public float DistanceToDestination
         {
             get { return Vector2.Distance(pixelPosition, new Vector2(NEXT_TARGET.X * world.TileWidth, NEXT_TARGET.Y * world.TileWidth)); }
@@ -247,11 +255,14 @@ namespace RTS_Game
             else    //When the unit is on the source tile.
             {
                 //Stop this.Move being called in GameInstance.Update
-                owner.MovingUnits.Remove(this);
+                owner.PlayerMovingEntities.Remove(this);
                 CURRENT_SPEED = 0;
             }
         }
 
+        #region Function Explanation
+        //Updates Entity tree, increases time since last shot.
+        #endregion
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
@@ -259,6 +270,9 @@ namespace RTS_Game
             bulletTime += (float) gameTime.ElapsedGameTime.TotalSeconds;
         }
 
+        #region Function Explanation
+        //Draw Method, Draws Base texture.
+        #endregion
         public override void Draw(SpriteBatch spriteBatch)
         {   
             base.Draw(spriteBatch);

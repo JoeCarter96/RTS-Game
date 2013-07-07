@@ -11,6 +11,7 @@ namespace RTS_Game
 {
     class SplashState : BasicGameState
     {
+        #region Variables
         //Bool used to tell us if we are on the first tick of the update() for this state
         private bool FirstTick = true;
 
@@ -25,12 +26,19 @@ namespace RTS_Game
 
         //The time the splash screen will stay for(in milli seconds)
         private long Duration = 1000;
+        #endregion
 
+        #region Function Explanation
+        //Constructor.
+        #endregion
         public SplashState()
         {
 
         }
 
+        #region Function Explanation
+        //Counts down time left showing Splash Screen.
+        #endregion
         public override void Update(GameTime gameTime, KeyboardState keyboard, MouseState mouse)
         {
             //On the first call of the loop in this game state, we set the start time
@@ -49,6 +57,9 @@ namespace RTS_Game
             }
         }
 
+        #region Function Explanation
+        //Draw Splashscreen.
+        #endregion
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Begin();

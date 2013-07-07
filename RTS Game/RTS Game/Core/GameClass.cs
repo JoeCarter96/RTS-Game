@@ -16,17 +16,23 @@ namespace RTS_Game
 {
     public class GameClass : Microsoft.Xna.Framework.Game
     {
+        #region Variables
         //Game constants
         public const int Game_Width = 800;
         public const int Game_Height = 600;
         public const int Tile_Width = 20;
 
-        public Input input;
-
         //Game objects
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
 
+        private KeyboardState keyboard;
+        private MouseState mouse;
+        #endregion
+
+        #region Function Explanation
+        //Constructor.
+        #endregion
         public GameClass()
         {
             //Content setup
@@ -37,6 +43,9 @@ namespace RTS_Game
             IsMouseVisible = true;
         }
 
+        #region Function Explanation
+        //Sets up screen size.
+        #endregion
         protected override void Initialize()
         {
             //Set the size of the game window
@@ -47,6 +56,9 @@ namespace RTS_Game
             base.Initialize();
         }
 
+        #region Function Explanation
+        //Loads all content used in game.
+        #endregion
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
@@ -141,17 +153,31 @@ namespace RTS_Game
             Resources.TestFont = Content.Load<SpriteFont>("TestFont");
         }
 
+        #region Function Explanation
+        //Currently Unused.
+        #endregion
         protected override void UnloadContent()
         {
 
         }
 
+        #region Function Explanation
+        //Updates Statemanager, rest is temporary.
+        #endregion
         protected override void Update(GameTime gameTime)
         {
-            input.Update(gameTime);
+            keyboard = Keyboard.GetState();
+            mouse = Mouse.GetState();
+
+            //Update the StateManager
+            StateManager.Instance.Update(gameTime, keyboard, mouse);
+
             base.Update(gameTime);
         }
 
+        #region Function Explanation
+        //Draws State and therefore all of the game world.
+        #endregion
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.White);
