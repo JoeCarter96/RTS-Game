@@ -121,8 +121,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Tank01.png">
-      <Name>Tank01</Name>
+    <Compile Include="Units\HeavyTank.png">
+      <Name>HeavyTank</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

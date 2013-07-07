@@ -37,10 +37,10 @@ namespace RTS_Game
         public override void Draw(SpriteBatch spriteBatch)
         {
             //draw the background
-            spriteBatch.Draw(Resources.GetGUITextures("HealthBack"), target.PixelPosition + new Vector2(0, HeightOffset), Color.White);
+            //spriteBatch.Draw(Resources.GetGUITextures("HealthBack"), target.PixelPosition + new Vector2(0, HeightOffset), Color.White);
 
             //draw the forground
-            spriteBatch.Draw(texture, destRectangle, Color.White);
+            //spriteBatch.Draw(texture, destRectangle, Color.White);
         }
     }
 }

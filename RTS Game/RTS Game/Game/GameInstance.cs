@@ -45,8 +45,10 @@ namespace RTS_Game
 
             Unit test6 = new Unit(world, player, new Vector2(17, 4), Resources.GetBuildingTextures("Construction Yard"), 100);
 
-            test = new Unit(world, player, new Vector2(0, 0), Resources.GetUnitTextures("Tank01"), 100);
-            test.FinalTarget = new Vector2(10, 0);
+            test = new HeavyTank(new Vector2(0, 0), player, world);
+            FieldModifer.calculateField(test.PFArray, 100, 100, 101);
+           // test.FinalTarget = new Vector2(100, 100);
+           // player.MovingUnits.Add(test);
 
             //testing health bars
             test2.Damage(null, 60);
@@ -55,21 +57,27 @@ namespace RTS_Game
 
             test6.Damage(null, 45);
 
-            player.MovingUnits.Add(test);
+            
         }
 
         public void Update(GameTime gameTime, Camera camera, KeyboardState keyboard, MouseState mouse)
         {
-            //Moving every moving unit.
-            foreach (Unit u in player.MovingUnits.ToList())
+            if (player.Units.Count > 0)
             {
-                u.Move();
-            }
+                //Moving every moving unit.
+                if (player.MovingUnits.Count > 0)
+                {
+                    foreach (Unit u in player.MovingUnits.ToList())
+                    {
+                        u.Move();
+                    }
+                }
 
-            //Update every unit
-            foreach (Unit u in player.Units)
-            {
-                u.Update(gameTime);
+                //Update every unit
+                foreach (Unit u in player.Units)
+                {
+                    u.Update(gameTime);
+                }
             }
         }
 

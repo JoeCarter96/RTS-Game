@@ -5,7 +5,7 @@ using System.Text;
 
 namespace RTS_Game
 {
-    class Player
+    public class Player
     {
         private List<Unit> units = new List<Unit>();
         private List<Unit> movingUnits = new List<Unit>();

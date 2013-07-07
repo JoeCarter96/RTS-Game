@@ -128,15 +128,6 @@
       <Time>2013-07-06T23:31:22.2670772+01:00</Time>
     </Item>
     <Item>
-      <Source>Tank01.png</Source>
-      <Name>Tank01</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\Pritchy\Documents\GitHub\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\Tank01.xnb</Output>
-      <Time>2013-07-06T23:31:22.2800779+01:00</Time>
-    </Item>
-    <Item>
       <Source>TestBuilding.png</Source>
       <Name>TestBuilding</Name>
       <Importer>TextureImporter</Importer>
@@ -171,6 +162,15 @@
       <Options>None</Options>
       <Output>C:\Users\Pritchy\Documents\GitHub\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\TestFont.xnb</Output>
       <Time>2013-07-06T23:30:19.812505+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Units\HeavyTank.png</Source>
+      <Name>Units\HeavyTank</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Pritchy\Documents\GitHub\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\Units\HeavyTank.xnb</Output>
+      <Time>2013-07-06T23:31:22.2800779+01:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

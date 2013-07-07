@@ -16,24 +16,42 @@ namespace RTS_Game
         */
     #endregion
 
-    class Unit : HealthEntity
+    public class Unit : HealthEntity
     {
         #region variables
-        float MAX_SPEED = 5;
-        //Next Tile unit is moving to.
-        Vector2 NEXT_TARGET = new Vector2();
-        //Final destination unit wants to reach.
-        //It is a TILE, not pixel.
-        Vector2 FINAL_TARGET = new Vector2();
-        //Units PF Array for movement.
-        public int[,] PF_ARRAY;
+            #region Unit Attributes
+            protected float MAX_SPEED;
+            protected float CURRENT_SPEED;
+            protected float ACCELLERATION;
+            
+            #endregion
+
+            #region Passed Variables
+            
+            #endregion
+
+            #region Pathfinding
+            //Next Tile unit is moving to.
+            protected Vector2 NEXT_TARGET = new Vector2();
+            //Final destination unit wants to reach.
+            //It is a TILE, not pixel.
+            protected Vector2 FINAL_TARGET = new Vector2();
+            //Units PF Array for movement.
+            protected int[,] PF_ARRAY;
+             #endregion
         #endregion
 
-        public float MaxSpeed
+       public float MaxSpeed
         {
             get { return MAX_SPEED; }
             set { MAX_SPEED = value; }
         }
+
+       public int[,] PFArray
+       {
+           get { return PF_ARRAY; }
+           set { PF_ARRAY = value; }
+       }
 
         public Vector2 FinalTarget
         {
@@ -76,14 +94,19 @@ namespace RTS_Game
             }
             else
             {
+                //Accellerating.
+                if (CURRENT_SPEED < MAX_SPEED)
+                {
+                    //If Max speed is smaller than current speed + accelleration, just make it max speed.
+                    //Stops it going faster than it's max speed.
+                    CURRENT_SPEED = Math.Min(MAX_SPEED, CURRENT_SPEED += ACCELLERATION);
+                }
                 Vector2 direction = new Vector2(NEXT_TARGET.X * world.TileWidth, NEXT_TARGET.Y * world.TileWidth) - pixelPosition;
                 direction.Normalize();
-                velocity = Vector2.Multiply(direction, MAX_SPEED);
+                velocity = Vector2.Multiply(direction, CURRENT_SPEED);
                 PixelPosition += velocity;
     }
 }
-
-
 
         #region Function Explanation
         //Finding the Unit a new target by finding the next lowest potential field.
@@ -93,7 +116,8 @@ namespace RTS_Game
         public void FindNextCell()
         {
             //If we're not at the final target.
-            if (base.TilePosition != FINAL_TARGET)
+            if (new Vector2((float)Math.Round(base.TilePosition.X), 
+                (float)Math.Round(base.TilePosition.Y)) != FINAL_TARGET)
             {
                 int highest = -int.MaxValue;
                 Vector2 nextTarget = new Vector2(base.TilePosition.X, base.TilePosition.Y);
@@ -218,7 +242,8 @@ namespace RTS_Game
             else    //When the unit is on the source tile.
             {
                 //Stop this.Move being called in GameInstance.Update
-                owner.MovingUnits.Remove(this); 
+                owner.MovingUnits.Remove(this);
+                CURRENT_SPEED = 0;
             }
         }
 

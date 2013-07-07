@@ -15,7 +15,7 @@ namespace RTS_Game
      * is passed in.
      */
     #endregion
-    class HealthEntity : Entity
+    public class HealthEntity : Entity
     {
         //Health variables to deturmine if the unit is dead and also for the health bar
         protected double maxHealth;

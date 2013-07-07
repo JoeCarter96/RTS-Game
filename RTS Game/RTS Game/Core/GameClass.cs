@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using RTS_Game;
 
 namespace RTS_Game
 {
@@ -123,9 +124,9 @@ namespace RTS_Game
 
             #region Unit Textures
             //Splash Screen
-            Texture2D Tank01 = Content.Load<Texture2D>("Tank01");
-            Tank01.Name = "Tank01";
-            Resources.AddUnitTexture(Tank01);
+            Texture2D HeavyTank = Content.Load<Texture2D>("Units/HeavyTank");
+            HeavyTank.Name = "HeavyTank";
+            Resources.AddUnitTexture(HeavyTank);
             #endregion
 
             #region Building Textures

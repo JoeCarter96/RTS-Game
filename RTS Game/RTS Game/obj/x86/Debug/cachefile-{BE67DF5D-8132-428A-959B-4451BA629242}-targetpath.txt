@@ -12,8 +12,8 @@ Content\DebugTile.xnb
 Content\Levels\Debug.xnb
 Content\Construction Yard.xnb
 Content\PowerPlant.xnb
-Content\Tank01.xnb
 Content\TestBuilding.xnb
 Content\Healthbar_Background.xnb
 Content\Healthbar_Foreground.xnb
 Content\TestFont.xnb
+Content\Units\HeavyTank.xnb
