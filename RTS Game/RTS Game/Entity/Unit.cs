@@ -125,7 +125,7 @@ namespace RTS_Game
                 //Right
                 try
                 {
-                    if (highest < PF_ARRAY[(int)base.TilePosition.X + 1, (int)base.TilePosition.Y])
+                    if (highest < PF_ARRAY[(int)base.TilePosition.X + 1, (int)base.TilePosition.Y] && PF_ARRAY[(int)base.TilePosition.X + 1, (int)base.TilePosition.Y] > 0 && world.TileArray[(int)base.TilePosition.X + 1, (int)base.TilePosition.Y].Occupied != true)
                     {
                         highest = PF_ARRAY[(int) base.tilePosition.X + 1, (int) base.tilePosition.Y];
                         nextTarget.X = base.tilePosition.X + 1;

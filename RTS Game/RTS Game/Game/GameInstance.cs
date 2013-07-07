@@ -45,10 +45,11 @@ namespace RTS_Game
 
             Unit test6 = new Unit(world, player, new Vector2(17, 4), Resources.GetBuildingTextures("Construction Yard"), 100);
 
+            //PF is not actually updated.
             test = new HeavyTank(new Vector2(0, 0), player, world);
-            FieldModifer.calculateField(test.PFArray, 100, 100, 101);
-           // test.FinalTarget = new Vector2(100, 100);
-           // player.MovingUnits.Add(test);
+            FieldModifer.calculateField(test.PFArray, 10, 10, 10000);
+            test.FinalTarget = new Vector2(10, 10);
+            player.MovingUnits.Add(test);
 
             //testing health bars
             test2.Damage(null, 60);

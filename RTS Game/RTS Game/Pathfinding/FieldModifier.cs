@@ -49,7 +49,7 @@ namespace RTS_Game
 
 
             //Creates the positive field.
-            addToField(fieldToModify, sourceX, sourceY, true, 100);
+            addToField(fieldToModify, sourceX, sourceY, true, maxPositiveRange);
 
 
             //Add code for generating negative fields here.
