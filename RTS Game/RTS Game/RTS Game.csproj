@@ -72,6 +72,7 @@
     <Reference Include="System.Net" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\Input.cs" />
     <Compile Include="Entity\Building.cs" />
     <Compile Include="Entity\Buildings\Base.cs" />
     <Compile Include="Entity\Bullet.cs" />

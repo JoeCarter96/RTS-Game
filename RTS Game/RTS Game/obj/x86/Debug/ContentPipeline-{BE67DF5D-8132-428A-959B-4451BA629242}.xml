@@ -137,24 +137,6 @@
       <Time>2013-07-06T23:30:19.812505+01:00</Time>
     </Item>
     <Item>
-      <Source>Healthbar_Background.png</Source>
-      <Name>Healthbar_Background</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\Pritchy\Documents\GitHub\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\Healthbar_Background.xnb</Output>
-      <Time>2013-07-07T03:59:11.9442101+01:00</Time>
-    </Item>
-    <Item>
-      <Source>Healthbar_Foreground.png</Source>
-      <Name>Healthbar_Foreground</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <Options>None</Options>
-      <Output>C:\Users\Pritchy\Documents\GitHub\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\Healthbar_Foreground.xnb</Output>
-      <Time>2013-07-07T03:59:11.9452102+01:00</Time>
-    </Item>
-    <Item>
       <Source>TestFont.spritefont</Source>
       <Name>TestFont</Name>
       <Importer>FontDescriptionImporter</Importer>
@@ -171,6 +153,15 @@
       <Options>None</Options>
       <Output>C:\Users\Pritchy\Documents\GitHub\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\Units\HeavyTank.xnb</Output>
       <Time>2013-07-07T03:59:11.9522106+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Healthbar.png</Source>
+      <Name>Healthbar</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Pritchy\Documents\GitHub\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\Healthbar.xnb</Output>
+      <Time>2013-07-07T04:29:23.0007966+01:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

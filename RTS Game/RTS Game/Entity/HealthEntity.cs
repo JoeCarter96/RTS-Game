@@ -55,7 +55,6 @@ namespace RTS_Game
             this.world = world;
             this.maxHealth = maxHealth;
             health = maxHealth;
-
             healthBar = new HealthBar(this, new Rectangle((int)PixelPosition.X, (int)pixelPosition.Y, GameClass.Tile_Width, GameClass.Tile_Width));
         }
 
@@ -68,6 +67,7 @@ namespace RTS_Game
             this.maxHealth = maxHealth;
             this.health = startHealth;
 
+            
             healthBar = new HealthBar(this, new Rectangle((int)PixelPosition.X, (int)pixelPosition.Y, GameClass.Tile_Width, GameClass.Tile_Width));
 
             //Stops the health going over its maximum
@@ -111,7 +111,7 @@ namespace RTS_Game
             {
                 //DEBUG: testing healthbar damage
                 //remove this to stop playerEntities dying :D
-                Damage(null, 0.1);
+                //Damage(null, 0.1);
 
                 if (drawHealthBar)
                 {

@@ -10,6 +10,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using RTS_Game;
+using RTS_Game.Core;
 
 namespace RTS_Game
 {
@@ -20,11 +21,11 @@ namespace RTS_Game
         public const int Game_Height = 600;
         public const int Tile_Width = 20;
 
+        public Input input;
+
         //Game objects
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
-        private KeyboardState keyboard;
-        private MouseState mouse;
 
         public GameClass()
         {
@@ -147,13 +148,7 @@ namespace RTS_Game
 
         protected override void Update(GameTime gameTime)
         {
-            //Update the state of the mouse and the keyboard
-            keyboard = Keyboard.GetState();
-            mouse = Mouse.GetState();
-
-            //Update the StateManager
-            StateManager.Instance.Update(gameTime, keyboard, mouse);
-
+            input.Update(gameTime);
             base.Update(gameTime);
         }
 
