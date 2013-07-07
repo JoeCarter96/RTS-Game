@@ -247,9 +247,9 @@ namespace RTS_Game
                 PF_ARRAY[(int)base.tilePosition.X, (int) base.tilePosition.Y] -= 100;
 
                 //Moving playerEntities occupation and target.
-                world.TileArray[(int)base.tilePosition.X, (int) base.tilePosition.Y].Occupied = false;
+                world.TileArray[(int)tilePosition.X, (int) tilePosition.Y].Occupied = false;
                 NEXT_TARGET = nextTarget;
-                world.TileArray[(int)base.tilePosition.X, (int) base.tilePosition.Y].Occupied = true;
+                world.TileArray[(int)tilePosition.X, (int) tilePosition.Y].Occupied = true;
 
             }
             else    //When the unit is on the source tile.

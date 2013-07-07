@@ -110,7 +110,7 @@ namespace RTS_Game
             if (distanceFromSource > 0)
             {
                 //Actual Calculation.
-                int newFieldStrength = 255 - distanceFromSource * 3;
+                int newFieldStrength = int.MaxValue - distanceFromSource * 3;
 
                 //Making sure it stays positive.
                 if (newFieldStrength > 0)

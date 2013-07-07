@@ -53,17 +53,14 @@ namespace RTS_Game.Core
                     foreach (Unit u in entityList)
                     {
                         //Unit area.
-                        double minX = u.TilePosition.X * GameClass.Tile_Width;
-                        double maxX = u.TilePosition.X * GameClass.Tile_Width + GameClass.Tile_Width;
-                        double minY = u.TilePosition.Y * GameClass.Tile_Width;
-                        double maxY = u.TilePosition.Y * GameClass.Tile_Width + GameClass.Tile_Width;
+                        Vector2 tilePos = new Vector2(currentMouse.X / GameClass.Tile_Width,
+                            currentMouse.Y / GameClass.Tile_Width);
 
-                        if (currentMouse.X > minX && currentMouse.X < maxX && currentMouse.Y > minY && currentMouse.Y < maxY)
-                        {
-                            FieldModifer.calculateField(u.PFArray, 10, 10, 10000);
-                            u.FinalTarget = new Vector2(10, 10);
+                        FieldModifer.calculateField(u.PFArray,(int)tilePos.X,(int)tilePos.Y, 100);
+                        u.FinalTarget = new Vector2((int)tilePos.X, (int)tilePos.Y);
+                        if (u.MaxSpeed == 5)    //TEMP, stops unit buildings moving.
                             movingEntityList.Add(u);
-                        }
+
                     }
                 }
             }

@@ -72,9 +72,9 @@ namespace RTS_Game
         #endregion
         public void Update(GameTime gameTime, Camera camera, KeyboardState keyboard, MouseState mouse)
         {
-           
+
             if (player.Entities.Count > 0)
-            { 
+            {
                 #region Moving Units
                 //Moving every moving unit which is meant to.
                 if (player.PlayerMovingEntities.Count > 0)
@@ -83,16 +83,17 @@ namespace RTS_Game
                     {
                         u.Move();
                     }
-                }
+
                 #endregion
 
-                #region Updating Units
-                //Update every unit.
-                foreach (Unit u in player.Entities)
-                {
-                    u.Update(gameTime);
+                    #region Updating Units
+                    //Update every unit.
+                    foreach (Unit u in player.Entities)
+                    {
+                        u.Update(gameTime);
+                    }
+                    #endregion
                 }
-                #endregion
             }
 
             //Update input.

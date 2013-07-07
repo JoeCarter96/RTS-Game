@@ -16,9 +16,9 @@ namespace RTS_Game
         #endregion
 
         #region Function Explanation
-        //Constructor, Simply adds all pairs to the Dictionary.
+        //Simply adds all pairs to the Dictionary.
         #endregion
-        public LevelLoad()
+        public static void AddColours()
         {
             Colours.Add(new Color(0, 0, 0), "DebugTile");
             Colours.Add(new Color(0, 178, 0), "Grass01");
@@ -35,6 +35,7 @@ namespace RTS_Game
         #endregion
         public static Texture2D[,] Load(Texture2D Level)
         {
+            AddColours();
             //Array of Colours of each pixel. 
             //Goes from top left to bottom right.
             Color[] pixelRGBValues = new Color[Level.Width * Level.Height];
