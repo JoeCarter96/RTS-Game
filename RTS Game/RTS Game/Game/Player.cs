@@ -7,19 +7,19 @@ namespace RTS_Game
 {
     class Player
     {
-        private List<Unit> units = new List<Unit>();
-        private List<Unit> movingUnits = new List<Unit>();
+        private List<Unit> playerEntities = new List<Unit>();
+        private List<Unit> playerMovingEntities = new List<Unit>();
 
         public List<Unit> MovingUnits
         {
-            get { return movingUnits; }
-            set { movingUnits = value; }
+            get { return playerMovingEntities; }
+            set { playerMovingEntities = value; }
         }
 
         public List<Unit> Units
         {
-            get { return units; }
-            set { units = value; }
+            get { return playerEntities; }
+            set { playerEntities = value; }
         }
 
 

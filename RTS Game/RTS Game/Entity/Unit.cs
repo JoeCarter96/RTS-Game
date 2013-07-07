@@ -238,7 +238,7 @@ namespace RTS_Game
                 //Negative trail to push unit forward.
                 PF_ARRAY[(int)base.tilePosition.X, (int) base.tilePosition.Y] -= 100;
 
-                //Moving units occupation and target.
+                //Moving playerEntities occupation and target.
                 world.TileArray[(int)base.tilePosition.X, (int) base.tilePosition.Y].Occupied = false;
                 NEXT_TARGET = nextTarget;
                 world.TileArray[(int)base.tilePosition.X, (int) base.tilePosition.Y].Occupied = true;
@@ -387,7 +387,7 @@ namespace RTS_Game
                 //Negative trail to push unit forward.
                 PF_ARRAY[(int)base.tilePosition.X, (int) base.tilePosition.Y] -= 100;
 
-                //Moving units occupation and target.
+                //Moving playerEntities occupation and target.
                 world.TileArray[(int)base.tilePosition.X, (int) base.tilePosition.Y].Occupied = false;
                 NEXT_TARGET = nextTarget;
                 world.TileArray[(int)base.tilePosition.X, (int) base.pixelPosition.Y].Occupied = true;

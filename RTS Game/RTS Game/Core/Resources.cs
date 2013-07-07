@@ -15,7 +15,9 @@ namespace RTS_Game
         private static Dictionary<String, Texture2D> UnitTextures = new Dictionary<string, Texture2D>();
         private static Dictionary<String, Texture2D> BuildingTextures = new Dictionary<string, Texture2D>();
         private static Dictionary<String, Texture2D> GUITextures = new Dictionary<string, Texture2D>();
+        private static Dictionary<String, Texture2D> BulletTextures = new Dictionary<String, Texture2D>();
         private static Dictionary<int, Level> LevelObjects = new Dictionary<int, Level>();
+        
 
         #region Background Textures
         public static void AddBackgroundTexture(Texture2D textureToAdd)
@@ -30,18 +32,7 @@ namespace RTS_Game
         }
         #endregion
 
-        #region Level Objects
-
-        public static void AddLevelObject(Level LevedToAdd)
-        {
-            LevelObjects.Add(LevedToAdd.ID, LevedToAdd);
-        }
-
-        public static Level GetLevelObject(int requestedLevelID)
-        {
-            return LevelObjects[requestedLevelID];
-        }
-        #endregion
+        
 
         #region Unit Textures
         public static void AddUnitTexture(Texture2D textureToAdd)
@@ -76,6 +67,32 @@ namespace RTS_Game
         public static Texture2D GetGUITextures(String requestedTextureName)
         {
             return GUITextures[requestedTextureName];
+        }
+        #endregion
+
+        #region Bullet Textures
+        public static void AddBulletTexture(Texture2D textureToAdd)
+        {
+
+            BulletTextures.Add(textureToAdd.Name, textureToAdd);
+        }
+
+        public static Texture2D GetBulletTextures(String requestedTextureName)
+        {
+            return BulletTextures[requestedTextureName];
+        }
+        #endregion
+        
+        #region Level Objects
+
+        public static void AddLevelObject(Level LevedToAdd)
+        {
+            LevelObjects.Add(LevedToAdd.ID, LevedToAdd);
+        }
+
+        public static Level GetLevelObject(int requestedLevelID)
+        {
+            return LevelObjects[requestedLevelID];
         }
         #endregion
     }

@@ -23,7 +23,7 @@ namespace RTS_Game
             ROF = 4;
         }
 
-        public void Update(GameTime gametime)
+        public override void Update(GameTime gametime)
         {
             if (target != null && bulletTime >= ROF)
             {

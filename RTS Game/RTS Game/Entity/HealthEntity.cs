@@ -10,7 +10,7 @@ namespace RTS_Game
 {
     #region Info
     /* A health entity is any entity that is considered to be alive.
-     * We will use health entitys for units and building that have a health bar
+     * We will use health entitys for playerEntities and building that have a health bar
      * and can die. We want the health entitys to be aware of the tile map so that 
      * is passed in.
      */
@@ -110,7 +110,7 @@ namespace RTS_Game
             if (alive)
             {
                 //DEBUG: testing healthbar damage
-                //remove this to stop units dying :D
+                //remove this to stop playerEntities dying :D
                 Damage(null, 0.1);
 
                 if (drawHealthBar)

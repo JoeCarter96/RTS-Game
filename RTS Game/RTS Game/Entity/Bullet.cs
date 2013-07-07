@@ -12,7 +12,7 @@ namespace RTS_Game
         private float speed;
         private float damage;
 
-        //Set to 0, 0, instantly  overwritten using PixelPosition.
+        //Set to 0,0, instantly  overwritten using PixelPosition Setter.
         public Bullet(Vector2 pixelPosition, Texture2D bulletTexture, float speed, float damage,
             float rotation) :
             base(new Vector2(0, 0), bulletTexture)

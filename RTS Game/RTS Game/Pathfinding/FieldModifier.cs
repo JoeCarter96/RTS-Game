@@ -13,7 +13,7 @@ namespace RTS_Game
         //method needs to be called. This uses the addToField and Equation methods to construct a Potential field, by first generating
         //a large positive field at mouse point, and then negative ones at enemy locations. Every time something moves (Units), we need to
         //loop through each moving unit and update their PF. Not too brilliant, however if we can make use of convoys/groups when moving
-        //many units at once, it should actually be quite efficient. I may also be able to add a method which just updates the potential
+        //many playerEntities at once, it should actually be quite efficient. I may also be able to add a method which just updates the potential
         //field at the changed locations, however I need to first find a method to remove the old potential field which the unit was creating
         // before I can add the new one. We can also make use of pre-generated arrays of fields, so for instance a unit could have a 2D array
         //which holds a negative field, which can just be added to the array generated here. All in all, there are a lot of possibilities.

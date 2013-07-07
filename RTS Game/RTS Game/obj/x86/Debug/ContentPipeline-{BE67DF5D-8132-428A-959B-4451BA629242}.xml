@@ -8,7 +8,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Pritchy\Documents\GitHub\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\Grass01.xnb</Output>
-      <Time>2013-07-06T23:31:20.8069936+01:00</Time>
+      <Time>2013-07-07T03:59:11.9442101+01:00</Time>
     </Item>
     <Item>
       <Source>Road01.png</Source>
@@ -17,7 +17,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Pritchy\Documents\GitHub\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\Road01.xnb</Output>
-      <Time>2013-07-06T23:31:22.2720774+01:00</Time>
+      <Time>2013-07-07T03:59:11.9502105+01:00</Time>
     </Item>
     <Item>
       <Source>Splash.png</Source>
@@ -35,7 +35,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Pritchy\Documents\GitHub\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\Water01.xnb</Output>
-      <Time>2013-07-06T23:31:22.2850782+01:00</Time>
+      <Time>2013-07-07T03:59:11.9542107+01:00</Time>
     </Item>
     <Item>
       <Source>Levels\Desert_Test.png</Source>
@@ -98,7 +98,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Pritchy\Documents\GitHub\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\DebugTile.xnb</Output>
-      <Time>2013-07-06T23:31:22.2980789+01:00</Time>
+      <Time>2013-07-07T03:59:11.9432101+01:00</Time>
     </Item>
     <Item>
       <Source>Levels\Debug.png</Source>
@@ -116,7 +116,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Pritchy\Documents\GitHub\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\Construction Yard.xnb</Output>
-      <Time>2013-07-06T23:31:22.2930786+01:00</Time>
+      <Time>2013-07-07T03:59:11.9412099+01:00</Time>
     </Item>
     <Item>
       <Source>PowerPlant.png</Source>
@@ -125,7 +125,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Pritchy\Documents\GitHub\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\PowerPlant.xnb</Output>
-      <Time>2013-07-06T23:31:22.2670772+01:00</Time>
+      <Time>2013-07-07T03:59:11.9472103+01:00</Time>
     </Item>
     <Item>
       <Source>TestBuilding.png</Source>
@@ -143,7 +143,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Pritchy\Documents\GitHub\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\Healthbar_Background.xnb</Output>
-      <Time>2013-07-06T23:30:19.7875035+01:00</Time>
+      <Time>2013-07-07T03:59:11.9442101+01:00</Time>
     </Item>
     <Item>
       <Source>Healthbar_Foreground.png</Source>
@@ -152,7 +152,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Pritchy\Documents\GitHub\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\Healthbar_Foreground.xnb</Output>
-      <Time>2013-07-06T23:30:19.7885036+01:00</Time>
+      <Time>2013-07-07T03:59:11.9452102+01:00</Time>
     </Item>
     <Item>
       <Source>TestFont.spritefont</Source>
@@ -170,7 +170,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Pritchy\Documents\GitHub\RTS-Game\RTS Game\RTS Game\bin\x86\Debug\Content\Units\HeavyTank.xnb</Output>
-      <Time>2013-07-06T23:31:22.2800779+01:00</Time>
+      <Time>2013-07-07T03:59:11.9522106+01:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
