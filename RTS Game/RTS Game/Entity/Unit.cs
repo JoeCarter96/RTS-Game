@@ -21,9 +21,14 @@ namespace RTS_Game
         #region variables
             #region Unit Attributes
             protected float MAX_SPEED;
-            protected float CURRENT_SPEED;
             protected float ACCELLERATION;
-            
+            protected float DAMAGE;
+            protected float AOE;
+            protected float ROF;
+
+            protected float CURRENT_SPEED;
+            protected float bulletTime;
+            protected HealthEntity target;
             #endregion
 
             #region Passed Variables
@@ -250,6 +255,8 @@ namespace RTS_Game
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
+
+            bulletTime += (float) gameTime.ElapsedGameTime.TotalSeconds;
         }
 
         public override void Draw(SpriteBatch spriteBatch)

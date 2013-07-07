@@ -30,7 +30,7 @@ namespace RTS_Game
             this.camera = camera;
 
             //Build the tilemap using the level
-            world = new TileMap(level, 800, 600, 20);
+            world = new TileMap(level, GameClass.Game_Width, GameClass.Game_Height, GameClass.Tile_Width);
 
             player = new Player(world);
 
@@ -45,7 +45,6 @@ namespace RTS_Game
 
             Unit test6 = new Unit(world, player, new Vector2(17, 4), Resources.GetBuildingTextures("Construction Yard"), 100);
 
-            //PF is not actually updated.
             test = new HeavyTank(new Vector2(0, 0), player, world);
             FieldModifer.calculateField(test.PFArray, 10, 10, 10000);
             test.FinalTarget = new Vector2(10, 10);
