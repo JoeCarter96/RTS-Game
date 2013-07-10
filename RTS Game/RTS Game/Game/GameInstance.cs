@@ -50,15 +50,15 @@ namespace RTS_Game
             player.PlayerMovingEntities.Add(test);
 
             Unit test2 = new HeavyTank(new Vector2(0, 1), player, world);
-            test2.Waypoints = WaypointsGenerator.GenerateWaypoints(test2.TilePosition, new Vector2(150, 31));
+            test2.Waypoints = WaypointsGenerator.GenerateWaypoints(test2.TilePosition, new Vector2(150, 35));
             player.PlayerMovingEntities.Add(test2);
 
             Unit test3 = new HeavyTank(new Vector2(1, 0), player, world);
-            test3.Waypoints = WaypointsGenerator.GenerateWaypoints(test3.TilePosition, new Vector2(151, 30));
+            test3.Waypoints = WaypointsGenerator.GenerateWaypoints(test3.TilePosition, new Vector2(151, 25));
             player.PlayerMovingEntities.Add(test3);
 
             Unit test4 = new HeavyTank(new Vector2(1, 1), player, world);
-            test4.Waypoints = WaypointsGenerator.GenerateWaypoints(test4.TilePosition, new Vector2(151, 31));
+            test4.Waypoints = WaypointsGenerator.GenerateWaypoints(test4.TilePosition, new Vector2(151, 40));
             player.PlayerMovingEntities.Add(test4);
 
             //myBase = new Base(world, player, new Vector2(5, 5));  //TEMP
