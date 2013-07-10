@@ -24,11 +24,10 @@ namespace RTS_Game
         private Camera camera;
         private TileMap world;
         private Player player;
-        public Input input; //TEMP
-        private Unit test;  //TEMP.
         #endregion
 
-        Base myBase;    //TEMP
+        private Unit test;  //TEMP.
+        
 
         #region Function Explanation
         //Constructor.
@@ -47,15 +46,14 @@ namespace RTS_Game
             camera.GiveTilemap(world);
 
             #region TEMP: Unit Testing.
-            /*
-            Unit test2 = new Unit(world, player, new Vector2(10, 3), Resources.GetBuildingTextures("PowerPlant"), 100);
-            Unit test3 = new Unit(world, player, new Vector2(13, 3), Resources.GetBuildingTextures("PowerPlant"), 100);
-            Unit test4 = new Unit(world, player, new Vector2(10, 8), Resources.GetBuildingTextures("PowerPlant"), 100);
-
-            Unit test6 = new Unit(world, player, new Vector2(17, 4), Resources.GetBuildingTextures("Construction Yard"), 100);
-            */
 
             test = new HeavyTank(new Vector2(0, 0), player, world);
+            test.Waypoints = WaypointsGenerator.GenerateWaypoints(test.TilePosition, new Vector2 (12, 22));
+            player.PlayerMovingEntities.Add(test);
+
+            Unit test2 = new HeavyTank(new Vector2(24, 0), player, world);
+            test2.Waypoints = WaypointsGenerator.GenerateWaypoints(test2.TilePosition, new Vector2(150, 22));
+            player.PlayerMovingEntities.Add(test2);
 
             //myBase = new Base(world, player, new Vector2(5, 5));  //TEMP
             #endregion
@@ -81,7 +79,7 @@ namespace RTS_Game
 
                 #endregion
 
-                    #region Updating Units
+                #region Updating Units
                     //Update every unit.
                     foreach (Unit u in player.Entities)
                     {

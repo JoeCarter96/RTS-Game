@@ -70,7 +70,7 @@ namespace RTS_Game
             }
 
             //Passes reference of tileArray.
-            GenerateWaypoints.setup(tileArray);
+            WaypointsGenerator.setup(tileArray);
         }
 
         #region Function Explanation
