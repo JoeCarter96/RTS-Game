@@ -83,7 +83,7 @@
     <Compile Include="GUI\Button.cs" />
     <Compile Include="GUI\Size.cs" />
     <Compile Include="GUI\SquareOfDoom.cs" />
-    <Compile Include="Pathfinding\FieldModifier.cs" />
+    <Compile Include="Pathfinding\GenerateWaypoints.cs" />
     <Compile Include="GameState\BasicGameState.cs" />
     <Compile Include="GameState\StateManager.cs" />
     <Compile Include="GameState\InGameState.cs" />

@@ -38,11 +38,7 @@ namespace RTS_Game
             #region Pathfinding
             //Next Tile unit is moving to.
             protected Vector2 NEXT_TARGET = new Vector2();
-            //Final destination unit wants to reach.
-            //It is a TILE, not pixel.
-            protected Vector2 FINAL_TARGET = new Vector2();
-            //Units PF Array for movement.
-            protected int[,] PF_ARRAY;
+            protected Queue<Vector2> WAYPOINTS = new Queue<Vector2>();
              #endregion
 
 
@@ -54,17 +50,12 @@ namespace RTS_Game
             set { MAX_SPEED = value; }
         }
 
-        public int[,] PFArray
+        public Queue<Vector2> Waypoints
        {
-           get { return PF_ARRAY; }
-           set { PF_ARRAY = value; }
+           get { return WAYPOINTS; }
+           set { WAYPOINTS = value; }
        }
 
-        public Vector2 FinalTarget
-        {
-            get { return FINAL_TARGET; }
-            set { FINAL_TARGET = value; }
-        }
 
         #region Function Explanation
         //Constructor, Adds Unit to entity list, passes a bunch of variables and then creates a PF array.
@@ -77,9 +68,6 @@ namespace RTS_Game
 
             this.world = world;
             this.TilePosition = tilePosition; 
-
-            //Setting PF Array Size to match world.
-            PF_ARRAY = new int[world.TileArray.GetLength(0), world.TileArray.GetLength(1)];
 
             //Makes moving work first time.
             NEXT_TARGET = tilePosition;
@@ -96,160 +84,30 @@ namespace RTS_Game
         #region Function Explanation
         //This is the code which moves the unit to the target fluidly.
         //The target is just the next cell/Tile. when it reaches it,
-        //it uses FindNextCell to find the next tile to move to until
-        //it reaches it's final Target.
+        //it uses waypoints.Dequeue to remove and use the next vector.
         #endregion
         public void Move()
         {
-            if (DistanceToDestination < MAX_SPEED)
+            if (Waypoints.Count > 0)
             {
-                FindNextCell();
-            }
-            else
-            {
-                //Accellerating.
-                if (CURRENT_SPEED < MAX_SPEED)
+                if (DistanceToDestination < MAX_SPEED)
                 {
-                    //If Max speed is smaller than current speed + accelleration, just make it max speed.
-                    //Stops it going faster than it's max speed.
-                    CURRENT_SPEED = Math.Min(MAX_SPEED, CURRENT_SPEED += ACCELLERATION);
+                    NEXT_TARGET = Waypoints.Dequeue();
                 }
-                Vector2 direction = new Vector2(NEXT_TARGET.X * world.TileWidth, NEXT_TARGET.Y * world.TileWidth) - pixelPosition;
-                direction.Normalize();
-                velocity = Vector2.Multiply(direction, CURRENT_SPEED);
-                PixelPosition += velocity;
-    }
-}
-
-        #region Function Explanation
-        //Finding the Unit a new target by finding the next lowest potential field.
-
-        //NEED TO CONVERT FROM PIXEL POSITION TO TILE POSITION IN SOME PLACES.
-        #endregion
-        public void FindNextCell()
-        {
-            //If we're not at the final target.
-            if (base.TilePosition != FINAL_TARGET)
-            {
-                int highest = -int.MaxValue;
-                Vector2 nextTarget = new Vector2(base.TilePosition.X, base.TilePosition.Y);
-
-                //Right
-                try
+                else
                 {
-                    if (highest < PF_ARRAY[(int)base.TilePosition.X + 1, (int)base.TilePosition.Y] && PF_ARRAY[(int)base.TilePosition.X + 1, (int)base.TilePosition.Y] > 0 && world.TileArray[(int)base.TilePosition.X + 1, (int)base.TilePosition.Y].Occupied != true)
+                    //Accellerating.
+                    if (CURRENT_SPEED < MAX_SPEED)
                     {
-                        highest = PF_ARRAY[(int) base.tilePosition.X + 1, (int) base.tilePosition.Y];
-                        nextTarget.X = base.TilePosition.X + 1;
-                        nextTarget.Y = base.TilePosition.Y;
+                        //If Max speed is smaller than current speed + accelleration, just make it max speed.
+                        //Stops it going faster than it's max speed.
+                        CURRENT_SPEED = Math.Min(MAX_SPEED, CURRENT_SPEED += ACCELLERATION);
                     }
+                    Vector2 direction = new Vector2(NEXT_TARGET.X * world.TileWidth, NEXT_TARGET.Y * world.TileWidth) - pixelPosition;
+                    direction.Normalize();
+                    velocity = Vector2.Multiply(direction, CURRENT_SPEED);
+                    PixelPosition += velocity;
                 }
-                catch { Console.WriteLine("Right Limit"); }
-
-                //Left
-                try
-                {
-                    if (highest < PF_ARRAY[(int)base.TilePosition.X - 1, (int)base.TilePosition.Y] && PF_ARRAY[(int)base.TilePosition.X - 1, (int)base.TilePosition.Y] > 0 && world.TileArray[(int)base.TilePosition.X - 1, (int)base.TilePosition.Y].Occupied != true)
-                    {
-                        highest = PF_ARRAY[(int)base.TilePosition.X - 1, (int)base.TilePosition.Y];
-                        nextTarget.X = base.TilePosition.X - 1;
-                        nextTarget.Y = base.TilePosition.Y;
-                    }
-                }
-                catch { Console.WriteLine("Left Limit"); }
-
-
-                //Down
-                try
-                {
-
-                    if (highest < PF_ARRAY[(int) base.tilePosition.X, (int) base.tilePosition.Y + 1] && PF_ARRAY[(int)base.tilePosition.X, (int)base.tilePosition.Y + 1] > 0 && world.TileArray[(int)base.tilePosition.X, (int) base.tilePosition.Y + 1].Occupied != true)
-                    {
-                        highest = PF_ARRAY[(int)base.tilePosition.X, (int) base.tilePosition.Y + 1];
-                        nextTarget.X = base.TilePosition.X;
-                        nextTarget.Y = base.TilePosition.Y + 1;
-                    }
-                }
-                catch { Console.WriteLine("Lower Limit"); }
-
-
-                //Up
-                try
-                {
-
-                    if (highest < PF_ARRAY[(int)base.tilePosition.X, (int)base.tilePosition.Y - 1] && PF_ARRAY[(int)base.tilePosition.X, (int)base.tilePosition.Y - 1] > 0 && world.TileArray[(int)base.tilePosition.X, (int) base.tilePosition.Y - 1].Occupied != true)
-                    {
-                        highest = PF_ARRAY[(int)base.tilePosition.X, (int) base.tilePosition.Y - 1];
-                        nextTarget.X = base.TilePosition.X;
-                        nextTarget.Y = base.TilePosition.Y - 1;
-                    }
-                }
-                catch { Console.WriteLine("Upper Limit"); }
-
-
-                //Up & Right
-                try
-                {
-
-                    if (highest < PF_ARRAY[(int)base.tilePosition.X + 1, (int)base.tilePosition.Y - 1] && PF_ARRAY[(int)base.tilePosition.X + 1, (int)base.tilePosition.Y - 1] > 0 && world.TileArray[(int)base.tilePosition.X + 1, (int) base.tilePosition.Y - 1].Occupied != true)
-                    {
-                        highest = PF_ARRAY[(int)base.tilePosition.X + 1, (int) base.tilePosition.Y - 1];
-                        nextTarget.X = base.TilePosition.X + 1;
-                        nextTarget.Y = base.TilePosition.Y - 1;
-                    }
-                }
-                catch { }
-
-
-                //Up & Left
-                try
-                {
-
-                    if (highest < PF_ARRAY[(int)base.tilePosition.X - 1, (int)base.tilePosition.Y - 1] && PF_ARRAY[(int)base.tilePosition.X - 1, (int)base.tilePosition.Y - 1] > 0 && world.TileArray[(int)base.tilePosition.X - 1, (int) base.tilePosition.Y - 1].Occupied != true)
-                    {
-                        highest = PF_ARRAY[(int)base.tilePosition.X - 1, (int) base.tilePosition.Y - 1];
-                        nextTarget.X = base.TilePosition.X - 1;
-                        nextTarget.Y = base.TilePosition.Y - 1;
-                    }
-                }
-                catch { }
-
-                //Down & Right
-                try
-                {
-
-                    if (highest < PF_ARRAY[(int)base.tilePosition.X + 1, (int)base.tilePosition.Y + 1] && PF_ARRAY[(int)base.tilePosition.X + 1, (int)base.tilePosition.Y + 1] > 0 && world.TileArray[(int)base.tilePosition.X + 1, (int) base.tilePosition.Y + 1].Occupied != true)
-                    {
-                        highest = PF_ARRAY[(int)base.tilePosition.X + 1, (int) base.tilePosition.Y + 1];
-                        nextTarget.X = base.TilePosition.X + 1;
-                        nextTarget.Y = base.TilePosition.Y + 1;
-                    }
-                }
-                catch { }
-
-
-                //Down & Left
-                try
-                {
-
-                    if (highest < PF_ARRAY[(int)base.tilePosition.X - 1, (int)base.tilePosition.Y + 1] && PF_ARRAY[(int)base.tilePosition.X - 1, (int)base.tilePosition.Y + 1] > 0 && world.TileArray[(int)base.tilePosition.X - 1, (int) base.tilePosition.Y + 1].Occupied != true)
-                    {
-                        highest = PF_ARRAY[(int)base.tilePosition.X - 1, (int) base.tilePosition.Y + 1];
-                        nextTarget.X = base.TilePosition.X - 1;
-                        nextTarget.Y = base.TilePosition.Y + 1;
-                    }
-                }
-                catch { }
-
-
-                //Negative trail to push unit forward.
-                PF_ARRAY[(int)base.tilePosition.X, (int) base.tilePosition.Y] -= 100;
-
-                //Moving playerEntities occupation and target.
-                world.TileArray[(int)tilePosition.X, (int) tilePosition.Y].Occupied = false;
-                NEXT_TARGET = nextTarget;
-                world.TileArray[(int)tilePosition.X, (int) tilePosition.Y].Occupied = true;
-
             }
             else    //When the unit is on the source tile.
             {
@@ -257,7 +115,7 @@ namespace RTS_Game
                 owner.PlayerMovingEntities.Remove(this);
                 CURRENT_SPEED = 0;
             }
-        }
+}
 
         #region Function Explanation
         //Updates Entity tree, increases time since last shot.
