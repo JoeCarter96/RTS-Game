@@ -25,8 +25,6 @@ namespace RTS_Game
         private TileMap world;
         private Player player;
         #endregion
-
-        private Unit test;  //TEMP.
         
 
         #region Function Explanation
@@ -47,13 +45,21 @@ namespace RTS_Game
 
             #region TEMP: Unit Testing.
 
-            test = new HeavyTank(new Vector2(0, 0), player, world);
-            test.Waypoints = WaypointsGenerator.GenerateWaypoints(test.TilePosition, new Vector2 (12, 22));
+            Unit test = new HeavyTank(new Vector2(0, 0), player, world);
+            test.Waypoints = WaypointsGenerator.GenerateWaypoints(test.TilePosition, new Vector2 (150, 30));
             player.PlayerMovingEntities.Add(test);
 
-            Unit test2 = new HeavyTank(new Vector2(24, 0), player, world);
-            test2.Waypoints = WaypointsGenerator.GenerateWaypoints(test2.TilePosition, new Vector2(150, 22));
+            Unit test2 = new HeavyTank(new Vector2(0, 1), player, world);
+            test2.Waypoints = WaypointsGenerator.GenerateWaypoints(test2.TilePosition, new Vector2(150, 31));
             player.PlayerMovingEntities.Add(test2);
+
+            Unit test3 = new HeavyTank(new Vector2(1, 0), player, world);
+            test3.Waypoints = WaypointsGenerator.GenerateWaypoints(test3.TilePosition, new Vector2(151, 30));
+            player.PlayerMovingEntities.Add(test3);
+
+            Unit test4 = new HeavyTank(new Vector2(1, 1), player, world);
+            test4.Waypoints = WaypointsGenerator.GenerateWaypoints(test4.TilePosition, new Vector2(151, 31));
+            player.PlayerMovingEntities.Add(test4);
 
             //myBase = new Base(world, player, new Vector2(5, 5));  //TEMP
             #endregion
