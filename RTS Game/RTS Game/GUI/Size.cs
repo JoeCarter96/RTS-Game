@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace RTS_Game
 {
@@ -28,6 +29,12 @@ namespace RTS_Game
         {
             this.width = width;
             this.height = height;
+        }
+
+        public Size(Texture2D texture)
+        {
+            this.width = texture.Width;
+            this.height = texture.Height;
         }
 
         public Rectangle CreateRectangle(Vector2 position)
