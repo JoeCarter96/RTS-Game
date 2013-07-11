@@ -24,9 +24,13 @@ namespace RTS_Game
         //Used to stop the unit from being drawn and updated once it is dead
         protected bool alive = true;
 
+        //Healthbar variables
+        //drawHealthBar will be replaced with a static variable in an options file
+        //when options are implemented
         private bool drawHealthBar = true;
         protected HealthBar healthBar;
 
+        //Game variables
         protected TileMap world;
         protected Player owner;
 
@@ -105,6 +109,9 @@ namespace RTS_Game
             return health / maxHealth;
         }
 
+
+        //NOTE: we only want to update and draw when the health entity is alive
+        //THis means we dont need to 
         public override void Update(GameTime gameTime)
         {
             if (alive)

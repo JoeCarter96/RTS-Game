@@ -18,7 +18,13 @@ namespace RTS_Game
         //The destination rectangle of the beackground and foreground of the bar
         private Rectangle DestinationBack = Rectangle.Empty;
         private Rectangle DestinationFront = Rectangle.Empty;
+
         #endregion
+
+        public Rectangle BoundingBox
+        {
+            set { boundingBox = value; }
+        }
 
         #region Function Explanation
         //Constructor.
@@ -28,6 +34,12 @@ namespace RTS_Game
         {
             this.target = target;
             this.boundingBox = boundingBox;
+        }
+
+        //Updates the bounding box
+        protected virtual void SetRectangle(Rectangle newRectangle)
+        {
+            boundingBox = newRectangle;
         }
 
         #region Function Explanation
