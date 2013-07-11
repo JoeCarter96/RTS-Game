@@ -15,12 +15,14 @@ namespace RTS_Game
         protected float rotation = 0f;
         protected Vector2 origin = Vector2.Zero;
         protected Vector2 velocity = Vector2.Zero;
-        protected int boundingBoxWidth = 20;
-        protected int boundingBoxHeight = 20;
-        //positioning variables
-        //Positioning variables.
+
+        //Positioning variables
         protected Vector2 pixelPosition;
         protected Vector2 tilePosition;
+
+        //Bounding box variables
+        private Size boundingBoxSize;
+
         #endregion
 
         public Vector2 PixelPosition
@@ -54,6 +56,19 @@ namespace RTS_Game
             }
         }
 
+        public Rectangle BoundingBox
+        {
+            //Converts the size into a boundingbox, based on the position of the entity
+            //See Size.cs for more info
+            get { return boundingBoxSize.CreateRectangle(pixelPosition); }
+        }
+
+        protected Size BoundingBoxSize
+        {
+            set { boundingBoxSize = value; }
+            get { return boundingBoxSize; }
+        }
+
         #region Function Explanation
         //Constructor.
         #endregion
@@ -62,6 +77,9 @@ namespace RTS_Game
             //we assign it to the property to also have it calculate the pixel position
             TilePosition = tilePosition;
             this.texture = texture;
+
+            //initially we assume that the size of thbe entity is its texture size.
+            boundingBoxSize = new Size(texture);
         }
 
         #region Function Explanation
@@ -86,17 +104,27 @@ namespace RTS_Game
         #region Function Explanation
         //Draws the Texture without Colour tint.
         #endregion
+        //New draw method uses bounding box to stretch the sprite to fit it
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, pixelPosition, null, Color.White, rotation, origin, 1.0f, SpriteEffects.None, 0);
+            spriteBatch.Draw(texture, BoundingBox, null, Color.White, rotation, origin, SpriteEffects.None, 0);
         }
+        /*public virtual void Draw(SpriteBatch spriteBatch)
+        {
+            spriteBatch.Draw(texture, pixelPosition, null, Color.White, rotation, origin, 1.0f, SpriteEffects.None, 0);
+        }*/
 
         #region Function Explanation
         //Draws the Texture with Color tint.
         #endregion
+        //New draw method uses bounding box to stretch the sprite to fit it, with a specified color tint
         public virtual void Draw(SpriteBatch spriteBatch, Color color)
         {
-            spriteBatch.Draw(texture, pixelPosition, null, color, rotation, origin, 1.0f, SpriteEffects.None, 0);
+            spriteBatch.Draw(texture, BoundingBox, null, color, rotation, origin, SpriteEffects.None, 0);
         }
+        /*public virtual void Draw(SpriteBatch spriteBatch, Color color)
+        {
+            spriteBatch.Draw(texture, pixelPosition, null, color, rotation, origin, 1.0f, SpriteEffects.None, 0);
+        }*/
     }
 }
