@@ -37,7 +37,8 @@ namespace RTS_Game
             OnEnter();
         }
 
-        //executes the MouseClicked() method of the first component which ahs contains set to true
+        //Executes the MouseClicked() method of the first component which has contains set to true,
+        //Which basically returns true if the mouse is contained within it.
         public virtual void MouseClicked(int x, int y, MouseButton button)
         {
             for (int i = 0; i < GuiComponents.Count; i++)
@@ -64,11 +65,11 @@ namespace RTS_Game
                 if (GuiComponents[i].MouseMoved(x, y))
                 {
                     break;
-                }
+                } 
             }
         }
 
-        //Pre-deturmined space for all Gui components to be initialised
+        //Pre-determined space for all Gui components to be initialised
         protected virtual void InitGui()
         {
 

@@ -29,9 +29,11 @@ namespace RTS_Game
             camera = new Camera();
 
             //Level ID will be passed to this state somehow
-            game = new GameInstance(level, camera);
-
+            game = new GameInstance(level, camera, base.GetInput());
+            
         }
+
+
 
         #region Function Explanation
         //Updates Camera and Game.

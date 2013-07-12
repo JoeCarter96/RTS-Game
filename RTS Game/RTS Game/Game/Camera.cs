@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace RTS_Game
 {
-    class Camera
+    public class Camera
     {
         #region Variables
         //Camera constants
@@ -150,6 +150,7 @@ namespace RTS_Game
                 }
                 #endregion
 
+                /*
                 #region Camera zoom logic - WIP
                 int scrollValue = input.ScrollWheelValue;
 
@@ -177,7 +178,8 @@ namespace RTS_Game
 
                 ScrollValueLastFrame = scrollValue;
                 #endregion
-
+                */
+                  
                 //Update the matrix
                 matrix =
                     Matrix.CreateScale(new Vector3(Zoom, Zoom, 1)) *

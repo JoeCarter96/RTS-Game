@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace RTS_Game
 {
-    class Size
+    public class Size
     {
         private int width;
         private int height;

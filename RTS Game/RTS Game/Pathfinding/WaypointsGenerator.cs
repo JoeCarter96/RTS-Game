@@ -32,6 +32,7 @@ namespace RTS_Game
         private const int orthogonal = 10;
         private const int diagonal = 14;
 
+        
         public static Queue<Vector2> GenerateWaypoints(Vector2 unitPos, Vector2 target)
         {
             //creating a Queue of waypoints and an integer array of G costs to refer to.
