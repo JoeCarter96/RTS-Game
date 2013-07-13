@@ -5,7 +5,7 @@ using System.Text;
 
 namespace RTS_Game
 {
-    enum MouseButton
+    public enum MouseButton
     {
         Left,
         Right,

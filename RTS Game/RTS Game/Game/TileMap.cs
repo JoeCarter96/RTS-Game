@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace RTS_Game
 {
-    class TileMap
+    public class TileMap
     {
         #region Variables
         private Tile[,] tileArray;

@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace RTS_Game
 {
-    class Input
+    public class Input
     {
         //Variables
         private KeyboardState keyboardState;
@@ -89,6 +89,8 @@ namespace RTS_Game
             x = mouseState.X;
             y = mouseState.Y;
 
+
+
             //Checking if there has been any clicks
             if (MouseClicked != null)
             {
@@ -102,7 +104,7 @@ namespace RTS_Game
                 }
             }
 
-            //Checking id left and right are down or not
+            //Checking if left and right are down or not
             right = (mouseState.RightButton == ButtonState.Pressed);
             left = (mouseState.LeftButton == ButtonState.Pressed);
 
@@ -131,6 +133,21 @@ namespace RTS_Game
         public bool IsKeyDown(Keys key)
         {
             return keyboardState.IsKeyDown(key);
+        }
+
+        #region Function Explanation
+        //A method which finds the mouse position within the
+        //entire game, not just within the viewport. I made it 
+        //require the camera here and only have this called externally
+        //so that this class can still be used with ease for menus,
+        //which do not have a camera. This however means you must
+        //remember to call this class on the XY variables before they
+        //are used. We can easily do ingame menus now as we just don't use
+        //this method, and use actual XY.
+        #endregion
+        public Vector2 relativeXY(Vector2 XY, Camera camera)
+        {
+            return camera.Position + XY;
         }
     }
 }
