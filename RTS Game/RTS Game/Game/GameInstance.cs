@@ -52,55 +52,81 @@ namespace RTS_Game
             Unit test3 = new HeavyTank(new Vector2(6, 6), player, world);
             Unit test4 = new HeavyTank(new Vector2(6, 7), player, world);
 
+            Base myBase = new Base(world, player, new Vector2(24, 5));
             #endregion
         }
 
         #region Function Explanation
-        //Executes the MouseClicked() method. This handles a LOT of code.
-        //First of all it sees if there are any entities within the selected region.
-        //if there are, they are selected. If there are not, it moves any movable 
-        //Entities (Units) to that location. Expect a lot more to follow.
+        /*Executes the MouseClicked() method.
+         * Left Click:
+                First of all it sees if there are any entities within the selected region.
+                if there are, they are selected. If there are not, it moves any movable 
+                Entities (Units) to that location. 
+         * Right Click:
+                Deselects all units.
+         */
         #endregion
         public virtual void MouseClicked(int x, int y, MouseButton button)
         {
-            //Finds the position of the mouse within the world, not within viewport.
-            Vector2 relativePosition = input.relativeXY(new Vector2(x, y), camera);
-            Vector2 mouseTile = new Vector2((float)Math.Floor((double)relativePosition.X / GameClass.Tile_Width),
-                (float)(Math.Floor((double)relativePosition.Y / GameClass.Tile_Width)));
-
-
-            //Searching for Entity to selected units.
-            player.PlayerSelectedEntities.Add(player.Entities.Find(delegate(Entity entity)
+            #region Left Mouse Click
+            if (button == MouseButton.Left)
             {
-                //Returns whatever unit whos bounding box contains
-                //mouse, or null if there is not one which does.
-                return entity.BoundingBox.Contains(new Point((int)relativePosition.X,
-                    (int)relativePosition.Y));
+                //Finds the position of the mouse within the world, not within viewport.
+                Vector2 relativePosition = input.relativeXY(new Vector2(x, y), camera);
+                Vector2 mouseTile = new Vector2((float)Math.Floor((double)relativePosition.X / GameClass.Tile_Width),
+                    (float)(Math.Floor((double)relativePosition.Y / GameClass.Tile_Width)));
 
-                // Old Method, assuming one above is better?
-                //Returns whatever unit is at mouse, or null if there is not one.
-                // return entity.TilePosition == mouseTile; 
-                  
-            }));
 
-            //If null was returned, remove it and move any selected units to the clicked location.
-            if (player.PlayerSelectedEntities.Last() == null)
-            {
-                player.PlayerSelectedEntities.Remove(null);
-                foreach (Unit u in player.PlayerSelectedEntities.ToList<Entity>())
+                //Searching for Entity to selected units.
+                player.PlayerSelectedEntities.Add(player.Entities.Find(delegate(Entity entity)
                 {
-                    //Deselect unit. TEMP?
-                    player.PlayerSelectedEntities.Remove(u);
+                    //Returns whatever unit whos bounding box contains
+                    //mouse, or null if there is not one which does.
+                    return entity.BoundingBox.Contains(new Point((int)relativePosition.X,
+                        (int)relativePosition.Y));
 
-                    //Generate Waypoints and move!.
-                    u.Waypoints = WaypointsGenerator.GenerateWaypoints(u.TilePosition, mouseTile);
-                    if (!player.PlayerMovingEntities.Contains(u))
+                    // Old Method, assuming one above is better?
+                    //Returns whatever unit is at mouse, or null if there is not one.
+                    // return entity.TilePosition == mouseTile; 
+
+                }));
+
+                //If null was returned it's an empty location to move any selected units to
+                //Therefore, remove it from selected list and move any selected units to the clicked location.
+                if (player.PlayerSelectedEntities.Last() == null)
+                {
+                    player.PlayerSelectedEntities.Remove(null);
+
+                    #region Deselecting Buildings as they cannot move.
+                    foreach (Building b in player.PlayerSelectedEntities.OfType<Building>().ToList<Building>())
                     {
-                        player.PlayerMovingEntities.Add(u);
+                        player.PlayerSelectedEntities.Remove(b);
                     }
-                    
+                    #endregion
+
+                    #region Moving Entities which can.
+                    foreach (Unit u in player.PlayerSelectedEntities.OfType<Unit>().ToList<Unit>())
+                    {
+                        //Generate Waypoints and move!.
+                        u.Waypoints = WaypointsGenerator.GenerateWaypoints(u.TilePosition, mouseTile);
+                        if (!player.PlayerMovingEntities.Contains(u))
+                        {
+                            player.PlayerMovingEntities.Add(u);
+                            u.NextTarget = u.Waypoints.Dequeue();
+                        }
+                    }
+                    #endregion
                 }
             }
+            #endregion
+
+            #region Right Mouse Click
+            else if (button == MouseButton.Right)
+            {
+                player.PlayerSelectedEntities.Clear();
+
+            }
+            #endregion
         }
         
         #region Function Explanation
@@ -134,9 +160,9 @@ namespace RTS_Game
 
                 #region Updating Units
                     //Update every unit.
-                    foreach (Unit u in player.Entities)
+                    foreach (Entity e in player.Entities)
                     {
-                        u.Update(gameTime);
+                        e.Update(gameTime);
                     }
                     #endregion
                 }
@@ -151,9 +177,9 @@ namespace RTS_Game
         public void Draw(SpriteBatch spriteBatch)
         {
             world.Draw(spriteBatch);
-            foreach (Unit u in player.Entities)
+            foreach (Entity e in player.Entities)
             {
-                u.Draw(spriteBatch);
+                e.Draw(spriteBatch);
             }
 
             foreach (Entity e in player.PlayerSelectedEntities)
@@ -179,5 +205,15 @@ namespace RTS_Game
 
 /*        #region Function Explanation
 
+
+*/
+
+
+/*
+ * //parsing units in the entity list.
+            foreach (Unit u in player.Entities.OfType<Unit>())
+            {
+                u.Draw(spriteBatch);
+            }
 
 */
