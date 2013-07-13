@@ -64,7 +64,7 @@ namespace RTS_Game
         public Unit(TileMap world, Player owner, Vector2 tilePosition, Texture2D texture, double maxHealth)
             : base(world, owner, tilePosition, texture, maxHealth)
         {
-            owner.Entities.Add(this);
+            
 
             this.world = world;
             this.TilePosition = tilePosition; 

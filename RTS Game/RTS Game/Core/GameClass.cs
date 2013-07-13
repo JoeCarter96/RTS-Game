@@ -123,10 +123,15 @@ namespace RTS_Game
             SplashScreen.Name = "SplashScreen";
             Resources.AddGUITexture(SplashScreen);
 
-            //Healthbar Background
+            //Healthbar
             Texture2D HealthBar = Content.Load<Texture2D>("Healthbar");
             HealthBar.Name = "HealthBar";
             Resources.AddGUITexture(HealthBar);
+
+            //SelectedRectangle
+            Texture2D SelectedRectangle = Content.Load<Texture2D>("SelectedRectangle");
+            SelectedRectangle.Name = "SelectedRectangle";
+            Resources.AddGUITexture(SelectedRectangle);
 
             #endregion
 
