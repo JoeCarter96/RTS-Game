@@ -10,6 +10,7 @@ namespace RTS_Game
         #region Variables
         private List<Entity> playerEntities = new List<Entity>();
         private List<Entity> playerMovingEntities = new List<Entity>();
+        private List<Entity> playerSelectedEntities = new List<Entity>();
         private TileMap world;
         #endregion
 
@@ -17,6 +18,12 @@ namespace RTS_Game
         {
             get { return playerMovingEntities; }
             set { playerMovingEntities = value; }
+        }
+
+        public List<Entity> PlayerSelectedEntities
+        {
+            get { return playerSelectedEntities; }
+            set { playerSelectedEntities = value; }
         }
 
         public List<Entity> Entities

@@ -24,11 +24,8 @@ namespace RTS_Game
         private Camera camera;
         private TileMap world;
         private Player player;
-        //The input opject
         private Input input;
         #endregion
-
-        Unit test;  //TEMP.
 
         #region Function Explanation
         //Constructor.
@@ -50,45 +47,62 @@ namespace RTS_Game
             camera.GiveTilemap(world);
 
             #region TEMP: Unit Testing.
+            Unit test = new HeavyTank(new Vector2(5, 6), player, world);
+            Unit test2 = new HeavyTank(new Vector2(5, 7), player, world);
+            Unit test3 = new HeavyTank(new Vector2(6, 6), player, world);
+            Unit test4 = new HeavyTank(new Vector2(6, 7), player, world);
 
-            test = new HeavyTank(new Vector2(0, 0), player, world);
-          //  test.Waypoints = WaypointsGenerator.GenerateWaypoints(test.TilePosition, new Vector2 (150, 30));
-            player.PlayerMovingEntities.Add(test);
-
-            Unit test2 = new HeavyTank(new Vector2(0, 1), player, world);
-            test2.Waypoints = WaypointsGenerator.GenerateWaypoints(test2.TilePosition, new Vector2(150, 31));
-            player.PlayerMovingEntities.Add(test2);
-
-            Unit test3 = new HeavyTank(new Vector2(1, 0), player, world);
-            test3.Waypoints = WaypointsGenerator.GenerateWaypoints(test3.TilePosition, new Vector2(151, 30));
-            player.PlayerMovingEntities.Add(test3);
-
-            Unit test4 = new HeavyTank(new Vector2(1, 1), player, world);
-            test4.Waypoints = WaypointsGenerator.GenerateWaypoints(test4.TilePosition, new Vector2(151, 31));
-            player.PlayerMovingEntities.Add(test4);
-
-            //myBase = new Base(world, player, new Vector2(5, 5));  //TEMP
             #endregion
         }
 
         #region Function Explanation
-        //Executes the MouseClicked() method of the first component which has contains set to true,
-        //Which basically returns true if the mouse is contained within it.
+        //Executes the MouseClicked() method. This handles a LOT of code.
+        //First of all it sees if there are any entities within the selected region.
+        //if there are, they are selected. If there are not, it moves any movable 
+        //Entities (Units) to that location. Expect a lot more to follow.
         #endregion
         public virtual void MouseClicked(int x, int y, MouseButton button)
         {
             //Finds the position of the mouse within the world, not within viewport.
-            Vector2 relativePosition = camera.Position + new Vector2(x, y);
-            Vector2 mouseTile = new Vector2((float)Math.Round((double)relativePosition.X / GameClass.Tile_Width),
-                (float)(Math.Round((double)relativePosition.Y / GameClass.Tile_Width)));
+            Vector2 relativePosition = input.relativeXY(new Vector2(x, y), camera);
+            Vector2 mouseTile = new Vector2((float)Math.Floor((double)relativePosition.X / GameClass.Tile_Width),
+                (float)(Math.Floor((double)relativePosition.Y / GameClass.Tile_Width)));
 
-            test.Waypoints = WaypointsGenerator.GenerateWaypoints(test.TilePosition, mouseTile);
-            if (!player.PlayerMovingEntities.Contains(test))
+
+            //Searching for Entity to selected units.
+            player.PlayerSelectedEntities.Add(player.Entities.Find(delegate(Entity entity)
             {
-                player.PlayerMovingEntities.Add(test);
+                //Returns whatever unit whos bounding box contains
+                //mouse, or null if there is not one which does.
+                return entity.BoundingBox.Contains(new Point((int)relativePosition.X,
+                    (int)relativePosition.Y));
+
+                // Old Method, assuming one above is better?
+                //Returns whatever unit is at mouse, or null if there is not one.
+                // return entity.TilePosition == mouseTile; 
+                  
+            }));
+
+            //If null was returned, remove it and move any selected units to the clicked location.
+            if (player.PlayerSelectedEntities.Last() == null)
+            {
+                player.PlayerSelectedEntities.Remove(null);
+                foreach (Unit u in player.PlayerSelectedEntities.ToList<Entity>())
+                {
+                    //Deselect unit. TEMP?
+                    player.PlayerSelectedEntities.Remove(u);
+
+                    //Generate Waypoints and move!.
+                    u.Waypoints = WaypointsGenerator.GenerateWaypoints(u.TilePosition, mouseTile);
+                    if (!player.PlayerMovingEntities.Contains(u))
+                    {
+                        player.PlayerMovingEntities.Add(u);
+                    }
+                    
+                }
             }
         }
-
+        
         #region Function Explanation
         #endregion
         public virtual void MouseMoved(int x, int y)
@@ -140,6 +154,11 @@ namespace RTS_Game
             foreach (Unit u in player.Entities)
             {
                 u.Draw(spriteBatch);
+            }
+
+            foreach (Entity e in player.PlayerSelectedEntities)
+            {
+                spriteBatch.Draw(Resources.GetGUITextures("SelectedRectangle"), e.BoundingBox, Color.White);
             }
 
             //myBase.Draw(spriteBatch);

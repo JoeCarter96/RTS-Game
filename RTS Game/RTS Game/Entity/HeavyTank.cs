@@ -21,8 +21,8 @@ namespace RTS_Game
             base(world, owner, tilePosition, texture, maxHealth)
         {
             //Can't we just do this instead of constructor perameters, if the base variables are protected?
-            MAX_SPEED = 5;
-            ACCELLERATION = 0.5f;
+            MAX_SPEED = 3;
+            ACCELLERATION = 0.2f;
             DAMAGE = 10;
             AOE = 4;
             ROF = 4;

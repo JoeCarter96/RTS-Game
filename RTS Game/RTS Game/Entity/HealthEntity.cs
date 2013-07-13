@@ -60,6 +60,7 @@ namespace RTS_Game
             this.maxHealth = maxHealth;
             health = maxHealth;
             healthBar = new HealthBar(this, new Rectangle((int)PixelPosition.X, (int)pixelPosition.Y, GameClass.Tile_Width, GameClass.Tile_Width));
+            owner.Entities.Add(this);
         }
 
         //Allows for a different start health
@@ -70,6 +71,8 @@ namespace RTS_Game
             this.world = world;
             this.maxHealth = maxHealth;
             this.health = startHealth;
+
+            owner.Entities.Add(this);
 
             
             healthBar = new HealthBar(this, new Rectangle((int)PixelPosition.X, (int)pixelPosition.Y, GameClass.Tile_Width, GameClass.Tile_Width));

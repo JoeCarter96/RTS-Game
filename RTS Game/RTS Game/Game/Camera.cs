@@ -150,7 +150,6 @@ namespace RTS_Game
                 }
                 #endregion
 
-                /*
                 #region Camera zoom logic - WIP
                 int scrollValue = input.ScrollWheelValue;
 
@@ -178,7 +177,6 @@ namespace RTS_Game
 
                 ScrollValueLastFrame = scrollValue;
                 #endregion
-                */
                   
                 //Update the matrix
                 matrix =
