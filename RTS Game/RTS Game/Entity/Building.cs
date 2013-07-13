@@ -55,26 +55,23 @@ namespace RTS_Game
         #endregion
         protected void ApplySizeChanges()
         {
-            //clear out the old occupied tiles
-            if (OccupiedTiles != null)
+            //clear out the old obstacle tiles
+            if (OccupiedTiles != null && OccupiedTiles[0, 0] != null)
             {
                 foreach (Tile t in OccupiedTiles)
                 {
-                    t.Occupied = false;
+                    t.Obstacle = false;
                 }
             }
             
             OccupiedTiles = new Tile[width, height];
-            int xCounter = 0;
-            int yCounter = 0;
-            for (int x = (int)TilePosition.X; x <= width; x++)
+
+            for (int x = 0; x < width; x++)
             {
-                for (int y = (int)TilePosition.Y; y <= height; y++)
+                for (int y = 0; y < height; y++)
                 {
-                    OccupiedTiles[xCounter, yCounter] = world.GetTile(x, y);
-                    yCounter++;
+                    OccupiedTiles[x, y] = world.GetTile(x + (int)TilePosition.X, y + (int)TilePosition.Y);
                 }
-                xCounter++;
             }
 
             //Updates the bounding box of the building
@@ -83,10 +80,13 @@ namespace RTS_Game
             //Recreate health bar
             healthBar = new HealthBar(this, boundingBox);
 
-            //update all the new occupied tiles 
-            foreach (Tile t in OccupiedTiles)
+            //update all the new Obstacle tiles 
+            if (OccupiedTiles[0, 0] != null)
             {
-                t.Occupied = true;
+                foreach (Tile t in OccupiedTiles)
+                {
+                    t.Obstacle = true;
+                }
             }
         }
 
@@ -98,7 +98,7 @@ namespace RTS_Game
         {
             foreach(Tile t in OccupiedTiles)
             {
-                t.Occupied = false;
+                t.Obstacle = false;
             }
 
             base.OnDeath(killer);

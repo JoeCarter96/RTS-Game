@@ -55,8 +55,9 @@ namespace RTS_Game
                 lowestF = int.MaxValue;
 
                 # region Right
-                //If it's within bounds..
-                if (((int) parent.X + 1) <= (tileArray.GetLength(0) - 1))
+                //If it's within bounds and not obstructed by a stationary thing,
+                if (((int)parent.X + 1) <= (tileArray.GetLength(0) - 1) && 
+                    tileArray[(int)parent.X + 1, (int)parent.Y].Obstacle != true)
                 {
                     //..and is not a Vector2 in the queue.
                     if (!(waypoints.Contains(new Vector2((int) parent.X + 1, (int) parent.Y))))
@@ -75,7 +76,8 @@ namespace RTS_Game
                 # region Left
                 if (((int) parent.X - 1 >= 0))
                 {
-                    if (!(waypoints.Contains(new Vector2((int) parent.X - 1, (int) parent.Y))))
+                    if (!(waypoints.Contains(new Vector2((int)parent.X - 1, (int)parent.Y))) &&
+                    tileArray[(int)parent.X - 1, (int)parent.Y].Obstacle != true)
                     {
                         gCosts[(int) parent.X - 1, (int) parent.Y] = gCosts[(int) parent.X, (int) parent.Y] + orthogonal;
                         h = (Math.Abs((int) parent.X - 1 - (int) target.X) + Math.Abs((int) parent.Y - (int) target.Y)) * 10;
@@ -91,7 +93,8 @@ namespace RTS_Game
                 # region Down
                 if (((int) parent.Y + 1 >= 0))
                 {
-                    if (!(waypoints.Contains(new Vector2((int) parent.X, (int) parent.Y + 1))))
+                    if (!(waypoints.Contains(new Vector2((int) parent.X, (int) parent.Y + 1))) &&
+                    tileArray[(int)parent.X, (int)parent.Y + 1].Obstacle != true)
                     {
                         gCosts[(int) parent.X, (int) parent.Y + 1] = gCosts[(int) parent.X, (int) parent.Y] + orthogonal;
                         h = (Math.Abs((int) parent.X - (int) target.X) + Math.Abs((int) parent.Y + 1 - (int) target.Y)) * 10;
@@ -107,7 +110,8 @@ namespace RTS_Game
                 #region Up
                 if (((int) parent.Y - 1 >= 0))
                 {
-                    if (!(waypoints.Contains(new Vector2((int) parent.X, (int) parent.Y - 1))))
+                    if (!(waypoints.Contains(new Vector2((int)parent.X, (int)parent.Y - 1))) &&
+                    tileArray[(int)parent.X, (int)parent.Y - 1].Obstacle != true)
                     {
                         gCosts[(int) parent.X, (int) parent.Y - 1] = gCosts[(int) parent.X, (int) parent.Y] + orthogonal;
                         h = (Math.Abs((int) parent.X - (int) target.X) + Math.Abs((int) parent.Y - (int) target.Y - 1)) * 10;
@@ -123,7 +127,8 @@ namespace RTS_Game
                 #region Up and right
                 if (((int) parent.Y - 1 >= 0) && ((int) parent.X + 1) <= (tileArray.GetLength(0) - 1))
                 {
-                    if (!(waypoints.Contains(new Vector2((int) parent.X + 1, (int) parent.Y - 1))))
+                    if (!(waypoints.Contains(new Vector2((int)parent.X + 1, (int)parent.Y - 1))) &&
+                    tileArray[(int)parent.X + 1, (int)parent.Y - 1].Obstacle != true)
                     {
                         gCosts[(int) parent.X + 1, (int) parent.Y - 1] = gCosts[(int) parent.X, (int) parent.Y] + diagonal;
                         h = (Math.Abs((int) parent.X + 1 - (int) target.X) + Math.Abs((int) parent.Y - (int) target.Y - 1)) * 10;
@@ -139,7 +144,8 @@ namespace RTS_Game
                 #region Up and left
                 if (((int) parent.Y - 1 >= 0) && ((int) parent.X - 1) >= 0)
                 {
-                    if (!(waypoints.Contains(new Vector2((int) parent.X - 1, (int) parent.Y - 1))))
+                    if (!(waypoints.Contains(new Vector2((int)parent.X - 1, (int)parent.Y - 1))) &&
+                    tileArray[(int)parent.X - 1, (int)parent.Y - 1].Obstacle != true)
                     {
                         gCosts[(int) parent.X - 1, (int) parent.Y - 1] = gCosts[(int) parent.X, (int) parent.Y] + diagonal;
                         h = (Math.Abs((int) parent.X - 1 - (int) target.X) + Math.Abs((int) parent.Y - (int) target.Y - 1)) * 10;
@@ -155,7 +161,8 @@ namespace RTS_Game
                 #region Down and right
                 if (((int) parent.Y + 1 >= 0) && ((int) parent.X + 1) <= (tileArray.GetLength(0) - 1))
                 {
-                    if (!(waypoints.Contains(new Vector2((int) parent.X + 1, (int) parent.Y + 1))))
+                    if (!(waypoints.Contains(new Vector2((int)parent.X + 1, (int)parent.Y + 1))) &&
+                    tileArray[(int)parent.X + 1, (int)parent.Y + 1].Obstacle != true)
                     {
                         gCosts[(int) parent.X + 1, (int) parent.Y + 1] = gCosts[(int) parent.X, (int) parent.Y] + diagonal;
                         h = (Math.Abs((int) parent.X + 1 - (int) target.X) + Math.Abs((int) parent.Y + 1 - (int) target.Y)) * 10;
@@ -171,7 +178,8 @@ namespace RTS_Game
                 #region Down and left
                 if (((int) parent.X - 1) >= 0 && ((int) parent.Y + 1 >= 0))
                 {
-                    if (!(waypoints.Contains(new Vector2((int) parent.X - 1, (int) parent.Y + 1))))
+                    if (!(waypoints.Contains(new Vector2((int)parent.X - 1, (int)parent.Y + 1))) &&
+                    tileArray[(int)parent.X - 1, (int)parent.Y + 1].Obstacle != true)
                     {
                         gCosts[(int) parent.X - 1, (int) parent.Y + 1] = gCosts[(int) parent.X, (int) parent.Y] + diagonal;
                         h = (Math.Abs((int) parent.X - 1 - (int) target.X) + Math.Abs((int) parent.Y - (int) target.Y + 1)) * 10;

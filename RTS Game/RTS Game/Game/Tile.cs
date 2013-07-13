@@ -11,12 +11,19 @@ namespace RTS_Game
     public class Tile : Entity
     {
         private Vector2 index;
-        private bool occupied;
+        private bool occupiedByUnit;
+        private bool obstacle;
 
-        public bool Occupied
+        public bool OccupiedByUnit
         {
-            get { return occupied; }
-            set { occupied = value; }
+            get { return obstacle; }
+            set { obstacle = value; }
+        }
+
+        public bool Obstacle
+        {
+            get { return occupiedByUnit; }
+            set { occupiedByUnit = value; }
         }
 
         public Vector2 Index

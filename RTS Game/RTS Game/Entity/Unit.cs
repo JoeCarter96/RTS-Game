@@ -56,6 +56,12 @@ namespace RTS_Game
            set { WAYPOINTS = value; }
        }
 
+        public Vector2 NextTarget
+        {
+            get { return NEXT_TARGET; }
+            set { NEXT_TARGET = value; }
+        }
+
 
         #region Function Explanation
         //Constructor, Adds Unit to entity list, passes a bunch of variables and then creates a PF array.
@@ -67,10 +73,8 @@ namespace RTS_Game
             
 
             this.world = world;
-            this.TilePosition = tilePosition; 
-
-            //Makes moving work first time.
-            NEXT_TARGET = tilePosition;
+            this.TilePosition = tilePosition;
+            world.TileArray[(int) tilePosition.X, (int) tilePosition.Y].OccupiedByUnit = true;
         }
 
         #region Function Explanation
@@ -84,7 +88,8 @@ namespace RTS_Game
         #region Function Explanation
         //This is the code which moves the unit to the target fluidly.
         //The target is just the next cell/Tile. when it reaches it,
-        //it uses waypoints.Dequeue to remove and use the next vector.
+        //it uses waypoints.Dequeue to remove and use the next waypoint.
+        //Also changes occupied tile.
         #endregion
         public void Move()
         {
@@ -92,7 +97,14 @@ namespace RTS_Game
             {
                 if (DistanceToDestination < MAX_SPEED)
                 {
-                    NEXT_TARGET = Waypoints.Dequeue();
+                    //If there is a newly placed building in the way, recalculate waypoints.
+                    if (world.TileArray[(int)NEXT_TARGET.X, (int)NEXT_TARGET.Y].Obstacle == true)
+                    {
+                        WaypointsGenerator.GenerateWaypoints(TilePosition, Waypoints.Last());
+                    }
+                        world.TileArray[(int)NEXT_TARGET.X, (int)NEXT_TARGET.Y].OccupiedByUnit = false;
+                        NEXT_TARGET = Waypoints.Dequeue();
+                        world.TileArray[(int)NEXT_TARGET.X, (int)NEXT_TARGET.Y].OccupiedByUnit = true;
                 }
                 else
                 {
@@ -151,7 +163,7 @@ namespace RTS_Game
                 //Left
                 try
                 {
-                    if (highest < PF_ARRAY[(int)base.tilePosition.X - 1, (int)base.tilePosition.Y] && PF_ARRAY[(int)base.tilePosition.X - 1, (int)base.tilePosition.Y] > 0 && world.TileArray[(int)base.tilePosition.X - 1, (int) base.tilePosition.Y].Occupied != true)
+                    if (highest < PF_ARRAY[(int)base.tilePosition.X - 1, (int)base.tilePosition.Y] && PF_ARRAY[(int)base.tilePosition.X - 1, (int)base.tilePosition.Y] > 0 && world.TileArray[(int)base.tilePosition.X - 1, (int) base.tilePosition.Y].OccupiedByUnit != true)
                     {
                         highest = PF_ARRAY[(int) base.tilePosition.X - 1, (int) base.tilePosition.Y];
                         nextTarget.X = base.tilePosition.X - 1;
@@ -163,7 +175,7 @@ namespace RTS_Game
                 //Right
                 try
                 {
-                    if (highest < PF_ARRAY[(int) base.tilePosition.X + 1, (int) base.tilePosition.Y] && PF_ARRAY[(int)base.tilePosition.X + 1, (int)base.tilePosition.Y] > 0 && world.TileArray[(int)base.tilePosition.X + 1, (int) base.tilePosition.Y].Occupied != true)
+                    if (highest < PF_ARRAY[(int) base.tilePosition.X + 1, (int) base.tilePosition.Y] && PF_ARRAY[(int)base.tilePosition.X + 1, (int)base.tilePosition.Y] > 0 && world.TileArray[(int)base.tilePosition.X + 1, (int) base.tilePosition.Y].OccupiedByUnit != true)
                     {
                         highest = PF_ARRAY[(int) base.tilePosition.X + 1, (int) base.tilePosition.Y];
                         nextTarget.X = base.tilePosition.X + 1;
@@ -176,7 +188,7 @@ namespace RTS_Game
                 try
                 {
 
-                    if (highest < PF_ARRAY[(int) base.tilePosition.X, (int) base.tilePosition.Y + 1] && PF_ARRAY[(int)base.tilePosition.X, (int)base.tilePosition.Y + 1] > 0 && world.TileArray[(int)base.tilePosition.X, (int) base.tilePosition.Y + 1].Occupied != true)
+                    if (highest < PF_ARRAY[(int) base.tilePosition.X, (int) base.tilePosition.Y + 1] && PF_ARRAY[(int)base.tilePosition.X, (int)base.tilePosition.Y + 1] > 0 && world.TileArray[(int)base.tilePosition.X, (int) base.tilePosition.Y + 1].OccupiedByUnit != true)
                     {
                         highest = PF_ARRAY[(int)base.tilePosition.X, (int) base.tilePosition.Y + 1];
                         nextTarget.X = base.tilePosition.X;
@@ -190,7 +202,7 @@ namespace RTS_Game
                 try
                 {
 
-                    if (highest < PF_ARRAY[(int)base.tilePosition.X, (int)base.tilePosition.Y - 1] && PF_ARRAY[(int)base.tilePosition.X, (int)base.tilePosition.Y - 1] > 0 && world.TileArray[(int)base.tilePosition.X, (int) base.tilePosition.Y - 1].Occupied != true)
+                    if (highest < PF_ARRAY[(int)base.tilePosition.X, (int)base.tilePosition.Y - 1] && PF_ARRAY[(int)base.tilePosition.X, (int)base.tilePosition.Y - 1] > 0 && world.TileArray[(int)base.tilePosition.X, (int) base.tilePosition.Y - 1].OccupiedByUnit != true)
                     {
                         highest = PF_ARRAY[(int)base.tilePosition.X, (int) base.tilePosition.Y - 1];
                         nextTarget.X = base.tilePosition.X;
@@ -204,7 +216,7 @@ namespace RTS_Game
                 try
                 {
 
-                    if (highest < PF_ARRAY[(int)base.tilePosition.X + 1, (int)base.tilePosition.Y - 1] && PF_ARRAY[(int)base.tilePosition.X + 1, (int)base.tilePosition.Y - 1] > 0 && world.TileArray[(int)base.tilePosition.X + 1, (int) base.tilePosition.Y - 1].Occupied != true)
+                    if (highest < PF_ARRAY[(int)base.tilePosition.X + 1, (int)base.tilePosition.Y - 1] && PF_ARRAY[(int)base.tilePosition.X + 1, (int)base.tilePosition.Y - 1] > 0 && world.TileArray[(int)base.tilePosition.X + 1, (int) base.tilePosition.Y - 1].OccupiedByUnit != true)
                     {
                         highest = PF_ARRAY[(int)base.tilePosition.X + 1, (int) base.tilePosition.Y - 1];
                         nextTarget.X = base.tilePosition.X + 1;
@@ -218,7 +230,7 @@ namespace RTS_Game
                 try
                 {
 
-                    if (highest < PF_ARRAY[(int)base.tilePosition.X - 1, (int)base.tilePosition.Y - 1] && PF_ARRAY[(int)base.tilePosition.X - 1, (int)base.tilePosition.Y - 1] > 0 && world.TileArray[(int)base.tilePosition.X - 1, (int) base.tilePosition.Y - 1].Occupied != true)
+                    if (highest < PF_ARRAY[(int)base.tilePosition.X - 1, (int)base.tilePosition.Y - 1] && PF_ARRAY[(int)base.tilePosition.X - 1, (int)base.tilePosition.Y - 1] > 0 && world.TileArray[(int)base.tilePosition.X - 1, (int) base.tilePosition.Y - 1].OccupiedByUnit != true)
                     {
                         highest = PF_ARRAY[(int)base.tilePosition.X - 1, (int) base.tilePosition.Y - 1];
                         nextTarget.X = base.tilePosition.X - 1;
@@ -231,7 +243,7 @@ namespace RTS_Game
                 try
                 {
 
-                    if (highest < PF_ARRAY[(int)base.tilePosition.X + 1, (int)base.tilePosition.Y + 1] && PF_ARRAY[(int)base.tilePosition.X + 1, (int)base.tilePosition.Y + 1] > 0 && world.TileArray[(int)base.tilePosition.X + 1, (int) base.tilePosition.Y + 1].Occupied != true)
+                    if (highest < PF_ARRAY[(int)base.tilePosition.X + 1, (int)base.tilePosition.Y + 1] && PF_ARRAY[(int)base.tilePosition.X + 1, (int)base.tilePosition.Y + 1] > 0 && world.TileArray[(int)base.tilePosition.X + 1, (int) base.tilePosition.Y + 1].OccupiedByUnit != true)
                     {
                         highest = PF_ARRAY[(int)base.tilePosition.X + 1, (int) base.tilePosition.Y + 1];
                         nextTarget.X = base.tilePosition.X + 1;
@@ -245,7 +257,7 @@ namespace RTS_Game
                 try
                 {
 
-                    if (highest < PF_ARRAY[(int)base.tilePosition.X - 1, (int)base.tilePosition.Y + 1] && PF_ARRAY[(int)base.tilePosition.X - 1, (int)base.tilePosition.Y + 1] > 0 && world.TileArray[(int)base.tilePosition.X - 1, (int) base.tilePosition.Y + 1].Occupied != true)
+                    if (highest < PF_ARRAY[(int)base.tilePosition.X - 1, (int)base.tilePosition.Y + 1] && PF_ARRAY[(int)base.tilePosition.X - 1, (int)base.tilePosition.Y + 1] > 0 && world.TileArray[(int)base.tilePosition.X - 1, (int) base.tilePosition.Y + 1].OccupiedByUnit != true)
                     {
                         highest = PF_ARRAY[(int)base.tilePosition.X - 1, (int) base.tilePosition.Y + 1];
                         nextTarget.X = base.tilePosition.X - 1;
@@ -259,9 +271,9 @@ namespace RTS_Game
                 PF_ARRAY[(int)base.tilePosition.X, (int) base.tilePosition.Y] -= 100;
 
                 //Moving playerEntities occupation and target.
-                world.TileArray[(int)base.tilePosition.X, (int) base.tilePosition.Y].Occupied = false;
+                world.TileArray[(int)base.tilePosition.X, (int) base.tilePosition.Y].OccupiedByUnit = false;
                 NEXT_TARGET = nextTarget;
-                world.TileArray[(int)base.tilePosition.X, (int) base.pixelPosition.Y].Occupied = true;
+                world.TileArray[(int)base.tilePosition.X, (int) base.pixelPosition.Y].OccupiedByUnit = true;
 
             }
             else    //When the unit is on the source tile.
@@ -272,19 +284,6 @@ namespace RTS_Game
         }
 
 */
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /*
         #region Function Explanation
