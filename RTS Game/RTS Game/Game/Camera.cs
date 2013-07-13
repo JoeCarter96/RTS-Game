@@ -90,10 +90,10 @@ namespace RTS_Game
         {
             //Unfinished
             if (value.X < 0) { value.X = 0; }
-            if (value.X > (WorldWidth - GameClass.Game_Width)) { value.X = (WorldWidth - GameClass.Game_Width); }
+            if (value.X > (WorldWidth * Zoom) - GameClass.Game_Width) { value.X = (WorldWidth * Zoom) - GameClass.Game_Width; }
 
             if (value.Y < 0) { value.Y = 0; }
-            if (value.Y > (WorldHeight - GameClass.Game_Height)) { value.Y = (WorldHeight - GameClass.Game_Height); }
+            if (value.Y > (WorldHeight * zoom) - GameClass.Game_Height) { value.Y = (WorldHeight * zoom) - GameClass.Game_Height; }
             return value;
         }
 
