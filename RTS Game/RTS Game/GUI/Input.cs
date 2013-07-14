@@ -14,10 +14,15 @@ namespace RTS_Game
         private KeyboardState keyboardState;
         private MouseState mouseState;
         private static int x, y, dy, dx = 0;
-        private static bool left, right = false;
+        private static bool left, right, middle = false;
+        private static bool leftLastFrame, rightLastFrame, middleLastFrame = false;
 
         //holds the x and y of the last frame
-        private static int oldy, oldx = 0;
+        private static int yLastFrame, xLastFrame = 0;
+
+        //Mouse clicked event variables
+        //Stores the mouse button that was clicked last on the MouseDown event
+        private MouseButton LastMouseDown = MouseButton.None;
 
         //Properties
         public int X
@@ -60,18 +65,24 @@ namespace RTS_Game
             get { return right; }
         }
 
+        public bool Middle
+        {
+            get { return middle; }
+        }
+
         public int ScrollWheelValue
         {
             get { return mouseState.ScrollWheelValue; }
         }
 
         //Events
-        public delegate void MouseClickedHandler(int x, int y, MouseButton button);
-        public event MouseClickedHandler MouseClicked;
+        public delegate void MouseHandler(int x, int y, MouseButton button);
+        public event MouseHandler MouseUp;
+        public event MouseHandler MouseDown;
+        public event MouseHandler MouseClicked;
 
         public delegate void MouseMovedHandler(int x, int y);
         public event MouseMovedHandler MouseMoved;
-
 
         public Input()
         {
@@ -82,37 +93,90 @@ namespace RTS_Game
 
         public void Update(GameTime gameTime)
         {
+            #region Storing various mouse values
             //updates the states of the mouse and keyboard
             keyboardState = Keyboard.GetState();
             mouseState = Mouse.GetState();
 
+            //store the x and y values of the mouse
             x = mouseState.X;
             y = mouseState.Y;
 
+            //mouse button down bools
+            right= (mouseState.RightButton == ButtonState.Pressed);
+            left = (mouseState.LeftButton == ButtonState.Pressed);
+            middle = (mouseState.MiddleButton == ButtonState.Pressed);
+            #endregion
 
+            #region MouseDown Triggering
+            //If the mouse is pressed, we fire the mouse down event
+            if (MouseDown != null)
+            {
+                if (mouseState.LeftButton == ButtonState.Pressed && !leftLastFrame)
+                {
+                    MouseDown(X, Y, MouseButton.Left);
+                    LastMouseDown = MouseButton.Left;
+                }
+                if (mouseState.RightButton == ButtonState.Pressed && !rightLastFrame)
+                {
+                    MouseDown(X, Y, MouseButton.Right);
+                    LastMouseDown = MouseButton.Right;
+                }
+                if (mouseState.MiddleButton == ButtonState.Pressed && !middleLastFrame)
+                {
+                    MouseDown(X, Y, MouseButton.Middle);
+                    LastMouseDown = MouseButton.Middle;
+                }
+            }
+            #endregion
 
-            //Checking if there has been any clicks
+            #region MouseUp Triggering
+            //If the mouse is released, we fire the mouse down event
+            if (MouseUp != null)
+            {
+                if (mouseState.LeftButton == ButtonState.Released && leftLastFrame)
+                {
+                    MouseUp(X, Y, MouseButton.Left);
+                }
+                if (mouseState.RightButton == ButtonState.Released && rightLastFrame)
+                {
+                    MouseUp(X, Y, MouseButton.Right);
+                }
+                if (mouseState.MiddleButton == ButtonState.Released && middleLastFrame)
+                {
+                    MouseUp(X, Y, MouseButton.Middle);
+                }
+            }
+            #endregion
+
+            #region MouseClicked Triggering
             if (MouseClicked != null)
             {
-                if (mouseState.LeftButton == ButtonState.Pressed && !left)
+                if (!left && leftLastFrame)
                 {
                     MouseClicked(X, Y, MouseButton.Left);
                 }
-                if (mouseState.RightButton == ButtonState.Pressed && !right)
+
+                if (!right && rightLastFrame)
                 {
                     MouseClicked(X, Y, MouseButton.Right);
                 }
+
+                if (!middle && middleLastFrame)
+                {
+                    MouseClicked(X, Y, MouseButton.Middle);
+                }
             }
+            #endregion
 
-            //Checking if left and right are down or not
-            right = (mouseState.RightButton == ButtonState.Pressed);
-            left = (mouseState.LeftButton == ButtonState.Pressed);
-
+            #region DY and DX calculation
             //Caluclating delta x and delta y
-            dy = y - oldy;
-            dx = x - oldx;
+            dy = y - yLastFrame;
+            dx = x - xLastFrame;
+            #endregion
 
-            //checking for mouse movements
+            #region MouseMoved Triggering
+            //Fires the mouse moved event if there has been a change in position of the mouse
             if (MouseMoved != null)
             {
                 if (dy > 0 || dy < 0 || dx > 0 || dx < 0)
@@ -120,9 +184,17 @@ namespace RTS_Game
                     MouseMoved(X, Y);
                 }
             }
+            #endregion
 
-            oldy = y;
-            oldx = x;
+            #region Storing last frame values
+            //Stores the x and y of this frame so we cna calculate DY and DX later on
+            yLastFrame = y;
+            xLastFrame = x;
+
+            leftLastFrame = left;
+            rightLastFrame = right;
+            middleLastFrame = middle;
+            #endregion
         }
 
         public bool IsKeyUp(Keys key)

@@ -30,12 +30,33 @@ namespace RTS_Game
             this.name = name;
             input = new Input();
             //Adding input events
+
+            input.MouseDown += MouseDown;
+            input.MouseUp += MouseUp;
+
             input.MouseClicked += MouseClicked;
             input.MouseMoved += MouseMoved;
 
             InitGui();
             OnEnter();
         }
+
+        //Pre-determined space for all Gui components to be initialised
+        protected virtual void InitGui()
+        {
+
+        }
+
+        protected virtual void OnEnter()
+        {
+            Console.WriteLine("Entering: {0}", name);
+        }
+
+        public virtual void OnExit()
+        {
+            Console.WriteLine("Exiting: {0}", name);
+        }
+
 
         //Executes the MouseClicked() method of the first component which has contains set to true,
         //Which basically returns true if the mouse is contained within it.
@@ -69,20 +90,14 @@ namespace RTS_Game
             }
         }
 
-        //Pre-determined space for all Gui components to be initialised
-        protected virtual void InitGui()
+        public virtual void MouseDown(int x, int y, MouseButton button)
         {
 
         }
 
-        protected virtual void OnEnter()
+        public virtual void MouseUp(int x, int y, MouseButton button)
         {
-            Console.WriteLine("Entering: {0}", name);
-        }
 
-        public virtual void OnExit()
-        {
-            Console.WriteLine("Exiting: {0}", name);
         }
 
         protected virtual void FirstTick(GameTime gameTime, Input input)
