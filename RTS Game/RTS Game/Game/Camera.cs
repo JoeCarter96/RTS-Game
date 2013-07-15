@@ -183,9 +183,6 @@ namespace RTS_Game
                     Matrix.CreateScale(new Vector3(Zoom, Zoom, 1)) *
                     Matrix.CreateTranslation(new Vector3(-Position.X, -Position.Y, 0));
             }
-            //Giving Credit
-            //I understand some of this, but most came from this tutorial:
-            //http://www.youtube.com/watch?v=c_SPRT7DAeM
         }
     }
 }

@@ -10,5 +10,6 @@ namespace RTS_Game
         Left,
         Right,
         Middle,
+        None,
     }
 }

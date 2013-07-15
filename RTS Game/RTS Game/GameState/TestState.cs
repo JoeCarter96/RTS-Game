@@ -23,6 +23,18 @@ namespace RTS_Game
             RegisterComponent(test);
         }
 
+        public override void MouseDown(int x, int y, MouseButton button)
+        {
+            //base.MouseDown(x, y, button);
+
+            //Console.WriteLine("{0} has been pressed", button.ToString());
+        }
+
+        public override void MouseClicked(int x, int y, MouseButton button)
+        {
+            base.MouseClicked(x, y, button);
+        }
+
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
