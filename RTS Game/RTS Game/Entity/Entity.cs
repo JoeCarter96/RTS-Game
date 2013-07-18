@@ -56,6 +56,12 @@ namespace RTS_Game
             }
         }
 
+        public Texture2D Texture
+        {
+            get { return texture; }
+            set { texture = value; }
+        }
+
         public Rectangle BoundingBox
         {
             //Converts the size into a boundingbox, based on the position of the entity

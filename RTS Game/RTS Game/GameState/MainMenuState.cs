@@ -27,8 +27,8 @@ namespace RTS_Game
         {
             base.MouseClicked(x, y, button);
 
-            //StateManager.Instance.CurrentGameState = new InGameState(Resources.GetLevelObject(5), null);
-            StateManager.Instance.CurrentGameState = new TestState();
+            StateManager.Instance.CurrentGameState = new InGameState(Resources.GetLevelObject(5), null);
+            //StateManager.Instance.CurrentGameState = new TestState();
         }
 
         #region Function Explanation

@@ -95,7 +95,15 @@ namespace RTS_Game
         {
             //Is this the best way to do it?
             foreach (Tile t in tileArray)
+            {
                 t.Draw(spriteBatch);
+
+                //  TEMP ore test. 
+                if (t.Texture.Equals(Resources.GetBackgroundTextures("Grass01")))
+                {
+                  //  spriteBatch.Draw(Resources.GetBackgroundTextures("Ore"), t.Rectangle, Color.White);
+                }
+            }
         }
     }
 }

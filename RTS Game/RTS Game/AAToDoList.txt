@@ -1,0 +1,23 @@
+﻿Please add to completed list when something is finished.
+
+UI
+	In game
+	Main Menus
+		Start screen
+		Skirmish Options
+Map Loading
+Map Generation
+Minimap
+Base and Buildings
+Pathfinding
+	Avoiding non static units.
+
+
+
+
+
+
+COMPLETED
+
+Initial Pathfinding System		Tom
+
