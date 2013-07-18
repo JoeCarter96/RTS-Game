@@ -65,32 +65,31 @@ namespace RTS_Game
             #region Background Textures.
 
             //Debug Tile
-            Texture2D DebugTile = Content.Load<Texture2D>("DebugTile");
+            Texture2D DebugTile = Content.Load<Texture2D>("BackgroundTiles/DebugTile");
             DebugTile.Name = "DebugTile";
             Resources.AddBackgroundTexture(DebugTile);
-
             //Ore
-            Texture2D Ore = Content.Load<Texture2D>("Ore");
+            Texture2D Ore = Content.Load<Texture2D>("BackgroundTiles/Ore");
             Ore.Name = "Ore";
             Resources.AddBackgroundTexture(Ore);
 
             //Grass01
-            Texture2D Grass01 = Content.Load<Texture2D>("Grass01");
+            Texture2D Grass01 = Content.Load<Texture2D>("BackgroundTiles/Grass01");
             Grass01.Name = "Grass01";
             Resources.AddBackgroundTexture(Grass01);
 
             //Grass02
-            Texture2D Grass02 = Content.Load<Texture2D>("Grass02");
+            Texture2D Grass02 = Content.Load<Texture2D>("BackgroundTiles/Grass02");
             Grass02.Name = "Grass02";
             Resources.AddBackgroundTexture(Grass02);
 
             //Road01
-            Texture2D Road01 = Content.Load<Texture2D>("Road01");
+            Texture2D Road01 = Content.Load<Texture2D>("BackgroundTiles/Road01");
             Road01.Name = "Road01";
             Resources.AddBackgroundTexture(Road01);
 
             //Water01
-            Texture2D Water01 = Content.Load<Texture2D>("Water01");
+            Texture2D Water01 = Content.Load<Texture2D>("BackgroundTiles/Water01");
             Water01.Name = "Water01";
             Resources.AddBackgroundTexture(Water01);
             #endregion
@@ -129,17 +128,17 @@ namespace RTS_Game
 
             #region GUI Textures
             //Splash Screen
-            Texture2D SplashScreen = Content.Load<Texture2D>("Splash");
+            Texture2D SplashScreen = Content.Load<Texture2D>("GUI/Splash");
             SplashScreen.Name = "SplashScreen";
             Resources.AddGUITexture(SplashScreen);
 
             //Healthbar
-            Texture2D HealthBar = Content.Load<Texture2D>("Healthbar");
+            Texture2D HealthBar = Content.Load<Texture2D>("GUI/Healthbar");
             HealthBar.Name = "HealthBar";
             Resources.AddGUITexture(HealthBar);
 
             //SelectedRectangle
-            Texture2D SelectedRectangle = Content.Load<Texture2D>("SelectedRectangle");
+            Texture2D SelectedRectangle = Content.Load<Texture2D>("GUI/SelectedRectangle");
             SelectedRectangle.Name = "SelectedRectangle";
             Resources.AddGUITexture(SelectedRectangle);
 
@@ -154,22 +153,17 @@ namespace RTS_Game
 
             #region Building Textures
             //Contruction Yard
-            Texture2D ConstructionYard = Content.Load<Texture2D>("Construction Yard");
-            ConstructionYard.Name = "Construction Yard";
+            Texture2D ConstructionYard = Content.Load<Texture2D>("Buildings/ConstructionYard");
+            ConstructionYard.Name = "ConstructionYard";
             Resources.AddBuildingTexture(ConstructionYard);
 
             //Power Plant
-            Texture2D PowerPlant = Content.Load<Texture2D>("PowerPlant");
+            Texture2D PowerPlant = Content.Load<Texture2D>("Buildings/PowerPlant");
             PowerPlant.Name = "PowerPlant";
             Resources.AddBuildingTexture(PowerPlant);
-
-            //Base
-            Texture2D Base = Content.Load<Texture2D>("Base");
-            Base.Name = "Base";
-            Resources.AddBuildingTexture(Base);
             #endregion
             
-            Resources.TestFont = Content.Load<SpriteFont>("TestFont");
+            Resources.TestFont = Content.Load<SpriteFont>("GUI/TestFont");
         }
 
         #region Function Explanation

@@ -30,35 +30,35 @@
     <Reference Include="Microsoft.Xna.Framework.Content.Pipeline.VideoImporters, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Grass01.png">
+    <Compile Include="BackgroundTiles\Grass01.png">
       <Name>Grass01</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Road01.png">
+    <Compile Include="BackgroundTiles\Road01.png">
       <Name>Road01</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Splash.png">
+    <Compile Include="GUI\Splash.png">
       <Name>Splash</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Water01.png">
+    <Compile Include="BackgroundTiles\Water01.png">
       <Name>Water01</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="TestFont.spritefont">
+    <Compile Include="GUI\TestFont.spritefont">
       <Name>TestFont</Name>
       <Importer>FontDescriptionImporter</Importer>
       <Processor>FontDescriptionProcessor</Processor>
@@ -97,7 +97,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DebugTile.png">
+    <Compile Include="BackgroundTiles\DebugTile.png">
       <Name>DebugTile</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -111,52 +111,40 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Construction Yard.png">
-      <Name>Construction Yard</Name>
+    <Compile Include="Buildings\ConstructionYard.png">
+      <Name>ConstructionYard</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="PowerPlant.png">
+    <Compile Include="Buildings\PowerPlant.png">
       <Name>PowerPlant</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="TestBuilding.png">
-      <Name>TestBuilding</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Healthbar.png">
+    <Compile Include="GUI\Healthbar.png">
       <Name>Healthbar</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Base.png">
-      <Name>Base</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="SelectedRectangle.png">
+    <Compile Include="GUI\SelectedRectangle.png">
       <Name>SelectedRectangle</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Ore.png">
+    <Compile Include="BackgroundTiles\Ore.png">
       <Name>Ore</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Grass02.png">
+    <Compile Include="BackgroundTiles\Grass02.png">
       <Name>Grass02</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>

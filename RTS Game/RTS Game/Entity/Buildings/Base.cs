@@ -10,7 +10,7 @@ namespace RTS_Game
     class Base : Building
     {
         public Base(TileMap world, Player owner, Vector2 TilePosition)
-            : base(world, owner, TilePosition, Resources.GetBuildingTextures("Base"))
+            : base(world, owner, TilePosition, Resources.GetBuildingTextures("ConstructionYard"))
         {
             MaxHealth = 500;
 
