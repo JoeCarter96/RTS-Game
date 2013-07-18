@@ -1,16 +1,25 @@
 ﻿Please add to completed list when something is finished.
-
 UI
+	Components
+		Scroll bar
+		TickBox
 	In game
 	Main Menus
 		Start screen
 		Skirmish Options
+
 Map Loading
+
 Map Generation
+
 Minimap
+
 Base and Buildings
+
 Pathfinding
 	Avoiding non static units.
+
+
 
 
 
@@ -20,4 +29,6 @@ Pathfinding
 COMPLETED
 
 Initial Pathfinding System		Tom
-
+Intial GUI Component			Joe
+GUI Buttons						Joe
+Organise Resources Class		Tom

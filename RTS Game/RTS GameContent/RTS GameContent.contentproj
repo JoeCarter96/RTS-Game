@@ -111,8 +111,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Buildings\ConstructionYard.png">
-      <Name>ConstructionYard</Name>
+    <Compile Include="Buildings\cy.png">
+      <Name>cy</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
@@ -153,6 +153,13 @@
   <ItemGroup>
     <Compile Include="Units\HeavyTank.png">
       <Name>HeavyTank</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Buildings\ConstructionYard.png">
+      <Name>ConstructionYard</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
