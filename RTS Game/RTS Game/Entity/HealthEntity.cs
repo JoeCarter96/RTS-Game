@@ -17,11 +17,11 @@ namespace RTS_Game
     #endregion
     class HealthEntity : Entity
     {
-        //Health variables to deturmine if the unit is dead and also for the health bar
+        //Health variables to deturmine if the harvester is dead and also for the health bar
         protected double maxHealth;
         protected double health;
 
-        //Used to stop the unit from being drawn and updated once it is dead
+        //Used to stop the harvester from being drawn and updated once it is dead
         protected bool alive = true;
 
         //Healthbar variables
@@ -51,7 +51,7 @@ namespace RTS_Game
             set { maxHealth = value; }
         }
 
-        //Assuming the unit is spawned with full health
+        //Assuming the harvester is spawned with full health
         public HealthEntity(TileMap world, Player owner, Vector2 tilePosition, Texture2D texture, double maxHealth)
             : base(tilePosition, texture)
         {
@@ -100,7 +100,7 @@ namespace RTS_Game
             }
         }
 
-        //Called when the unit is killed, can be overridden
+        //Called when the harvester is killed, can be overridden
         public virtual void OnDeath(HealthEntity killer)
         {
 

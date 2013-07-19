@@ -10,22 +10,23 @@ namespace RTS_Game
     class HeavyTank : Unit
     {
         #region Variables
-        static int maxHealth = 100;
+        static float maxHealth = 100;
         static Texture2D texture = Resources.GetUnitTextures("HeavyTank");
+        static float maxSpeed = 3f;
+        static float acceleration = 0.2f;
+        static float damage = 10;
+        static float AOE = 4;
+        static float ROF = 7;
         #endregion
 
         #region Function Explanation
         //Constructor.
         #endregion
         public HeavyTank(Vector2 tilePosition, Player owner, TileMap world) :
-            base(world, owner, tilePosition, texture, maxHealth)
+            base(world, owner, tilePosition, texture, maxHealth, maxSpeed, acceleration, damage,
+            AOE, ROF)
         {
-            //Can't we just do this instead of constructor perameters, if the base variables are protected?
-            MAX_SPEED = 3;
-            ACCELLERATION = 0.2f;
-            DAMAGE = 10;
-            AOE = 4;
-            ROF = 4;
+            
         }
 
         #region Function Explanation

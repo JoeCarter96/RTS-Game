@@ -19,6 +19,26 @@ Base and Buildings
 Pathfinding
 	Avoiding non static units.
 
+Resources
+	GUI
+	Money variable
+	silos?
+	Harvesters
+		Finding ore
+		moving
+		Harvesting
+		dumping ore
+
+
+		Ore really needs to be a 2D array,*******
+		
+
+	Buying Buildings/Reduction
+	
+
+
+Drawing efficiency***
+
 
 
 
@@ -32,3 +52,6 @@ Initial Pathfinding System		Tom
 Intial GUI Component			Joe
 GUI Buttons						Joe
 Organise Resources Class		Tom
+Created Ore Class				Tom
+Created Ore finding method.		Tom
+

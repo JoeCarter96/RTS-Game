@@ -77,16 +77,16 @@ namespace RTS_Game
                     (float)(Math.Floor((double)relativePosition.Y / GameClass.Tile_Width)));
 
 
-                //Searching for Entity to selected units.
+                //FindClosestOre for Entity to selected units.
                 player.PlayerSelectedEntities.Add(player.Entities.Find(delegate(Entity entity)
                 {
-                    //Returns whatever unit whos bounding box contains
+                    //Returns whatever harvester whos bounding box contains
                     //mouse, or null if there is not one which does.
                     return entity.BoundingBox.Contains(new Point((int)relativePosition.X,
                         (int)relativePosition.Y));
 
                     // Old Method, assuming one above is better?
-                    //Returns whatever unit is at mouse, or null if there is not one.
+                    //Returns whatever harvester is at mouse, or null if there is not one.
                     // return entity.TilePosition == mouseTile; 
 
                 }));
@@ -148,7 +148,7 @@ namespace RTS_Game
             if (player.Entities.Count > 0)
             {
                 #region Moving Units
-                //Moving every moving unit which is meant to.
+                //Moving every moving harvester which is meant to.
                 if (player.PlayerMovingEntities.Count > 0)
                 {
                     foreach (Unit u in player.PlayerMovingEntities.ToList())
@@ -159,7 +159,7 @@ namespace RTS_Game
                 #endregion
 
                 #region Updating Units
-                    //Update every unit.
+                    //Update every harvester.
                     foreach (Entity e in player.Entities)
                     {
                         e.Update(gameTime);
@@ -177,6 +177,7 @@ namespace RTS_Game
         public void Draw(SpriteBatch spriteBatch)
         {
             world.Draw(spriteBatch);
+
             foreach (Entity e in player.Entities)
             {
                 e.Draw(spriteBatch);
@@ -186,8 +187,6 @@ namespace RTS_Game
             {
                 spriteBatch.Draw(Resources.GetGUITextures("SelectedRectangle"), e.BoundingBox, Color.White);
             }
-
-            //myBase.Draw(spriteBatch);
         }
 
         #region Function Explanation

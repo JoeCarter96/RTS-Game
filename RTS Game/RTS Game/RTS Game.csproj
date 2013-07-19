@@ -74,17 +74,21 @@
   <ItemGroup>
     <Compile Include="Core\Map\Map.cs" />
     <Compile Include="Core\Map\MapInfo.cs" />
+    <Compile Include="Entity\Ore.cs" />
+    <Compile Include="Entity\Units\Harvester\Harvester.cs" />
     <Compile Include="GameState\TestState.cs" />
     <Compile Include="GUI\Input.cs" />
     <Compile Include="Entity\Buildings\Building.cs" />
     <Compile Include="Entity\Buildings\Base.cs" />
-    <Compile Include="Entity\Unit\Bullet.cs" />
+    <Compile Include="Entity\Units\Bullet.cs" />
     <Compile Include="Entity\Progress Bar\HealthBar.cs" />
-    <Compile Include="Entity\Unit\HeavyTank.cs" />
+    <Compile Include="Entity\Units\HeavyTank\HeavyTank.cs" />
     <Compile Include="Game\Player.cs" />
     <Compile Include="GUI\Button.cs" />
+    <Compile Include="GUI\MainMenuButton.cs" />
     <Compile Include="GUI\Size.cs" />
     <Compile Include="GUI\SquareOfDoom.cs" />
+    <Compile Include="Pathfinding\FindNearestOre.cs" />
     <Compile Include="Pathfinding\WaypointsGenerator.cs" />
     <Compile Include="GameState\BasicGameState.cs" />
     <Compile Include="GameState\StateManager.cs" />
@@ -96,7 +100,7 @@
     <Compile Include="GUI\Component.cs" />
     <Compile Include="Entity\Entity.cs" />
     <Compile Include="Entity\HealthEntity.cs" />
-    <Compile Include="Entity\Unit\Unit.cs" />
+    <Compile Include="Entity\Units\Unit.cs" />
     <Compile Include="Game\GameInstance.cs" />
     <Compile Include="GUI\MouseButton.cs" />
     <Compile Include="Core\Map\Level.cs" />

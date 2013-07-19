@@ -10,7 +10,7 @@ namespace RTS_Game
 {
     #region Class Info
         /*Name: Unit.cs
-          Represents a spawnable unit which can be moved about the battle field
+          Represents a spawnable harvester which can be moved about the battle field
           and shoot other enemys. Has a lot of stat veriables that will be changed 
           over time as the game progresses in development. 
         */
@@ -20,14 +20,14 @@ namespace RTS_Game
     {
         #region Variables
             #region Unit Attributes
-            protected float MAX_SPEED;
-            protected float ACCELLERATION;
-            protected float DAMAGE;
+            protected float maxSpeed;
+            protected float acceleration;
+            protected float damage;
             protected float AOE;
             protected float ROF;
-
             protected float CURRENT_SPEED;
             protected float bulletTime;
+
             protected HealthEntity target;
             #endregion
 
@@ -36,18 +36,16 @@ namespace RTS_Game
             #endregion
 
             #region Pathfinding
-            //Next Tile unit is moving to.
+            //Next Tile harvester is moving to.
             protected Vector2 NEXT_TARGET = new Vector2();
             protected Queue<Vector2> WAYPOINTS = new Queue<Vector2>();
              #endregion
-
-
         #endregion
 
         public float MaxSpeed
         {
-            get { return MAX_SPEED; }
-            set { MAX_SPEED = value; }
+            get { return maxSpeed; }
+            set { maxSpeed = value; }
         }
 
         public Queue<Vector2> Waypoints
@@ -67,14 +65,20 @@ namespace RTS_Game
         //Constructor, Adds Unit to entity list, passes a bunch of variables and then creates a PF array.
         //Sets Next Target to Tile Position so that when Move() is called it immediately looks for the next tile.
         #endregion
-        public Unit(TileMap world, Player owner, Vector2 tilePosition, Texture2D texture, double maxHealth)
+        public Unit(TileMap world, Player owner, Vector2 tilePosition, Texture2D texture, double maxHealth,
+           float maxSpeed, float acceleration, float damage, float AOE, float ROF)
             : base(world, owner, tilePosition, texture, maxHealth)
         {
-            
-
             this.world = world;
             this.TilePosition = tilePosition;
+            this.maxHealth = maxHealth;
+            this.maxSpeed = maxSpeed;
+            this.acceleration = acceleration;
+            this.damage = damage;
+            this.AOE = AOE;
+            this.ROF = ROF;
             world.TileArray[(int) tilePosition.X, (int) tilePosition.Y].OccupiedByUnit = true;
+
         }
 
         #region Function Explanation
@@ -86,7 +90,7 @@ namespace RTS_Game
         }
 
         #region Function Explanation
-        //This is the code which moves the unit to the target fluidly.
+        //This is the code which moves the harvester to the target fluidly.
         //The target is just the next cell/Tile. when it reaches it,
         //it uses waypoints.Dequeue to remove and use the next waypoint.
         //Also changes occupied tile.
@@ -95,7 +99,7 @@ namespace RTS_Game
         {
             if (Waypoints.Count > 0)
             {
-                if (DistanceToDestination < MAX_SPEED)
+                if (DistanceToDestination < maxSpeed)
                 {
                     //If there is a newly placed building in the way, recalculate waypoints.
                     if (world.TileArray[(int)NEXT_TARGET.X, (int)NEXT_TARGET.Y].Obstacle == true)
@@ -109,11 +113,11 @@ namespace RTS_Game
                 else
                 {
                     //Accellerating.
-                    if (CURRENT_SPEED < MAX_SPEED)
+                    if (CURRENT_SPEED < maxSpeed)
                     {
-                        //If Max speed is smaller than current speed + accelleration, just make it max speed.
+                        //If Max speed is smaller than current speed + acceleration, just make it max speed.
                         //Stops it going faster than it's max speed.
-                        CURRENT_SPEED = Math.Min(MAX_SPEED, CURRENT_SPEED += ACCELLERATION);
+                        CURRENT_SPEED = Math.Min(maxSpeed, CURRENT_SPEED += acceleration);
                     }
                     Vector2 direction = new Vector2(NEXT_TARGET.X * world.TileWidth, NEXT_TARGET.Y * world.TileWidth) - pixelPosition;
                     direction.Normalize();
@@ -121,7 +125,7 @@ namespace RTS_Game
                     PixelPosition += velocity;
                 }
             }
-            else    //When the unit is on the source tile.
+            else    //When the harvester is on the source tile.
             {
                 //Stop this.Move being called in GameInstance.Update
                 owner.PlayerMovingEntities.Remove(this);
@@ -267,7 +271,7 @@ namespace RTS_Game
                 catch { }
 
 
-                //Negative trail to push unit forward.
+                //Negative trail to push harvester forward.
                 PF_ARRAY[(int)base.tilePosition.X, (int) base.tilePosition.Y] -= 100;
 
                 //Moving playerEntities occupation and target.
@@ -276,7 +280,7 @@ namespace RTS_Game
                 world.TileArray[(int)base.tilePosition.X, (int) base.pixelPosition.Y].OccupiedByUnit = true;
 
             }
-            else    //When the unit is on the source tile.
+            else    //When the harvester is on the source tile.
             {
                 //Stop this.Move being called in GameInstance.Update
                 owner.MovingUnits.Remove(this); 
@@ -287,7 +291,7 @@ namespace RTS_Game
 
 /*
         #region Function Explanation
-        //This is the code which moves the unit to the target fluidly.
+        //This is the code which moves the harvester to the target fluidly.
         //The target is just the next cell/Tile. when it reaches it,
         //it uses FindNextCell to find the next tile to move to until
         //it reaches it's final Target.
@@ -302,7 +306,7 @@ namespace RTS_Game
             }
             else
             {
-                //Moving the unit.
+                //Moving the harvester.
                 //Stand in code until i can be arsed moving stuff nicely.
                 base.TilePosition = new Vector2(NEXT_TARGET.X, NEXT_TARGET.Y);
                
