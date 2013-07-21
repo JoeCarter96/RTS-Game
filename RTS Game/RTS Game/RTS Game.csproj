@@ -74,6 +74,7 @@
   <ItemGroup>
     <Compile Include="Core\Map\Map.cs" />
     <Compile Include="Core\Map\MapInfo.cs" />
+    <Compile Include="Entity\Buildings\Refinary.cs" />
     <Compile Include="Entity\Ore.cs" />
     <Compile Include="Entity\Units\Harvester\Harvester.cs" />
     <Compile Include="GameState\TestState.cs" />

@@ -22,6 +22,10 @@ Pathfinding
 Resources
 	GUI
 	Money variable
+	Refinary
+		standard building code
+		handling harvesters
+		handling ore limit?
 	silos?
 	Harvesters
 		Finding ore
@@ -54,4 +58,5 @@ GUI Buttons						Joe
 Organise Resources Class		Tom
 Created Ore Class				Tom
 Created Ore finding method.		Tom
+Created Refinary				Tom
 

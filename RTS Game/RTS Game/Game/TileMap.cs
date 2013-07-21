@@ -101,7 +101,7 @@ namespace RTS_Game
                 //  TEMP ore test. 
                 if (t.Texture.Equals(Resources.GetBackgroundTextures("Grass01")))
                 {
-                  //  spriteBatch.Draw(Resources.GetBackgroundTextures("Ore"), t.Rectangle, Color.White);
+                  //  spriteBatch.Draw(Resources.GetBackgroundTextures("oreArray"), t.Rectangle, Color.White);
                 }
             }
         }
