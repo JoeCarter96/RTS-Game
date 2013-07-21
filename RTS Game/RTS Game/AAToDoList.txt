@@ -32,6 +32,7 @@ Resources
 		moving
 		Harvesting
 		dumping ore
+		override move code so we can changing state.
 
 
 		Ore really needs to be a 2D array,*******

@@ -25,6 +25,8 @@ namespace RTS_Game
         private TileMap world;
         private Player player;
         private Input input;
+
+        Ore[,] oreArray = new Ore[30, 30];   //TEMP so find nearest ore works. This will be in gameclass and be passed to all harvesters as they are made.
         #endregion
 
         #region Function Explanation
@@ -52,7 +54,23 @@ namespace RTS_Game
             Unit test3 = new HeavyTank(new Vector2(6, 6), player, world);
             Unit test4 = new HeavyTank(new Vector2(6, 7), player, world);
 
+            Ore oretest = new Ore(new Vector2(3, 4));
+            oretest.CurrentAmount = 500;
+
+            for (int i = 0; i < oreArray.GetLength(0); i++)
+            {
+                for (int j = 0; j < oreArray.GetLength(0); j++)
+                {
+                    oreArray[i, j] = new Ore(new Vector2(i, j));
+                }
+            }
+
+            oreArray[3, 4] = oretest;
+
+            Unit harv = new Harvester(new Vector2(1, 1), player, world, player.Entities, oreArray);
             Base myBase = new Base(world, player, new Vector2(24, 5));
+
+
             #endregion
         }
 
@@ -159,7 +177,7 @@ namespace RTS_Game
                 #endregion
 
                 #region Updating Units
-                    //Update every harvester.
+                    //Update every Entity.
                     foreach (Entity e in player.Entities)
                     {
                         e.Update(gameTime);

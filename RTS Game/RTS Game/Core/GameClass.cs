@@ -69,7 +69,7 @@ namespace RTS_Game
             DebugTile.Name = "DebugTile";
             Resources.AddBackgroundTexture(DebugTile);
             //oreArray
-            Texture2D Ore = Content.Load<Texture2D>("BackgroundTiles/oreArray");
+            Texture2D Ore = Content.Load<Texture2D>("BackgroundTiles/Ore");
             Ore.Name = "oreArray";
             Resources.AddBackgroundTexture(Ore);
 

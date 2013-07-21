@@ -95,7 +95,7 @@ namespace RTS_Game
         //it uses waypoints.Dequeue to remove and use the next waypoint.
         //Also changes occupied tile.
         #endregion
-        public void Move()
+        public virtual void Move()
         {
             if (Waypoints.Count > 0)
             {

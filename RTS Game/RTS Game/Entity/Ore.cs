@@ -31,7 +31,7 @@ namespace RTS_Game
         public Ore (Vector2 tilePosition) :
             base(tilePosition, Resources.GetBackgroundTextures("oreArray"))
         {
-        
+            currentAmount = 0;
         }
     } 
 }

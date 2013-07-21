@@ -16,9 +16,10 @@ namespace RTS_Game.Pathfinding
     {
         static Harvester harvester;
         static Tile[,] world;
-        static List<Tile> toBeSearched = new List<Tile>();
-        static List<Tile> alreadySearched = new List<Tile>();
-        static Tile target = null;
+        static Ore[,] oreArray;
+        static List<Ore> toBeSearched = new List<Ore>();
+        static List<Ore> alreadySearched = new List<Ore>();
+        static Ore target = null;
 
         #region Function Explanation
         /*Adds the units position to the to be searched list and calls the search method
@@ -27,15 +28,17 @@ namespace RTS_Game.Pathfinding
          * returns the tile where ore exists.
          * */
         #endregion
-        static public Vector2 BeginSearch(Harvester harvesterToMove, Tile[,] worldArray)
+        static public Vector2 BeginSearch(Harvester harvesterToMove, Tile[,] worldArray, Ore[,] OreArray)
         {
             harvester = harvesterToMove;
             world = worldArray;
-            toBeSearched.Add(world[(int)harvester.TilePosition.X,(int) harvester.TilePosition.Y]);
+            oreArray = OreArray;
+
+            toBeSearched.Add(oreArray[(int)harvester.TilePosition.X, (int)harvester.TilePosition.Y]);
 
             while (target == null)
             {
-                foreach (Tile t in toBeSearched.ToList<Tile>())
+                foreach (Ore t in toBeSearched.ToList<Ore>())
                 {
                     if (!alreadySearched.Contains(t))
                     {
@@ -66,9 +69,9 @@ namespace RTS_Game.Pathfinding
          * tile is contained by it. If it is not it is out of the array and if it were called we would get errors.
          */
         #endregion
-        static public void Search(Tile tileToSearch)
+        static public void Search(Ore tileToSearch)
         {
-            if (tileToSearch.Obstacle == true)
+            if (tileToSearch.CurrentAmount > 0)
             {
                 target = tileToSearch;
             }
@@ -77,39 +80,39 @@ namespace RTS_Game.Pathfinding
                 alreadySearched.Add(tileToSearch);
                 toBeSearched.Remove(tileToSearch);
 
-                if (new Rectangle(0, 0, world.GetLength(0), world.GetLength(1)).Contains
+                if (new Rectangle(0, 0, oreArray.GetLength(0), oreArray.GetLength(1)).Contains
                     (new Point((int) (int) tileToSearch.TilePosition.X + 1, (int) (int) tileToSearch.TilePosition.Y)))
                 {
-                    if (!alreadySearched.Contains(world[(int) tileToSearch.TilePosition.X + 1, (int) tileToSearch.TilePosition.Y]))
+                    if (!alreadySearched.Contains(oreArray[(int) tileToSearch.TilePosition.X + 1, (int) tileToSearch.TilePosition.Y]))
                     {
-                        toBeSearched.Add(world[(int) tileToSearch.TilePosition.X + 1, (int) tileToSearch.TilePosition.Y]);
+                        toBeSearched.Add(oreArray[(int) tileToSearch.TilePosition.X + 1, (int) tileToSearch.TilePosition.Y]);
                     }
                 }
 
-                if (new Rectangle(0, 0, world.GetLength(0), world.GetLength(1)).Contains
+                if (new Rectangle(0, 0, oreArray.GetLength(0), oreArray.GetLength(1)).Contains
                     (new Point((int)tileToSearch.TilePosition.X - 1, (int)tileToSearch.TilePosition.Y)))
                 {
-                    if (!alreadySearched.Contains(world[(int) tileToSearch.TilePosition.X - 1, (int) tileToSearch.TilePosition.Y]))
+                    if (!alreadySearched.Contains(oreArray[(int) tileToSearch.TilePosition.X - 1, (int) tileToSearch.TilePosition.Y]))
                     {
-                        toBeSearched.Add(world[(int) tileToSearch.TilePosition.X - 1, (int) tileToSearch.TilePosition.Y]);
+                        toBeSearched.Add(oreArray[(int) tileToSearch.TilePosition.X - 1, (int) tileToSearch.TilePosition.Y]);
                     }
                 }
 
-                if (new Rectangle(0, 0, world.GetLength(0), world.GetLength(1)).Contains
+                if (new Rectangle(0, 0, oreArray.GetLength(0), oreArray.GetLength(1)).Contains
                     (new Point((int)tileToSearch.TilePosition.X, (int)tileToSearch.TilePosition.Y + 1)))
                 {
-                    if (!alreadySearched.Contains(world[(int) tileToSearch.TilePosition.X, (int) tileToSearch.TilePosition.Y + 1]))
+                    if (!alreadySearched.Contains(oreArray[(int) tileToSearch.TilePosition.X, (int) tileToSearch.TilePosition.Y + 1]))
                     {
-                        toBeSearched.Add(world[(int) tileToSearch.TilePosition.X, (int) tileToSearch.TilePosition.Y + 1]);
+                        toBeSearched.Add(oreArray[(int) tileToSearch.TilePosition.X, (int) tileToSearch.TilePosition.Y + 1]);
                     }
                 }
 
-                if (new Rectangle(0, 0, world.GetLength(0), world.GetLength(1)).Contains
+                if (new Rectangle(0, 0, oreArray.GetLength(0), oreArray.GetLength(1)).Contains
                     (new Point((int)tileToSearch.TilePosition.X + 1, (int)tileToSearch.TilePosition.Y)))
                 {
-                    if (!alreadySearched.Contains(world[(int) tileToSearch.TilePosition.X + 1, (int) tileToSearch.TilePosition.Y]))
+                    if (!alreadySearched.Contains(oreArray[(int) tileToSearch.TilePosition.X + 1, (int) tileToSearch.TilePosition.Y]))
                     {
-                        toBeSearched.Add(world[(int) tileToSearch.TilePosition.X + 1, (int) tileToSearch.TilePosition.Y]);
+                        toBeSearched.Add(oreArray[(int) tileToSearch.TilePosition.X + 1, (int) tileToSearch.TilePosition.Y]);
                     }
                 }
 
