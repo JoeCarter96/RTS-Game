@@ -55,7 +55,7 @@ namespace RTS_Game
             Unit test4 = new HeavyTank(new Vector2(6, 7), player, world);
 
             Ore oretest = new Ore(new Vector2(3, 4));
-            oretest.CurrentAmount = 500;
+            oretest.CurrentAmount = 100;
 
             for (int i = 0; i < oreArray.GetLength(0); i++)
             {
@@ -67,7 +67,7 @@ namespace RTS_Game
 
             oreArray[3, 4] = oretest;
 
-            Unit harv = new Harvester(new Vector2(1, 1), player, world, player.Entities, oreArray);
+           // Unit harv = new Harvester(new Vector2(1, 1), player, world, player.Entities, oreArray);
             Base myBase = new Base(world, player, new Vector2(24, 5));
 
 

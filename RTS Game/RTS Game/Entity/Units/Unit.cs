@@ -125,11 +125,28 @@ namespace RTS_Game
                     PixelPosition += velocity;
                 }
             }
-            else    //When the harvester is on the source tile.
+            else    //When the harvester has no more waypoints
             {
-                //Stop this.Move being called in GameInstance.Update
-                owner.PlayerMovingEntities.Remove(this);
-                CURRENT_SPEED = 0;
+                if (DistanceToDestination < maxSpeed)
+                {
+                    //Stops this.Move being called in GameInstance.Update
+                    owner.PlayerMovingEntities.Remove(this);
+                    CURRENT_SPEED = 0;
+                }
+                else    //if it's not on the tile, continue to move
+                {
+                    //Accellerating.
+                    if (CURRENT_SPEED < maxSpeed)
+                    {
+                        //If Max speed is smaller than current speed + acceleration, just make it max speed.
+                        //Stops it going faster than it's max speed.
+                        CURRENT_SPEED = Math.Min(maxSpeed, CURRENT_SPEED += acceleration);
+                    }
+                    Vector2 direction = new Vector2(NEXT_TARGET.X * world.TileWidth, NEXT_TARGET.Y * world.TileWidth) - pixelPosition;
+                    direction.Normalize();
+                    velocity = Vector2.Multiply(direction, CURRENT_SPEED);
+                    PixelPosition += velocity;
+                }
             }
 }
 
