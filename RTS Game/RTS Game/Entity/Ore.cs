@@ -9,7 +9,7 @@ namespace RTS_Game
     class Ore : Entity
     {
         protected int MAX_AMOUNT = 1000;
-        protected int currentAmount;
+        protected int currentAmount = 0;
         protected int DEPLETION_AMOUNT = 50;
 
         public int DEPLETIONAMOUNT
@@ -29,9 +29,8 @@ namespace RTS_Game
         }
 
         public Ore (Vector2 tilePosition) :
-            base(tilePosition, Resources.GetBackgroundTextures("oreArray"))
+            base(tilePosition, Resources.GetBackgroundTextures("Ore"))
         {
-            currentAmount = 0;
         }
     } 
 }

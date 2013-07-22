@@ -21,24 +21,11 @@ Pathfinding
 
 Resources
 	GUI
-	Money variable
 	Refinary
 		standard building code
-		handling harvesters
-		handling ore limit?
 	silos?
-	Harvesters
-		Finding ore
-		moving
-		Harvesting
-		dumping ore
-		override move code so we can changing state.
-
-
-		Ore really needs to be a 2D array,*******
 		
-
-	Buying Buildings/Reduction
+Buying Buildings/Reduction
 	
 
 
@@ -57,7 +44,12 @@ Initial Pathfinding System		Tom
 Intial GUI Component			Joe
 GUI Buttons						Joe
 Organise Resources Class		Tom
+Began Map Making stuff			Tom
 Created Ore Class				Tom
 Created Ore finding method.		Tom
 Created Refinary				Tom
+Added Money variable in player  Tom
+Completed Ore specific code in 
+refinary						Tom
+Completely finished Harvester	Tom
 

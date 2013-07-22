@@ -107,6 +107,8 @@ namespace RTS_Game
             if (bestChoice != null)
             {
                 this.Waypoints = WaypointsGenerator.GenerateWaypoints(this.tilePosition, bestChoice.TilePosition);
+                owner.PlayerMovingEntities.Add(this);
+                NextTarget = Waypoints.Dequeue();
                 targetRef = bestChoice;
             }
 
@@ -230,12 +232,14 @@ namespace RTS_Game
                     //If we're stopped and at refinary, begin unloading.
                     if (targetRef != null && tilePosition == targetRef.TilePosition)
                     {
-                        currentState = State.Unloading;                       
+                        currentState = State.Unloading;
+                        UnloadOre();
                     }
 
                     //otherwise, move to the refinary.
                     else
                     {
+                        currentState = State.Moving;
                         MoveToRef();
                     }
                 }

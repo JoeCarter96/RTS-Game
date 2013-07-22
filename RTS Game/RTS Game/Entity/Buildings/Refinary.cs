@@ -29,8 +29,8 @@ namespace RTS_Game
         {
             MaxHealth = 500;
 
-            Width = 0;
-            Height = 0;
+            Width = 4;
+            Height = 4;
             ApplySizeChanges();
         }
 

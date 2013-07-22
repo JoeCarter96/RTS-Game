@@ -68,9 +68,9 @@ namespace RTS_Game
             Texture2D DebugTile = Content.Load<Texture2D>("BackgroundTiles/DebugTile");
             DebugTile.Name = "DebugTile";
             Resources.AddBackgroundTexture(DebugTile);
-            //oreArray
+            //Ore
             Texture2D Ore = Content.Load<Texture2D>("BackgroundTiles/Ore");
-            Ore.Name = "oreArray";
+            Ore.Name = "Ore";
             Resources.AddBackgroundTexture(Ore);
 
             //Grass01

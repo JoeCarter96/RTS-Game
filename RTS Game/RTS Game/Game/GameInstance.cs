@@ -52,10 +52,7 @@ namespace RTS_Game
             Unit test = new HeavyTank(new Vector2(5, 6), player, world);
             Unit test2 = new HeavyTank(new Vector2(5, 7), player, world);
             Unit test3 = new HeavyTank(new Vector2(6, 6), player, world);
-            Unit test4 = new HeavyTank(new Vector2(6, 7), player, world);
-
-            Ore oretest = new Ore(new Vector2(3, 4));
-            oretest.CurrentAmount = 1000;
+            Unit test4 = new HeavyTank(new Vector2(6, 7), player, world);;
 
             for (int i = 0; i < oreArray.GetLength(0); i++)
             {
@@ -65,7 +62,13 @@ namespace RTS_Game
                 }
             }
 
-            oreArray[3, 4] = oretest;
+            for (int i = 10; i < 20; i++)
+            {
+                for (int j = 10; j < 20; j++)
+                {
+                    oreArray[i, j].CurrentAmount = 100;
+                }
+            }
 
             Unit harv = new Harvester(new Vector2(1, 1), player, world, player.Entities, oreArray);
             Refinary refin = new Refinary(world, player, new Vector2(3, 1));
@@ -174,7 +177,7 @@ namespace RTS_Game
                     {
                         u.Move();
                     }
-
+                }
                 #endregion
 
                 #region Updating Units
@@ -184,7 +187,7 @@ namespace RTS_Game
                         e.Update(gameTime);
                     }
                     #endregion
-                }
+
             }
 
             
@@ -196,6 +199,14 @@ namespace RTS_Game
         public void Draw(SpriteBatch spriteBatch)
         {
             world.Draw(spriteBatch);
+
+            foreach (Ore o in oreArray)
+            {
+                if (o.CurrentAmount > 0)
+                {
+                    o.Draw(spriteBatch);
+                }
+            }
 
             foreach (Entity e in player.Entities)
             {

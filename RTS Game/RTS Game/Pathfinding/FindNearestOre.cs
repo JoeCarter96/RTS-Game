@@ -33,6 +33,7 @@ namespace RTS_Game.Pathfinding
             harvester = harvesterToMove;
             world = worldArray;
             oreArray = OreArray;
+            target = null;
 
             toBeSearched.Add(oreArray[(int)harvester.TilePosition.X, (int)harvester.TilePosition.Y]);
 
