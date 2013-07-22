@@ -79,8 +79,18 @@ namespace RTS_Game
             Refinary bestChoice = null;
             Double lowestSolution = double.MaxValue;
 
-            foreach (Refinary r in entityListForRef.ToList())
+            foreach (Entity e in entityListForRef.ToList())
             {
+                Refinary r = null;
+                if (e is Refinary)
+                {
+                    r = (Refinary) e;
+                }
+                else
+                {
+                    continue;
+                }
+
                 double diff = (r.TilePosition.X - tilePosition.X) *
                     (r.TilePosition.X - tilePosition.X);
 
