@@ -145,10 +145,15 @@ namespace RTS_Game
             #endregion
 
             #region Unit Textures
-            //Splash Screen
+            //Heavy Tank
             Texture2D HeavyTank = Content.Load<Texture2D>("Units/HeavyTank");
             HeavyTank.Name = "HeavyTank";
             Resources.AddUnitTexture(HeavyTank);
+
+            //Harvester
+            Texture2D Harvester = Content.Load<Texture2D>("Units/Harvester");
+            Harvester.Name = "Harvester";
+            Resources.AddUnitTexture(Harvester);
             #endregion
 
             #region Building Textures
@@ -161,6 +166,11 @@ namespace RTS_Game
             Texture2D PowerPlant = Content.Load<Texture2D>("Buildings/PowerPlant");
             PowerPlant.Name = "PowerPlant";
             Resources.AddBuildingTexture(PowerPlant);
+
+            //Refinery
+            Texture2D Refinery = Content.Load<Texture2D>("Buildings/Refinery");
+            Refinery.Name = "Refinery";
+            Resources.AddBuildingTexture(Refinery);
             #endregion
             
             Resources.TestFont = Content.Load<SpriteFont>("GUI/TestFont");

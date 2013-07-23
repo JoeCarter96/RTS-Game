@@ -74,7 +74,7 @@
   <ItemGroup>
     <Compile Include="Core\Map\Map.cs" />
     <Compile Include="Core\Map\MapInfo.cs" />
-    <Compile Include="Entity\Buildings\Refinary.cs" />
+    <Compile Include="Entity\Buildings\Refinery.cs" />
     <Compile Include="Entity\Ore.cs" />
     <Compile Include="Entity\Units\Harvester\Harvester.cs" />
     <Compile Include="GameState\TestState.cs" />
@@ -89,6 +89,7 @@
     <Compile Include="GUI\MainMenuButton.cs" />
     <Compile Include="GUI\Size.cs" />
     <Compile Include="GUI\SquareOfDoom.cs" />
+    <Compile Include="Pathfinding\WaypointsOntoABuilding.cs" />
     <Compile Include="Pathfinding\FindNearestOre.cs" />
     <Compile Include="Pathfinding\WaypointsGenerator.cs" />
     <Compile Include="GameState\BasicGameState.cs" />

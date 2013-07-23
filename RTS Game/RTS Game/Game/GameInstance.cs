@@ -71,7 +71,7 @@ namespace RTS_Game
             }
 
             Unit harv = new Harvester(new Vector2(1, 1), player, world, player.Entities, oreArray);
-            Refinary refin = new Refinary(world, player, new Vector2(3, 1));
+            Refinery refin = new Refinery(world, player, new Vector2(3, 1));
             Base myBase = new Base(world, player, new Vector2(24, 5));
 
 
@@ -106,11 +106,6 @@ namespace RTS_Game
                     //mouse, or null if there is not one which does.
                     return entity.BoundingBox.Contains(new Point((int)relativePosition.X,
                         (int)relativePosition.Y));
-
-                    // Old Method, assuming one above is better?
-                    //Returns whatever harvester is at mouse, or null if there is not one.
-                    // return entity.TilePosition == mouseTile; 
-
                 }));
 
                 //If null was returned it's an empty location to move any selected units to
@@ -187,10 +182,7 @@ namespace RTS_Game
                         e.Update(gameTime);
                     }
                     #endregion
-
-            }
-
-            
+            }   
         }
 
         #region Function Explanation
@@ -226,6 +218,7 @@ namespace RTS_Game
         public void StaticDraw(SpriteBatch spriteBatch)
         {
             spriteBatch.DrawString(Resources.TestFont, camera.Position.ToString(), new Vector2(0 ,0), Color.Black);
+            spriteBatch.DrawString(Resources.TestFont, "$" + player.Money.ToString(), new Vector2(0, 30), Color.Black);
         }
     }
 }

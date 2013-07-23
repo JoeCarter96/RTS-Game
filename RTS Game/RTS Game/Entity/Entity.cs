@@ -93,10 +93,18 @@ namespace RTS_Game
         #endregion
         public Vector2 GetCenter()
         {
-            float x = pixelPosition.X + texture.Width / 2;
-            float y = pixelPosition.Y + texture.Height / 2;
+            float x = pixelPosition.X + (texture.Width / 2);
+            float y = pixelPosition.Y + (texture.Height / 2);
 
             return new Vector2(x, y);
+        }
+
+        public Vector2 GetCenterTile()
+        {
+            Vector2 center = GetCenter();
+
+            return new Vector2((int)Math.Round((decimal)center.X / GameClass.Tile_Width),
+                    (int)Math.Round((decimal)center.Y / GameClass.Tile_Width));
         }
 
         #region Function Explanation

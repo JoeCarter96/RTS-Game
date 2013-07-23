@@ -85,7 +85,7 @@ namespace RTS_Game
             {
                 foreach (Tile t in OccupiedTiles)
                 {
-                //    t.Obstacle = true;
+                    t.Obstacle = true;
                 }
             }
         }

@@ -21,13 +21,16 @@ Pathfinding
 
 Resources
 	GUI
-	Refinary
+	Refinery
 		standard building code
 	silos?
 		
 Buying Buildings/Reduction
 	
-
+Selection Code
+	Moving a Harvester.
+		Mine if moved to ore
+		Stop AI collection control if not
 
 Drawing efficiency***
 
@@ -47,9 +50,9 @@ Organise Resources Class		Tom
 Began Map Making stuff			Tom
 Created Ore Class				Tom
 Created Ore finding method.		Tom
-Created Refinary				Tom
+Created Refinery				Tom
 Added Money variable in player  Tom
 Completed Ore specific code in 
-refinary						Tom
+refinery						Tom
 Completely finished Harvester	Tom
 

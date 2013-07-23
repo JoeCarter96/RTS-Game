@@ -6,7 +6,7 @@ using System.Text;
 
 namespace RTS_Game
 {
-    class Refinary : Building
+    class Refinery : Building
     {
         private int numberOfHarvesters = 0;
         //This limit can be broken if there are no refinarys anywhere near but this one.
@@ -24,8 +24,8 @@ namespace RTS_Game
             set { harvesterLimit = value; }
         }
 
-        public Refinary(TileMap world, Player owner, Vector2 TilePosition)
-            : base(world, owner, TilePosition, Resources.GetBuildingTextures("ConstructionYard"))
+        public Refinery(TileMap world, Player owner, Vector2 TilePosition)
+            : base(world, owner, TilePosition, Resources.GetBuildingTextures("Refinery"))
         {
             MaxHealth = 500;
 

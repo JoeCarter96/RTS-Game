@@ -11,7 +11,7 @@ namespace RTS_Game
     {
         #region Variables
         static float maxHealth = 100;
-        static Texture2D texture = Resources.GetUnitTextures("HeavyTank");
+        static Texture2D texture = Resources.GetUnitTextures("Harvester");
         static float maxSpeed = 1.5f;
         static float acceleration = 0.2f;
 
@@ -21,9 +21,10 @@ namespace RTS_Game
         protected Ore targetOre;
         enum State { Stopped, Moving, Unloading };
         State currentState = State.Stopped;
-        Refinary targetRef = null;
-        int timeSinceUnload = 0;
-        const int timeBetweenUnloads = 1;
+        Refinery targetRef = null;
+        int timeSinceLast = 0;
+        const int timeBetweenUnloads = 1000;
+        const int timeBetweenMines = 750;
         const int amountToUnload = 250;
         Ore[,] oreArray;
         #endregion
@@ -39,15 +40,13 @@ namespace RTS_Game
         }
 
         #region Function Explanation
-        //Unloads as much ore as it can to the refinary until it is empty.
-        //When it is, it changes state to stopped and makes the target refinary
+        //Unloads as much ore as it can to the refinery until it is empty.
+        //When it is, it changes state to stopped and makes the target refinery
         //null so it will find some more ore in the next update loop*. (*this is
         //handled within update).
         #endregion
         public void UnloadOre()
         {
-            currentState = State.Unloading;
-
             //Actually unloading. Play any animation here.
             if (oreAmount > amountToUnload)
             {
@@ -64,9 +63,6 @@ namespace RTS_Game
             {
                 currentState = State.Stopped;
             }
-
-            //Resets ref so update code works correctly.
-            targetRef = null;
         }
 
         #region Function Explanation
@@ -76,21 +72,12 @@ namespace RTS_Game
         #endregion
         public void MoveToRef()
         {
-            Refinary bestChoice = null;
+            Refinery bestChoice = null;
             Double lowestSolution = double.MaxValue;
 
-            foreach (Entity e in entityListForRef.ToList())
+            //parsing units in the entity list.
+            foreach (Refinery r in entityListForRef.OfType<Refinery>())
             {
-                Refinary r = null;
-                if (e is Refinary)
-                {
-                    r = (Refinary) e;
-                }
-                else
-                {
-                    continue;
-                }
-
                 double diff = (r.TilePosition.X - tilePosition.X) *
                     (r.TilePosition.X - tilePosition.X);
 
@@ -104,9 +91,10 @@ namespace RTS_Game
                 }
             }
 
+            //If there is a refinery chosen, move to it.
             if (bestChoice != null)
             {
-                this.Waypoints = WaypointsGenerator.GenerateWaypoints(this.tilePosition, bestChoice.TilePosition);
+                this.Waypoints = WaypointsGenerator.GenerateWaypoints(this.tilePosition, bestChoice.GetCenterTile(), bestChoice.BoundingBox);
                 owner.PlayerMovingEntities.Add(this);
                 NextTarget = Waypoints.Dequeue();
                 targetRef = bestChoice;
@@ -121,7 +109,17 @@ namespace RTS_Game
         {
             Vector2 orePos = Pathfinding.FindClosestOre.BeginSearch(this, world.TileArray, oreArray);
             targetOre = oreArray[(int) orePos.X,(int) orePos.Y];
-            Waypoints = WaypointsGenerator.GenerateWaypoints(tilePosition, orePos);
+
+            if (targetRef == null)
+            {
+                Waypoints = WaypointsGenerator.GenerateWaypoints(tilePosition, orePos);
+            }
+            //Ignore the obstacles of the refinery, for when we move from it after unloading.
+            else
+            {
+                Waypoints = WaypointsGenerator.GenerateWaypoints(tilePosition, orePos, targetRef.BoundingBox);
+            }
+
             owner.PlayerMovingEntities.Add(this);
             NextTarget = Waypoints.Dequeue();
         }
@@ -165,11 +163,6 @@ namespace RTS_Game
             {
                 if (DistanceToDestination < maxSpeed)
                 {
-                    //If there is a newly placed building in the way, recalculate waypoints.
-                    if (world.TileArray[(int)NEXT_TARGET.X, (int)NEXT_TARGET.Y].Obstacle == true)
-                    {
-                        WaypointsGenerator.GenerateWaypoints(TilePosition, Waypoints.Last());
-                    }
                     world.TileArray[(int)NEXT_TARGET.X, (int)NEXT_TARGET.Y].OccupiedByUnit = false;
                     NEXT_TARGET = Waypoints.Dequeue();
                     world.TileArray[(int)NEXT_TARGET.X, (int)NEXT_TARGET.Y].OccupiedByUnit = true;
@@ -222,21 +215,18 @@ namespace RTS_Game
         #endregion
         public override void Update(GameTime gametime)
         {
-            // needs changing state code when moving/stopping moving.
-
             if (currentState == State.Stopped)
             {
                 //if we're full of ore..
                 if (oreAmount == maxOreAmount)
                 {
-                    //If we're stopped and at refinary, begin unloading.
-                    if (targetRef != null && tilePosition == targetRef.TilePosition)
+                    //If we're stopped and at refinery, begin unloading.
+                    if (targetRef != null && tilePosition == targetRef.GetCenterTile())
                     {
                         currentState = State.Unloading;
-                        UnloadOre();
                     }
 
-                    //otherwise, move to the refinary.
+                    //otherwise, move to the refinery.
                     else
                     {
                         currentState = State.Moving;
@@ -249,8 +239,24 @@ namespace RTS_Game
                 {
                     if (oreArray[(int)tilePosition.X, (int)tilePosition.Y].CurrentAmount != 0)
                     {
-                        Mine();
+                        if (timeSinceLast == 0)
+                        {
+                            Mine();
+                        }
+
+                        //If it's close enough to the time betwen drops, unload some ore and reset timer.
+                        if (timeSinceLast + gametime.ElapsedGameTime.Milliseconds > timeBetweenMines)
+                        {
+                            timeSinceLast = 0;
+                        }
+
+                        //otherwise, just update the timer.
+                        else
+                        {
+                            timeSinceLast += gametime.ElapsedGameTime.Milliseconds;
+                        }
                     }
+
                     else
                     {
                         currentState = State.Moving;
@@ -259,26 +265,27 @@ namespace RTS_Game
                 }
             }
 
-            //Unloading to Refinary code.
+            //Unloading to Refinery code.
             else if (currentState == State.Unloading)
             {
-                if (timeSinceUnload == 0)
+                if (timeSinceLast == 0)
                 {
                     UnloadOre();
                 }
 
                 //If it's close enough to the time betwen drops, unload some ore and reset timer.
-                if (timeSinceUnload + gametime.ElapsedGameTime.Seconds > timeBetweenUnloads)
+                if (timeSinceLast + gametime.ElapsedGameTime.Milliseconds > timeBetweenUnloads)
                 {
-                    timeSinceUnload = 0;
+                    timeSinceLast = 0;
                 }
 
                 //otherwise, just update the timer.
                 else
                 {
-                    timeSinceUnload += gametime.ElapsedGameTime.Seconds;
+                    timeSinceLast += gametime.ElapsedGameTime.Milliseconds;
                 }
             }
+
             base.Update(gametime);
         }
     }
