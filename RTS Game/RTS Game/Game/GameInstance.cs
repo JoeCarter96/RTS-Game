@@ -26,7 +26,7 @@ namespace RTS_Game
         private Player player;
         private Input input;
 
-        Ore[,] oreArray = new Ore[30, 30];   //TEMP so find nearest ore works. This will be in gameclass and be passed to all harvesters as they are made.
+        Ore[,] oreArray;   //TEMP so find nearest ore works. This will be passed to all harvesters as they are made.
         #endregion
 
         #region Function Explanation
@@ -54,23 +54,26 @@ namespace RTS_Game
             Unit test3 = new HeavyTank(new Vector2(6, 6), player, world);
             Unit test4 = new HeavyTank(new Vector2(6, 7), player, world);;
 
+            oreArray = new Ore[world.TileArray.GetLength(0), world.TileArray.GetLength(1)];
+
             for (int i = 0; i < oreArray.GetLength(0); i++)
             {
-                for (int j = 0; j < oreArray.GetLength(0); j++)
+                for (int j = 0; j < oreArray.GetLength(1); j++)
                 {
                     oreArray[i, j] = new Ore(new Vector2(i, j));
-                }
+                } 
             }
 
-            for (int i = 10; i < 20; i++)
+            for (int i = 10; i < 30; i++)
             {
-                for (int j = 10; j < 20; j++)
+                for (int j = 10; j < 110; j++)
                 {
                     oreArray[i, j].CurrentAmount = 100;
                 }
             }
 
-            Unit harv = new Harvester(new Vector2(1, 1), player, world, player.Entities, oreArray);
+            Unit harv = new Harvester(new Vector2(12, 12), player, world, player.Entities, oreArray);
+            Unit harv2 = new Harvester(new Vector2(1, 100), player, world, player.Entities, oreArray);
             Refinery refin = new Refinery(world, player, new Vector2(3, 1));
             Base myBase = new Base(world, player, new Vector2(24, 5));
 

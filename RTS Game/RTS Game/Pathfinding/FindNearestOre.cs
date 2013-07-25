@@ -34,6 +34,8 @@ namespace RTS_Game.Pathfinding
             world = worldArray;
             oreArray = OreArray;
             target = null;
+            toBeSearched = new List<Ore>();
+            alreadySearched = new List<Ore>();
 
             toBeSearched.Add(oreArray[(int)harvester.TilePosition.X, (int)harvester.TilePosition.Y]);
 
@@ -72,7 +74,7 @@ namespace RTS_Game.Pathfinding
         #endregion
         static public void Search(Ore tileToSearch)
         {
-            if (tileToSearch.CurrentAmount > 0)
+            if (tileToSearch.CurrentAmount > 0 && tileToSearch.BeingMined == false)
             {
                 target = tileToSearch;
             }

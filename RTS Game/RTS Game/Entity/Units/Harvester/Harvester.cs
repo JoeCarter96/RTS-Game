@@ -23,9 +23,9 @@ namespace RTS_Game
         State currentState = State.Stopped;
         Refinery targetRef = null;
         int timeSinceLast = 0;
-        const int timeBetweenUnloads = 1000;
+        const int timeBetweenUnloads = 250;
         const int timeBetweenMines = 750;
-        const int amountToUnload = 250;
+        const int amountToUnload = 25;
         Ore[,] oreArray;
         #endregion
 
@@ -55,7 +55,7 @@ namespace RTS_Game
             }
             else
             {
-                owner.Money += maxOreAmount - oreAmount;
+                owner.Money += oreAmount;
                 oreAmount = 0;
             }
 
@@ -109,6 +109,7 @@ namespace RTS_Game
         {
             Vector2 orePos = Pathfinding.FindClosestOre.BeginSearch(this, world.TileArray, oreArray);
             targetOre = oreArray[(int) orePos.X,(int) orePos.Y];
+            targetOre.BeingMined = true;    //No other harvesters can touch this ore.
 
             if (targetRef == null)
             {
@@ -142,12 +143,14 @@ namespace RTS_Game
                 {
                     oreAmount += tileToMine.CurrentAmount;
                     tileToMine.CurrentAmount = 0;
+                    targetOre.BeingMined = false;   //Allows other harvesters to mine the ore we were on.
                 }
             }
             else
             {
                 tileToMine.CurrentAmount -= (maxOreAmount - oreAmount);
                 oreAmount = maxOreAmount;
+                tileToMine.BeingMined = false;
             }
         }
 
@@ -242,6 +245,7 @@ namespace RTS_Game
                         if (timeSinceLast == 0)
                         {
                             Mine();
+                            targetOre = oreArray[(int)tilePosition.X, (int)tilePosition.Y];
                         }
 
                         //If it's close enough to the time betwen drops, unload some ore and reset timer.

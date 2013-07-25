@@ -11,6 +11,14 @@ namespace RTS_Game
         protected int MAX_AMOUNT = 1000;
         protected int currentAmount = 0;
         protected int DEPLETION_AMOUNT = 50;
+        protected bool beingMined = false;
+
+	public bool BeingMined
+	{
+		get { return beingMined;}
+		set { beingMined = value;}
+	}
+	
 
         public int DEPLETIONAMOUNT
         {

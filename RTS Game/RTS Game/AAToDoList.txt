@@ -44,15 +44,28 @@ Drawing efficiency***
 COMPLETED
 
 Initial Pathfinding System		Tom
+
 Intial GUI Component			Joe
+
 GUI Buttons						Joe
+
 Organise Resources Class		Tom
+
 Began Map Making stuff			Tom
+
 Created Ore Class				Tom
+
 Created Ore finding method.		Tom
+
 Created Refinery				Tom
+
 Added Money variable in player  Tom
-Completed Ore specific code in 
-refinery						Tom
-Completely finished Harvester	Tom
+
+Completed Ore specific code in	Tom
+refinery						
+
+Harvester now works				Tom
+
+Ore can now only be mined by	Tom
+one Harvester at once			
 
