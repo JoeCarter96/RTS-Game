@@ -223,9 +223,11 @@ namespace RTS_Game
                 //Set F to highest possible value so at least one direction will be chosen.
                 lowestF = int.MaxValue;
 
+                Rectangle modifiedRect = new Rectangle(ToTile(rectToIgnore.X) - 1, ToTile(rectToIgnore.Y) - 1, ToTile(rectToIgnore.Width) + 2,
+                    ToTile(rectToIgnore.Height) + 2);
+
                 //Normal Obstacle Avoidance.
-                if (!new Rectangle(ToTile(rectToIgnore.X) - 1, ToTile(rectToIgnore.X) - 1, ToTile(rectToIgnore.Width) + 1,
-                    ToTile(rectToIgnore.Height) + 1).Contains(new Point((int)parent.X, (int)parent.Y)))
+                if (!modifiedRect.Contains(new Point((int)parent.X, (int)parent.Y)))
                 {
                     # region Right
                     //If it's within bounds and not obstructed by a stationary thing,

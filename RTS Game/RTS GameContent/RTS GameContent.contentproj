@@ -30,13 +30,6 @@
     <Reference Include="Microsoft.Xna.Framework.Content.Pipeline.VideoImporters, Version=4.0.0.0, Culture=neutral, PublicKeyToken=842cf8be1de50553, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BackgroundTiles\Grass01.png">
-      <Name>Grass01</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="BackgroundTiles\Road01.png">
       <Name>Road01</Name>
       <Importer>TextureImporter</Importer>
@@ -144,22 +137,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BackgroundTiles\Grass02.png">
-      <Name>Grass02</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Units\HeavyTank.png">
       <Name>HeavyTank</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Buildings\customCY.png">
-      <Name>customCY</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
@@ -174,6 +153,28 @@
   <ItemGroup>
     <Compile Include="Buildings\Refinery.png">
       <Name>Refinery</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BackgroundTiles\Grass\Grass01.png">
+      <Name>Grass01</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="BackgroundTiles\Grass\Grass02.png">
+      <Name>Grass02</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="BackgroundTiles\Grass\Grass03.png">
+      <Name>Grass03</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="BackgroundTiles\Grass\Grass04.png">
+      <Name>Grass04</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

@@ -7,15 +7,15 @@ using Microsoft.Xna.Framework;
 
 namespace RTS_Game
 {
-    class Base : Building
+    class ConstructionYard : Building
     {
-        public Base(TileMap world, Player owner, Vector2 TilePosition)
+        public ConstructionYard(TileMap world, Player owner, Vector2 TilePosition)
             : base(world, owner, TilePosition, Resources.GetBuildingTextures("ConstructionYard"))
         {
             MaxHealth = 500;
 
-            Width = 4;
-            Height = 4;
+            Width = 3;
+            Height = 3;
             ApplySizeChanges();
         }
     }

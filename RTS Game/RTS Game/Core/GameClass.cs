@@ -19,7 +19,7 @@ namespace RTS_Game
         //Game constants
         public const int Game_Width = 800;
         public const int Game_Height = 600;
-        public const int Tile_Width = 20;
+        public const int Tile_Width = 24;
 
         //Game objects
         private GraphicsDeviceManager graphics;
@@ -68,20 +68,31 @@ namespace RTS_Game
             Texture2D DebugTile = Content.Load<Texture2D>("BackgroundTiles/DebugTile");
             DebugTile.Name = "DebugTile";
             Resources.AddBackgroundTexture(DebugTile);
+            
             //Ore
             Texture2D Ore = Content.Load<Texture2D>("BackgroundTiles/Ore");
             Ore.Name = "Ore";
             Resources.AddBackgroundTexture(Ore);
 
             //Grass01
-            Texture2D Grass01 = Content.Load<Texture2D>("BackgroundTiles/Grass01");
+            Texture2D Grass01 = Content.Load<Texture2D>("BackgroundTiles/Grass/Grass01");
             Grass01.Name = "Grass01";
             Resources.AddBackgroundTexture(Grass01);
 
             //Grass02
-            Texture2D Grass02 = Content.Load<Texture2D>("BackgroundTiles/Grass02");
+            Texture2D Grass02 = Content.Load<Texture2D>("BackgroundTiles/Grass/Grass02");
             Grass02.Name = "Grass02";
             Resources.AddBackgroundTexture(Grass02);
+
+            //Grass03
+            Texture2D Grass03 = Content.Load<Texture2D>("BackgroundTiles/Grass/Grass03");
+            Grass03.Name = "Grass03";
+            Resources.AddBackgroundTexture(Grass03);
+
+            //Grass04
+            Texture2D Grass04 = Content.Load<Texture2D>("BackgroundTiles/Grass/Grass04");
+            Grass04.Name = "Grass04";
+            Resources.AddBackgroundTexture(Grass04);
 
             //Road01
             Texture2D Road01 = Content.Load<Texture2D>("BackgroundTiles/Road01");

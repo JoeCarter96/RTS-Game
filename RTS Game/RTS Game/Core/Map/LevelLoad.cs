@@ -13,6 +13,8 @@ namespace RTS_Game
         #region Variables
         private static Texture2D[,] textureArray;
         private static Dictionary<Color, String> Colours = new Dictionary<Color, String>();
+        private static List<String> grass = new List<String>();
+        private static int count = 0;
         #endregion
 
         #region Function Explanation
@@ -21,8 +23,11 @@ namespace RTS_Game
         public static void AddColours()
         {
             Colours.Add(new Color(0, 0, 0), "DebugTile");
-            Colours.Add(new Color(0, 178, 0), "Grass01");
-            Colours.Add(new Color(0, 185, 0), "Grass02");
+            Colours.Add(new Color(0, 180, 0), "Grass01");
+            grass.Add("Grass01");
+            grass.Add("Grass02");
+            grass.Add("Grass03");
+            grass.Add("Grass04");
             Colours.Add(new Color(191, 191, 191), "Road01");
             Colours.Add(new Color(63, 72, 204), "Water01");
         }
@@ -62,7 +67,19 @@ namespace RTS_Game
                     //Tries to find texture in Resources dictionary, if it can't defaults to grass texture.
                     try
                     {
-                        textureArray[i, j] = Resources.GetBackgroundTextures(textureName);
+                        if (textureName == "Grass01")
+                        {
+                            if (count > 3)
+                                count = 0;
+
+                            textureArray[i, j] = Resources.GetBackgroundTextures(grass[count]);
+
+                            count++;
+                        }
+                        else
+                        {
+                            textureArray[i, j] = Resources.GetBackgroundTextures(textureName);
+                        }
                     }
                     catch
                     {

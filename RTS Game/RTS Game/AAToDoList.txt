@@ -1,4 +1,5 @@
 ﻿Please add to completed list when something is finished.
+
 UI
 	Components
 		Scroll bar
@@ -24,18 +25,16 @@ Resources
 	Refinery
 		standard building code
 	silos?
-		
-Buying Buildings/Reduction
-	
+Buying Buildings/Reduction of money
+No ore left handling code
+bug in ore finding: diagonal movement may solve?	
+
 Selection Code
 	Moving a Harvester.
 		Mine if moved to ore
 		Stop AI collection control if not
 
 Drawing efficiency***
-
-
-
 
 
 
@@ -69,3 +68,6 @@ Harvester now works				Tom
 Ore can now only be mined by	Tom
 one Harvester at once			
 
+Now using 24x24px sized tiles	Tom
+
+New Grass Graphics				Tom

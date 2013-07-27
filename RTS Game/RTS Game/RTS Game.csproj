@@ -74,13 +74,14 @@
   <ItemGroup>
     <Compile Include="Core\Map\Map.cs" />
     <Compile Include="Core\Map\MapInfo.cs" />
+    <Compile Include="Entity\Buildings\PowerPlant.cs" />
     <Compile Include="Entity\Buildings\Refinery.cs" />
     <Compile Include="Entity\Ore.cs" />
     <Compile Include="Entity\Units\Harvester\Harvester.cs" />
     <Compile Include="GameState\TestState.cs" />
     <Compile Include="GUI\Input.cs" />
     <Compile Include="Entity\Buildings\Building.cs" />
-    <Compile Include="Entity\Buildings\Base.cs" />
+    <Compile Include="Entity\Buildings\ConstructionYard.cs" />
     <Compile Include="Entity\Units\Bullet.cs" />
     <Compile Include="Entity\Progress Bar\HealthBar.cs" />
     <Compile Include="Entity\Units\HeavyTank\HeavyTank.cs" />

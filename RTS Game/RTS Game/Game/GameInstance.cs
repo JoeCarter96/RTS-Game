@@ -49,11 +49,6 @@ namespace RTS_Game
             camera.GiveTilemap(world);
 
             #region TEMP: Unit Testing.
-            Unit test = new HeavyTank(new Vector2(5, 6), player, world);
-            Unit test2 = new HeavyTank(new Vector2(5, 7), player, world);
-            Unit test3 = new HeavyTank(new Vector2(6, 6), player, world);
-            Unit test4 = new HeavyTank(new Vector2(6, 7), player, world);;
-
             oreArray = new Ore[world.TileArray.GetLength(0), world.TileArray.GetLength(1)];
 
             for (int i = 0; i < oreArray.GetLength(0); i++)
@@ -72,10 +67,17 @@ namespace RTS_Game
                 }
             }
 
-            Unit harv = new Harvester(new Vector2(12, 12), player, world, player.Entities, oreArray);
-            Unit harv2 = new Harvester(new Vector2(1, 100), player, world, player.Entities, oreArray);
-            Refinery refin = new Refinery(world, player, new Vector2(3, 1));
-            Base myBase = new Base(world, player, new Vector2(24, 5));
+            Unit HT1 = new HeavyTank(new Vector2(2, 6), player, world);
+            Unit HT2 = new HeavyTank(new Vector2(2, 7), player, world);
+            Unit HT3 = new HeavyTank(new Vector2(3, 6), player, world);
+            Unit HT4 = new HeavyTank(new Vector2(3, 7), player, world); ;
+
+            ConstructionYard CY = new ConstructionYard(world, player, new Vector2(2, 2));
+            PowerPlant PP1 = new PowerPlant(world, player, new Vector2(6, 3));
+            PowerPlant PP2 = new PowerPlant(world, player, new Vector2(8, 3));
+            Refinery REF = new Refinery(world, player, new Vector2(6, 6));
+            Harvester H1 = new Harvester(world, player, new Vector2(12, 12), player.Entities, oreArray);
+
 
 
             #endregion

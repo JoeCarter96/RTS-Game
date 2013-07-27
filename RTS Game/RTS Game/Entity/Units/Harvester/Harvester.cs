@@ -32,7 +32,7 @@ namespace RTS_Game
         #region Function Explanation
         //Constructor.
         #endregion
-        public Harvester(Vector2 tilePosition, Player owner, TileMap world, List<Entity> entityListForRef, Ore[,] oreArray) :
+        public Harvester(TileMap world, Player owner, Vector2 tilePosition, List<Entity> entityListForRef, Ore[,] oreArray) :
             base(world, owner, tilePosition, texture, maxHealth, maxSpeed, acceleration, 0, 0, 0)
         {
             this.entityListForRef = entityListForRef;

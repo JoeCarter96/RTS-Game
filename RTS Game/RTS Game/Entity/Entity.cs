@@ -84,7 +84,7 @@ namespace RTS_Game
             TilePosition = tilePosition;
             this.texture = texture;
 
-            //initially we assume that the size of thbe entity is its texture size.
+            //initially we assume that the size of the entity is its texture size.
             boundingBoxSize = new Size(texture);
         }
 
@@ -101,10 +101,8 @@ namespace RTS_Game
 
         public Vector2 GetCenterTile()
         {
-            Vector2 center = GetCenter();
-
-            return new Vector2((int)Math.Round((decimal)center.X / GameClass.Tile_Width),
-                    (int)Math.Round((decimal)center.Y / GameClass.Tile_Width));
+            //TEMP. Uses ToTile.
+            return new Vector2(ToTile(BoundingBox.Center.X), ToTile(BoundingBox.Center.Y));
         }
 
         #region Function Explanation
@@ -140,5 +138,10 @@ namespace RTS_Game
         {
             spriteBatch.Draw(texture, pixelPosition, null, color, rotation, origin, 1.0f, SpriteEffects.None, 0);
         }*/
+
+        public static int ToTile(int pixelPos)
+        {   //TEMP.
+            return (int)Math.Floor((decimal)pixelPos / GameClass.Tile_Width);
+        }
     }
 }
