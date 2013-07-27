@@ -38,7 +38,7 @@ namespace RTS_Game
         }
         #endregion
 
-        #region Variable: Oragin
+        #region Variable: Origin
         private Vector2 origin = Vector2.Zero;
         private Vector2 Origin
         {

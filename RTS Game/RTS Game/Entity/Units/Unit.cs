@@ -69,16 +69,12 @@ namespace RTS_Game
            float maxSpeed, float acceleration, float damage, float AOE, float ROF)
             : base(world, owner, tilePosition, texture, maxHealth)
         {
-            this.world = world;
-            this.TilePosition = tilePosition;
-            this.maxHealth = maxHealth;
             this.maxSpeed = maxSpeed;
             this.acceleration = acceleration;
             this.damage = damage;
             this.AOE = AOE;
             this.ROF = ROF;
             world.TileArray[(int) tilePosition.X, (int) tilePosition.Y].OccupiedByUnit = true;
-
         }
 
         #region Function Explanation
@@ -86,7 +82,7 @@ namespace RTS_Game
         #endregion
         public float DistanceToDestination
         {
-            get { return Vector2.Distance(PixelPosition, new Vector2(NEXT_TARGET.X * world.TileWidth, NEXT_TARGET.Y * world.TileWidth)); }
+            get { return Vector2.Distance(PixelPosition, new Vector2(NEXT_TARGET.X * World.TileWidth, NEXT_TARGET.Y * World.TileWidth)); }
         }
 
         #region Function Explanation
@@ -102,13 +98,13 @@ namespace RTS_Game
                 if (DistanceToDestination < maxSpeed)
                 {
                     //If there is a newly placed building in the way, recalculate waypoints.
-                    if (world.TileArray[(int)NEXT_TARGET.X, (int)NEXT_TARGET.Y].Obstacle == true)
+                    if (World.TileArray[(int)NEXT_TARGET.X, (int)NEXT_TARGET.Y].Obstacle == true)
                     {
                         WaypointsGenerator.GenerateWaypoints(TilePosition, Waypoints.Last());
                     }
-                        world.TileArray[(int)NEXT_TARGET.X, (int)NEXT_TARGET.Y].OccupiedByUnit = false;
+                        World.TileArray[(int)NEXT_TARGET.X, (int)NEXT_TARGET.Y].OccupiedByUnit = false;
                         NEXT_TARGET = Waypoints.Dequeue();
-                        world.TileArray[(int)NEXT_TARGET.X, (int)NEXT_TARGET.Y].OccupiedByUnit = true;
+                        World.TileArray[(int)NEXT_TARGET.X, (int)NEXT_TARGET.Y].OccupiedByUnit = true;
                 }
                 else
                 {
@@ -119,7 +115,7 @@ namespace RTS_Game
                         //Stops it going faster than it's max speed.
                         CURRENT_SPEED = Math.Min(maxSpeed, CURRENT_SPEED += acceleration);
                     }
-                    Vector2 direction = new Vector2(NEXT_TARGET.X * world.TileWidth, NEXT_TARGET.Y * world.TileWidth) - PixelPosition;
+                    Vector2 direction = new Vector2(NEXT_TARGET.X * World.TileWidth, NEXT_TARGET.Y * World.TileWidth) - PixelPosition;
                     direction.Normalize();
                     Velocity = Vector2.Multiply(direction, CURRENT_SPEED);
                     PixelPosition += Velocity;
@@ -130,7 +126,7 @@ namespace RTS_Game
                 if (DistanceToDestination < maxSpeed)
                 {
                     //Stops this.Move being called in GameInstance.Update
-                    owner.PlayerMovingEntities.Remove(this);
+                    Owner.PlayerMovingEntities.Remove(this);
                     CURRENT_SPEED = 0;
                 }
                 else    //if it's not on the tile, continue to move
@@ -142,7 +138,7 @@ namespace RTS_Game
                         //Stops it going faster than it's max speed.
                         CURRENT_SPEED = Math.Min(maxSpeed, CURRENT_SPEED += acceleration);
                     }
-                    Vector2 direction = new Vector2(NEXT_TARGET.X * world.TileWidth, NEXT_TARGET.Y * world.TileWidth) - PixelPosition;
+                    Vector2 direction = new Vector2(NEXT_TARGET.X * World.TileWidth, NEXT_TARGET.Y * World.TileWidth) - PixelPosition;
                     direction.Normalize();
                     Velocity = Vector2.Multiply(direction, CURRENT_SPEED);
                     PixelPosition += Velocity;

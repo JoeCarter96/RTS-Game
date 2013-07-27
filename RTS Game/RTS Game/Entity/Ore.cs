@@ -8,37 +8,37 @@ namespace RTS_Game
 {
     class Ore : Entity
     {
-        protected int MAX_AMOUNT = 1000;
+        public const int MaxOreAmount = 1000;
+
+        #region Variable: BeingMined
+        private bool beingMined = false;
+        public bool BeingMined
+        {
+            get { return beingMined; }
+            set { beingMined = value; }
+        }
+        #endregion
+        #region Variable: CurrentAmount
         protected int currentAmount = 0;
-        protected int DEPLETION_AMOUNT = 50;
-        protected bool beingMined = false;
-
-	public bool BeingMined
-	{
-		get { return beingMined;}
-		set { beingMined = value;}
-	}
-	
-
-        public int DEPLETIONAMOUNT
-        {
-            get { return DEPLETION_AMOUNT; }
-        }
-
-        public int MAXAMOUNT
-        {
-            get { return MAX_AMOUNT; }
-        }
-
         public int CurrentAmount
         {
             get { return currentAmount; }
             set { currentAmount = value; }
         }
+        #endregion
+        #region Variable: DepletionAmount
+        protected int depletionAmount = 50;
+
+        public int DepletionAmount
+        {
+            get { return depletionAmount; }
+        }
+        #endregion
 
         public Ore (Vector2 tilePosition) :
             base(tilePosition, Resources.GetBackgroundTextures("Ore"))
         {
+
         }
     } 
 }

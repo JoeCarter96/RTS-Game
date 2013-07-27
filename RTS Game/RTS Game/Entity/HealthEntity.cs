@@ -17,71 +17,104 @@ namespace RTS_Game
     #endregion
     class HealthEntity : Entity
     {
-        //Health variables to deturmine if the harvester is dead and also for the health bar
-        protected double maxHealth;
-        protected double health;
-
-        //Used to stop the harvester from being drawn and updated once it is dead
-        protected bool alive = true;
-
-        //Healthbar variables
-        //drawHealthBar will be replaced with a static variable in an options file
-        //when options are implemented
-        private bool drawHealthBar = true;
-        protected HealthBar healthBar;
-
-        //Game variables
-        protected TileMap world;
-        protected Player owner;
-
-        public bool Alive
+        #region Variable: Health
+        private double health;
+        public double Health
         {
-            get { return alive; }
+            get { return health; }
+            protected set 
+            { 
+                health = value;
+                if (health > MaxHealth)
+                {
+                    health = MaxHealth;
+                }
+            }
         }
-
-        public bool DrawHealthBar
-        {
-            get { return drawHealthBar; }
-            set { drawHealthBar = value; }
-        }
-
+        #endregion
+        #region Variable: MaxHealth
+        private double maxHealth;
         public double MaxHealth
         {
             get { return maxHealth; }
-            set { maxHealth = value; }
+            protected set { maxHealth = value; }
         }
+        #endregion
+
+        #region Variable: Alive
+        //A variable specifying if the entity should still be drawn and updated
+        private bool alive = true;
+        public bool Alive
+        {
+            get { return alive; }
+            protected set { alive = value; }
+        }
+        #endregion
+        #region Variable: DrawHealthBar
+        private bool drawHealthBar = true;
+        public bool DrawHealthBar
+        {
+            get { return drawHealthBar; }
+            private set { drawHealthBar = value; }
+        }
+        #endregion
+
+       /*#region Variable: HealthBar
+        private HealthBar healthBar = null;
+        public HealthBar HealthBar
+        {
+            get { return healthBar; }
+            protected set { healthBar = value; }
+        }
+        #endregion*/
+
+        #region Variable: World
+        private TileMap world;
+        protected TileMap World
+        {
+            get { return world; }
+            private set { world = value; }
+        }
+        #endregion
+        #region Variable: Owner
+        private Player owner;
+        protected Player Owner
+        {
+            get { return owner; }
+            private set { owner = value; }
+        }
+        #endregion
 
         //Assuming the harvester is spawned with full health
         public HealthEntity(TileMap world, Player owner, Vector2 tilePosition, Texture2D texture, double maxHealth)
             : base(tilePosition, texture)
         {
-            this.owner = owner;
-            this.world = world;
-            this.maxHealth = maxHealth;
-            health = maxHealth;
-            healthBar = new HealthBar(this, new Rectangle((int)PixelPosition.X, (int)PixelPosition.Y, GameClass.Tile_Width, GameClass.Tile_Width));
+            Owner = owner;
+            World = world;
+            MaxHealth = maxHealth;
+            Health = maxHealth;
+            //healthBar = new HealthBar(this, new Rectangle((int)PixelPosition.X, (int)PixelPosition.Y, GameClass.Tile_Width, GameClass.Tile_Width));
             
             owner.Entities.Add(this);
         }
 
         //Allows for a different start health
-        public HealthEntity(TileMap world, Player owner, Vector2 tilePosition, Texture2D texture, double maxHealth, double startHealth)
+        /*public HealthEntity(TileMap world, Player owner, Vector2 tilePosition, Texture2D texture, double maxHealth, double startHealth)
             : base(tilePosition, texture)
         {
+            /*this.health = startHealth;
+            
             this.owner = owner;
             this.world = world;
             this.maxHealth = maxHealth;
-            this.health = startHealth;
+            
 
             owner.Entities.Add(this);
 
             
             healthBar = new HealthBar(this, new Rectangle((int)PixelPosition.X, (int)PixelPosition.Y, GameClass.Tile_Width, GameClass.Tile_Width));
-
-            //Stops the health going over its maximum
-            if (startHealth > maxHealth)
-                health = maxHealth;
-        }
+            
+        }*/
 
         public void Kill()
         {
@@ -92,11 +125,11 @@ namespace RTS_Game
         //Note: we pass the entity which did the damage so that we can log it for end game statistics
         public void Damage(HealthEntity damager, double damage)
         {
-            health -= damage;
+            Health -= damage;
 
-            if (health <= 0)
+            if (Health <= 0)
             {
-                alive = false;
+                Alive = false;
                 OnDeath(damager);
             }
         }
@@ -110,33 +143,29 @@ namespace RTS_Game
         //For use by the health bar class
         public double GetHealthPercentage()
         {
-            return health / maxHealth;
+            return Health / MaxHealth;
         }
 
 
         //NOTE: we only want to update and draw when the health entity is alive
-        //THis means we dont need to 
+        //This means we dont need to 
         public override void Update(GameTime gameTime)
         {
-            if (alive)
+            if (DrawHealthBar)
             {
-                if (drawHealthBar)
-                {
-                    healthBar.Update(gameTime);
-                }
-                base.Update(gameTime);
+                //healthBar.Update(gameTime);
             }
+
+            base.Update(gameTime);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            if (alive)
+            base.Draw(spriteBatch);
+
+            if (drawHealthBar)
             {
-                base.Draw(spriteBatch);
-                if (drawHealthBar)
-                {
-                    healthBar.Draw(spriteBatch);
-                }
+                //healthBar.Draw(spriteBatch);
             }
         }
     }

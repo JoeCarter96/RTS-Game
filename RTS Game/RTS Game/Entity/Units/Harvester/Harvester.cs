@@ -51,11 +51,11 @@ namespace RTS_Game
             if (oreAmount > amountToUnload)
             {
                 oreAmount -= amountToUnload;
-                owner.Money += amountToUnload;
+                Owner.Money += amountToUnload;
             }
             else
             {
-                owner.Money += oreAmount;
+                Owner.Money += oreAmount;
                 oreAmount = 0;
             }
 
@@ -95,7 +95,7 @@ namespace RTS_Game
             if (bestChoice != null)
             {
                 this.Waypoints = WaypointsGenerator.GenerateWaypoints(this.TilePosition, bestChoice.GetCenterTile(), bestChoice.BoundingBox);
-                owner.PlayerMovingEntities.Add(this);
+                Owner.PlayerMovingEntities.Add(this);
                 NextTarget = Waypoints.Dequeue();
                 targetRef = bestChoice;
             }
@@ -107,7 +107,7 @@ namespace RTS_Game
         #endregion
         public void MoveToOre()
         {
-            Vector2 orePos = Pathfinding.FindClosestOre.BeginSearch(this, world.TileArray, oreArray);
+            Vector2 orePos = Pathfinding.FindClosestOre.BeginSearch(this, World.TileArray, oreArray);
             targetOre = oreArray[(int) orePos.X,(int) orePos.Y];
             targetOre.BeingMined = true;    //No other harvesters can touch this ore.
 
@@ -121,7 +121,7 @@ namespace RTS_Game
                 Waypoints = WaypointsGenerator.GenerateWaypoints(TilePosition, orePos, targetRef.BoundingBox);
             }
 
-            owner.PlayerMovingEntities.Add(this);
+            Owner.PlayerMovingEntities.Add(this);
             NextTarget = Waypoints.Dequeue();
         }
 
@@ -134,10 +134,10 @@ namespace RTS_Game
 
             if (maxOreAmount - oreAmount > tileToMine.CurrentAmount)
             {
-                if (tileToMine.CurrentAmount > tileToMine.DEPLETIONAMOUNT)
+                if (tileToMine.CurrentAmount > tileToMine.DepletionAmount)
                 {
-                    oreAmount += tileToMine.DEPLETIONAMOUNT;
-                    tileToMine.CurrentAmount -= tileToMine.DEPLETIONAMOUNT;
+                    oreAmount += tileToMine.DepletionAmount;
+                    tileToMine.CurrentAmount -= tileToMine.DepletionAmount;
                 }
                 else
                 {
@@ -166,9 +166,9 @@ namespace RTS_Game
             {
                 if (DistanceToDestination < maxSpeed)
                 {
-                    world.TileArray[(int)NEXT_TARGET.X, (int)NEXT_TARGET.Y].OccupiedByUnit = false;
+                    World.TileArray[(int)NEXT_TARGET.X, (int)NEXT_TARGET.Y].OccupiedByUnit = false;
                     NEXT_TARGET = Waypoints.Dequeue();
-                    world.TileArray[(int)NEXT_TARGET.X, (int)NEXT_TARGET.Y].OccupiedByUnit = true;
+                    World.TileArray[(int)NEXT_TARGET.X, (int)NEXT_TARGET.Y].OccupiedByUnit = true;
                 }
                 else
                 {
@@ -179,7 +179,7 @@ namespace RTS_Game
                         //Stops it going faster than it's max speed.
                         CURRENT_SPEED = Math.Min(maxSpeed, CURRENT_SPEED += acceleration);
                     }
-                    Vector2 direction = new Vector2(NEXT_TARGET.X * world.TileWidth, NEXT_TARGET.Y * world.TileWidth) - PixelPosition;
+                    Vector2 direction = new Vector2(NEXT_TARGET.X * World.TileWidth, NEXT_TARGET.Y * World.TileWidth) - PixelPosition;
                     direction.Normalize();
                     Velocity = Vector2.Multiply(direction, CURRENT_SPEED);
                     PixelPosition += Velocity;
@@ -191,7 +191,7 @@ namespace RTS_Game
                 if (DistanceToDestination < maxSpeed)
                 {
                     //Stops this.Move being called in GameInstance.Update
-                    owner.PlayerMovingEntities.Remove(this);
+                    Owner.PlayerMovingEntities.Remove(this);
                     CURRENT_SPEED = 0;
                     currentState = State.Stopped;
                 }
@@ -204,7 +204,7 @@ namespace RTS_Game
                         //Stops it going faster than it's max speed.
                         CURRENT_SPEED = Math.Min(maxSpeed, CURRENT_SPEED += acceleration);
                     }
-                    Vector2 direction = new Vector2(NEXT_TARGET.X * world.TileWidth, NEXT_TARGET.Y * world.TileWidth) - PixelPosition;
+                    Vector2 direction = new Vector2(NEXT_TARGET.X * World.TileWidth, NEXT_TARGET.Y * World.TileWidth) - PixelPosition;
                     direction.Normalize();
                     Velocity = Vector2.Multiply(direction, CURRENT_SPEED);
                     PixelPosition += Velocity;

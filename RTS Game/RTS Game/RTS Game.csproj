@@ -72,8 +72,6 @@
     <Reference Include="System.Net" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Core\Map\Map.cs" />
-    <Compile Include="Core\Map\MapInfo.cs" />
     <Compile Include="Entity\Buildings\PowerPlant.cs" />
     <Compile Include="Entity\Buildings\Refinery.cs" />
     <Compile Include="Entity\Ore.cs" />
@@ -83,7 +81,7 @@
     <Compile Include="Entity\Buildings\Building.cs" />
     <Compile Include="Entity\Buildings\ConstructionYard.cs" />
     <Compile Include="Entity\Units\Bullet.cs" />
-    <Compile Include="Entity\Progress Bar\HealthBar.cs" />
+    <Compile Include="Entity\Progress Bar\oldHealthBar.cs" />
     <Compile Include="Entity\Units\HeavyTank\HeavyTank.cs" />
     <Compile Include="Game\Player.cs" />
     <Compile Include="GUI\Button.cs" />
@@ -106,8 +104,8 @@
     <Compile Include="Entity\Units\Unit.cs" />
     <Compile Include="Game\GameInstance.cs" />
     <Compile Include="GUI\MouseButton.cs" />
-    <Compile Include="Core\Map\Level.cs" />
-    <Compile Include="Core\Map\LevelLoad.cs" />
+    <Compile Include="Map\Level.cs" />
+    <Compile Include="Map\LevelLoad.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Core\Program.cs" />
     <Compile Include="Core\GameClass.cs" />

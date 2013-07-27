@@ -70,7 +70,7 @@ namespace RTS_Game
             {
                 for (int y = 0; y < height; y++)
                 {
-                    OccupiedTiles[x, y] = world.GetTile(x + (int)TilePosition.X, y + (int)TilePosition.Y);
+                    OccupiedTiles[x, y] = World.GetTile(x + (int)TilePosition.X, y + (int)TilePosition.Y);
                 }
             }
 
@@ -78,7 +78,7 @@ namespace RTS_Game
             boundingBox = new Rectangle((int)TilePosition.X, (int)TilePosition.Y, GameClass.Tile_Width * width, GameClass.Tile_Width * height);
 
             //Recreate health bar
-            healthBar = new HealthBar(this, boundingBox);
+            //healthBar = new HealthBar(this, boundingBox);
 
             //update all the new Obstacle tiles 
             if (OccupiedTiles[0, 0] != null)
