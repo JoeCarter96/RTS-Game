@@ -10,70 +10,109 @@ namespace RTS_Game
 {
     public class Entity
     {
-        #region Variables
-        protected Texture2D texture;
-        protected float rotation = 0f;
-        protected Vector2 origin = Vector2.Zero;
-        protected Vector2 velocity = Vector2.Zero;
+        #region Variable: Texture
+        private Texture2D texture;
+        public Texture2D Texture
+        {
+            get { return texture; }
+            protected set
+            {
+                texture = value;
+                BoundingBoxSize = new Size(texture);
 
-        //Positioning variables
-        protected Vector2 pixelPosition;
-        protected Vector2 tilePosition;
-
-        //Bounding box variables
-        private Size boundingBoxSize;
-
+            }
+        }
         #endregion
-
-        public Vector2 PixelPosition
-        {
-            get { return pixelPosition; }
-            set { 
-                pixelPosition = value;
-                tilePosition = new Vector2((int)Math.Round((decimal)value.X / GameClass.Tile_Width),
-                    (int)Math.Round((decimal)value.Y / GameClass.Tile_Width));
-
-            }
-        }
-
-        public Vector2 TilePosition
-        {
-            get { return tilePosition; }
-            set { 
-                tilePosition = value;
-                pixelPosition = value * GameClass.Tile_Width;
-            }
-        }
-
+        #region Variable: Rotation
+        private float rotation = 0f;
         public float Rotation
         {
             get { return rotation; }
-            set
+            protected set
             {
-                origin = new Vector2(texture.Width / 2, texture.Height / 2);
+                //NOTE: this might not work, it is untested
+                origin = new Vector2(Texture.Width / 2, Texture.Height / 2);
                 rotation = value;
                 origin = Vector2.Zero;
             }
         }
+        #endregion
 
-        public Texture2D Texture
+        #region Variable: Oragin
+        private Vector2 origin = Vector2.Zero;
+        private Vector2 Origin
         {
-            get { return texture; }
-            set { texture = value; }
+            get { return origin; }
+            set { origin = value; }
         }
+        #endregion
+        #region Variable: Velocity
+        protected Vector2 velocity = Vector2.Zero;
+        public Vector2 Velocity
+        {
+            get { return velocity; }
+            protected set { velocity = value; }
+        }
+        #endregion
 
+        #region Variable: PixelPosition
+        private Vector2 pixelPosition;
+        public Vector2 PixelPosition
+        {
+            get { return pixelPosition; }
+            protected set
+            {
+                pixelPosition = value;
+
+                double newX = (int)Math.Round((decimal)pixelPosition.X / GameClass.Tile_Width);
+                double newY = (int)Math.Round((decimal)pixelPosition.Y / GameClass.Tile_Width);
+
+                tilePosition = new Vector2((float)newX, (float)newY);
+            }
+        }
+        #endregion
+        #region Variable: TilePosition
+        private Vector2 tilePosition;
+        public Vector2 TilePosition
+        {
+            get { return tilePosition; }
+            protected set
+            {
+                tilePosition = value;
+                PixelPosition = value * GameClass.Tile_Width;
+            }
+        }
+        #endregion
+
+        #region Variable: BoundingBox
         public Rectangle BoundingBox
         {
-            //Converts the size into a boundingbox, based on the position of the entity
-            //See Size.cs for more info
-            get { return boundingBoxSize.CreateRectangle(pixelPosition); }
+            get { return boundingBoxSize.CreateRectangle(PixelPosition); }
         }
-
-        protected Size BoundingBoxSize
+        #endregion
+        #region Variable: BoundingBoxSize
+        private Size boundingBoxSize;
+        private Size BoundingBoxSize
         {
-            set { boundingBoxSize = value; }
             get { return boundingBoxSize; }
+            set { boundingBoxSize = value; }
         }
+        #endregion
+        #region Variable: BoundingBoxWidth
+        public int BoundingBoxWidth
+        {
+            get { return BoundingBoxSize.Width; }
+            set { BoundingBoxSize.Width = value; }
+        }
+        #endregion
+        #region Variable: BoundingBoxHeight
+        public int BoundingBoxHeight
+        {
+            get { return boundingBoxSize.Height; }
+            protected set { BoundingBoxSize.Height = value; }
+        }
+        #endregion
+
 
         #region Function Explanation
         //Constructor.
@@ -82,10 +121,7 @@ namespace RTS_Game
         {
             //we assign it to the property to also have it calculate the pixel position
             TilePosition = tilePosition;
-            this.texture = texture;
-
-            //initially we assume that the size of the entity is its texture size.
-            boundingBoxSize = new Size(texture);
+            Texture = texture;
         }
 
         #region Function Explanation
@@ -93,8 +129,8 @@ namespace RTS_Game
         #endregion
         public Vector2 GetCenter()
         {
-            float x = pixelPosition.X + (texture.Width / 2);
-            float y = pixelPosition.Y + (texture.Height / 2);
+            float x = PixelPosition.X + (Texture.Width / 2);
+            float y = PixelPosition.Y + (Texture.Height / 2);
 
             return new Vector2(x, y);
         }
@@ -103,6 +139,11 @@ namespace RTS_Game
         {
             //TEMP. Uses ToTile.
             return new Vector2(ToTile(BoundingBox.Center.X), ToTile(BoundingBox.Center.Y));
+        }
+
+        public static int ToTile(int pixelPos)
+        {
+            return (int)Math.Floor((decimal)pixelPos / GameClass.Tile_Width);
         }
 
         #region Function Explanation
@@ -116,32 +157,17 @@ namespace RTS_Game
         #region Function Explanation
         //Draws the Texture without Colour tint.
         #endregion
-        //New draw method uses bounding box to stretch the sprite to fit it
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, BoundingBox, null, Color.White, rotation, origin, SpriteEffects.None, 0);
+            spriteBatch.Draw(Texture, BoundingBox, null, Color.White, rotation, origin, SpriteEffects.None, 0);
         }
-        /*public virtual void Draw(SpriteBatch spriteBatch)
-        {
-            spriteBatch.Draw(texture, pixelPosition, null, Color.White, rotation, origin, 1.0f, SpriteEffects.None, 0);
-        }*/
 
         #region Function Explanation
         //Draws the Texture with Color tint.
         #endregion
-        //New draw method uses bounding box to stretch the sprite to fit it, with a specified color tint
         public virtual void Draw(SpriteBatch spriteBatch, Color color)
         {
-            spriteBatch.Draw(texture, BoundingBox, null, color, rotation, origin, SpriteEffects.None, 0);
-        }
-        /*public virtual void Draw(SpriteBatch spriteBatch, Color color)
-        {
-            spriteBatch.Draw(texture, pixelPosition, null, color, rotation, origin, 1.0f, SpriteEffects.None, 0);
-        }*/
-
-        public static int ToTile(int pixelPos)
-        {   //TEMP.
-            return (int)Math.Floor((decimal)pixelPos / GameClass.Tile_Width);
+            spriteBatch.Draw(Texture, BoundingBox, null, color, rotation, origin, SpriteEffects.None, 0);
         }
     }
 }

@@ -86,7 +86,7 @@ namespace RTS_Game
         #endregion
         public float DistanceToDestination
         {
-            get { return Vector2.Distance(pixelPosition, new Vector2(NEXT_TARGET.X * world.TileWidth, NEXT_TARGET.Y * world.TileWidth)); }
+            get { return Vector2.Distance(PixelPosition, new Vector2(NEXT_TARGET.X * world.TileWidth, NEXT_TARGET.Y * world.TileWidth)); }
         }
 
         #region Function Explanation
@@ -119,10 +119,10 @@ namespace RTS_Game
                         //Stops it going faster than it's max speed.
                         CURRENT_SPEED = Math.Min(maxSpeed, CURRENT_SPEED += acceleration);
                     }
-                    Vector2 direction = new Vector2(NEXT_TARGET.X * world.TileWidth, NEXT_TARGET.Y * world.TileWidth) - pixelPosition;
+                    Vector2 direction = new Vector2(NEXT_TARGET.X * world.TileWidth, NEXT_TARGET.Y * world.TileWidth) - PixelPosition;
                     direction.Normalize();
-                    velocity = Vector2.Multiply(direction, CURRENT_SPEED);
-                    PixelPosition += velocity;
+                    Velocity = Vector2.Multiply(direction, CURRENT_SPEED);
+                    PixelPosition += Velocity;
                 }
             }
             else    //When the harvester has no more waypoints
@@ -142,10 +142,10 @@ namespace RTS_Game
                         //Stops it going faster than it's max speed.
                         CURRENT_SPEED = Math.Min(maxSpeed, CURRENT_SPEED += acceleration);
                     }
-                    Vector2 direction = new Vector2(NEXT_TARGET.X * world.TileWidth, NEXT_TARGET.Y * world.TileWidth) - pixelPosition;
+                    Vector2 direction = new Vector2(NEXT_TARGET.X * world.TileWidth, NEXT_TARGET.Y * world.TileWidth) - PixelPosition;
                     direction.Normalize();
-                    velocity = Vector2.Multiply(direction, CURRENT_SPEED);
-                    PixelPosition += velocity;
+                    Velocity = Vector2.Multiply(direction, CURRENT_SPEED);
+                    PixelPosition += Velocity;
                 }
             }
 }

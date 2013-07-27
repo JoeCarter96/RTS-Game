@@ -22,10 +22,10 @@ namespace RTS_Game
             float rotation) : base(new Vector2(0, 0), bulletTexture)
         {
             PixelPosition = pixelPosition;
-            base.texture = texture;
+            base.Texture = Texture;
             this.speed = speed;
             this.damage = damage;
-            this.rotation = rotation;
+            this.Rotation = rotation;
 
         }
 
@@ -34,7 +34,7 @@ namespace RTS_Game
         #endregion
         public void update(GameTime gameTime)
         {
-            pixelPosition += velocity;
+            PixelPosition += Velocity;
 
             base.Update(gameTime);
         }

@@ -78,8 +78,8 @@ namespace RTS_Game
             //parsing units in the entity list.
             foreach (Refinery r in entityListForRef.OfType<Refinery>())
             {
-                double diff = (r.TilePosition.X - tilePosition.X) *
-                    (r.TilePosition.X - tilePosition.X);
+                double diff = (r.TilePosition.X - TilePosition.X) *
+                    (r.TilePosition.X - TilePosition.X);
 
                 double solution = diff * (r.NumberOfHarvesters
                     / r.HarvesterLimit);
@@ -94,7 +94,7 @@ namespace RTS_Game
             //If there is a refinery chosen, move to it.
             if (bestChoice != null)
             {
-                this.Waypoints = WaypointsGenerator.GenerateWaypoints(this.tilePosition, bestChoice.GetCenterTile(), bestChoice.BoundingBox);
+                this.Waypoints = WaypointsGenerator.GenerateWaypoints(this.TilePosition, bestChoice.GetCenterTile(), bestChoice.BoundingBox);
                 owner.PlayerMovingEntities.Add(this);
                 NextTarget = Waypoints.Dequeue();
                 targetRef = bestChoice;
@@ -113,12 +113,12 @@ namespace RTS_Game
 
             if (targetRef == null)
             {
-                Waypoints = WaypointsGenerator.GenerateWaypoints(tilePosition, orePos);
+                Waypoints = WaypointsGenerator.GenerateWaypoints(TilePosition, orePos);
             }
             //Ignore the obstacles of the refinery, for when we move from it after unloading.
             else
             {
-                Waypoints = WaypointsGenerator.GenerateWaypoints(tilePosition, orePos, targetRef.BoundingBox);
+                Waypoints = WaypointsGenerator.GenerateWaypoints(TilePosition, orePos, targetRef.BoundingBox);
             }
 
             owner.PlayerMovingEntities.Add(this);
@@ -130,7 +130,7 @@ namespace RTS_Game
         #endregion
         public void Mine()
         {
-            Ore tileToMine = oreArray[(int)tilePosition.X, (int)tilePosition.Y];
+            Ore tileToMine = oreArray[(int)TilePosition.X, (int)TilePosition.Y];
 
             if (maxOreAmount - oreAmount > tileToMine.CurrentAmount)
             {
@@ -179,10 +179,10 @@ namespace RTS_Game
                         //Stops it going faster than it's max speed.
                         CURRENT_SPEED = Math.Min(maxSpeed, CURRENT_SPEED += acceleration);
                     }
-                    Vector2 direction = new Vector2(NEXT_TARGET.X * world.TileWidth, NEXT_TARGET.Y * world.TileWidth) - pixelPosition;
+                    Vector2 direction = new Vector2(NEXT_TARGET.X * world.TileWidth, NEXT_TARGET.Y * world.TileWidth) - PixelPosition;
                     direction.Normalize();
-                    velocity = Vector2.Multiply(direction, CURRENT_SPEED);
-                    PixelPosition += velocity;
+                    Velocity = Vector2.Multiply(direction, CURRENT_SPEED);
+                    PixelPosition += Velocity;
                 }
             }
 
@@ -204,10 +204,10 @@ namespace RTS_Game
                         //Stops it going faster than it's max speed.
                         CURRENT_SPEED = Math.Min(maxSpeed, CURRENT_SPEED += acceleration);
                     }
-                    Vector2 direction = new Vector2(NEXT_TARGET.X * world.TileWidth, NEXT_TARGET.Y * world.TileWidth) - pixelPosition;
+                    Vector2 direction = new Vector2(NEXT_TARGET.X * world.TileWidth, NEXT_TARGET.Y * world.TileWidth) - PixelPosition;
                     direction.Normalize();
-                    velocity = Vector2.Multiply(direction, CURRENT_SPEED);
-                    PixelPosition += velocity;
+                    Velocity = Vector2.Multiply(direction, CURRENT_SPEED);
+                    PixelPosition += Velocity;
                 }
             }
         }
@@ -224,7 +224,7 @@ namespace RTS_Game
                 if (oreAmount == maxOreAmount)
                 {
                     //If we're stopped and at refinery, begin unloading.
-                    if (targetRef != null && tilePosition == targetRef.GetCenterTile())
+                    if (targetRef != null && TilePosition == targetRef.GetCenterTile())
                     {
                         currentState = State.Unloading;
                     }
@@ -240,12 +240,12 @@ namespace RTS_Game
                 //If we're not stopped and not full, mine or find ore to mine.
                 else
                 {
-                    if (oreArray[(int)tilePosition.X, (int)tilePosition.Y].CurrentAmount != 0)
+                    if (oreArray[(int)TilePosition.X, (int)TilePosition.Y].CurrentAmount != 0)
                     {
                         if (timeSinceLast == 0)
                         {
                             Mine();
-                            targetOre = oreArray[(int)tilePosition.X, (int)tilePosition.Y];
+                            targetOre = oreArray[(int)TilePosition.X, (int)TilePosition.Y];
                         }
 
                         //If it's close enough to the time betwen drops, unload some ore and reset timer.

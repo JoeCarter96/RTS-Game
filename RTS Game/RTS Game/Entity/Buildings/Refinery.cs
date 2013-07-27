@@ -28,7 +28,6 @@ namespace RTS_Game
             : base(world, owner, TilePosition, Resources.GetBuildingTextures("Refinery"))
         {
             MaxHealth = 500;
-
             Width = 3;
             Height = 3;
             ApplySizeChanges();

@@ -52,11 +52,11 @@ namespace RTS_Game
 
             //DestinationBack logic
             int width = boundingBox.Width;
-            DestinationBack = new Rectangle((int)position.X, (int)position.Y, width, texture.Height);
+            DestinationBack = new Rectangle((int)position.X, (int)position.Y, width, Texture.Height);
             
             //DestinationFront logic
             width = (int)(boundingBox.Width * target.GetHealthPercentage());
-            DestinationFront = new Rectangle((int)position.X, (int)position.Y, width, texture.Height);
+            DestinationFront = new Rectangle((int)position.X, (int)position.Y, width, Texture.Height);
         }
 
         #region Function Explanation
@@ -65,10 +65,10 @@ namespace RTS_Game
         public override void Draw(SpriteBatch spriteBatch)
         {
             //draw the background
-            spriteBatch.Draw(texture, DestinationBack, Color.Red);
+            spriteBatch.Draw(Texture, DestinationBack, Color.Red);
 
             //draw the foreground
-            spriteBatch.Draw(texture, DestinationFront, Color.Green);
+            spriteBatch.Draw(Texture, DestinationFront, Color.Green);
         }
     }
 }

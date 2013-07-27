@@ -59,7 +59,8 @@ namespace RTS_Game
             this.world = world;
             this.maxHealth = maxHealth;
             health = maxHealth;
-            healthBar = new HealthBar(this, new Rectangle((int)PixelPosition.X, (int)pixelPosition.Y, GameClass.Tile_Width, GameClass.Tile_Width));
+            healthBar = new HealthBar(this, new Rectangle((int)PixelPosition.X, (int)PixelPosition.Y, GameClass.Tile_Width, GameClass.Tile_Width));
+            
             owner.Entities.Add(this);
         }
 
@@ -75,7 +76,7 @@ namespace RTS_Game
             owner.Entities.Add(this);
 
             
-            healthBar = new HealthBar(this, new Rectangle((int)PixelPosition.X, (int)pixelPosition.Y, GameClass.Tile_Width, GameClass.Tile_Width));
+            healthBar = new HealthBar(this, new Rectangle((int)PixelPosition.X, (int)PixelPosition.Y, GameClass.Tile_Width, GameClass.Tile_Width));
 
             //Stops the health going over its maximum
             if (startHealth > maxHealth)

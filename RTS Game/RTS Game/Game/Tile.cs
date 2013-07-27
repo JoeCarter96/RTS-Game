@@ -33,15 +33,15 @@ namespace RTS_Game
 
         public Rectangle Rectangle
         {
-            get { return new Rectangle((int)pixelPosition.X, (int)pixelPosition.Y, GameClass.Tile_Width, GameClass.Tile_Width); }
+            get { return new Rectangle((int)PixelPosition.X, (int)PixelPosition.Y, GameClass.Tile_Width, GameClass.Tile_Width); }
         }
 
         public Tile(Vector2 tilePosition, Vector2 index, Texture2D texture)
             : base(tilePosition, texture)
         {
             this.index = index;
-            this.tilePosition = tilePosition;
-            this.pixelPosition = tilePosition * GameClass.Tile_Width;
+            this.TilePosition = tilePosition;
+            this.PixelPosition = tilePosition * GameClass.Tile_Width;
         }
     }
 }
