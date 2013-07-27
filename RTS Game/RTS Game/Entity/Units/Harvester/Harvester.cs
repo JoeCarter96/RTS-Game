@@ -10,12 +10,12 @@ namespace RTS_Game
     class Harvester : Unit
     {
         #region Variables
-        static float maxHealth = 100;
-        static Texture2D texture = Resources.GetUnitTextures("Harvester");
-        static float maxSpeed = 1.5f;
-        static float acceleration = 0.2f;
+        private static float maxHealth = 100;
+        private static Texture2D texture = Resources.GetUnitTextures("Harvester");
+        private static float maxSpeed = 1.5f;
+        private static float acceleration = 0.2f;
 
-        static int oreAmount = 0;
+        private int oreAmount = 0;
         const int maxOreAmount = 500;
         List<Entity> entityListForRef;
         protected Ore targetOre;
