@@ -15,6 +15,7 @@ namespace RTS_Game
         private static Dictionary<Color, String> Colours = new Dictionary<Color, String>();
         private static List<String> grass = new List<String>();
         private static int count = 0;
+        static Random rand = new Random();
         #endregion
 
         #region Function Explanation
@@ -69,12 +70,10 @@ namespace RTS_Game
                     {
                         if (textureName == "Grass01")
                         {
-                            if (count > 3)
-                                count = 0;
 
                             textureArray[i, j] = Resources.GetBackgroundTextures(grass[count]);
 
-                            count++;
+                            count = rand.Next(0, 3);
                         }
                         else
                         {
