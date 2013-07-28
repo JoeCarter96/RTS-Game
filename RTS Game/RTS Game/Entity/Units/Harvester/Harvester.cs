@@ -183,6 +183,7 @@ namespace RTS_Game
                     direction.Normalize();
                     Velocity = Vector2.Multiply(direction, CURRENT_SPEED);
                     PixelPosition += Velocity;
+                    Rotation = toAngle(direction);
                 }
             }
 
@@ -208,6 +209,7 @@ namespace RTS_Game
                     direction.Normalize();
                     Velocity = Vector2.Multiply(direction, CURRENT_SPEED);
                     PixelPosition += Velocity;
+                    Rotation = toAngle(direction);
                 }
             }
         }

@@ -119,9 +119,10 @@ namespace RTS_Game
                     direction.Normalize();
                     Velocity = Vector2.Multiply(direction, CURRENT_SPEED);
                     PixelPosition += Velocity;
+                    Rotation = toAngle(direction);
                 }
             }
-            else    //When the harvester has no more waypoints
+            else    //When the Unit has no more waypoints
             {
                 if (DistanceToDestination < maxSpeed)
                 {
@@ -129,7 +130,7 @@ namespace RTS_Game
                     Owner.PlayerMovingEntities.Remove(this);
                     CURRENT_SPEED = 0;
                 }
-                else    //if it's not on the tile, continue to move
+                else    //if it's not on the final tile, continue to move
                 {
                     //Accellerating.
                     if (CURRENT_SPEED < maxSpeed)
@@ -142,9 +143,21 @@ namespace RTS_Game
                     direction.Normalize();
                     Velocity = Vector2.Multiply(direction, CURRENT_SPEED);
                     PixelPosition += Velocity;
+                    Rotation = toAngle(direction);
                 }
             }
 }
+
+        #region Function Explanation
+        //Converts a Vector2 to an angle.
+        #endregion
+        public float toAngle(Vector2 vector)
+        {
+            //Find Angle using Trig (in rads):
+            float degrees = (float) Math.Atan2((float)vector.Y, (float)vector.X);
+            //Return Degrees in rads.
+            return (float)(degrees);
+        }
 
         #region Function Explanation
         //Updates Entity tree, increases time since last shot.

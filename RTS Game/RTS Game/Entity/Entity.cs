@@ -134,16 +134,9 @@ namespace RTS_Game
 
             return new Vector2(x, y);
         }
-
         public Vector2 GetCenterTile()
         {
-            //TEMP. Uses ToTile.
-            return new Vector2(ToTile(BoundingBox.Center.X), ToTile(BoundingBox.Center.Y));
-        }
-
-        public static int ToTile(int pixelPos)
-        {
-            return (int)Math.Floor((decimal)pixelPos / GameClass.Tile_Width);
+            return new Vector2(BoundingBox.Center.X / GameClass.Tile_Width, BoundingBox.Center.Y / GameClass.Tile_Width);
         }
 
         #region Function Explanation
