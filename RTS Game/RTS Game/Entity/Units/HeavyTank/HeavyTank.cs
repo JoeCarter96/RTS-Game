@@ -11,7 +11,7 @@ namespace RTS_Game
     {
         #region Variables
         static float maxHealth = 100;
-        static Texture2D texture = Resources.GetUnitTextures("HeavyTank");
+        private static List<Texture2D> textures = new List<Texture2D> { Resources.GetUnitTextures("HeavyTank")};
         static float maxSpeed = 3f;
         static float acceleration = 0.2f;
         static float damage = 10;
@@ -23,7 +23,7 @@ namespace RTS_Game
         //Constructor.
         #endregion
         public HeavyTank(Vector2 tilePosition, Player owner, TileMap world) :
-            base(world, owner, tilePosition, texture, maxHealth, maxSpeed, acceleration, damage,
+            base(world, owner, tilePosition, textures, maxHealth, maxSpeed, acceleration, damage,
             AOE, ROF)
         {
             

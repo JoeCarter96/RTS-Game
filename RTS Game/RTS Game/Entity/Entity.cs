@@ -26,7 +26,7 @@ namespace RTS_Game
 
         #region Variable: Rotation
         private float rotation = 0f;
-        public float Rotation
+        public virtual float Rotation
         {
             get { return rotation; }
             protected set

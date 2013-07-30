@@ -32,7 +32,7 @@ namespace RTS_Game
             #endregion
 
             #region Passed Variables
-            
+            protected List<Texture2D> textures;
             #endregion
 
             #region Pathfinding
@@ -60,19 +60,42 @@ namespace RTS_Game
             set { NEXT_TARGET = value; }
         }
 
+        public List<Texture2D> Textures
+        {
+            get { return textures; }
+            set { textures = value; }
+        }
+
+        #region Property Explanation
+        //Override Enities rotation, just points to Entities rotation
+        //but adds the unit only method SetCorrectRotation.
+        #endregion
+        public override float Rotation
+        {
+            get { return base.Rotation; }
+            protected set
+            {
+                SetCorrectTexture();
+                base.Rotation = value;
+            }
+        }
+
         #region Function Explanation
         //Constructor, Adds Unit to entity list, passes a bunch of variables and then creates a PF array.
         //Sets Next Target to Tile Position so that when Move() is called it immediately looks for the next tile.
         #endregion
-        public Unit(TileMap world, Player owner, Vector2 tilePosition, Texture2D texture, double maxHealth,
+        public Unit(TileMap world, Player owner, Vector2 tilePosition, List<Texture2D> textures, double maxHealth,
            float maxSpeed, float acceleration, float damage, float AOE, float ROF)
-            : base(world, owner, tilePosition, texture, maxHealth)
+            : base(world, owner, tilePosition, textures[0], maxHealth)
         {
             this.maxSpeed = maxSpeed;
             this.acceleration = acceleration;
             this.damage = damage;
             this.AOE = AOE;
             this.ROF = ROF;
+
+            Textures = textures;
+            SetCorrectTexture();
             world.TileArray[(int) tilePosition.X, (int) tilePosition.Y].OccupiedByUnit = true;
         }
 
@@ -156,6 +179,15 @@ namespace RTS_Game
             float rads = (float) Math.Atan2((float)vector.Y, (float)vector.X);
             //Return Degrees in rads.
             return (rads);
+        }
+
+        #region Function Explanation
+        //Returns the correct image for the angle the Unit is at.
+        #endregion
+        public void SetCorrectTexture()
+        {
+            //How about adding some proper code here?
+            Texture = Textures[0];
         }
 
         #region Function Explanation
