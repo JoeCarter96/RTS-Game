@@ -10,28 +10,15 @@ namespace RTS_Game
 {
     public class Entity
     {
-        #region Variable: Textures
-        private List<Texture2D> textures;
-        public List<Texture2D> Textures
+        #region Variable: Texture
+        private Texture2D texture;
+        public Texture2D Texture
         {
-            get { return textures; }
+            get { return texture; }
             protected set
             {
-                textures = value;
-            }
-        }
-
-        #endregion
-
-        #region Variable: CurrentTexture
-        private Texture2D currentTexture;
-        public Texture2D  CurrentTexture
-        {
-            get { return currentTexture; }
-            protected set
-            {
-                currentTexture = value;
-                BoundingBoxSize = new Size(currentTexture);
+                texture = value;
+                BoundingBoxSize = new Size(texture);
             }
         }
 
@@ -44,7 +31,6 @@ namespace RTS_Game
             get { return rotation; }
             protected set
             {
-
                 origin = new Vector2(Texture.Width / 2, Texture.Height / 2);
                 rotation = value;
             }
@@ -156,16 +142,6 @@ namespace RTS_Game
         public Vector2 GetCenterTile()
         {
             return new Vector2(BoundingBox.Center.X / GameClass.Tile_Width, BoundingBox.Center.Y / GameClass.Tile_Width);
-        }
-
-        #region Function Explanation
-        //sets current texture tpo the direction texture the unit needs to display,
-        //based on rotation.
-        #endregion
-        public void SetDirectionTexture()
-        {
-            //How about we add some actual code here?
-            CurrentTexture = textures[0]; //TEMP.
         }
 
         #region Function Explanation

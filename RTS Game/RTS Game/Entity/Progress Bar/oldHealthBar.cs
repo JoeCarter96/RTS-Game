@@ -52,7 +52,7 @@ namespace RTS_Game
 
             //DestinationBack logic
             int width = boundingBox.Width;
-            DestinationBack = new Rectangle((int)position.X, (int)position.Y, width, CurrentTexture.Height);
+            DestinationBack = new Rectangle((int)position.X, (int)position.Y, width, Texture.Height);
             
             //DestinationFront logic
             width = (int)(boundingBox.Width * target.GetHealthPercentage());
