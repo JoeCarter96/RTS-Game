@@ -19,10 +19,11 @@ namespace RTS_Game
             {
                 texture = value;
                 BoundingBoxSize = new Size(texture);
-
             }
         }
+
         #endregion
+
         #region Variable: Rotation
         private float rotation = 0f;
         public float Rotation
@@ -30,22 +31,21 @@ namespace RTS_Game
             get { return rotation; }
             protected set
             {
-                //NOTE: this might not work, it is untested
                 origin = new Vector2(Texture.Width / 2, Texture.Height / 2);
                 rotation = value;
-                origin = Vector2.Zero;
             }
         }
         #endregion
 
         #region Variable: Origin
         private Vector2 origin = Vector2.Zero;
-        private Vector2 Origin
+        public Vector2 Origin
         {
             get { return origin; }
             set { origin = value; }
         }
         #endregion
+
         #region Variable: Velocity
         protected Vector2 velocity = Vector2.Zero;
         public Vector2 Velocity
@@ -71,6 +71,7 @@ namespace RTS_Game
             }
         }
         #endregion
+
         #region Variable: TilePosition
         private Vector2 tilePosition;
         public Vector2 TilePosition
@@ -90,14 +91,16 @@ namespace RTS_Game
             get { return boundingBoxSize.CreateRectangle(PixelPosition); }
         }
         #endregion
+
         #region Variable: BoundingBoxSize
         private Size boundingBoxSize;
-        private Size BoundingBoxSize
+        public Size BoundingBoxSize
         {
             get { return boundingBoxSize; }
             set { boundingBoxSize = value; }
         }
         #endregion
+
         #region Variable: BoundingBoxWidth
         public int BoundingBoxWidth
         {
@@ -105,6 +108,7 @@ namespace RTS_Game
             set { BoundingBoxSize.Width = value; }
         }
         #endregion
+
         #region Variable: BoundingBoxHeight
         public int BoundingBoxHeight
         {
@@ -119,9 +123,10 @@ namespace RTS_Game
         #endregion
         public Entity(Vector2 tilePosition, Texture2D texture)
         {
-            //we assign it to the property to also have it calculate the pixel position
-            TilePosition = tilePosition;
+            //We assign it to the property to also have it calculate the pixel position
             Texture = texture;
+            TilePosition = tilePosition;
+            rotation = 0;
         }
 
         #region Function Explanation
@@ -152,7 +157,7 @@ namespace RTS_Game
         #endregion
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(Texture, BoundingBox, null, Color.White, rotation, origin, SpriteEffects.None, 0);
+            spriteBatch.Draw(Texture, boundingBoxSize.CreateRectangle(pixelPosition + origin), null, Color.White, Rotation, origin, SpriteEffects.None, 0);
         }
 
         #region Function Explanation
@@ -160,7 +165,7 @@ namespace RTS_Game
         #endregion
         public virtual void Draw(SpriteBatch spriteBatch, Color color)
         {
-            spriteBatch.Draw(Texture, BoundingBox, null, color, rotation, origin, SpriteEffects.None, 0);
+            spriteBatch.Draw(Texture, boundingBoxSize.CreateRectangle(pixelPosition + origin), null, color, Rotation, origin, SpriteEffects.None, 0);
         }
     }
 }

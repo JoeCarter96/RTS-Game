@@ -41,7 +41,6 @@ Input
 	Mouse input
 
 Rotation System
-	Origin working correctly
 	Graphics when at certain angles
 	Smooth rotation.
 
@@ -80,3 +79,6 @@ Now using 24x24px sized tiles	Tom
 New Grass Graphics				Tom
 
 Initial Rotation System			Tom
+
+Rotation System now rotates		Tom
+around center of texture.

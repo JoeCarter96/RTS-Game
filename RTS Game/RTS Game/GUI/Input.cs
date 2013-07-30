@@ -219,7 +219,7 @@ namespace RTS_Game
         #endregion
         public Vector2 relativeXY(Vector2 XY, Camera camera)
         {
-            return camera.Position + XY / camera.Zoom;
+            return (camera.Position + XY) / camera.Zoom;
         }
     }
 }

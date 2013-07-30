@@ -107,7 +107,7 @@ namespace RTS_Game
                 //FindClosestOre for Entity to selected units.
                 player.PlayerSelectedEntities.Add(player.Entities.Find(delegate(Entity entity)
                 {
-                    //Returns whatever harvester whos bounding box contains
+                    //Returns whatever unit which their bounding box contains
                     //mouse, or null if there is not one which does.
                     return entity.BoundingBox.Contains(new Point((int)relativePosition.X,
                         (int)relativePosition.Y));
@@ -206,13 +206,13 @@ namespace RTS_Game
             }
 
             foreach (Entity e in player.Entities)
-            {
+            {  
                 e.Draw(spriteBatch);
             }
 
             foreach (Entity e in player.PlayerSelectedEntities)
             {
-                spriteBatch.Draw(Resources.GetGUITextures("SelectedRectangle"), e.BoundingBox, Color.White);
+                spriteBatch.Draw(Resources.GetGUITextures("SelectedRectangle"), e.BoundingBoxSize.CreateRectangle(e.PixelPosition + e.Origin), null, Color.White, e.Rotation, e.Origin, SpriteEffects.None, 0);
             }
         }
 

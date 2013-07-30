@@ -60,7 +60,6 @@ namespace RTS_Game
             set { NEXT_TARGET = value; }
         }
 
-
         #region Function Explanation
         //Constructor, Adds Unit to entity list, passes a bunch of variables and then creates a PF array.
         //Sets Next Target to Tile Position so that when Move() is called it immediately looks for the next tile.
@@ -153,10 +152,10 @@ namespace RTS_Game
         #endregion
         public float toAngle(Vector2 vector)
         {
-            //Find Angle using Trig (in rads):
-            float degrees = (float) Math.Atan2((float)vector.Y, (float)vector.X);
+            //Find Angle (in rads):
+            float rads = (float) Math.Atan2((float)vector.Y, (float)vector.X);
             //Return Degrees in rads.
-            return (float)(degrees);
+            return (rads);
         }
 
         #region Function Explanation
@@ -173,7 +172,7 @@ namespace RTS_Game
         //Draw Method, Draws Base texture.
         #endregion
         public override void Draw(SpriteBatch spriteBatch)
-        {   
+        {
             base.Draw(spriteBatch);
         }
     }
