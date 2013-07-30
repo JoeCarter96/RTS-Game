@@ -75,8 +75,8 @@ namespace RTS_Game
             get { return base.Rotation; }
             protected set
             {
-                SetCorrectTexture();
                 base.Rotation = value;
+                SetCorrectTexture();
             }
         }
 
@@ -176,18 +176,65 @@ namespace RTS_Game
         public float toAngle(Vector2 vector)
         {
             //Find Angle (in rads):
-            float rads = (float) Math.Atan2((float)vector.Y, (float)vector.X);
-            //Return Degrees in rads.
-            return (rads);
+            float rads = (float) Math.Atan2((float)vector.X, (float)-vector.Y);
+
+
+            if (vector.X < 0)
+            {
+                return ((float) (2 * Math.PI) - Math.Abs(rads));
+            }
+            else
+            {
+                //Return Degrees in rads.
+                return (rads);
+            }
         }
 
         #region Function Explanation
-        //Returns the correct image for the angle the Unit is at.
+        //Returns the correct image for the angle (Rotation, in radians) the Unit is at.
         #endregion
         public void SetCorrectTexture()
         {
-            //How about adding some proper code here?
-            Texture = Textures[0];
+            //Up
+            if ( Rotation > 5.890 || Rotation < 0.480)
+            {
+                Texture = Textures[0];
+            }
+            //Up Right
+            else if (Rotation > 0.480 && Rotation < 1.178)
+            {
+                Texture = Textures[1];
+            }
+            //Right
+            else if (Rotation > 1.178 && Rotation < 1.963)
+            {
+                Texture = Textures[2];
+            }
+            //Down Right
+            else if (Rotation > 1.963 && Rotation < 2.749)
+            {
+                Texture = Textures[3];
+            }
+            //Down
+            else if (Rotation > 2.749 && Rotation < 3.534)
+            {
+                Texture = Textures[4];
+            }
+            //Down Left
+            else if (Rotation > 3.534 && Rotation < 4.320)
+            {
+                Texture = Textures[5];
+            }
+            //Left
+            else if (Rotation > 4.320 && Rotation < 5.105)
+            {
+                Texture = Textures[6];
+            }
+            //Left Up
+            else if (Rotation > 5.105 && Rotation < 5.890)
+            {
+                Texture = Textures[7];
+            }
         }
 
         #region Function Explanation

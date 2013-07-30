@@ -105,7 +105,7 @@ namespace RTS_Game
             Resources.AddBackgroundTexture(Water01);
             #endregion
 
-            #region Level Objects.
+             #region Level Objects.
             //Debug
             Texture2D Debug = Content.Load<Texture2D>("Levels/Debug");
             Level Level00 = new Level("Level_Test", Debug, 0);
@@ -116,25 +116,10 @@ namespace RTS_Game
             Level Level01 = new Level("Island", Island, 1);
             Resources.AddLevelObject(Level01);
 
-            //Snow Test
-            Texture2D Snow_Test = Content.Load<Texture2D>("Levels/Snow_Test");
-            Level Level02 = new Level("Snow Test", Snow_Test, 2);
+            //Bridge
+            Texture2D Bridge = Content.Load<Texture2D>("Levels/Bridge");
+            Level Level02 = new Level("Bridge", Bridge, 2);
             Resources.AddLevelObject(Level02);
-
-            //Desert Test
-            Texture2D Desert_Test = Content.Load<Texture2D>("Levels/Desert_Test");
-            Level Level03 = new Level("Desert Test", Desert_Test, 3);
-            Resources.AddLevelObject(Level03);
-
-            //Ocean Combat
-            Texture2D Ocean_Combat = Content.Load<Texture2D>("Levels/Ocean_Combat");
-            Level Level04 = new Level("Ocean Combat", Ocean_Combat, 4);
-            Resources.AddLevelObject(Level04);
-
-            //MegaMap
-            Texture2D MegaMap = Content.Load<Texture2D>("Levels/MegaMap");
-            Level Level05 = new Level("MegaMap", MegaMap, 5);
-            Resources.AddLevelObject(Level05);
             #endregion
 
             #region GUI Textures
@@ -156,10 +141,48 @@ namespace RTS_Game
             #endregion
 
             #region Unit Textures
-            //Heavy Tank
-            Texture2D HeavyTank = Content.Load<Texture2D>("Units/HeavyTank");
-            HeavyTank.Name = "HeavyTank";
-            Resources.AddUnitTexture(HeavyTank);
+
+            #region Heavy Tank
+            //Up
+            Texture2D HeavyTankUp = Content.Load<Texture2D>("Units/HeavyTank/HeavyTankUp");
+            HeavyTankUp.Name = "HeavyTankUp";
+            Resources.AddUnitTexture(HeavyTankUp);
+
+            //Down
+            Texture2D HeavyTankDown = Content.Load<Texture2D>("Units/HeavyTank/HeavyTankDown");
+            HeavyTankDown.Name = "HeavyTankDown";
+            Resources.AddUnitTexture(HeavyTankDown);
+
+            //Left
+            Texture2D HeavyTankLeft = Content.Load<Texture2D>("Units/HeavyTank/HeavyTankLeft");
+            HeavyTankLeft.Name = "HeavyTankLeft";
+            Resources.AddUnitTexture(HeavyTankLeft);
+
+            //Right
+            Texture2D HeavyTankRight = Content.Load<Texture2D>("Units/HeavyTank/HeavyTankRight");
+            HeavyTankRight.Name = "HeavyTankRight";
+            Resources.AddUnitTexture(HeavyTankRight);
+
+            //Up and Right
+            Texture2D HeavyTankUpRight = Content.Load<Texture2D>("Units/HeavyTank/HeavyTankUpRight");
+            HeavyTankUpRight.Name = "HeavyTankUpRight";
+            Resources.AddUnitTexture(HeavyTankUpRight);
+
+            //Up and Left
+            Texture2D HeavyTankUpLeft = Content.Load<Texture2D>("Units/HeavyTank/HeavyTankUpLeft");
+            HeavyTankUpLeft.Name = "HeavyTankUpLeft";
+            Resources.AddUnitTexture(HeavyTankUpLeft);
+
+            //Down and Right
+            Texture2D HeavyTankDownRight = Content.Load<Texture2D>("Units/HeavyTank/HeavyTankDownRight");
+            HeavyTankDownRight.Name = "HeavyTankDownRight";
+            Resources.AddUnitTexture(HeavyTankDownRight);            
+            
+            //Down and Left
+            Texture2D HeavyTankDownLeft = Content.Load<Texture2D>("Units/HeavyTank/HeavyTankDownLeft");
+            HeavyTankDownLeft.Name = "HeavyTankDownLeft";
+            Resources.AddUnitTexture(HeavyTankDownLeft);
+            #endregion
 
             //Harvester
             Texture2D Harvester = Content.Load<Texture2D>("Units/Harvester");

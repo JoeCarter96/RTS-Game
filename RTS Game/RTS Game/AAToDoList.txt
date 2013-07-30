@@ -41,7 +41,6 @@ Input
 	Mouse input
 
 Rotation System
-	Graphics when at certain angles
 	Smooth rotation.
 
 
@@ -82,3 +81,6 @@ Initial Rotation System			Tom
 
 Rotation System now rotates		Tom
 around center of texture.
+
+Graphic of unit now changes		Tom
+depending on the Angle. 

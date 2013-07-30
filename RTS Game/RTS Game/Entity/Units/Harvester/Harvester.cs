@@ -11,7 +11,21 @@ namespace RTS_Game
     {
         #region Variables
         private static float maxHealth = 100;
-        private static List<Texture2D> textures = new List<Texture2D> {Resources.GetUnitTextures("Harvester")};
+
+        #region Textures
+        private static List<Texture2D> textures = new List<Texture2D> 
+        {
+            Resources.GetUnitTextures("Harvester"),
+            Resources.GetUnitTextures("Harvester"),
+            Resources.GetUnitTextures("Harvester"),
+            Resources.GetUnitTextures("Harvester"),
+            Resources.GetUnitTextures("Harvester"),
+            Resources.GetUnitTextures("Harvester"),
+            Resources.GetUnitTextures("Harvester"),
+            Resources.GetUnitTextures("Harvester"),
+        };
+        #endregion
+
         private static float maxSpeed = 1.5f;
         private static float acceleration = 0.2f;
 

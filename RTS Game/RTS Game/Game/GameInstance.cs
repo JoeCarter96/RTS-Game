@@ -147,6 +147,13 @@ namespace RTS_Game
             {
                 player.PlayerSelectedEntities.Clear();
 
+                //Finds the position of the mouse within the world, not within viewport.
+                Vector2 relativePosition = input.relativeXY(new Vector2(x, y), camera);
+                Vector2 mouseTile = new Vector2((float)Math.Floor((double)relativePosition.X / GameClass.Tile_Width),
+                    (float)(Math.Floor((double)relativePosition.Y / GameClass.Tile_Width)));
+
+                HeavyTank H = new HeavyTank(mouseTile, player, world);
+
             }
             #endregion
         }

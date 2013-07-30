@@ -11,7 +11,21 @@ namespace RTS_Game
     {
         #region Variables
         static float maxHealth = 100;
-        private static List<Texture2D> textures = new List<Texture2D> { Resources.GetUnitTextures("HeavyTank")};
+
+        #region Textures
+        private static List<Texture2D> textures = new List<Texture2D> 
+        { 
+            Resources.GetUnitTextures("HeavyTankUp"),
+            Resources.GetUnitTextures("HeavyTankUpRight"),
+            Resources.GetUnitTextures("HeavyTankRight"),
+            Resources.GetUnitTextures("HeavyTankDownRight"),
+            Resources.GetUnitTextures("HeavyTankDown"),
+            Resources.GetUnitTextures("HeavyTankDownLeft"),
+            Resources.GetUnitTextures("HeavyTankLeft"),
+            Resources.GetUnitTextures("HeavyTankUpLeft")
+        };
+        #endregion
+
         static float maxSpeed = 3f;
         static float acceleration = 0.2f;
         static float damage = 10;

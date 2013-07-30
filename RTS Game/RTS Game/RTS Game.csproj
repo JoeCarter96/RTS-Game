@@ -85,7 +85,6 @@
     <Compile Include="Entity\Units\HeavyTank\HeavyTank.cs" />
     <Compile Include="Game\Player.cs" />
     <Compile Include="GUI\Button.cs" />
-    <Compile Include="GUI\MainMenuButton.cs" />
     <Compile Include="GUI\Size.cs" />
     <Compile Include="GUI\SquareOfDoom.cs" />
     <Compile Include="Pathfinding\WaypointsOntoABuilding.cs" />

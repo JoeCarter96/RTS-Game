@@ -58,33 +58,13 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Levels\Desert_Test.png">
-      <Name>Desert_Test</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
     <Compile Include="Levels\Island.png">
       <Name>Island</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Levels\Level_Test.png">
-      <Name>Level_Test</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Levels\Ocean_Combat.png">
-      <Name>Ocean_Combat</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Levels\Snow_Test.png">
-      <Name>Snow_Test</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Levels\MegaMap.png">
-      <Name>MegaMap</Name>
+    <Compile Include="Levels\Bridge.png">
+      <Name>Bridge</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
@@ -137,13 +117,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Units\HeavyTank.png">
-      <Name>HeavyTank</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Units\Harvester.png">
       <Name>Harvester</Name>
       <Importer>TextureImporter</Importer>
@@ -175,6 +148,50 @@
     </Compile>
     <Compile Include="BackgroundTiles\Grass\Grass04.png">
       <Name>Grass04</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Units\HeavyTank\HeavyTankDown.png">
+      <Name>HeavyTankDown</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Units\HeavyTank\HeavyTankLeft.png">
+      <Name>HeavyTankLeft</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Units\HeavyTank\HeavyTankRight.png">
+      <Name>HeavyTankRight</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Units\HeavyTank\HeavyTankUp.png">
+      <Name>HeavyTankUp</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Units\HeavyTank\HeavyTankDownLeft.png">
+      <Name>HeavyTankDownLeft</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Units\HeavyTank\HeavyTankDownRight.png">
+      <Name>HeavyTankDownRight</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Units\HeavyTank\HeavyTankUpLeft.png">
+      <Name>HeavyTankUpLeft</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Units\HeavyTank\HeavyTankUpRight.png">
+      <Name>HeavyTankUpRight</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

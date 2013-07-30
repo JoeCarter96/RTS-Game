@@ -24,7 +24,7 @@ namespace RTS_Game
         public static void AddColours()
         {
             Colours.Add(new Color(0, 0, 0), "DebugTile");
-            Colours.Add(new Color(0, 180, 0), "Grass01");
+            Colours.Add(new Color(0, 180, 0), "Grass");
             grass.Add("Grass01");
             grass.Add("Grass02");
             grass.Add("Grass03");
@@ -68,7 +68,7 @@ namespace RTS_Game
                     //Tries to find texture in Resources dictionary, if it can't defaults to grass texture.
                     try
                     {
-                        if (textureName == "Grass01")
+                        if (textureName == "Grass")
                         {
 
                             textureArray[i, j] = Resources.GetBackgroundTextures(grass[count]);
