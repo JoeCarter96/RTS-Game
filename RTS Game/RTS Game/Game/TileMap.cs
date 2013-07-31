@@ -91,11 +91,18 @@ namespace RTS_Game
         #region Function Explanation
         //Draws Each Tile.
         #endregion
-        public void Draw(SpriteBatch spriteBatch)
+        public void Draw(SpriteBatch spriteBatch, Camera camera)
         {
-            foreach (Tile t in tileArray)
+            Vector2 relativeViewport = camera.relativeXY(new Vector2(camera.Viewport.X, camera.Viewport.Y));
+            for (int i = (int) (relativeViewport.X / GameClass.Tile_Width); i <= (relativeViewport.X + (camera.Viewport.Width / camera.Zoom)) / (GameClass.Tile_Width); i++)
             {
-                t.Draw(spriteBatch);
+                for (int j = (int)(relativeViewport.Y / GameClass.Tile_Width); j <= (relativeViewport.Y + (camera.Viewport.Height / camera.Zoom)) / (GameClass.Tile_Width); j++)
+                {
+                    if (i < tileArray.GetLength(0) && j < tileArray.GetLength(1))
+                    {
+                        tileArray[i, j].Draw(spriteBatch);
+                    }
+                }
             }
         }
     }

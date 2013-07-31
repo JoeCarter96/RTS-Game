@@ -34,7 +34,6 @@ Selection Code
 		Mine if moved to ore
 		Stop AI collection control if not
 
-Drawing efficiency***
 
 Input
 	Keyboard input
@@ -84,3 +83,7 @@ around center of texture.
 
 Graphic of unit now changes		Tom
 depending on the Angle. 
+
+
+Heavily increased drawing		Tom
+efficiency

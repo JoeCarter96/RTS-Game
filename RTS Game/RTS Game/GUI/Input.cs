@@ -207,19 +207,6 @@ namespace RTS_Game
             return keyboardState.IsKeyDown(key);
         }
 
-        #region Function Explanation
-        //A method which finds the mouse position within the
-        //entire game, not just within the viewport. I made it 
-        //require the camera here and only have this called externally
-        //so that this class can still be used with ease for menus,
-        //which do not have a camera. This however means you must
-        //remember to call this class on the XY variables before they
-        //are used. We can easily do ingame menus now as we just don't use
-        //this method, and use actual XY.
-        #endregion
-        public Vector2 relativeXY(Vector2 XY, Camera camera)
-        {
-            return (camera.Position + XY) / camera.Zoom;
-        }
+
     }
 }

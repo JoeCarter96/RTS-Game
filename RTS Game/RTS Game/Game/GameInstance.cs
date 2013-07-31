@@ -99,7 +99,7 @@ namespace RTS_Game
             if (button == MouseButton.Left)
             {
                 //Finds the position of the mouse within the world, not within viewport.
-                Vector2 relativePosition = input.relativeXY(new Vector2(x, y), camera);
+                Vector2 relativePosition = camera.relativeXY(new Vector2(x, y));
                 Vector2 mouseTile = new Vector2((float)Math.Floor((double)relativePosition.X / GameClass.Tile_Width),
                     (float)(Math.Floor((double)relativePosition.Y / GameClass.Tile_Width)));
 
@@ -148,7 +148,7 @@ namespace RTS_Game
                 player.PlayerSelectedEntities.Clear();
 
                 //Finds the position of the mouse within the world, not within viewport.
-                Vector2 relativePosition = input.relativeXY(new Vector2(x, y), camera);
+                Vector2 relativePosition = camera.relativeXY(new Vector2(x, y));
                 Vector2 mouseTile = new Vector2((float)Math.Floor((double)relativePosition.X / GameClass.Tile_Width),
                     (float)(Math.Floor((double)relativePosition.Y / GameClass.Tile_Width)));
 
@@ -202,7 +202,7 @@ namespace RTS_Game
         #endregion
         public void Draw(SpriteBatch spriteBatch)
         {
-            world.Draw(spriteBatch);
+            world.Draw(spriteBatch, camera);
 
             foreach (Ore o in oreArray)
             {

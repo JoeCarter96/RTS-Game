@@ -28,13 +28,13 @@ namespace RTS_Game
         private float zoom = 1f;
 
         //TODO: add support for full screen game
-        private Viewport viewport = new Viewport(new Rectangle(0 ,0 ,800 ,600));
+        private Viewport viewport = new Viewport(new Rectangle(0, 0, 800, 600));
 
         //The value of the mouses scroll from the last frame.
         //Used to find if the mouse has beens crolled since the last frame.
         private int ScrollValueLastFrame = 0;
 
-        //We initially assume a 30 x 30 tilemap
+        //We initially assume a 24 x 24 tilemap
         //We have methods that re-workout these values
         private int WorldWidth = 2400;
         private int WorldHeight = 2400;
@@ -58,6 +58,12 @@ namespace RTS_Game
         {
             get { return zoom; }
             set { zoom = ClampZoom(value); }
+        }
+
+        public Viewport Viewport
+        {
+            get { return viewport; }
+            set { viewport = value; }
         }
 
         public Camera()
@@ -183,6 +189,21 @@ namespace RTS_Game
                     Matrix.CreateScale(new Vector3(Zoom, Zoom, 1)) *
                     Matrix.CreateTranslation(new Vector3(-Position.X, -Position.Y, 0));
             }
+        }
+
+
+        #region Function Explanation
+        //A method which finds the mouse position within the
+        //entire game, not just within the viewport. I made it called externally
+        //so that this class can still be used with ease for menus,
+        //which do not have a camera. This however means you must
+        //remember to call this method on the XY variables before they
+        //are used. We can easily do ingame menus now as we just don't use
+        //this method, and use actual XY.
+        #endregion
+        public Vector2 relativeXY(Vector2 XY)
+        {
+            return (Position + XY) / Zoom;
         }
     }
 }
