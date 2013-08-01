@@ -9,8 +9,13 @@ namespace RTS_Game
 {
     class PowerPlant : Building
     {
+
+        #region Variable: SpriteDimensions
+        static Rectangle spriteDimensions = new Rectangle(0, 0, 48, 48);
+        #endregion
+
         public PowerPlant(TileMap world, Player owner, Vector2 TilePosition)
-            : base(world, owner, TilePosition, Resources.GetBuildingTextures("PowerPlant"))
+            : base(world, owner, TilePosition, owner.GetBuildingTextures("PowerPlant"), spriteDimensions)
         {
             MaxHealth = 500;
 

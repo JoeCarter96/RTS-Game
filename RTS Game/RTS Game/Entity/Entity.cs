@@ -18,7 +18,6 @@ namespace RTS_Game
             protected set
             {
                 texture = value;
-                BoundingBoxSize = new Size(texture);
             }
         }
 
@@ -31,7 +30,7 @@ namespace RTS_Game
             get { return rotation; }
             protected set
             {
-                origin = new Vector2(Texture.Width / 2, Texture.Height / 2);
+                origin = new Vector2(SpriteDimensions.Width / 2, SpriteDimensions.Height / 2);
                 rotation = value;
             }
         }
@@ -117,20 +116,44 @@ namespace RTS_Game
         }
         #endregion
 
+        #region Variable: SpriteDimensions
+        private Rectangle spriteDimensions = new Rectangle();
+        public Rectangle SpriteDimensions
+        {
+            get { return spriteDimensions; }
+            set { spriteDimensions = value; }
+        }
+        #endregion
+
+        #region Variable: SourceRectangle
+        private Rectangle sourceRectangle = new Rectangle();
+        public Rectangle SourceRectangle
+        {
+            get { return sourceRectangle; }
+            set
+            {
+                sourceRectangle = value;
+                BoundingBoxSize = new Size(spriteDimensions);
+            }
+        }
+        #endregion
 
         #region Function Explanation
         //Constructor.
         #endregion
-        public Entity(Vector2 tilePosition, Texture2D initialTexture)
+        public Entity(Vector2 tilePosition, Texture2D texture, Rectangle spriteDimensions)
         {
+            Texture = texture;
+            //SpriteSheet Calculations (gets first image in spritesheet).
+            SpriteDimensions = spriteDimensions;
+            SourceRectangle = spriteDimensions;
             //We assign it to the property to also have it calculate the pixel position
-            Texture = initialTexture;
             TilePosition = tilePosition;
             rotation = 0;
         }
 
         #region Function Explanation
-        //Returns the center of the initialTexture.
+        //Returns the center of the texture.
         #endregion
         public Vector2 GetCenter()
         {
@@ -157,7 +180,7 @@ namespace RTS_Game
         #endregion
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(Texture, boundingBoxSize.CreateRectangle(pixelPosition + origin), null, Color.White, 0f, origin, SpriteEffects.None, 0);
+            spriteBatch.Draw(Texture, boundingBoxSize.CreateRectangle(pixelPosition + origin), SourceRectangle, Color.White, 0f, origin, SpriteEffects.None, 0);
         }
 
         #region Function Explanation
@@ -165,7 +188,7 @@ namespace RTS_Game
         #endregion
         public virtual void Draw(SpriteBatch spriteBatch, Color color)
         {
-            spriteBatch.Draw(Texture, boundingBoxSize.CreateRectangle(pixelPosition + origin), null, color, 0f, origin, SpriteEffects.None, 0);
+            spriteBatch.Draw(Texture, boundingBoxSize.CreateRectangle(pixelPosition + origin), SourceRectangle, color, 0f, origin, SpriteEffects.None, 0);
         }
     }
 }

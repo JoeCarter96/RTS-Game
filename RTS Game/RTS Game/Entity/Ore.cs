@@ -34,9 +34,12 @@ namespace RTS_Game
             get { return depletionAmount; }
         }
         #endregion
+        #region Variable: SpriteDimensions
+        static Rectangle spriteDimensions = new Rectangle(0, 0, 24, 24);
+        #endregion
 
         public Ore (Vector2 tilePosition) :
-            base(tilePosition, Resources.GetBackgroundTextures("Ore"))
+            base(tilePosition, Resources.GetBackgroundTextures("Ore"), spriteDimensions)
         {
 
         }

@@ -153,45 +153,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Units\HeavyTank\HeavyTankDown.png">
-      <Name>HeavyTankDown</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Units\HeavyTank\HeavyTankLeft.png">
-      <Name>HeavyTankLeft</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Units\HeavyTank\HeavyTankRight.png">
-      <Name>HeavyTankRight</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Units\HeavyTank\HeavyTankUp.png">
-      <Name>HeavyTankUp</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Units\HeavyTank\HeavyTankDownLeft.png">
-      <Name>HeavyTankDownLeft</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Units\HeavyTank\HeavyTankDownRight.png">
-      <Name>HeavyTankDownRight</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Units\HeavyTank\HeavyTankUpLeft.png">
-      <Name>HeavyTankUpLeft</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Units\HeavyTank\HeavyTankUpRight.png">
-      <Name>HeavyTankUpRight</Name>
+    <Compile Include="Units\HeavyTank\HeavyTank.png">
+      <Name>HeavyTank</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

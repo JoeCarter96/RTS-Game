@@ -142,47 +142,11 @@ namespace RTS_Game
 
             #region Unit Textures
 
-            #region Heavy Tank
-            //Up
-            Texture2D HeavyTankUp = Content.Load<Texture2D>("Units/HeavyTank/HeavyTankUp");
-            HeavyTankUp.Name = "HeavyTankUp";
-            Resources.AddUnitTexture(HeavyTankUp);
+            //Heavy Tank
+            Texture2D HeavyTank = Content.Load<Texture2D>("Units/HeavyTank/HeavyTank");
+            HeavyTank.Name = "HeavyTank";
+            Resources.AddUnitTexture(HeavyTank);
 
-            //Down
-            Texture2D HeavyTankDown = Content.Load<Texture2D>("Units/HeavyTank/HeavyTankDown");
-            HeavyTankDown.Name = "HeavyTankDown";
-            Resources.AddUnitTexture(HeavyTankDown);
-
-            //Left
-            Texture2D HeavyTankLeft = Content.Load<Texture2D>("Units/HeavyTank/HeavyTankLeft");
-            HeavyTankLeft.Name = "HeavyTankLeft";
-            Resources.AddUnitTexture(HeavyTankLeft);
-
-            //Right
-            Texture2D HeavyTankRight = Content.Load<Texture2D>("Units/HeavyTank/HeavyTankRight");
-            HeavyTankRight.Name = "HeavyTankRight";
-            Resources.AddUnitTexture(HeavyTankRight);
-
-            //Up and Right
-            Texture2D HeavyTankUpRight = Content.Load<Texture2D>("Units/HeavyTank/HeavyTankUpRight");
-            HeavyTankUpRight.Name = "HeavyTankUpRight";
-            Resources.AddUnitTexture(HeavyTankUpRight);
-
-            //Up and Left
-            Texture2D HeavyTankUpLeft = Content.Load<Texture2D>("Units/HeavyTank/HeavyTankUpLeft");
-            HeavyTankUpLeft.Name = "HeavyTankUpLeft";
-            Resources.AddUnitTexture(HeavyTankUpLeft);
-
-            //Down and Right
-            Texture2D HeavyTankDownRight = Content.Load<Texture2D>("Units/HeavyTank/HeavyTankDownRight");
-            HeavyTankDownRight.Name = "HeavyTankDownRight";
-            Resources.AddUnitTexture(HeavyTankDownRight);            
-            
-            //Down and Left
-            Texture2D HeavyTankDownLeft = Content.Load<Texture2D>("Units/HeavyTank/HeavyTankDownLeft");
-            HeavyTankDownLeft.Name = "HeavyTankDownLeft";
-            Resources.AddUnitTexture(HeavyTankDownLeft);
-            #endregion
 
             //Harvester
             Texture2D Harvester = Content.Load<Texture2D>("Units/Harvester");
@@ -211,7 +175,7 @@ namespace RTS_Game
         }
 
         #region Function Explanation
-        //Dynamically loads a initialTexture.
+        //Dynamically loads a texture.
         #endregion
         /*public Texture2D LoadTexture(string texturePath)
         {
@@ -226,10 +190,10 @@ namespace RTS_Game
                 name = texturePath;
             }
 
-            Texture2D initialTexture = Content.Load<Texture2D>(texturePath);
-            initialTexture.Name = name;
+            Texture2D texture = Content.Load<Texture2D>(texturePath);
+            texture.Name = name;
 
-            return initialTexture;
+            return texture;
         }*/
 
         #region Function Explanation

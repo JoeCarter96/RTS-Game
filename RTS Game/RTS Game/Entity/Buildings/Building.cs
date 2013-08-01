@@ -43,12 +43,11 @@ namespace RTS_Game
         #region Function Explanation
         //Constructor.
         #endregion
-        public Building(TileMap world, Player owner, Vector2 TilePosition, Texture2D texture)
-            :base(world, owner, TilePosition, texture, 100)
+        public Building(TileMap world, Player owner, Vector2 TilePosition, Texture2D texture, Rectangle spriteDimensions)
+            : base(world, owner, TilePosition, texture, 100, spriteDimensions)
         {
             //Assuming the building is a 1x1. We will have to re-call this
             ApplySizeChanges();
-            Resources.setTeamColours(new List<Texture2D> { texture }, owner.TeamColour);
         }
 
         #region Function Explanation

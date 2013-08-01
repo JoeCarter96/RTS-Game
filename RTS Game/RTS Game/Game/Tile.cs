@@ -36,8 +36,12 @@ namespace RTS_Game
             get { return new Rectangle((int)PixelPosition.X, (int)PixelPosition.Y, GameClass.Tile_Width, GameClass.Tile_Width); }
         }
 
+        #region Variable: SpriteDimensions
+        static Rectangle spriteDimensions = new Rectangle(0, 0, 24, 24);
+        #endregion
+
         public Tile(Vector2 tilePosition, Vector2 index, Texture2D texture)
-            : base(tilePosition, texture)
+            : base(tilePosition, texture, spriteDimensions)
         {
             this.index = index;
             this.TilePosition = tilePosition;

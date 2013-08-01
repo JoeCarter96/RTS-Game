@@ -12,35 +12,23 @@ namespace RTS_Game
         #region Variables
         static float maxHealth = 100;
 
-        #region Textures
-        private static List<Texture2D> textures = new List<Texture2D> {
-            Resources.GetUnitTextures("HeavyTankUp"),
-            Resources.GetUnitTextures("HeavyTankUpRight"),
-            Resources.GetUnitTextures("HeavyTankRight"),
-            Resources.GetUnitTextures("HeavyTankDownRight"),
-            Resources.GetUnitTextures("HeavyTankDown"),
-            Resources.GetUnitTextures("HeavyTankDownLeft"),
-            Resources.GetUnitTextures("HeavyTankLeft"),
-            Resources.GetUnitTextures("HeavyTankUpLeft")
-        };
-        #endregion
-
         static float maxSpeed = 3f;
         static float acceleration = 0.2f;
         static float damage = 10;
         static float AOE = 4;
         static float ROF = 7;
+
+        static Rectangle spriteDimensions = new Rectangle(0, 0, 24, 24);
         #endregion
 
         #region Function Explanation
         //Constructor.
         #endregion
         public HeavyTank(Vector2 tilePosition, Player owner, TileMap world) :
-            base(world, owner, tilePosition, textures, maxHealth, maxSpeed, acceleration, damage,
-            AOE, ROF)
+            base(world, owner, tilePosition, owner.GetUnitTextures("HeavyTank"), maxHealth, maxSpeed, acceleration, damage,
+            AOE, ROF, spriteDimensions)
         {
-            //Tint Heavytank to team colour.
-            textures = Resources.setTeamColours(textures, owner.TeamColour);
+
         }
 
         #region Function Explanation

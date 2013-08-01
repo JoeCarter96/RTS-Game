@@ -72,7 +72,7 @@ namespace RTS_Game
             PowerPlant PP1 = new PowerPlant(world, player, new Vector2(6, 3));
             PowerPlant PP2 = new PowerPlant(world, player, new Vector2(8, 3));
             Refinery REF = new Refinery(world, player, new Vector2(6, 6));
-            Harvester H1 = new Harvester(world, player, new Vector2(12, 12), player.Entities, oreArray);
+         //   Harvester H1 = new Harvester(world, player, new Vector2(12, 12), player.Entities, oreArray);
 
 
 

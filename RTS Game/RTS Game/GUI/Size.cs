@@ -31,10 +31,10 @@ namespace RTS_Game
             this.height = height;
         }
 
-        public Size(Texture2D texture)
+        public Size(Rectangle rect)
         {
-            this.width = texture.Width;
-            this.height = texture.Height;
+            this.width = rect.Width;
+            this.height = rect.Height;
         }
 
         public Rectangle CreateRectangle(Vector2 position)

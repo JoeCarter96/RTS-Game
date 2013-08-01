@@ -26,11 +26,15 @@ namespace RTS_Game
             set { boundingBox = value; }
         }
 
+        #region Variable: SpriteDimensions
+        static Rectangle spriteDimensions = new Rectangle(0, 0, 24, 24);
+        #endregion
+
         #region Function Explanation
         //Constructor.
         #endregion
         public HealthBar(HealthEntity target, Rectangle boundingBox)
-            :base(target.TilePosition, Resources.GetGUITextures("HealthBar"))
+            :base(target.TilePosition, Resources.GetGUITextures("HealthBar"), spriteDimensions)
         {
             this.target = target;
             this.boundingBox = boundingBox;

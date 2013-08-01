@@ -12,22 +12,10 @@ namespace RTS_Game
         #region Variables
         private static float maxHealth = 100;
 
-        #region Textures
-        private static List<Texture2D> textures = new List<Texture2D> 
-        {
-            Resources.GetUnitTextures("Harvester"),
-            Resources.GetUnitTextures("Harvester"),
-            Resources.GetUnitTextures("Harvester"),
-            Resources.GetUnitTextures("Harvester"),
-            Resources.GetUnitTextures("Harvester"),
-            Resources.GetUnitTextures("Harvester"),
-            Resources.GetUnitTextures("Harvester"),
-            Resources.GetUnitTextures("Harvester"),
-        };
-        #endregion
-
         private static float maxSpeed = 1.5f;
         private static float acceleration = 0.2f;
+
+        static Rectangle spriteDimensions = new Rectangle(0, 0, 24, 24);
 
         private int oreAmount = 0;
         const int maxOreAmount = 500;
@@ -47,7 +35,8 @@ namespace RTS_Game
         //Constructor.
         #endregion
         public Harvester(TileMap world, Player owner, Vector2 tilePosition, List<Entity> entityListForRef, Ore[,] oreArray) :
-            base(world, owner, tilePosition, textures, maxHealth, maxSpeed, acceleration, 0, 0, 0)
+            base(world, owner, tilePosition, owner.GetUnitTextures("Harvester"), maxHealth, maxSpeed, acceleration, 0, 0, 0,
+            spriteDimensions)
         {
             this.entityListForRef = entityListForRef;
             this.oreArray = oreArray;

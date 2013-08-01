@@ -24,8 +24,12 @@ namespace RTS_Game
             set { harvesterLimit = value; }
         }
 
+        #region Variable: SpriteDimensions
+        static Rectangle spriteDimensions = new Rectangle(0, 0, 72, 72);
+        #endregion
+
         public Refinery(TileMap world, Player owner, Vector2 TilePosition)
-            : base(world, owner, TilePosition, Resources.GetBuildingTextures("Refinery"))
+            : base(world, owner, TilePosition, owner.GetBuildingTextures("Refinery"), spriteDimensions)
         {
             MaxHealth = 500;
             Width = 3;

@@ -84,9 +84,9 @@ namespace RTS_Game
         //Constructor, Adds Unit to entity list, passes a bunch of variables and then creates a PF array.
         //Sets Next Target to Tile Position so that when Move() is called it immediately looks for the next tile.
         #endregion
-        public Unit(TileMap world, Player owner, Vector2 tilePosition, List<Texture2D> textures, double maxHealth,
-           float maxSpeed, float acceleration, float damage, float AOE, float ROF)
-            : base(world, owner, tilePosition, textures[0], maxHealth)
+        public Unit(TileMap world, Player owner, Vector2 tilePosition, Texture2D texture, double maxHealth,
+           float maxSpeed, float acceleration, float damage, float AOE, float ROF, Rectangle spriteDimensions) 
+           : base(world, owner, tilePosition, texture, maxHealth, spriteDimensions)
         {
             this.maxSpeed = maxSpeed;
             this.acceleration = acceleration;
@@ -94,8 +94,6 @@ namespace RTS_Game
             this.AOE = AOE;
             this.ROF = ROF;
 
-            Textures = textures;
-            SetCorrectTexture();
             world.TileArray[(int) tilePosition.X, (int) tilePosition.Y].OccupiedByUnit = true;
         }
 
@@ -198,42 +196,50 @@ namespace RTS_Game
             //Up
             if ( Rotation > 5.890 || Rotation < 0.480)
             {
-                Texture = Textures[0];
+                SourceRectangle = new Rectangle(SpriteDimensions.Width * 0, SpriteDimensions.Height * 0,
+                    SpriteDimensions.Width, SpriteDimensions.Height);
             }
             //Up Right
             else if (Rotation > 0.480 && Rotation < 1.178)
             {
-                Texture = Textures[1];
+                SourceRectangle = new Rectangle(SpriteDimensions.Width * 1, SpriteDimensions.Height * 0,
+                    SpriteDimensions.Width, SpriteDimensions.Height);
             }
             //Right
             else if (Rotation > 1.178 && Rotation < 1.963)
             {
-                Texture = Textures[2];
+                SourceRectangle = new Rectangle(SpriteDimensions.Width * 2, SpriteDimensions.Height * 0,
+                     SpriteDimensions.Width, SpriteDimensions.Height);
             }
             //Down Right
             else if (Rotation > 1.963 && Rotation < 2.749)
             {
-                Texture = Textures[3];
+                SourceRectangle = new Rectangle(SpriteDimensions.Width * 3, SpriteDimensions.Height * 0,
+                    SpriteDimensions.Width, SpriteDimensions.Height);
             }
             //Down
             else if (Rotation > 2.749 && Rotation < 3.534)
             {
-                Texture = Textures[4];
+                SourceRectangle = new Rectangle(SpriteDimensions.Width * 4, SpriteDimensions.Height * 0,
+                     SpriteDimensions.Width, SpriteDimensions.Height);
             }
             //Down Left
             else if (Rotation > 3.534 && Rotation < 4.320)
             {
-                Texture = Textures[5];
+                SourceRectangle = new Rectangle(SpriteDimensions.Width * 5, SpriteDimensions.Height * 0,
+                    SpriteDimensions.Width, SpriteDimensions.Height);
             }
             //Left
             else if (Rotation > 4.320 && Rotation < 5.105)
             {
-                Texture = Textures[6];
+                SourceRectangle = new Rectangle(SpriteDimensions.Width * 6, SpriteDimensions.Height * 0,
+                    SpriteDimensions.Width, SpriteDimensions.Height);
             }
             //Left Up
             else if (Rotation > 5.105 && Rotation < 5.890)
             {
-                Texture = Textures[7];
+                SpriteDimensions = new Rectangle(SpriteDimensions.Width * 7, SpriteDimensions.Height * 0,
+                    SpriteDimensions.Width, SpriteDimensions.Height);
             }
         }
 
@@ -248,7 +254,7 @@ namespace RTS_Game
         }
 
         #region Function Explanation
-        //Draw Method, Draws Base initialTexture.
+        //Draw Method, Draws Base texture.
         #endregion
         public override void Draw(SpriteBatch spriteBatch)
         {

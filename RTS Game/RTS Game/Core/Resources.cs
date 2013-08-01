@@ -40,9 +40,9 @@ namespace RTS_Game
             UnitTextures.Add(textureToAdd.Name, textureToAdd);
         }
 
-        public static Texture2D GetUnitTextures(String requestedTextureName)
+        public static Dictionary<String, Texture2D> GetUnitTextures()
         {
-            return UnitTextures[requestedTextureName];
+            return UnitTextures;
         }
         #endregion
 
@@ -52,9 +52,9 @@ namespace RTS_Game
             BuildingTextures.Add(textureToAdd.Name, textureToAdd);
         }
 
-        public static Texture2D GetBuildingTextures(String requestedTextureName)
+        public static Dictionary<String, Texture2D> GetBuildingTextures()
         {
-            return BuildingTextures[requestedTextureName];
+            return BuildingTextures;
         }
         #endregion
 
@@ -73,7 +73,6 @@ namespace RTS_Game
         #region Bullet Textures
         public static void AddBulletTexture(Texture2D textureToAdd)
         {
-
             BulletTextures.Add(textureToAdd.Name, textureToAdd);
         }
 
@@ -97,32 +96,41 @@ namespace RTS_Game
         #endregion
 
 
-        public static List<Texture2D> setTeamColours(List<Texture2D> textures, Color teamColour)
+
+        public static Dictionary<String, Texture2D> getColouredTextures(Dictionary<String, Texture2D> textures, Color teamColour)
         {
-            //For each initialTexture in initialTexture list..
-            foreach (Texture2D t in textures)
+            //For each texture in texture list..
+            foreach (KeyValuePair<String, Texture2D> k in textures)
             {
                 //Array of Colours of each pixel. 
                 //Goes from top left to bottom right.
-                Color[] pixelRGBValues = new Color[t.Width * t.Height];
+                Color[] pixelRGBValues = new Color[k.Value.Width * k.Value.Height];
                 //Puts colour of each Pixel into Array.
-                t.GetData(pixelRGBValues);
+                k.Value.GetData(pixelRGBValues);
 
-                for (int i = 0; i < t.Width; i++)
+                for (int i = 0; i < k.Value.Width; i++)
                 {
-                    for (int j = 0; j < t.Height; j++)
+                    for (int j = 0; j < k.Value.Height; j++)
                     {
                         //Array2DTo1D converts from 2D to 1D by adding up all the full rows
                         // and then adding the remaining amount on the current row.
-                        int Array2DTo1D = t.Width * i + j;
+                        int Array2DTo1D = k.Value.Width * j + i;
 
+                        //Shadows
+                        if (pixelRGBValues[Array2DTo1D].G == 255 && pixelRGBValues[Array2DTo1D].B == 0 &&
+                            pixelRGBValues[Array2DTo1D].R == 0)
+                        {
+                            pixelRGBValues[Array2DTo1D] = new Color(0, 0, 0, 100);
+                        }
+                        //Team Colours
+                        #region Explanation
                         //If Red are Blue are equal, and Green is 0, it is a team colour pizel and so should
                         //be recoloured using the team colour. It multipies the team colour by the Blue value
                         //In order to shade the colour.
-                        if (pixelRGBValues[Array2DTo1D].B == pixelRGBValues[Array2DTo1D].R && pixelRGBValues[Array2DTo1D].G == 0 &&
+                        #endregion
+                        else if (pixelRGBValues[Array2DTo1D].B == pixelRGBValues[Array2DTo1D].R && pixelRGBValues[Array2DTo1D].G == 0 &&
                             pixelRGBValues[Array2DTo1D].B != 0)
                         {
-
                             Color colour = new Color
                                 (
                                 teamColour.R / 2,
@@ -130,20 +138,12 @@ namespace RTS_Game
                                 teamColour.B / 2
                                 );
 
-
                             pixelRGBValues[Array2DTo1D] = (colour * (pixelRGBValues[Array2DTo1D].R / 50));
-                        }
-
-                        //Shadows
-                        else if (pixelRGBValues[Array2DTo1D].G == 255 && pixelRGBValues[Array2DTo1D].B == 0 &&
-                            pixelRGBValues[Array2DTo1D].R == 0)
-                        {
-                            pixelRGBValues[Array2DTo1D] = new Color(0, 0, 0, 100);
                         }
                     }
                 }
-                //Sets t to the array.
-                t.SetData(pixelRGBValues);
+                //Sets k.Value to the array.
+                k.Value.SetData(pixelRGBValues);
             }
             return textures;
         }
