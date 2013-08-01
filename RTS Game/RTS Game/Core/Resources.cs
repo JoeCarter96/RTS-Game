@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -94,5 +95,53 @@ namespace RTS_Game
             return LevelObjects[requestedLevelID];
         }
         #endregion
+
+
+        public static List<Texture2D> setTeamColours(List<Texture2D> textures, Color teamColour)
+        {
+            //For each initialTexture in initialTexture list..
+            foreach (Texture2D t in textures)
+            {
+                //Array of Colours of each pixel. 
+                //Goes from top left to bottom right.
+                Color[] pixelRGBValues = new Color[t.Width * t.Height];
+                //Puts colour of each Pixel into Array.
+                t.GetData(pixelRGBValues);
+
+                for (int i = 0; i < t.Width; i++)
+                {
+                    for (int j = 0; j < t.Height; j++)
+                    {
+                        //Array2DTo1D converts from 2D to 1D by adding up all the full rows
+                        // and then adding the remaining amount on the current row.
+                        int Array2DTo1D = t.Width * i + j;
+
+                        //If Red are Blue are equal, and Green is 0, it is a team colour pizel and so should
+                        //be recoloured using the team colour. It multipies the team colour by the Blue value
+                        //In order to shade the colour.
+                        if (pixelRGBValues[Array2DTo1D].B == pixelRGBValues[Array2DTo1D].R && pixelRGBValues[Array2DTo1D].G == 0 &&
+                            pixelRGBValues[Array2DTo1D].B != 0)
+                        {
+
+                            Color colour = new Color
+                                (
+                                teamColour.R / 2,
+                                teamColour.G / 2,
+                                teamColour.B / 2
+                                );
+
+
+                            pixelRGBValues[Array2DTo1D] = (colour * (pixelRGBValues[Array2DTo1D].R / 50));
+                        }
+                    }
+                }
+                //Sets t to the array.
+                t.SetData(pixelRGBValues);
+            }
+            return textures;
+        }
+
+
     }
 }
+ 

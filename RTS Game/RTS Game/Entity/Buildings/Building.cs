@@ -48,6 +48,7 @@ namespace RTS_Game
         {
             //Assuming the building is a 1x1. We will have to re-call this
             ApplySizeChanges();
+            Resources.setTeamColours(new List<Texture2D> { texture }, owner.TeamColour);
         }
 
         #region Function Explanation

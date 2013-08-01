@@ -93,7 +93,7 @@ namespace RTS_Game
 
         public void Update(GameTime gameTime)
         {
-            #region Storing various mouse values
+            #region Storing various values
             //updates the states of the mouse and keyboard
             keyboardState = Keyboard.GetState();
             mouseState = Mouse.GetState();

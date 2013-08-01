@@ -36,7 +36,7 @@ namespace RTS_Game
         #region Function Explanation
         //First gets a 1D Array (PixelRGBValues) of the colours of each pixel in a Texture2D Image (Level). 
         //It then loops through a Texture2D array/every pixel in the image. It tries to find the name of the 
-        //texture represented by the current pixel in the image by comparing it's RGB value to a dictionary of them.
+        //initialTexture represented by the current pixel in the image by comparing it's RGB value to a dictionary of them.
         //If it finds them it then tries to set the Texture2D array's current cell to the corresponding Texture in the
         //Array in Resources.cs.
         #endregion
@@ -47,7 +47,7 @@ namespace RTS_Game
             //Goes from top left to bottom right.
             Color[] pixelRGBValues = new Color[Level.Width * Level.Height];
 
-            //Array of each Pixel Colours texture.
+            //Array of each Pixel Colours initialTexture.
             textureArray = new Texture2D[Level.Width, Level.Height];
 
             //Puts colour of each Pixel into Array.
@@ -65,7 +65,7 @@ namespace RTS_Game
                     int Array2DTo1D = Level.Width * j + i;
                     Colours.TryGetValue(pixelRGBValues[Array2DTo1D], out textureName);
 
-                    //Tries to find texture in Resources dictionary, if it can't defaults to grass texture.
+                    //Tries to find initialTexture in Resources dictionary, if it can't defaults to grass initialTexture.
                     try
                     {
                         if (textureName == "Grass")

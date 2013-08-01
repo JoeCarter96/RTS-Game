@@ -13,8 +13,7 @@ namespace RTS_Game
         static float maxHealth = 100;
 
         #region Textures
-        private static List<Texture2D> textures = new List<Texture2D> 
-        { 
+        private static List<Texture2D> textures = new List<Texture2D> {
             Resources.GetUnitTextures("HeavyTankUp"),
             Resources.GetUnitTextures("HeavyTankUpRight"),
             Resources.GetUnitTextures("HeavyTankRight"),
@@ -40,7 +39,8 @@ namespace RTS_Game
             base(world, owner, tilePosition, textures, maxHealth, maxSpeed, acceleration, damage,
             AOE, ROF)
         {
-            
+            //Tint Heavytank to team colour.
+            textures = Resources.setTeamColours(textures, owner.TeamColour);
         }
 
         #region Function Explanation

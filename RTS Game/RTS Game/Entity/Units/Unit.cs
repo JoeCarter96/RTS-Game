@@ -248,7 +248,7 @@ namespace RTS_Game
         }
 
         #region Function Explanation
-        //Draw Method, Draws Base texture.
+        //Draw Method, Draws Base initialTexture.
         #endregion
         public override void Draw(SpriteBatch spriteBatch)
         {

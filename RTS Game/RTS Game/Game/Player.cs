@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,6 +15,13 @@ namespace RTS_Game
         private TileMap world;
 
         private int money = 0;
+        private Color teamColour = new Color(240, 240, 240);
+        public Color TeamColour
+        {
+            get { return teamColour; }
+            set { teamColour = value; }
+        }
+
 
         #endregion
 

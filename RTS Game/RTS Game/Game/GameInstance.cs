@@ -67,10 +67,6 @@ namespace RTS_Game
                 }
             }
 
-            Unit HT1 = new HeavyTank(new Vector2(2, 6), player, world);
-            Unit HT2 = new HeavyTank(new Vector2(2, 7), player, world);
-            Unit HT3 = new HeavyTank(new Vector2(3, 6), player, world);
-            Unit HT4 = new HeavyTank(new Vector2(3, 7), player, world); ;
 
             ConstructionYard CY = new ConstructionYard(world, player, new Vector2(2, 2));
             PowerPlant PP1 = new PowerPlant(world, player, new Vector2(6, 3));
@@ -147,13 +143,18 @@ namespace RTS_Game
             {
                 player.PlayerSelectedEntities.Clear();
 
+            }
+            #endregion
+
+            #region Middle Mouse Click
+            else if (button == MouseButton.Middle)
+            {
                 //Finds the position of the mouse within the world, not within viewport.
                 Vector2 relativePosition = camera.relativeXY(new Vector2(x, y));
                 Vector2 mouseTile = new Vector2((float)Math.Floor((double)relativePosition.X / GameClass.Tile_Width),
                     (float)(Math.Floor((double)relativePosition.Y / GameClass.Tile_Width)));
 
                 HeavyTank H = new HeavyTank(mouseTile, player, world);
-
             }
             #endregion
         }
@@ -162,6 +163,12 @@ namespace RTS_Game
         #endregion
         public virtual void MouseMoved(int x, int y)
         {
+            //Finds the position of the mouse within the world, not within viewport.
+            Vector2 relativePosition = camera.relativeXY(new Vector2(x, y));
+            Vector2 mouseTile = new Vector2((float)Math.Floor((double)relativePosition.X / GameClass.Tile_Width),
+                (float)(Math.Floor((double)relativePosition.Y / GameClass.Tile_Width)));
+
+            HeavyTank H = new HeavyTank(mouseTile, player, world);
         }
 
         #region Function Explanation

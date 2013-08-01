@@ -121,16 +121,16 @@ namespace RTS_Game
         #region Function Explanation
         //Constructor.
         #endregion
-        public Entity(Vector2 tilePosition, Texture2D texture)
+        public Entity(Vector2 tilePosition, Texture2D initialTexture)
         {
             //We assign it to the property to also have it calculate the pixel position
-            Texture = texture;
+            Texture = initialTexture;
             TilePosition = tilePosition;
             rotation = 0;
         }
 
         #region Function Explanation
-        //Returns the center of the texture.
+        //Returns the center of the initialTexture.
         #endregion
         public Vector2 GetCenter()
         {

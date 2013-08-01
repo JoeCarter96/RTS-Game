@@ -211,7 +211,7 @@ namespace RTS_Game
         }
 
         #region Function Explanation
-        //Dynamically loads a texture.
+        //Dynamically loads a initialTexture.
         #endregion
         /*public Texture2D LoadTexture(string texturePath)
         {
@@ -226,10 +226,10 @@ namespace RTS_Game
                 name = texturePath;
             }
 
-            Texture2D texture = Content.Load<Texture2D>(texturePath);
-            texture.Name = name;
+            Texture2D initialTexture = Content.Load<Texture2D>(texturePath);
+            initialTexture.Name = name;
 
-            return texture;
+            return initialTexture;
         }*/
 
         #region Function Explanation
