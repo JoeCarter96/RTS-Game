@@ -133,6 +133,13 @@ namespace RTS_Game
 
                             pixelRGBValues[Array2DTo1D] = (colour * (pixelRGBValues[Array2DTo1D].R / 50));
                         }
+
+                        //Shadows
+                        else if (pixelRGBValues[Array2DTo1D].G == 255 && pixelRGBValues[Array2DTo1D].B == 0 &&
+                            pixelRGBValues[Array2DTo1D].R == 0)
+                        {
+                            pixelRGBValues[Array2DTo1D] = new Color(0, 0, 0, 100);
+                        }
                     }
                 }
                 //Sets t to the array.
@@ -140,8 +147,6 @@ namespace RTS_Game
             }
             return textures;
         }
-
-
     }
 }
  
