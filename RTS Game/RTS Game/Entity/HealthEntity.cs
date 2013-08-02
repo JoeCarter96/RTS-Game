@@ -85,7 +85,7 @@ namespace RTS_Game
         }
         #endregion
 
-        //Assuming the harvester is spawned with full health
+        //Assuming the Unit is spawned with full health
         public HealthEntity(TileMap world, Player owner, Vector2 tilePosition, Texture2D texture, double maxHealth,
             Rectangle spriteDimensions)
             : base(tilePosition, texture, spriteDimensions)
@@ -135,7 +135,7 @@ namespace RTS_Game
             }
         }
 
-        //Called when the harvester is killed, can be overridden
+        //Called when the Unit is killed, can be overridden
         public virtual void OnDeath(HealthEntity killer)
         {
 

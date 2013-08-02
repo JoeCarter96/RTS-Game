@@ -26,7 +26,7 @@ namespace RTS_Game
         private Player player;
         private Input input;
 
-        Ore[,] oreArray;   //TEMP so find nearest ore works. This will be passed to all harvesters as they are made.
+        Ore[,] oreArray;   //TEMP so find nearest ore works. This will be passed to all Unit as they are made.
         #endregion
 
         #region Function Explanation
@@ -72,7 +72,7 @@ namespace RTS_Game
             PowerPlant PP1 = new PowerPlant(world, player, new Vector2(6, 3));
             PowerPlant PP2 = new PowerPlant(world, player, new Vector2(8, 3));
             Refinery REF = new Refinery(world, player, new Vector2(6, 6));
-         //   Harvester H1 = new Harvester(world, player, new Vector2(12, 12), player.Entities, oreArray);
+            Harvester H1 = new Harvester(world, player, new Vector2(12, 12), player.Entities, oreArray);
 
 
 
@@ -184,7 +184,7 @@ namespace RTS_Game
             if (player.Entities.Count > 0)
             {
                 #region Moving Units
-                //Moving every moving harvester which is meant to.
+                //Moving every moving Unit which is meant to.
                 if (player.PlayerMovingEntities.Count > 0)
                 {
                     foreach (Unit u in player.PlayerMovingEntities.ToList())

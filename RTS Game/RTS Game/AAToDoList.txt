@@ -95,3 +95,9 @@ Shadows							Tom
 Spritesheets					Tom
 
 Custom Cursor					Tom
+
+Units now collide				Tom
+
+Harvester now has new movement	Tom
+
+Harvester now has new Graphics.	Tom

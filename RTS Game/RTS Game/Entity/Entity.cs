@@ -180,7 +180,7 @@ namespace RTS_Game
         #endregion
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(Texture, boundingBoxSize.CreateRectangle(pixelPosition + origin), SourceRectangle, Color.White, 0f, origin, SpriteEffects.None, 0);
+            spriteBatch.Draw(Texture, boundingBoxSize.CreateRectangle(pixelPosition + Origin), SourceRectangle, Color.White, 0f, origin, SpriteEffects.None, 0);
         }
 
         #region Function Explanation
@@ -188,7 +188,7 @@ namespace RTS_Game
         #endregion
         public virtual void Draw(SpriteBatch spriteBatch, Color color)
         {
-            spriteBatch.Draw(Texture, boundingBoxSize.CreateRectangle(pixelPosition + origin), SourceRectangle, color, 0f, origin, SpriteEffects.None, 0);
+            spriteBatch.Draw(Texture, boundingBoxSize.CreateRectangle(pixelPosition + Origin), SourceRectangle, color, 0f, origin, SpriteEffects.None, 0);
         }
     }
 }

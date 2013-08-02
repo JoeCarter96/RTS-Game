@@ -10,7 +10,7 @@ namespace RTS_Game
 {
     #region Class Info
     /*Name: Unit.cs
-          Represents a spawnable harvester which can be moved about the battle field
+          Represents a spawnable Unit which can be moved about the battle field
           and shoot other enemys. Has a lot of stat veriables that will be changed 
           over time as the game progresses in development. 
         */
@@ -27,10 +27,12 @@ namespace RTS_Game
         protected float ROF;
         protected float CURRENT_SPEED;
         protected float bulletTime;
+        #endregion
 
+        #region Other Variables
         protected HealthEntity target;
 
-        //Shooting and waiting to move (when unit is infront).
+        //Shooting and waiting to move (when another unit is in the way).
         protected int waitTimer = 0;
         protected int elapsedMills = 0;
         #endregion
@@ -40,7 +42,7 @@ namespace RTS_Game
         #endregion
 
         #region Pathfinding
-        //Next Tile harvester is moving to.
+        //Next Tile Unit is moving to.
         protected Vector2 nextTile = new Vector2();
         protected Vector2 currentTile = new Vector2();
         protected Queue<Vector2> WAYPOINTS = new Queue<Vector2>();
@@ -111,19 +113,16 @@ namespace RTS_Game
         }
 
 
-
-
-
         public float DistanceToDestination
         {
             get { return Vector2.Distance(PixelPosition, new Vector2(nextTile.X * World.TileWidth, nextTile.Y * World.TileWidth)); }
         }
 
         #region Function Explanation
-        //This is the code which moves the harvester to the target fluidly.
+        //This is the code which moves the Unit to the target fluidly.
         //The target is just the next cell/Tile. when it reaches it,
         //it uses waypoints.Dequeue to remove and use the next waypoint.
-        //Also changes occupied tile.
+        //Also changes occupied tile, and handles collisions.
         #endregion
         public virtual void Move()
         {
