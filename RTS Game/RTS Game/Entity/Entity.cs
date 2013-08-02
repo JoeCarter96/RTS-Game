@@ -157,8 +157,8 @@ namespace RTS_Game
         #endregion
         public Vector2 GetCenter()
         {
-            float x = PixelPosition.X + (Texture.Width / 2);
-            float y = PixelPosition.Y + (Texture.Height / 2);
+            float x = PixelPosition.X + (SourceRectangle.Width / 2);
+            float y = PixelPosition.Y + (SourceRectangle.Height / 2);
 
             return new Vector2(x, y);
         }

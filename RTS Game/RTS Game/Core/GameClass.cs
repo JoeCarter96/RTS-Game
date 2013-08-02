@@ -109,7 +109,7 @@ namespace RTS_Game
             Resources.AddBackgroundTexture(Water01);
             #endregion
 
-             #region Level Objects.
+            #region Level Objects.
             //Debug
             Texture2D Debug = Content.Load<Texture2D>("Levels/Debug");
             Level Level00 = new Level("Level_Test", Debug, 0);
@@ -128,9 +128,36 @@ namespace RTS_Game
 
             #region GUI Textures
             //Splash Screen
-            Texture2D SplashScreen = Content.Load<Texture2D>("GUI/Splash");
+            Texture2D SplashScreen = Content.Load<Texture2D>("GUI/SplashScreen");
             SplashScreen.Name = "SplashScreen";
             Resources.AddGUITexture(SplashScreen);
+
+            #region Main Menu
+            //ButtonBack
+            Texture2D ButtonBack = Content.Load<Texture2D>("GUI/MainMenu/ButtonBack");
+            ButtonBack.Name = "ButtonBack";
+            Resources.AddGUITexture(ButtonBack);
+
+            //LeftBack
+            Texture2D LeftBack = Content.Load<Texture2D>("GUI/MainMenu/LeftBack");
+            LeftBack.Name = "LeftBack";
+            Resources.AddGUITexture(LeftBack);
+
+            //TopRightBack
+            Texture2D TopRightBack = Content.Load<Texture2D>("GUI/MainMenu/TopRightBack");
+            TopRightBack.Name = "TopRightBack";
+            Resources.AddGUITexture(TopRightBack);
+
+            //BackgroundUnit
+            Texture2D BackgroundUnit = Content.Load<Texture2D>("GUI/MainMenu/BackgroundUnit");
+            BackgroundUnit.Name = "BackgroundUnit";
+            Resources.AddGUITexture(BackgroundUnit);
+
+            //BottomRightBack
+            Texture2D BottomRightBack = Content.Load<Texture2D>("GUI/MainMenu/BottomRightBack");
+            BottomRightBack.Name = "BottomRightBack";
+            Resources.AddGUITexture(BottomRightBack);
+            #endregion
 
             //Healthbar
             Texture2D HealthBar = Content.Load<Texture2D>("GUI/Healthbar");
