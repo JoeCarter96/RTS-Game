@@ -14,13 +14,13 @@ namespace RTS_Game
         private bool occupiedByUnit;
         private bool obstacle;
 
-        public bool OccupiedByUnit
+        public bool Obstacle
         {
             get { return obstacle; }
             set { obstacle = value; }
         }
 
-        public bool Obstacle
+        public bool OccupiedByUnit
         {
             get { return occupiedByUnit; }
             set { occupiedByUnit = value; }

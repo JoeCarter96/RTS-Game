@@ -21,7 +21,7 @@ namespace RTS_Game
         private Dictionary<String, Texture2D> buildingTextures = Resources.getColouredTextures(Resources.GetBuildingTextures(), teamColour);
 
         private int money = 0;
-        private static Color teamColour = new Color(0, 200, 0);
+        private static Color teamColour = new Color(42, 100, 52);
         #endregion
 
         public List<Entity> PlayerMovingEntities

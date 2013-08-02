@@ -99,7 +99,7 @@ namespace RTS_Game
             {
                 this.Waypoints = WaypointsGenerator.GenerateWaypoints(this.TilePosition, bestChoice.GetCenterTile(), bestChoice.BoundingBox);
                 Owner.PlayerMovingEntities.Add(this);
-                NextTarget = Waypoints.Dequeue();
+                NextTile = Waypoints.Dequeue();
                 targetRef = bestChoice;
             }
 
@@ -125,7 +125,7 @@ namespace RTS_Game
             }
 
             Owner.PlayerMovingEntities.Add(this);
-            NextTarget = Waypoints.Dequeue();
+            NextTile = Waypoints.Dequeue();
         }
 
         #region Function Explanation
@@ -169,9 +169,9 @@ namespace RTS_Game
             {
                 if (DistanceToDestination < maxSpeed)
                 {
-                    World.TileArray[(int)NEXT_TARGET.X, (int)NEXT_TARGET.Y].OccupiedByUnit = false;
-                    NEXT_TARGET = Waypoints.Dequeue();
-                    World.TileArray[(int)NEXT_TARGET.X, (int)NEXT_TARGET.Y].OccupiedByUnit = true;
+                    World.TileArray[(int)nextTile.X, (int)nextTile.Y].OccupiedByUnit = false;
+                    nextTile = Waypoints.Dequeue();
+                    World.TileArray[(int)nextTile.X, (int)nextTile.Y].OccupiedByUnit = true;
                 }
                 else
                 {
@@ -182,7 +182,7 @@ namespace RTS_Game
                         //Stops it going faster than it's max speed.
                         CURRENT_SPEED = Math.Min(maxSpeed, CURRENT_SPEED += acceleration);
                     }
-                    Vector2 direction = new Vector2(NEXT_TARGET.X * World.TileWidth, NEXT_TARGET.Y * World.TileWidth) - PixelPosition;
+                    Vector2 direction = new Vector2(nextTile.X * World.TileWidth, nextTile.Y * World.TileWidth) - PixelPosition;
                     direction.Normalize();
                     Velocity = Vector2.Multiply(direction, CURRENT_SPEED);
                     PixelPosition += Velocity;
@@ -208,7 +208,7 @@ namespace RTS_Game
                         //Stops it going faster than it's max speed.
                         CURRENT_SPEED = Math.Min(maxSpeed, CURRENT_SPEED += acceleration);
                     }
-                    Vector2 direction = new Vector2(NEXT_TARGET.X * World.TileWidth, NEXT_TARGET.Y * World.TileWidth) - PixelPosition;
+                    Vector2 direction = new Vector2(nextTile.X * World.TileWidth, nextTile.Y * World.TileWidth) - PixelPosition;
                     direction.Normalize();
                     Velocity = Vector2.Multiply(direction, CURRENT_SPEED);
                     PixelPosition += Velocity;

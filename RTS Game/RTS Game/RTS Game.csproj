@@ -87,7 +87,6 @@
     <Compile Include="GUI\Button.cs" />
     <Compile Include="GUI\Size.cs" />
     <Compile Include="GUI\SquareOfDoom.cs" />
-    <Compile Include="Pathfinding\WaypointsOntoABuilding.cs" />
     <Compile Include="Pathfinding\FindNearestOre.cs" />
     <Compile Include="Pathfinding\WaypointsGenerator.cs" />
     <Compile Include="GameState\BasicGameState.cs" />

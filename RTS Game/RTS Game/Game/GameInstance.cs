@@ -130,7 +130,7 @@ namespace RTS_Game
                         if (!player.PlayerMovingEntities.Contains(u))
                         {
                             player.PlayerMovingEntities.Add(u);
-                            u.NextTarget = u.Waypoints.Dequeue();
+                            u.NextTile = u.Waypoints.Dequeue();
                         }
                     }
                     #endregion

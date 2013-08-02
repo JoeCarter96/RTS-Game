@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 namespace RTS_Game
 {
     #region Class Info
-        /*Name: Unit.cs
+    /*Name: Unit.cs
           Represents a spawnable harvester which can be moved about the battle field
           and shoot other enemys. Has a lot of stat veriables that will be changed 
           over time as the game progresses in development. 
@@ -19,27 +19,33 @@ namespace RTS_Game
     class Unit : HealthEntity
     {
         #region Variables
-            #region Unit Attributes
-            protected float maxSpeed;
-            protected float acceleration;
-            protected float damage;
-            protected float AOE;
-            protected float ROF;
-            protected float CURRENT_SPEED;
-            protected float bulletTime;
+        #region Unit Attributes
+        protected float maxSpeed;
+        protected float acceleration;
+        protected float damage;
+        protected float AOE;
+        protected float ROF;
+        protected float CURRENT_SPEED;
+        protected float bulletTime;
 
-            protected HealthEntity target;
-            #endregion
+        protected HealthEntity target;
 
-            #region Passed Variables
-            protected List<Texture2D> textures;
-            #endregion
+        //Shooting and waiting to move (when unit is infront).
+        protected int waitTimer = 0;
+        protected int elapsedMills = 0;
+        #endregion
 
-            #region Pathfinding
-            //Next Tile harvester is moving to.
-            protected Vector2 NEXT_TARGET = new Vector2();
-            protected Queue<Vector2> WAYPOINTS = new Queue<Vector2>();
-             #endregion
+        #region Passed Variables
+        protected List<Texture2D> textures;
+        #endregion
+
+        #region Pathfinding
+        //Next Tile harvester is moving to.
+        protected Vector2 nextTile = new Vector2();
+        protected Vector2 currentTile = new Vector2();
+        protected Queue<Vector2> WAYPOINTS = new Queue<Vector2>();
+
+        #endregion
         #endregion
 
         public float MaxSpeed
@@ -49,15 +55,21 @@ namespace RTS_Game
         }
 
         public Queue<Vector2> Waypoints
-       {
-           get { return WAYPOINTS; }
-           set { WAYPOINTS = value; }
-       }
-
-        public Vector2 NextTarget
         {
-            get { return NEXT_TARGET; }
-            set { NEXT_TARGET = value; }
+            get { return WAYPOINTS; }
+            set { WAYPOINTS = value; }
+        }
+
+        public Vector2 NextTile
+        {
+            get { return nextTile; }
+            set { nextTile = value; }
+        }
+
+        public Vector2 CurrentTile
+        {
+            get { return currentTile; }
+            set { currentTile = value; }
         }
 
         public List<Texture2D> Textures
@@ -85,8 +97,8 @@ namespace RTS_Game
         //Sets Next Target to Tile Position so that when Move() is called it immediately looks for the next tile.
         #endregion
         public Unit(TileMap world, Player owner, Vector2 tilePosition, Texture2D texture, double maxHealth,
-           float maxSpeed, float acceleration, float damage, float AOE, float ROF, Rectangle spriteDimensions) 
-           : base(world, owner, tilePosition, texture, maxHealth, spriteDimensions)
+           float maxSpeed, float acceleration, float damage, float AOE, float ROF, Rectangle spriteDimensions)
+            : base(world, owner, tilePosition, texture, maxHealth, spriteDimensions)
         {
             this.maxSpeed = maxSpeed;
             this.acceleration = acceleration;
@@ -94,15 +106,17 @@ namespace RTS_Game
             this.AOE = AOE;
             this.ROF = ROF;
 
-            world.TileArray[(int) tilePosition.X, (int) tilePosition.Y].OccupiedByUnit = true;
+            world.TileArray[(int)tilePosition.X, (int)tilePosition.Y].OccupiedByUnit = true;
+            currentTile = tilePosition;
         }
 
-        #region Function Explanation
-        //Gets the Distance to the next target Cell.
-        #endregion
+
+
+
+
         public float DistanceToDestination
         {
-            get { return Vector2.Distance(PixelPosition, new Vector2(NEXT_TARGET.X * World.TileWidth, NEXT_TARGET.Y * World.TileWidth)); }
+            get { return Vector2.Distance(PixelPosition, new Vector2(nextTile.X * World.TileWidth, nextTile.Y * World.TileWidth)); }
         }
 
         #region Function Explanation
@@ -113,20 +127,51 @@ namespace RTS_Game
         #endregion
         public virtual void Move()
         {
+            //If a unit is moving whatsoever, it is no longer a semi-stationary objecT.
+            World.TileArray[(int)currentTile.X, (int)currentTile.Y].Obstacle = false;
+
             if (Waypoints.Count > 0)
             {
-                if (DistanceToDestination < maxSpeed)
+                //If there is a unit in the way.
+                if (World.TileArray[(int)nextTile.X, (int)nextTile.Y].OccupiedByUnit == true)
                 {
-                    //If there is a newly placed building in the way, recalculate waypoints.
-                    if (World.TileArray[(int)NEXT_TARGET.X, (int)NEXT_TARGET.Y].Obstacle == true)
+                    //If it's waited more then 3 seconds for the unit to move and it has not,
+                    //Make the unit an obstacle (will be made false when the unit moves) and 
+                    //move around it. Set wait to 0.
+                    if (waitTimer + elapsedMills > 1000)
                     {
-                        WaypointsGenerator.GenerateWaypoints(TilePosition, Waypoints.Last());
+                        World.TileArray[(int)nextTile.X, (int)nextTile.Y].Obstacle = true;
+                        Waypoints = WaypointsGenerator.GenerateWaypoints(CurrentTile, Waypoints.Last());
+                        nextTile = Waypoints.Dequeue();
+                        waitTimer = 0;
                     }
-                        World.TileArray[(int)NEXT_TARGET.X, (int)NEXT_TARGET.Y].OccupiedByUnit = false;
-                        NEXT_TARGET = Waypoints.Dequeue();
-                        World.TileArray[(int)NEXT_TARGET.X, (int)NEXT_TARGET.Y].OccupiedByUnit = true;
+                    else   //If it's still waiting, increment wait timer.
+                    {
+                        waitTimer += elapsedMills;
+                    }
                 }
-                else
+
+                else if (DistanceToDestination < maxSpeed)   //Changing tile target, if we can.
+                {
+                    //If there is a stationary object in the way (stopped tank or newly
+                    //placed building), recalculate waypoints.
+                    if (World.TileArray[(int)nextTile.X, (int)nextTile.Y].Obstacle == true)
+                    {
+                       Waypoints = WaypointsGenerator.GenerateWaypoints(CurrentTile, Waypoints.Last());
+                       nextTile = Waypoints.Dequeue();
+                    }
+                    else    //If nothing is in the way, change the target to the next waypoint.
+                    {
+                        World.TileArray[(int)currentTile.X, (int)currentTile.Y].OccupiedByUnit = false;
+
+                        currentTile = nextTile;
+                        nextTile = Waypoints.Dequeue();
+
+                        World.TileArray[(int)currentTile.X, (int)currentTile.Y].OccupiedByUnit = true;
+                    }
+                }
+
+                else    //If there is still space to move to the next target.
                 {
                     //Accellerating.
                     if (CURRENT_SPEED < maxSpeed)
@@ -135,22 +180,27 @@ namespace RTS_Game
                         //Stops it going faster than it's max speed.
                         CURRENT_SPEED = Math.Min(maxSpeed, CURRENT_SPEED += acceleration);
                     }
-                    Vector2 direction = new Vector2(NEXT_TARGET.X * World.TileWidth, NEXT_TARGET.Y * World.TileWidth) - PixelPosition;
+                    //Actually visibly moving, changing directione etc.
+                    Vector2 direction = new Vector2(nextTile.X * World.TileWidth, nextTile.Y * World.TileWidth) - PixelPosition;
                     direction.Normalize();
                     Velocity = Vector2.Multiply(direction, CURRENT_SPEED);
                     PixelPosition += Velocity;
                     Rotation = toAngle(direction);
                 }
             }
+
             else    //When the Unit has no more waypoints
             {
-                if (DistanceToDestination < maxSpeed)
+                if (DistanceToDestination < maxSpeed)   //If it's at it's target.
                 {
                     //Stops this.Move being called in GameInstance.Update
                     Owner.PlayerMovingEntities.Remove(this);
                     CURRENT_SPEED = 0;
+                    World.TileArray[(int)currentTile.X, (int)currentTile.Y].OccupiedByUnit = false;
+                    currentTile = TilePosition;
+                    World.TileArray[(int)currentTile.X, (int)currentTile.Y].OccupiedByUnit = true;
                 }
-                else    //if it's not on the final tile, continue to move
+                else    // OR if it's not on the final tile, continue to move
                 {
                     //Accellerating.
                     if (CURRENT_SPEED < maxSpeed)
@@ -159,14 +209,15 @@ namespace RTS_Game
                         //Stops it going faster than it's max speed.
                         CURRENT_SPEED = Math.Min(maxSpeed, CURRENT_SPEED += acceleration);
                     }
-                    Vector2 direction = new Vector2(NEXT_TARGET.X * World.TileWidth, NEXT_TARGET.Y * World.TileWidth) - PixelPosition;
+                    //Actually visibly moving, changing directione etc.
+                    Vector2 direction = new Vector2(nextTile.X * World.TileWidth, nextTile.Y * World.TileWidth) - PixelPosition;
                     direction.Normalize();
                     Velocity = Vector2.Multiply(direction, CURRENT_SPEED);
                     PixelPosition += Velocity;
                     Rotation = toAngle(direction);
                 }
             }
-}
+        }
 
         #region Function Explanation
         //Converts a Vector2 to an angle.
@@ -174,12 +225,12 @@ namespace RTS_Game
         public float toAngle(Vector2 vector)
         {
             //Find Angle (in rads):
-            float rads = (float) Math.Atan2((float)vector.X, (float)-vector.Y);
+            float rads = (float)Math.Atan2((float)vector.X, (float)-vector.Y);
 
 
             if (vector.X < 0)
             {
-                return ((float) (2 * Math.PI) - Math.Abs(rads));
+                return ((float)(2 * Math.PI) - Math.Abs(rads));
             }
             else
             {
@@ -194,7 +245,7 @@ namespace RTS_Game
         public void SetCorrectTexture()
         {
             //Up
-            if ( Rotation > 5.890 || Rotation < 0.480)
+            if (Rotation > 5.890 || Rotation < 0.480)
             {
                 SourceRectangle = new Rectangle(SpriteDimensions.Width * 0, SpriteDimensions.Height * 0,
                     SpriteDimensions.Width, SpriteDimensions.Height);
@@ -238,7 +289,7 @@ namespace RTS_Game
             //Left Up
             else if (Rotation > 5.105 && Rotation < 5.890)
             {
-                SpriteDimensions = new Rectangle(SpriteDimensions.Width * 7, SpriteDimensions.Height * 0,
+                SourceRectangle = new Rectangle(SpriteDimensions.Width * 7, SpriteDimensions.Height * 0,
                     SpriteDimensions.Width, SpriteDimensions.Height);
             }
         }
@@ -250,7 +301,8 @@ namespace RTS_Game
         {
             base.Update(gameTime);
 
-            bulletTime += (float) gameTime.ElapsedGameTime.TotalSeconds;
+            bulletTime += (float)gameTime.ElapsedGameTime.TotalSeconds;
+            elapsedMills = gameTime.ElapsedGameTime.Milliseconds;
         }
 
         #region Function Explanation
@@ -272,7 +324,7 @@ namespace RTS_Game
             if (base.tilePosition != FINAL_TARGET)
             {
                 int highest = int.MaxValue;
-                Vector2 nextTarget = new Vector2(base.tilePosition.X, base.tilePosition.Y);
+                Vector2 nextTile = new Vector2(base.tilePosition.X, base.tilePosition.Y);
 
                 //Left
                 try
@@ -280,8 +332,8 @@ namespace RTS_Game
                     if (highest < PF_ARRAY[(int)base.tilePosition.X - 1, (int)base.tilePosition.Y] && PF_ARRAY[(int)base.tilePosition.X - 1, (int)base.tilePosition.Y] > 0 && world.TileArray[(int)base.tilePosition.X - 1, (int) base.tilePosition.Y].OccupiedByUnit != true)
                     {
                         highest = PF_ARRAY[(int) base.tilePosition.X - 1, (int) base.tilePosition.Y];
-                        nextTarget.X = base.tilePosition.X - 1;
-                        nextTarget.Y = base.tilePosition.Y;
+                        nextTile.X = base.tilePosition.X - 1;
+                        nextTile.Y = base.tilePosition.Y;
                     }
                 }
                 catch { Console.WriteLine("Left Limit"); }
@@ -292,8 +344,8 @@ namespace RTS_Game
                     if (highest < PF_ARRAY[(int) base.tilePosition.X + 1, (int) base.tilePosition.Y] && PF_ARRAY[(int)base.tilePosition.X + 1, (int)base.tilePosition.Y] > 0 && world.TileArray[(int)base.tilePosition.X + 1, (int) base.tilePosition.Y].OccupiedByUnit != true)
                     {
                         highest = PF_ARRAY[(int) base.tilePosition.X + 1, (int) base.tilePosition.Y];
-                        nextTarget.X = base.tilePosition.X + 1;
-                        nextTarget.Y = base.tilePosition.Y;
+                        nextTile.X = base.tilePosition.X + 1;
+                        nextTile.Y = base.tilePosition.Y;
                     }
                 }
                 catch { Console.WriteLine("Right Limit"); }
@@ -305,8 +357,8 @@ namespace RTS_Game
                     if (highest < PF_ARRAY[(int) base.tilePosition.X, (int) base.tilePosition.Y + 1] && PF_ARRAY[(int)base.tilePosition.X, (int)base.tilePosition.Y + 1] > 0 && world.TileArray[(int)base.tilePosition.X, (int) base.tilePosition.Y + 1].OccupiedByUnit != true)
                     {
                         highest = PF_ARRAY[(int)base.tilePosition.X, (int) base.tilePosition.Y + 1];
-                        nextTarget.X = base.tilePosition.X;
-                        nextTarget.Y = base.tilePosition.Y + 1;
+                        nextTile.X = base.tilePosition.X;
+                        nextTile.Y = base.tilePosition.Y + 1;
                     }
                 }
                 catch { Console.WriteLine("Lower Limit"); }
@@ -319,8 +371,8 @@ namespace RTS_Game
                     if (highest < PF_ARRAY[(int)base.tilePosition.X, (int)base.tilePosition.Y - 1] && PF_ARRAY[(int)base.tilePosition.X, (int)base.tilePosition.Y - 1] > 0 && world.TileArray[(int)base.tilePosition.X, (int) base.tilePosition.Y - 1].OccupiedByUnit != true)
                     {
                         highest = PF_ARRAY[(int)base.tilePosition.X, (int) base.tilePosition.Y - 1];
-                        nextTarget.X = base.tilePosition.X;
-                        nextTarget.Y = base.tilePosition.Y - 1;
+                        nextTile.X = base.tilePosition.X;
+                        nextTile.Y = base.tilePosition.Y - 1;
                     }
                 }
                 catch { Console.WriteLine("Upper Limit"); }
@@ -333,8 +385,8 @@ namespace RTS_Game
                     if (highest < PF_ARRAY[(int)base.tilePosition.X + 1, (int)base.tilePosition.Y - 1] && PF_ARRAY[(int)base.tilePosition.X + 1, (int)base.tilePosition.Y - 1] > 0 && world.TileArray[(int)base.tilePosition.X + 1, (int) base.tilePosition.Y - 1].OccupiedByUnit != true)
                     {
                         highest = PF_ARRAY[(int)base.tilePosition.X + 1, (int) base.tilePosition.Y - 1];
-                        nextTarget.X = base.tilePosition.X + 1;
-                        nextTarget.Y = base.tilePosition.Y - 1;
+                        nextTile.X = base.tilePosition.X + 1;
+                        nextTile.Y = base.tilePosition.Y - 1;
                     }
                 }
                 catch { }
@@ -347,8 +399,8 @@ namespace RTS_Game
                     if (highest < PF_ARRAY[(int)base.tilePosition.X - 1, (int)base.tilePosition.Y - 1] && PF_ARRAY[(int)base.tilePosition.X - 1, (int)base.tilePosition.Y - 1] > 0 && world.TileArray[(int)base.tilePosition.X - 1, (int) base.tilePosition.Y - 1].OccupiedByUnit != true)
                     {
                         highest = PF_ARRAY[(int)base.tilePosition.X - 1, (int) base.tilePosition.Y - 1];
-                        nextTarget.X = base.tilePosition.X - 1;
-                        nextTarget.Y = base.tilePosition.Y - 1;
+                        nextTile.X = base.tilePosition.X - 1;
+                        nextTile.Y = base.tilePosition.Y - 1;
                     }
                 }
                 catch { }
@@ -360,8 +412,8 @@ namespace RTS_Game
                     if (highest < PF_ARRAY[(int)base.tilePosition.X + 1, (int)base.tilePosition.Y + 1] && PF_ARRAY[(int)base.tilePosition.X + 1, (int)base.tilePosition.Y + 1] > 0 && world.TileArray[(int)base.tilePosition.X + 1, (int) base.tilePosition.Y + 1].OccupiedByUnit != true)
                     {
                         highest = PF_ARRAY[(int)base.tilePosition.X + 1, (int) base.tilePosition.Y + 1];
-                        nextTarget.X = base.tilePosition.X + 1;
-                        nextTarget.Y = base.tilePosition.Y + 1;
+                        nextTile.X = base.tilePosition.X + 1;
+                        nextTile.Y = base.tilePosition.Y + 1;
                     }
                 }
                 catch { }
@@ -374,8 +426,8 @@ namespace RTS_Game
                     if (highest < PF_ARRAY[(int)base.tilePosition.X - 1, (int)base.tilePosition.Y + 1] && PF_ARRAY[(int)base.tilePosition.X - 1, (int)base.tilePosition.Y + 1] > 0 && world.TileArray[(int)base.tilePosition.X - 1, (int) base.tilePosition.Y + 1].OccupiedByUnit != true)
                     {
                         highest = PF_ARRAY[(int)base.tilePosition.X - 1, (int) base.tilePosition.Y + 1];
-                        nextTarget.X = base.tilePosition.X - 1;
-                        nextTarget.Y = base.tilePosition.Y + 1;
+                        nextTile.X = base.tilePosition.X - 1;
+                        nextTile.Y = base.tilePosition.Y + 1;
                     }
                 }
                 catch { }
@@ -386,7 +438,7 @@ namespace RTS_Game
 
                 //Moving playerEntities occupation and target.
                 world.TileArray[(int)base.tilePosition.X, (int) base.tilePosition.Y].OccupiedByUnit = false;
-                NEXT_TARGET = nextTarget;
+                nextTile = nextTile;
                 world.TileArray[(int)base.tilePosition.X, (int) base.pixelPosition.Y].OccupiedByUnit = true;
 
             }
@@ -409,7 +461,7 @@ namespace RTS_Game
         public void Move()
         {
             //If it is at the Tile, find a new one.
-            if (base.TilePosition == NEXT_TARGET)
+            if (base.TilePosition == nextTile)
             {
                 //Find a new one.
                 FindNextCell();
@@ -418,7 +470,7 @@ namespace RTS_Game
             {
                 //Moving the harvester.
                 //Stand in code until i can be arsed moving stuff nicely.
-                base.TilePosition = new Vector2(NEXT_TARGET.X, NEXT_TARGET.Y);
+                base.TilePosition = new Vector2(nextTile.X, nextTile.Y);
                
                   //TEMP.
             }

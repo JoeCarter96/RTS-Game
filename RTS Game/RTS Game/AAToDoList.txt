@@ -87,3 +87,11 @@ depending on the Angle.
 
 Heavily increased drawing		Tom
 efficiency
+
+Team Colours					Tom
+
+Shadows							Tom
+
+Spritesheets					Tom
+
+Custom Cursor					Tom

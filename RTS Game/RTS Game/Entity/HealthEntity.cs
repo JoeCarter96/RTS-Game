@@ -86,9 +86,9 @@ namespace RTS_Game
         #endregion
 
         //Assuming the harvester is spawned with full health
-        public HealthEntity(TileMap world, Player owner, Vector2 tilePosition, Texture2D initialTexture, double maxHealth,
+        public HealthEntity(TileMap world, Player owner, Vector2 tilePosition, Texture2D texture, double maxHealth,
             Rectangle spriteDimensions)
-            : base(tilePosition, initialTexture, spriteDimensions)
+            : base(tilePosition, texture, spriteDimensions)
         {
             Owner = owner;
             World = world;

@@ -27,6 +27,10 @@ namespace RTS_Game
 
         private KeyboardState keyboard;
         private MouseState mouse;
+        private Vector2 mousePos;
+
+        private Dictionary<String, Texture2D> mouseTextures = new Dictionary<String, Texture2D>();
+        private Texture2D currentMouseTexture;
         #endregion
 
         #region Function Explanation
@@ -39,7 +43,7 @@ namespace RTS_Game
             Content.RootDirectory = "Content";
 
             //make the mouse visible, we want to see the mouse
-            IsMouseVisible = true;
+            //IsMouseVisible = true;
         }
 
         #region Function Explanation
@@ -138,6 +142,11 @@ namespace RTS_Game
             SelectedRectangle.Name = "SelectedRectangle";
             Resources.AddGUITexture(SelectedRectangle);
 
+            //Cursors.
+            mouseTextures.Add("Normal", Content.Load<Texture2D>("GUI/Cursors/Normal"));
+
+            currentMouseTexture = mouseTextures["Normal"];
+
             #endregion
 
             #region Unit Textures
@@ -216,6 +225,15 @@ namespace RTS_Game
             //Update the StateManager
             StateManager.Instance.Update(gameTime);
 
+            //Cursor
+            mousePos = new Vector2(mouse.X, mouse.Y);
+
+            //TODO: Add code for changing conditions while in diferent states.
+            if (StateManager.Instance.CurrentGameState.GetType() == new MainMenuState().GetType())
+            {
+                
+            }
+
             base.Update(gameTime);
         }
 
@@ -226,6 +244,9 @@ namespace RTS_Game
         {
             GraphicsDevice.Clear(Color.White);
             StateManager.Instance.Draw(spriteBatch);
+            spriteBatch.Begin();
+            spriteBatch.Draw(currentMouseTexture, mousePos, Color.White);
+            spriteBatch.End();
             base.Draw(gameTime);
         }
     }
