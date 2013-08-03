@@ -101,3 +101,7 @@ Units now collide				Tom
 Harvester now has new movement	Tom
 
 Harvester now has new Graphics.	Tom
+
+New Menu						Tom
+
+Building Test					Tom

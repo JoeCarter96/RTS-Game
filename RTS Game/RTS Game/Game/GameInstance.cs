@@ -68,14 +68,17 @@ namespace RTS_Game
             }
 
 
-            ConstructionYard CY = new ConstructionYard(world, player, new Vector2(2, 2));
-            PowerPlant PP1 = new PowerPlant(world, player, new Vector2(6, 3));
-            PowerPlant PP2 = new PowerPlant(world, player, new Vector2(8, 3));
-            Refinery REF = new Refinery(world, player, new Vector2(6, 6));
-            Harvester H1 = new Harvester(world, player, new Vector2(12, 12), player.Entities, oreArray);
-
-
-
+            new ConstructionYard(world, player, new Vector2(2, 2));
+            new PowerPlant(world, player, new Vector2(6, 3));
+            new PowerPlant(world, player, new Vector2(8, 3));
+            new Refinery(world, player, new Vector2(6, 6));
+            new Refinery(world, player, new Vector2(6, 30));
+            new Harvester(world, player, new Vector2(12, 12), player.Entities, oreArray);
+            new Harvester(world, player, new Vector2(13, 12), player.Entities, oreArray);
+            new Harvester(world, player, new Vector2(14, 12), player.Entities, oreArray);
+            new Harvester(world, player, new Vector2(15, 12), player.Entities, oreArray);
+            new Harvester(world, player, new Vector2(16, 12), player.Entities, oreArray);
+            new Harvester(world, player, new Vector2(8, 30), player.Entities, oreArray);
             #endregion
         }
 

@@ -19,17 +19,17 @@ namespace RTS_Game
 
         private int oreAmount = 0;
         const int maxOreAmount = 500;
-        List<Entity> entityListForRef;
+        private List<Entity> entityListForRef;
         protected Ore targetOre;
-        enum State { Stopped, Moving, Unloading };
-        State currentState = State.Stopped;
-        Refinery targetRef = null;
-        int timeSinceLast = 0;
+        private enum State { Stopped, Moving, Unloading };
+        private State currentState = State.Stopped;
+        private Refinery targetRef = null;
+        private int timeSinceLast = 0;
         const int timeBetweenUnloads = 250;
         const int timeBetweenMines = 750;
         const int amountToUnload = 25;
-        Ore[,] oreArray;
-        Rectangle rectToIgnore = new Rectangle();
+        private Ore[,] oreArray;
+        private Rectangle rectToIgnore = new Rectangle();
         #endregion
 
         #region Function Explanation
@@ -98,7 +98,7 @@ namespace RTS_Game
             //If there is a refinery chosen, move to it.
             if (bestChoice != null)
             {
-                this.Waypoints = WaypointsGenerator.GenerateWaypoints(this.TilePosition, bestChoice.GetCenterTile(), bestChoice.BoundingBox);
+                Waypoints = WaypointsGenerator.GenerateWaypoints(this.TilePosition, bestChoice.GetCenterTile(), bestChoice.BoundingBox);
                 rectToIgnore = bestChoice.BoundingBox;
                 Owner.PlayerMovingEntities.Add(this);
                 NextTile = Waypoints.Dequeue();

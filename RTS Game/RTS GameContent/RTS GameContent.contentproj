@@ -84,11 +84,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Buildings\ConstructionYard.png">
-      <Name>ConstructionYard</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
     <Compile Include="Buildings\PowerPlant.png">
       <Name>PowerPlant</Name>
       <Importer>TextureImporter</Importer>
@@ -193,6 +188,13 @@
   <ItemGroup>
     <Compile Include="GUI\MainMenu\BottomRightBack.png">
       <Name>BottomRightBack</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Buildings\ConstructionYard.png">
+      <Name>ConstructionYard</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
