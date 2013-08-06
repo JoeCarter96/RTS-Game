@@ -28,7 +28,7 @@ namespace RTS_Game
         public virtual float Rotation
         {
             get { return rotation; }
-            protected set
+            set
             {
                 origin = new Vector2(SpriteDimensions.Width / 2, SpriteDimensions.Height / 2);
                 rotation = value;
@@ -59,7 +59,7 @@ namespace RTS_Game
         public Vector2 PixelPosition
         {
             get { return pixelPosition; }
-            protected set
+            set
             {
                 pixelPosition = value;
 
@@ -67,6 +67,8 @@ namespace RTS_Game
                 double newY = (int)Math.Round((decimal)pixelPosition.Y / GameClass.Tile_Width);
 
                 tilePosition = new Vector2((float)newX, (float)newY);
+
+                Rotation = 0;
             }
         }
         #endregion
@@ -87,7 +89,7 @@ namespace RTS_Game
         #region Variable: BoundingBox
         public Rectangle BoundingBox
         {
-            get { return boundingBoxSize.CreateRectangle(PixelPosition); }
+            get { return boundingBoxSize.CreateRectangle(new Vector2(pixelPosition.X - (spriteDimensions.Width / 2), pixelPosition.Y - (spriteDimensions.Height / 2))); }
         }
         #endregion
 
@@ -153,21 +155,6 @@ namespace RTS_Game
         }
 
         #region Function Explanation
-        //Returns the center of the texture.
-        #endregion
-        public Vector2 GetCenter()
-        {
-            float x = PixelPosition.X + (SourceRectangle.Width / 2);
-            float y = PixelPosition.Y + (SourceRectangle.Height / 2);
-
-            return new Vector2(x, y);
-        }
-        public Vector2 GetCenterTile()
-        {
-            return new Vector2(BoundingBox.Center.X / GameClass.Tile_Width, BoundingBox.Center.Y / GameClass.Tile_Width);
-        }
-
-        #region Function Explanation
         //Not currently used.
         #endregion
         public virtual void Update(GameTime gameTime)
@@ -176,19 +163,20 @@ namespace RTS_Game
         }
 
         #region Function Explanation
-        //Draws the Texture without Colour tint.
+        //Draws the Texture without Colour tint. The Rectangle created is offset by half the texture
+        //so it is central to the tile/pixel position.
         #endregion
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(Texture, boundingBoxSize.CreateRectangle(pixelPosition + Origin), SourceRectangle, Color.White, 0f, origin, SpriteEffects.None, 0);
-        }
+                spriteBatch.Draw(Texture, boundingBoxSize.CreateRectangle(new Vector2(pixelPosition.X - (spriteDimensions.Width / 2), pixelPosition.Y - (spriteDimensions.Height / 2))), SourceRectangle, Color.White, 0f, new Vector2(0, 0), SpriteEffects.None, 0);
+       }
 
         #region Function Explanation
         //Draws the Texture with Color tint.
         #endregion
         public virtual void Draw(SpriteBatch spriteBatch, Color color)
         {
-            spriteBatch.Draw(Texture, boundingBoxSize.CreateRectangle(pixelPosition + Origin), SourceRectangle, color, 0f, origin, SpriteEffects.None, 0);
+            spriteBatch.Draw(Texture, boundingBoxSize.CreateRectangle(new Vector2(pixelPosition.X - (spriteDimensions.Width / 2))), SourceRectangle, color, 0f, origin, SpriteEffects.None, 0);
         }
     }
 }

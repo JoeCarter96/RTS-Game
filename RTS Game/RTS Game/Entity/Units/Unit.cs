@@ -35,6 +35,8 @@ namespace RTS_Game
         //Shooting and waiting to move (when another unit is in the way).
         protected int waitTimer = 0;
         protected int elapsedMills = 0;
+
+        protected Turret turret;
         #endregion
 
         #region Passed Variables
@@ -87,7 +89,7 @@ namespace RTS_Game
         public override float Rotation
         {
             get { return base.Rotation; }
-            protected set
+            set
             {
                 base.Rotation = value;
                 SetCorrectTexture();
@@ -126,9 +128,6 @@ namespace RTS_Game
         #endregion
         public virtual void Move()
         {
-            //If a unit is moving whatsoever, it is no longer a semi-stationary objecT.
-            World.TileArray[(int)currentTile.X, (int)currentTile.Y].Obstacle = false;
-
             if (Waypoints.Count > 0)
             {
                 //If there is a unit in the way.
@@ -184,7 +183,9 @@ namespace RTS_Game
                     direction.Normalize();
                     Velocity = Vector2.Multiply(direction, CURRENT_SPEED);
                     PixelPosition += Velocity;
+                    turret.PixelPosition = PixelPosition;
                     Rotation = toAngle(direction);
+                    turret.Rotation = Rotation;
                 }
             }
 
@@ -213,7 +214,9 @@ namespace RTS_Game
                     direction.Normalize();
                     Velocity = Vector2.Multiply(direction, CURRENT_SPEED);
                     PixelPosition += Velocity;
+                    turret.PixelPosition = PixelPosition;
                     Rotation = toAngle(direction);
+                    turret.Rotation = Rotation;
                 }
             }
         }
@@ -310,6 +313,11 @@ namespace RTS_Game
         public override void Draw(SpriteBatch spriteBatch)
         {
             base.Draw(spriteBatch);
+
+            if (turret != null)
+            {
+                turret.Draw(spriteBatch);
+            }
         }
     }
 }

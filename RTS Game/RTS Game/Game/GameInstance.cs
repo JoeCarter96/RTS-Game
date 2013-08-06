@@ -71,14 +71,9 @@ namespace RTS_Game
             new ConstructionYard(world, player, new Vector2(2, 2));
             new PowerPlant(world, player, new Vector2(6, 3));
             new PowerPlant(world, player, new Vector2(8, 3));
-            new Refinery(world, player, new Vector2(6, 6));
+            new Refinery(world, player, new Vector2(6, 7));
             new Refinery(world, player, new Vector2(6, 30));
-            new Harvester(world, player, new Vector2(12, 12), player.Entities, oreArray);
-            new Harvester(world, player, new Vector2(13, 12), player.Entities, oreArray);
-            new Harvester(world, player, new Vector2(14, 12), player.Entities, oreArray);
-            new Harvester(world, player, new Vector2(15, 12), player.Entities, oreArray);
-            new Harvester(world, player, new Vector2(16, 12), player.Entities, oreArray);
-            new Harvester(world, player, new Vector2(8, 30), player.Entities, oreArray);
+
             #endregion
         }
 
@@ -158,6 +153,7 @@ namespace RTS_Game
                     (float)(Math.Floor((double)relativePosition.Y / GameClass.Tile_Width)));
 
                 HeavyTank H = new HeavyTank(mouseTile, player, world);
+                Harvester H2 = new Harvester(world, player, new Vector2(mouseTile.X, mouseTile.Y + 1), player.Entities, oreArray);
             }
             #endregion
         }
@@ -166,12 +162,6 @@ namespace RTS_Game
         #endregion
         public virtual void MouseMoved(int x, int y)
         {
-            //Finds the position of the mouse within the world, not within viewport.
-            Vector2 relativePosition = camera.relativeXY(new Vector2(x, y));
-            Vector2 mouseTile = new Vector2((float)Math.Floor((double)relativePosition.X / GameClass.Tile_Width),
-                (float)(Math.Floor((double)relativePosition.Y / GameClass.Tile_Width)));
-
-            HeavyTank H = new HeavyTank(mouseTile, player, world);
         }
 
         #region Function Explanation
@@ -229,7 +219,17 @@ namespace RTS_Game
 
             foreach (Entity e in player.PlayerSelectedEntities)
             {
-                spriteBatch.Draw(Resources.GetGUITextures("SelectedRectangle"), e.BoundingBoxSize.CreateRectangle(e.PixelPosition + e.Origin), null, Color.White, e.Rotation, e.Origin, SpriteEffects.None, 0);
+                spriteBatch.Draw(Resources.GetGUITextures("SelectedRectangle"), e.BoundingBox, null, Color.White, 0f, new Vector2(0, 0), SpriteEffects.None, 0);
+               
+            }
+
+            //DEBUG.
+            foreach (Tile t in world.TileArray)
+            {
+                if (t.Obstacle)
+                {
+                   // spriteBatch.Draw(Resources.GetBackgroundTextures("DebugTile"), t.BoundingBox, null, Color.White, 0f, new Vector2(0, 0), SpriteEffects.None, 0);
+                }
             }
         }
 

@@ -1,5 +1,7 @@
 ﻿Please add to completed list when something is finished.
 
+TO BE ADDED.
+
 UI
 	Components
 		Scroll bar
@@ -23,7 +25,7 @@ Pathfinding
 Resources
 	GUI
 	Refinery
-		standard building code
+		standard building code 
 	silos?
 Buying Buildings/Reduction of money
 No ore left handling code
@@ -42,6 +44,12 @@ Input
 Rotation System
 	Smooth rotation.
 
+
+BUGS
+
+Harvester moving crashes game when encountering a unit in the way.
+
+Gamr crashes when unit tries to move to obstacle.
 
 
 COMPLETED
@@ -105,3 +113,12 @@ Harvester now has new Graphics.	Tom
 New Menu						Tom
 
 Building Test					Tom
+
+Tileposition and Pixel			Tom
+Position are measured from the 
+center. Larger units and buildings 
+are now drawn centrally.
+
+Building has correct obstacles.	Tom
+They were wrong as tileposition
+was now central, not top left.

@@ -138,7 +138,7 @@ namespace RTS_Game
                 }
                 if (input.IsKeyDown(Keys.Right) || input.X > GameClass.Game_Width - (GameClass.Game_Width / 100))
                 {
-                    movementVector.X++;
+                    movementVector.X+=50;
                 }
                 if (input.IsKeyDown(Keys.Up) || input.Y < (GameClass.Game_Height / 100))
                 {
@@ -146,12 +146,12 @@ namespace RTS_Game
                 }
                 if (input.IsKeyDown(Keys.Down) || input.Y > GameClass.Game_Height - (GameClass.Game_Height / 100))
                 {
-                    movementVector.Y++;
+                    movementVector.Y+=50;
                 }
 
                 if (movementVector != Vector2.Zero)
                 {
-                    movementVector.Normalize();
+                  //  movementVector.Normalize();
                     Position += (movementVector * CameraSpeed);
                 }
                 #endregion

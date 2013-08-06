@@ -89,12 +89,12 @@ namespace RTS_Game
         }
 
         #region Function Explanation
-        //Draws Each Tile.
+        //Draws Each Tile that is within the viewport.
         #endregion
         public void Draw(SpriteBatch spriteBatch, Camera camera)
         {
             Vector2 relativeViewport = camera.relativeXY(new Vector2(camera.Viewport.X, camera.Viewport.Y));
-            for (int i = (int) (relativeViewport.X / GameClass.Tile_Width); i <= (relativeViewport.X + (camera.Viewport.Width / camera.Zoom)) / (GameClass.Tile_Width); i++)
+            for (int i = (int) (relativeViewport.X / GameClass.Tile_Width); i <= ((relativeViewport.X + (camera.Viewport.Width / camera.Zoom)) / (GameClass.Tile_Width)); i++)
             {
                 for (int j = (int)(relativeViewport.Y / GameClass.Tile_Width); j <= (relativeViewport.Y + (camera.Viewport.Height / camera.Zoom)) / (GameClass.Tile_Width); j++)
                 {

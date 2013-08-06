@@ -82,11 +82,11 @@ namespace RTS_Game
             //parsing units in the entity list.
             foreach (Refinery r in entityListForRef.OfType<Refinery>())
             {
-                double diff = (r.TilePosition.X - TilePosition.X) *
-                    (r.TilePosition.X - TilePosition.X);
+                double diff = Math.Abs(r.TilePosition.X - TilePosition.X) *
+                    Math.Abs(r.TilePosition.Y - TilePosition.Y);
 
-                double solution = diff * (r.NumberOfHarvesters
-                    / r.HarvesterLimit);
+                double solution = diff * ((double) (r.NumberOfHarvesters + 1)
+                    / (double) r.HarvesterLimit);
 
                 if (solution < lowestSolution)
                 {
@@ -98,11 +98,12 @@ namespace RTS_Game
             //If there is a refinery chosen, move to it.
             if (bestChoice != null)
             {
-                Waypoints = WaypointsGenerator.GenerateWaypoints(this.TilePosition, bestChoice.GetCenterTile(), bestChoice.BoundingBox);
+                Waypoints = WaypointsGenerator.GenerateWaypoints(this.TilePosition, bestChoice.TilePosition, bestChoice.BoundingBox);
                 rectToIgnore = bestChoice.BoundingBox;
                 Owner.PlayerMovingEntities.Add(this);
                 NextTile = Waypoints.Dequeue();
                 targetRef = bestChoice;
+                targetRef.NumberOfHarvesters++;
             }
 
         }
@@ -167,8 +168,6 @@ namespace RTS_Game
         #endregion
         public override void Move()
         {
-            //If a unit is moving whatsoever, it is no longer a semi-stationary objecT.
-            World.TileArray[(int)currentTile.X, (int)currentTile.Y].Obstacle = false;
 
             if (Waypoints.Count > 0)
             {
@@ -277,7 +276,7 @@ namespace RTS_Game
                 if (oreAmount == maxOreAmount)
                 {
                     //If we're stopped and at refinery, begin unloading.
-                    if (targetRef != null && TilePosition == targetRef.GetCenterTile())
+                    if (targetRef != null && TilePosition == targetRef.TilePosition)
                     {
                         currentState = State.Unloading;
                     }
@@ -318,6 +317,13 @@ namespace RTS_Game
                     {
                         currentState = State.Moving;
                         MoveToOre();
+                    }
+
+
+                    if (targetRef != null)
+                    {
+                        targetRef.NumberOfHarvesters--;
+                        targetRef = null;
                     }
                 }
             }

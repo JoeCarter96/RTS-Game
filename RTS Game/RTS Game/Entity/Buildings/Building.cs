@@ -66,11 +66,15 @@ namespace RTS_Game
             
             OccupiedTiles = new Tile[width, height];
 
+            //Add new Obstacles.
             for (int x = 0; x < width; x++)
             {
                 for (int y = 0; y < height; y++)
                 {
-                    OccupiedTiles[x, y] = World.GetTile(x + (int)TilePosition.X, y + (int)TilePosition.Y);
+                    //Finding tiles which building occupies. The (int)((SpriteDimensions.Width /2) /GameClass.Tile_Width) is because tile position is 
+                    //central. We therefore do this code in order to reverse what we do in the entity draw method and measure from the top left of the sprite.
+                    OccupiedTiles[x, y] = World.GetTile(x + ((int)TilePosition.X - (int)((SpriteDimensions.Width /2) /GameClass.Tile_Width)), 
+                                                        y + ((int)TilePosition.Y - (int)((SpriteDimensions.Height /2) /GameClass.Tile_Width)));
                 }
             }
 

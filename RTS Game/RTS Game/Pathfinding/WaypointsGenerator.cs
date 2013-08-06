@@ -196,6 +196,10 @@ namespace RTS_Game
                 waypoints.Enqueue(nextParent);
             }
 
+            //If a unit is moving whatsoever, it is no longer a semi-stationary object.
+            //it's here to stop Harvesters making buildings not obstacles.
+            tileArray[(int)unitPos.X, (int)unitPos.Y].Obstacle = false;
+
             //when we have made a path, return it.
             return waypoints;
         }
@@ -508,6 +512,9 @@ namespace RTS_Game
                     waypoints.Enqueue(nextParent);
                 }
             }
+            //If a unit is moving whatsoever, it is no longer a semi-stationary object.
+            //it's here to stop Harvesters making buildings not obstacles.
+            tileArray[(int)unitPos.X, (int)unitPos.Y].Obstacle = false;
 
             //when we have made a path, return it.
             return waypoints;

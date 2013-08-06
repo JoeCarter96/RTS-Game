@@ -76,6 +76,8 @@
     <Compile Include="Entity\Buildings\Refinery.cs" />
     <Compile Include="Entity\Ore.cs" />
     <Compile Include="Entity\Units\Harvester\Harvester.cs" />
+    <Compile Include="Entity\Units\HeavyTank\HeavyTankTurret.cs" />
+    <Compile Include="Entity\Units\Turret.cs" />
     <Compile Include="GameState\TestState.cs" />
     <Compile Include="GUI\Input.cs" />
     <Compile Include="Entity\Buildings\Building.cs" />

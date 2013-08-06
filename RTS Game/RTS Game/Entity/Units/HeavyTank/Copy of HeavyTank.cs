@@ -7,7 +7,7 @@ using System.Text;
 
 namespace RTS_Game
 {
-    class HeavyTank : Unit
+    class Turret : Unit
     {
         #region Variables
         static float maxHealth = 100;
@@ -24,11 +24,11 @@ namespace RTS_Game
         #region Function Explanation
         //Constructor.
         #endregion
-        public HeavyTank(Vector2 tilePosition, Player owner, TileMap world) :
-            base(world, owner, tilePosition, owner.GetUnitTextures("HeavyTank"), maxHealth, maxSpeed, acceleration, damage,
+        public Turret(Vector2 tilePosition, Player owner, TileMap world) :
+            base(world, owner, tilePosition, owner.GetUnitTextures("Turret"), maxHealth, maxSpeed, acceleration, damage,
             AOE, ROF, spriteDimensions)
         {
-            turret = new HeavyTankTurret(this, owner.GetUnitTextures("HeavyTank"));
+
         }
 
         #region Function Explanation

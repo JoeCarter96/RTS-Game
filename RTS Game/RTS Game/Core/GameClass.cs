@@ -72,7 +72,7 @@ namespace RTS_Game
             Texture2D DebugTile = Content.Load<Texture2D>("BackgroundTiles/DebugTile");
             DebugTile.Name = "DebugTile";
             Resources.AddBackgroundTexture(DebugTile);
-            
+
             //Ore
             Texture2D Ore = Content.Load<Texture2D>("BackgroundTiles/Ore");
             Ore.Name = "Ore";
@@ -206,7 +206,7 @@ namespace RTS_Game
             Refinery.Name = "Refinery";
             Resources.AddBuildingTexture(Refinery);
             #endregion
-            
+
             Resources.TestFont = Content.Load<SpriteFont>("GUI/TestFont");
         }
 
@@ -258,7 +258,7 @@ namespace RTS_Game
             //TODO: Add code for changing conditions while in diferent states.
             if (StateManager.Instance.CurrentGameState.GetType() == new MainMenuState().GetType())
             {
-                
+
             }
 
             base.Update(gameTime);
