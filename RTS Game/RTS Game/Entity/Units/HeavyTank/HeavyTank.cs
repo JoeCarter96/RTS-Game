@@ -18,8 +18,22 @@ namespace RTS_Game
         static float AOE = 4;
         static float ROF = 7;
 
-        static Rectangle spriteDimensions = new Rectangle(0, 0, 24, 24);
+        static Rectangle spriteDimensions = new Rectangle(0, 0, 30, 30);
         #endregion
+
+        #region Property Explanation
+        //Override Enities rotation, just points to Entities rotation
+        //but adds the unit only method SetCorrectRotation.
+        #endregion
+        public override float Rotation
+        {
+            get { return base.Rotation; }
+            set
+            {
+                base.Rotation = value;
+                SetCorrectTexture();
+            }
+        }
 
         #region Function Explanation
         //Constructor.

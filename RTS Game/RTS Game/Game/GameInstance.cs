@@ -74,6 +74,8 @@ namespace RTS_Game
             new Refinery(world, player, new Vector2(6, 7));
             new Refinery(world, player, new Vector2(6, 30));
 
+            new Harvester(world, player, new Vector2(9, 9), player.Entities, oreArray);
+
             #endregion
         }
 
@@ -94,8 +96,8 @@ namespace RTS_Game
             {
                 //Finds the position of the mouse within the world, not within viewport.
                 Vector2 relativePosition = camera.relativeXY(new Vector2(x, y));
-                Vector2 mouseTile = new Vector2((float)Math.Floor((double)relativePosition.X / GameClass.Tile_Width),
-                    (float)(Math.Floor((double)relativePosition.Y / GameClass.Tile_Width)));
+                Vector2 mouseTile = new Vector2((float)Math.Round((double)relativePosition.X / GameClass.Tile_Width),
+                    (float)Math.Round(((double)relativePosition.Y / GameClass.Tile_Width)));
 
 
                 //FindClosestOre for Entity to selected units.
@@ -149,11 +151,10 @@ namespace RTS_Game
             {
                 //Finds the position of the mouse within the world, not within viewport.
                 Vector2 relativePosition = camera.relativeXY(new Vector2(x, y));
-                Vector2 mouseTile = new Vector2((float)Math.Floor((double)relativePosition.X / GameClass.Tile_Width),
-                    (float)(Math.Floor((double)relativePosition.Y / GameClass.Tile_Width)));
+                Vector2 mouseTile = new Vector2((float)Math.Round((double)relativePosition.X / GameClass.Tile_Width),
+                    (float)Math.Round(((double)relativePosition.Y / GameClass.Tile_Width)));
 
-                HeavyTank H = new HeavyTank(mouseTile, player, world);
-                Harvester H2 = new Harvester(world, player, new Vector2(mouseTile.X, mouseTile.Y + 1), player.Entities, oreArray);
+                new HeavyTank(mouseTile, player, world);
             }
             #endregion
         }
@@ -194,6 +195,22 @@ namespace RTS_Game
                         e.Update(gameTime);
                     }
                     #endregion
+
+                    #region TEMP for shits and giggles
+                    foreach (Unit u in player.Entities.OfType<Unit>())
+                    {
+                        if (u.Turret != null)
+                        {
+                            Vector2 target = camera.relativeXY(input.MousePos);
+
+                            Vector2 angle = new Vector2(target.X - u.Turret.PixelPosition.X,
+                                target.Y - u.Turret.PixelPosition.Y);
+
+                            u.Turret.Rotation = u.toAngle(angle);
+                        }
+                    }
+                    #endregion
+            
             }   
         }
 
@@ -228,7 +245,7 @@ namespace RTS_Game
             {
                 if (t.Obstacle)
                 {
-                   // spriteBatch.Draw(Resources.GetBackgroundTextures("DebugTile"), t.BoundingBox, null, Color.White, 0f, new Vector2(0, 0), SpriteEffects.None, 0);
+                 //   spriteBatch.Draw(Resources.GetBackgroundTextures("DebugTile"), t.BoundingBox, null, Color.White, 0f, new Vector2(0, 0), SpriteEffects.None, 0);
                 }
             }
         }

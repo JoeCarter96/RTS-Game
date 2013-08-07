@@ -19,9 +19,6 @@ Minimap
 
 Base and Buildings
 
-Pathfinding
-	Avoiding non static units.
-
 Resources
 	GUI
 	Refinery
@@ -42,14 +39,20 @@ Input
 	Mouse input
 
 Rotation System
-	Smooth rotation.
+	32 rotations.
 
 
 BUGS
 
 Harvester moving crashes game when encountering a unit in the way.
 
-Gamr crashes when unit tries to move to obstacle.
+Game crashes when unit tries to move to obstacle or its own tile
+
+Game draws all tiles a half back and up, on purpose but can this be changed?
+
+Harvester isn't perfect in movement.
+
+
 
 
 COMPLETED
@@ -92,7 +95,6 @@ around center of texture.
 Graphic of unit now changes		Tom
 depending on the Angle. 
 
-
 Heavily increased drawing		Tom
 efficiency
 
@@ -122,3 +124,10 @@ are now drawn centrally.
 Building has correct obstacles.	Tom
 They were wrong as tileposition
 was now central, not top left.
+
+Basic Tank Turret logic is		Tom
+now implimented.
+
+Units now move correctly again.	Tom
+Math.Floor was used, not Math.round, 
+in mouse clicks.

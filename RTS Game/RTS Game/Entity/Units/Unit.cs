@@ -36,7 +36,7 @@ namespace RTS_Game
         protected int waitTimer = 0;
         protected int elapsedMills = 0;
 
-        protected Turret turret;
+        protected Turret turret;  
         #endregion
 
         #region Passed Variables
@@ -80,6 +80,12 @@ namespace RTS_Game
         {
             get { return textures; }
             set { textures = value; }
+        }
+
+        public Turret Turret
+        {
+            get { return turret; }
+            set { turret = value; }
         }
 
         #region Property Explanation

@@ -13,6 +13,20 @@ namespace RTS_Game
         private Unit unit;
         #endregion
 
+        #region Property Explanation
+        //Override Enities rotation, just points to Entities rotation
+        //but adds the unit only method SetCorrectRotation.
+        #endregion
+        public override float Rotation
+        {
+            get { return base.Rotation; }
+            set
+            {
+                base.Rotation = value;
+                SetCorrectTexture();
+            }
+        }
+
         #region Function Explanation
         //Constructor.
         #endregion
