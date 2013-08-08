@@ -12,11 +12,14 @@ namespace RTS_Game
     {
         //Variables
         private KeyboardState keyboardState;
+        private static Keys[] keys;
+        private static bool keyDown = false;
+        private static bool keyDownLastFrame = false;
+
         private MouseState mouseState;
         private static int x, y, dy, dx = 0;
         private static bool left, right, middle = false;
         private static bool leftLastFrame, rightLastFrame, middleLastFrame = false;
-
         //holds the x and y of the last frame
         private static int yLastFrame, xLastFrame = 0;
 
@@ -25,10 +28,15 @@ namespace RTS_Game
         private MouseButton LastMouseDown = MouseButton.None;
 
         //Properties
+        public bool KeyDown
+        {
+            get { return keyDown; }
+        }
+
         public int X
         {
             get { return x; }
-        }
+        } 
 
         public int Y
         {
@@ -75,7 +83,12 @@ namespace RTS_Game
             get { return mouseState.ScrollWheelValue; }
         }
 
+        
+
         //Events
+        public delegate void KeyHandler(Keys[] keys);
+        public event KeyHandler KeyPress;
+
         public delegate void MouseHandler(int x, int y, MouseButton button);
         public event MouseHandler MouseUp;
         public event MouseHandler MouseDown;
@@ -106,6 +119,16 @@ namespace RTS_Game
             right= (mouseState.RightButton == ButtonState.Pressed);
             left = (mouseState.LeftButton == ButtonState.Pressed);
             middle = (mouseState.MiddleButton == ButtonState.Pressed);
+
+            if (keyboardState.GetPressedKeys().Length > 0)
+            {
+                keyDown = true;
+                keys = keyboardState.GetPressedKeys();
+            }
+            else
+            {
+                keyDown = false;
+            }
             #endregion
 
             #region MouseDown Triggering
@@ -169,6 +192,26 @@ namespace RTS_Game
             }
             #endregion
 
+            #region KeyPress Triggering
+            if (KeyPress != null)
+            {
+                if (!keyDown && keyDownLastFrame)
+                {
+                    KeyPress(keys);
+                }
+
+                if (!right && rightLastFrame)
+                {
+                    MouseClicked(X, Y, MouseButton.Right);
+                }
+
+                if (!middle && middleLastFrame)
+                {
+                    MouseClicked(X, Y, MouseButton.Middle);
+                }
+            }
+            #endregion
+
             #region DY and DX calculation
             //Caluclating delta x and delta y
             dy = y - yLastFrame;
@@ -194,6 +237,8 @@ namespace RTS_Game
             leftLastFrame = left;
             rightLastFrame = right;
             middleLastFrame = middle;
+
+            keyDownLastFrame = keyDown;
             #endregion
         }
 

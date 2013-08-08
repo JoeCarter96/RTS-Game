@@ -57,7 +57,7 @@ Harvester isn't perfect in movement.
 
 COMPLETED
 
-Initial Pathfinding System		Tom
+Initial Pathfinding System mkII	Tom
 
 Intial GUI Component			Joe
 
@@ -90,10 +90,10 @@ New Grass Graphics				Tom
 Initial Rotation System			Tom
 
 Rotation System now rotates		Tom
-around center of texture.
+around center of texture
 
 Graphic of unit now changes		Tom
-depending on the Angle. 
+depending on the Angle 
 
 Heavily increased drawing		Tom
 efficiency
@@ -119,15 +119,26 @@ Building Test					Tom
 Tileposition and Pixel			Tom
 Position are measured from the 
 center. Larger units and buildings 
-are now drawn centrally.
+are now drawn centrally
 
 Building has correct obstacles.	Tom
 They were wrong as tileposition
-was now central, not top left.
+was now central, not top left
 
 Basic Tank Turret logic is		Tom
-now implimented.
+now implimented
 
 Units now move correctly again.	Tom
 Math.Floor was used, not Math.round, 
-in mouse clicks.
+in mouse clicks
+
+Improved team colours code		Tom
+
+Harvester now uses a decent		Tom
+method to go to harvester	
+
+Keyboard Input					Tom
+
+Hotkeys!						Tom
+	
+Basic Money system				Tom 

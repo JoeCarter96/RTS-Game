@@ -38,7 +38,7 @@ namespace RTS_Game
         #region Function Explanation
         //Constructor.
         #endregion
-        public HeavyTank(Vector2 tilePosition, Player owner, TileMap world) :
+        public HeavyTank(TileMap world, Player owner, Vector2 tilePosition) :
             base(world, owner, tilePosition, owner.GetUnitTextures("HeavyTank"), maxHealth, maxSpeed, acceleration, damage,
             AOE, ROF, spriteDimensions)
         {

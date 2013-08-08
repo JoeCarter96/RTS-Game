@@ -44,6 +44,7 @@ namespace RTS_Game
 
             this.input = input;
             input.MouseClicked += MouseClicked;
+            input.KeyPress += KeyPress;
             
             //we tell the camera the size of the tilemap so it can adjust its range
             camera.GiveTilemap(world);
@@ -149,12 +150,6 @@ namespace RTS_Game
             #region Middle Mouse Click
             else if (button == MouseButton.Middle)
             {
-                //Finds the position of the mouse within the world, not within viewport.
-                Vector2 relativePosition = camera.relativeXY(new Vector2(x, y));
-                Vector2 mouseTile = new Vector2((float)Math.Round((double)relativePosition.X / GameClass.Tile_Width),
-                    (float)Math.Round(((double)relativePosition.Y / GameClass.Tile_Width)));
-
-                new HeavyTank(mouseTile, player, world);
             }
             #endregion
         }
@@ -163,6 +158,63 @@ namespace RTS_Game
         #endregion
         public virtual void MouseMoved(int x, int y)
         {
+        }
+
+        #region Function Explanation
+        #endregion
+        public virtual void KeyPress(Keys[] keys)
+        {
+            if (keys.Length == 1)
+            {
+                #region Heavytank
+                if (keys[0] == Keys.D1)
+                {
+                    if (player.Money >= 2000)
+                    {
+                        #region Calculating Mouse tile.
+                        //Finds the position of the mouse within the world, not within viewport.
+                        Vector2 relativePosition = camera.relativeXY(new Vector2(input.X, input.Y));
+                        Vector2 mouseTile = new Vector2((float)Math.Round((double)relativePosition.X / GameClass.Tile_Width),
+                            (float)Math.Round(((double)relativePosition.Y / GameClass.Tile_Width)));
+                        #endregion
+
+                        if (!world.TileArray[(int)mouseTile.X, (int)mouseTile.Y].Obstacle &&
+                            !world.TileArray[(int)mouseTile.X, (int)mouseTile.Y].OccupiedByUnit)
+                        {
+                            new HeavyTank(world, player, mouseTile);
+                            player.Money -= 2000;
+                        }
+                    }
+                }
+                #endregion
+
+                #region Harvester
+                if (keys[0] == Keys.D2)
+                {
+                    if (player.Money >= 2500)
+                    {
+                        #region Calculating Mouse tile.
+                        //Finds the position of the mouse within the world, not within viewport.
+                        Vector2 relativePosition = camera.relativeXY(new Vector2(input.X, input.Y));
+                        Vector2 mouseTile = new Vector2((float)Math.Round((double)relativePosition.X / GameClass.Tile_Width),
+                            (float)Math.Round(((double)relativePosition.Y / GameClass.Tile_Width)));
+                        #endregion
+
+                        if (!world.TileArray[(int)mouseTile.X, (int)mouseTile.Y].Obstacle &&
+                            !world.TileArray[(int)mouseTile.X, (int)mouseTile.Y].OccupiedByUnit)
+                        {
+                            new Harvester(world, player, mouseTile, player.Entities, oreArray);
+                            player.Money -= 2500;
+                        }
+                    }
+                }
+
+                if (keys[0] == Keys.M)
+                {
+                    player.Money += 1000;
+                }
+                #endregion
+            }
         }
 
         #region Function Explanation

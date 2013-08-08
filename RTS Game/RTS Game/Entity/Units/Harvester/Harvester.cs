@@ -29,7 +29,6 @@ namespace RTS_Game
         const int timeBetweenMines = 750;
         const int amountToUnload = 25;
         private Ore[,] oreArray;
-        private Rectangle rectToIgnore = new Rectangle();
         #endregion
 
         #region Function Explanation
@@ -98,8 +97,7 @@ namespace RTS_Game
             //If there is a refinery chosen, move to it.
             if (bestChoice != null)
             {
-                Waypoints = WaypointsGenerator.GenerateWaypoints(this.TilePosition, bestChoice.TilePosition, bestChoice.BoundingBox);
-                rectToIgnore = bestChoice.BoundingBox;
+                Waypoints = WaypointsGenerator.GenerateWaypoints(this.TilePosition, bestChoice.MineSpot);
                 Owner.PlayerMovingEntities.Add(this);
                 NextTile = Waypoints.Dequeue();
                 targetRef = bestChoice;
@@ -196,9 +194,7 @@ namespace RTS_Game
                     //placed building) which is not with in rectangle to ignore,
                     //recalculate waypoints.
 
-                    if (World.TileArray[(int)nextTile.X, (int)nextTile.Y].Obstacle == true && (rectToIgnore.IsEmpty || 
-                        !rectToIgnore.Contains(new Point((int)nextTile.X * GameClass.Tile_Width, (int)
-                        nextTile.Y * GameClass.Tile_Width))))
+                    if (World.TileArray[(int)nextTile.X, (int)nextTile.Y].Obstacle == true)
                     {
                             Waypoints = WaypointsGenerator.GenerateWaypoints(CurrentTile, Waypoints.Last());
                             nextTile = Waypoints.Dequeue();
@@ -254,7 +250,7 @@ namespace RTS_Game
                         //Stops it going faster than it's max speed.
                         CURRENT_SPEED = Math.Min(maxSpeed, CURRENT_SPEED += acceleration);
                     }
-                    //Actually visibly moving, changing directione etc.
+                    //Actually visibly moving, changing direction etc.
                     Vector2 direction = new Vector2(nextTile.X * World.TileWidth, nextTile.Y * World.TileWidth) - PixelPosition;
                     direction.Normalize();
                     Velocity = Vector2.Multiply(direction, CURRENT_SPEED);
@@ -268,7 +264,7 @@ namespace RTS_Game
         //Handles the move/mine/unload cycle, by use of states
         //within this class.
         #endregion
-        public override void Update(GameTime gametime)
+        public override void Update(GameTime gametime) 
         {
             if (currentState == State.Stopped)
             {
@@ -276,7 +272,7 @@ namespace RTS_Game
                 if (oreAmount == maxOreAmount)
                 {
                     //If we're stopped and at refinery, begin unloading.
-                    if (targetRef != null && TilePosition == targetRef.TilePosition)
+                    if (targetRef != null && TilePosition == targetRef.MineSpot)
                     {
                         currentState = State.Unloading;
                     }

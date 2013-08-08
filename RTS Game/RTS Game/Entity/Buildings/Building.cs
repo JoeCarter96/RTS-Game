@@ -46,14 +46,13 @@ namespace RTS_Game
         public Building(TileMap world, Player owner, Vector2 TilePosition, Texture2D texture, Rectangle spriteDimensions)
             : base(world, owner, TilePosition, texture, 100, spriteDimensions)
         {
-            //Assuming the building is a 1x1. We will have to re-call this
-            ApplySizeChanges();
+
         }
 
         #region Function Explanation
         //This method should be called when the width or height are called.
         #endregion
-        protected void ApplySizeChanges()
+        protected virtual void ApplySizeChanges()
         {
             //clear out the old obstacle tiles
             if (OccupiedTiles != null && OccupiedTiles[0, 0] != null)

@@ -142,7 +142,7 @@ namespace RTS_Game
                     //If it's waited more then 3 seconds for the unit to move and it has not,
                     //Make the unit an obstacle (will be made false when the unit moves) and 
                     //move around it. Set wait to 0.
-                    if (waitTimer + elapsedMills > 1000)
+                    if (waitTimer + elapsedMills > 250)
                     {
                         World.TileArray[(int)nextTile.X, (int)nextTile.Y].Obstacle = true;
                         Waypoints = WaypointsGenerator.GenerateWaypoints(CurrentTile, Waypoints.Last());
