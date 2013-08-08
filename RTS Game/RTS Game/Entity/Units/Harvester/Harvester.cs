@@ -21,7 +21,7 @@ namespace RTS_Game
         const int maxOreAmount = 500;
         private List<Entity> entityListForRef;
         protected Ore targetOre;
-        private enum State { Stopped, Moving, Unloading };
+        private enum State { Stopped, Moving, Unloading, Waiting };
         private State currentState = State.Stopped;
         private Refinery targetRef = null;
         private int timeSinceLast = 0;
@@ -166,97 +166,110 @@ namespace RTS_Game
         #endregion
         public override void Move()
         {
-
-            if (Waypoints.Count > 0)
+            //If we're not moving to refinary OR we are and it's in use, we can go there. We can still move if
+            // we're waiting, which means we're gonna move to another tile nearby and wait.
+            if (targetRef == null || targetRef.InUse == false || currentState == State.Waiting)
             {
-                //If there is a unit in the way.
-                if (World.TileArray[(int)nextTile.X, (int)nextTile.Y].OccupiedByUnit == true)
-                {
-                    //If it's waited more then 3 seconds for the unit to move and it has not,
-                    //Make the unit an obstacle (will be made false when the unit moves) and 
-                    //move around it. Set wait to 0.
-                    if (waitTimer + elapsedMills > 1000)
-                    {
-                        World.TileArray[(int)nextTile.X, (int)nextTile.Y].Obstacle = true;
-                        Waypoints = WaypointsGenerator.GenerateWaypoints(CurrentTile, Waypoints.Last());
-                        nextTile = Waypoints.Dequeue();
-                        waitTimer = 0;
-                    }
-                    else   //If it's still waiting, increment wait timer.
-                    {
-                        waitTimer += elapsedMills;
-                    }
-                }
+                currentState = State.Moving;
 
-                else if (DistanceToDestination < maxSpeed)   //Changing tile target, if we can.
+                //if we're moving anywhere else, just move.
+                if (Waypoints.Count > 0)
                 {
-                    //If there is a stationary object in the way (stopped tank or newly
-                    //placed building) which is not with in rectangle to ignore,
-                    //recalculate waypoints.
-
-                    if (World.TileArray[(int)nextTile.X, (int)nextTile.Y].Obstacle == true)
+                    //If there is a unit in the way.
+                    if (World.TileArray[(int)nextTile.X, (int)nextTile.Y].OccupiedByUnit == true)
                     {
+                        //If it's waited more then 3 seconds for the unit to move and it has not,
+                        //Make the unit an obstacle (will be made false when the unit moves) and 
+                        //move around it. Set wait to 0.
+                        if (waitTimer + elapsedMills > 1000)
+                        {
+                            World.TileArray[(int)nextTile.X, (int)nextTile.Y].Obstacle = true;
                             Waypoints = WaypointsGenerator.GenerateWaypoints(CurrentTile, Waypoints.Last());
                             nextTile = Waypoints.Dequeue();
+                            waitTimer = 0;
+                        }
+                        else   //If it's still waiting, increment wait timer.
+                        {
+                            waitTimer += elapsedMills;
+                        }
                     }
 
-                    else    //If nothing is in the way, change the target to the next waypoint.
+                    else if (DistanceToDestination < maxSpeed)   //Changing tile target, if we can.
                     {
+                        //If there is a stationary object in the way (stopped tank or newly
+                        //placed building) which is not with in rectangle to ignore,
+                        //recalculate waypoints.
+
+                        if (World.TileArray[(int)nextTile.X, (int)nextTile.Y].Obstacle == true)
+                        {
+                            Waypoints = WaypointsGenerator.GenerateWaypoints(CurrentTile, Waypoints.Last());
+                            nextTile = Waypoints.Dequeue();
+                        }
+
+                        else    //If nothing is in the way, change the target to the next waypoint.
+                        {
+                            World.TileArray[(int)currentTile.X, (int)currentTile.Y].OccupiedByUnit = false;
+
+                            currentTile = nextTile;
+                            nextTile = Waypoints.Dequeue();
+
+                            World.TileArray[(int)currentTile.X, (int)currentTile.Y].OccupiedByUnit = true;
+                        }
+                    }
+
+                    else    //If there is still space to move to the next target.
+                    {
+                        //Accellerating.
+                        if (CURRENT_SPEED < maxSpeed)
+                        {
+                            //If Max speed is smaller than current speed + acceleration, just make it max speed.
+                            //Stops it going faster than it's max speed.
+                            CURRENT_SPEED = Math.Min(maxSpeed, CURRENT_SPEED += acceleration);
+                        }
+                        //Actually visibly moving, changing directione etc.
+                        Vector2 direction = new Vector2(nextTile.X * World.TileWidth, nextTile.Y * World.TileWidth) - PixelPosition;
+                        direction.Normalize();
+                        Velocity = Vector2.Multiply(direction, CURRENT_SPEED);
+                        PixelPosition += Velocity;
+                        Rotation = toAngle(direction);
+                    }
+                }
+
+                else    //When the Unit has no more waypoints
+                {
+                    if (DistanceToDestination < maxSpeed)   //If it's at it's target.
+                    {
+                        //Stops this.Move being called in GameInstance.Update
+                        Owner.PlayerMovingEntities.Remove(this);
+                        CURRENT_SPEED = 0;
+                        currentState = State.Stopped;
                         World.TileArray[(int)currentTile.X, (int)currentTile.Y].OccupiedByUnit = false;
-
-                        currentTile = nextTile;
-                        nextTile = Waypoints.Dequeue();
-
+                        currentTile = TilePosition;
                         World.TileArray[(int)currentTile.X, (int)currentTile.Y].OccupiedByUnit = true;
                     }
-                }
-
-                else    //If there is still space to move to the next target.
-                {
-                    //Accellerating.
-                    if (CURRENT_SPEED < maxSpeed)
+                    else    // OR if it's not on the final tile, continue to move
                     {
-                        //If Max speed is smaller than current speed + acceleration, just make it max speed.
-                        //Stops it going faster than it's max speed.
-                        CURRENT_SPEED = Math.Min(maxSpeed, CURRENT_SPEED += acceleration);
+                        //Accellerating.
+                        if (CURRENT_SPEED < maxSpeed)
+                        {
+                            //If Max speed is smaller than current speed + acceleration, just make it max speed.
+                            //Stops it going faster than it's max speed.
+                            CURRENT_SPEED = Math.Min(maxSpeed, CURRENT_SPEED += acceleration);
+                        }
+                        //Actually visibly moving, changing direction etc.
+                        Vector2 direction = new Vector2(nextTile.X * World.TileWidth, nextTile.Y * World.TileWidth) - PixelPosition;
+                        direction.Normalize();
+                        Velocity = Vector2.Multiply(direction, CURRENT_SPEED);
+                        PixelPosition += Velocity;
+                        Rotation = toAngle(direction);
                     }
-                    //Actually visibly moving, changing directione etc.
-                    Vector2 direction = new Vector2(nextTile.X * World.TileWidth, nextTile.Y * World.TileWidth) - PixelPosition;
-                    direction.Normalize();
-                    Velocity = Vector2.Multiply(direction, CURRENT_SPEED);
-                    PixelPosition += Velocity;
-                    Rotation = toAngle(direction);
                 }
             }
-
-            else    //When the Unit has no more waypoints
+            //If we are trying to move to ref while it's in use, find a nearby tile and wait.
+            else
             {
-                if (DistanceToDestination < maxSpeed)   //If it's at it's target.
-                {
-                    //Stops this.Move being called in GameInstance.Update
-                    Owner.PlayerMovingEntities.Remove(this);
-                    CURRENT_SPEED = 0;
-                    currentState = State.Stopped;
-                    World.TileArray[(int)currentTile.X, (int)currentTile.Y].OccupiedByUnit = false;
-                    currentTile = TilePosition;
-                    World.TileArray[(int)currentTile.X, (int)currentTile.Y].OccupiedByUnit = true;
-                }
-                else    // OR if it's not on the final tile, continue to move
-                {
-                    //Accellerating.
-                    if (CURRENT_SPEED < maxSpeed)
-                    {
-                        //If Max speed is smaller than current speed + acceleration, just make it max speed.
-                        //Stops it going faster than it's max speed.
-                        CURRENT_SPEED = Math.Min(maxSpeed, CURRENT_SPEED += acceleration);
-                    }
-                    //Actually visibly moving, changing direction etc.
-                    Vector2 direction = new Vector2(nextTile.X * World.TileWidth, nextTile.Y * World.TileWidth) - PixelPosition;
-                    direction.Normalize();
-                    Velocity = Vector2.Multiply(direction, CURRENT_SPEED);
-                    PixelPosition += Velocity;
-                    Rotation = toAngle(direction);
-                }
+                // TODO: Add code to wait by ref.
+                currentState = State.Stopped;
             }
         }
 
@@ -275,31 +288,32 @@ namespace RTS_Game
                     if (targetRef != null && TilePosition == targetRef.MineSpot)
                     {
                         currentState = State.Unloading;
+                        targetRef.InUse = true;
+                        Rotation = 5f;
                     }
 
-                    //otherwise, move to the refinery.
+                    //otherwise, move to the refinery, if we can.
                     else
                     {
-                        currentState = State.Moving;
-                        MoveToRef();
+                        if (targetRef == null)
+                        {
+                            currentState = State.Moving;
+                            MoveToRef();
+                        }
                     }
                 }
 
-                //If we're not stopped and not full, mine or find ore to mine.
+                //If we're not full, mine or find ore to mine.
                 else
                 {
                     if (oreArray[(int)TilePosition.X, (int)TilePosition.Y].CurrentAmount != 0)
                     {
-                        if (timeSinceLast == 0)
-                        {
-                            Mine();
-                            targetOre = oreArray[(int)TilePosition.X, (int)TilePosition.Y];
-                        }
-
-                        //If it's close enough to the time betwen drops, unload some ore and reset timer.
+                        //If it's close enough to the time betwen drops, mine some ore and reset timer.
                         if (timeSinceLast + gametime.ElapsedGameTime.Milliseconds > timeBetweenMines)
                         {
                             timeSinceLast = 0;
+                            Mine();
+                            targetOre = oreArray[(int)TilePosition.X, (int)TilePosition.Y];
                         }
 
                         //otherwise, just update the timer.
@@ -319,6 +333,7 @@ namespace RTS_Game
                     if (targetRef != null)
                     {
                         targetRef.NumberOfHarvesters--;
+                        targetRef.InUse = false;
                         targetRef = null;
                     }
                 }

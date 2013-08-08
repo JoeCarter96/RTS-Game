@@ -142,3 +142,7 @@ Keyboard Input					Tom
 Hotkeys!						Tom
 	
 Basic Money system				Tom 
+
+Basic Harvester waiting to		Tom
+drop ore. Doesn't wait nearby
+yet.

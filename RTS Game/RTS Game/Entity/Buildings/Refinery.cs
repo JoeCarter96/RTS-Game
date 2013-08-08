@@ -14,6 +14,14 @@ namespace RTS_Game
 
         private Vector2 mineSpot;
 
+        private bool inUse = false;
+
+        public bool InUse
+        {
+            get { return inUse; }
+            set { inUse = value; }
+        }
+        
         public Vector2 MineSpot
         {
             get { return mineSpot; }

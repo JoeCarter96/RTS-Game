@@ -133,12 +133,12 @@ namespace RTS_Game
                         {
                             Color colour = new Color
                                 (
-                                teamColour.R / 4,
-                                teamColour.G / 4,
-                                teamColour.B / 4
+                                teamColour.R / 8,
+                                teamColour.G / 8,
+                                teamColour.B / 8
                                 );
 
-                            pixelRGBValues[Array2DTo1D] = (colour * (pixelRGBValues[Array2DTo1D].R / 25));
+                            pixelRGBValues[Array2DTo1D] = (colour * (pixelRGBValues[Array2DTo1D].R / 13));
                         }
                     }
                 }
