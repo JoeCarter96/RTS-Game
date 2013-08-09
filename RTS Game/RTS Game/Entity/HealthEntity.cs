@@ -84,7 +84,7 @@ namespace RTS_Game
             private set { owner = value; }
         }
         #endregion
-
+        
         //Assuming the Unit is spawned with full health
         public HealthEntity(TileMap world, Player owner, Vector2 tilePosition, Texture2D texture, double maxHealth,
             Rectangle spriteDimensions)
@@ -95,8 +95,7 @@ namespace RTS_Game
             MaxHealth = maxHealth;
             Health = maxHealth;
             //healthBar = new HealthBar(this, new Rectangle((int)PixelPosition.X, (int)PixelPosition.Y, GameClass.Tile_Width, GameClass.Tile_Width));
-            
-            owner.Entities.Add(this);
+          
         }
 
         //Allows for a different start health

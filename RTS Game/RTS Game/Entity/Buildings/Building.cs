@@ -46,7 +46,7 @@ namespace RTS_Game
         public Building(TileMap world, Player owner, Vector2 TilePosition, Texture2D texture, Rectangle spriteDimensions)
             : base(world, owner, TilePosition, texture, 100, spriteDimensions)
         {
-
+            owner.PlayerBuildings.Add(this);
         }
 
         #region Function Explanation

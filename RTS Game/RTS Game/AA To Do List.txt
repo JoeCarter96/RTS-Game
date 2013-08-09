@@ -1,0 +1,51 @@
+﻿Please add to Chnage list when something is finished.
+
+TO BE ADDED.
+
+UI
+	Components
+		Scroll bar
+		TickBox
+	In game
+	Main Menus
+		Start screen
+		Skirmish Options
+
+Map Loading
+
+Map Generation
+
+Minimap
+
+Base and Buildings
+
+Resources
+	GUI
+	Refinery
+		standard building code 
+	silos?
+Buying Buildings/Reduction of money
+No ore left handling code
+
+Selection Code
+	Moving a Harvester.
+		Mine if moved to ore
+		Stop AI collection control if not
+
+Rotation System
+	32 rotations.
+
+Split out Entity List.
+
+
+
+
+BUGS
+
+Harvester moving crashes game when encountering a unit in the way.
+
+Game crashes when unit tries to move to obstacle or its own tile
+
+Game draws all tiles a half back and up, on purpose but can this be changed?
+
+Harvester isn't perfect in movement.

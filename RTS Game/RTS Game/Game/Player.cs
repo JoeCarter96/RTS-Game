@@ -12,7 +12,10 @@ namespace RTS_Game
         #region Variables
         private TileMap world;
 
-        private List<Entity> playerEntities = new List<Entity>();
+        private List<Entity> playerBuildings = new List<Entity>();
+        private List<Entity> playerUnits = new List<Entity>();
+        private List<Entity> playerHarvesters = new List<Entity>();
+
         private List<Entity> playerMovingEntities = new List<Entity>();
         private List<Entity> playerSelectedEntities = new List<Entity>();
         
@@ -20,7 +23,7 @@ namespace RTS_Game
         private Dictionary<String, Texture2D> unitTextures = Resources.getColouredTextures(Resources.GetUnitTextures(), teamColour);
         private Dictionary<String, Texture2D> buildingTextures = Resources.getColouredTextures(Resources.GetBuildingTextures(), teamColour);
 
-        private int money = 0;
+        private int money = 10000;
         private static Color teamColour = new Color(42, 100, 52);
         #endregion
 
@@ -36,11 +39,24 @@ namespace RTS_Game
             set { playerSelectedEntities = value; }
         }
 
-        public List<Entity> Entities
+        public List<Entity> PlayerBuildings
         {
-            get { return playerEntities; }
-            set { playerEntities = value; }
+            get { return playerBuildings; }
+            set { playerBuildings = value; }
         }
+
+        public List<Entity> PlayerUnits
+        {
+            get { return playerUnits; }
+            set { playerUnits = value; }
+        }
+
+        public List<Entity> PlayerHarvesters
+        {
+            get { return playerHarvesters; }
+            set { playerHarvesters = value; }
+        }
+
 
         public Texture2D GetUnitTextures(String requestedName)
         {

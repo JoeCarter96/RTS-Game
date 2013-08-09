@@ -25,9 +25,9 @@ namespace RTS_Game
         private State currentState = State.Stopped;
         private Refinery targetRef = null;
         private int timeSinceLast = 0;
-        const int timeBetweenUnloads = 250;
+        const int timeBetweenUnloads = 1000;
         const int timeBetweenMines = 750;
-        const int amountToUnload = 25;
+        const int amountToUnload = 250;
         private Ore[,] oreArray;
         #endregion
 
@@ -38,6 +38,7 @@ namespace RTS_Game
             base(world, owner, tilePosition, owner.GetUnitTextures("Harvester"), maxHealth, maxSpeed, acceleration, 0, 0, 0,
             spriteDimensions)
         {
+            owner.PlayerHarvesters.Add(this);
             this.entityListForRef = entityListForRef;
             this.oreArray = oreArray;
         }

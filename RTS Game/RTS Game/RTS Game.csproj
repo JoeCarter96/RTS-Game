@@ -114,7 +114,8 @@
     <Compile Include="Core\Resources.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="AAToDoList.txt" />
+    <Content Include="AA To Do List.txt" />
+    <Content Include="AA ChangeLog.txt" />
     <Content Include="Game.ico" />
     <Content Include="GameThumbnail.png">
       <XnaPlatformSpecific>true</XnaPlatformSpecific>

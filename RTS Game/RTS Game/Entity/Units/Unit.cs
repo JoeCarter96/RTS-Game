@@ -110,6 +110,8 @@ namespace RTS_Game
            float maxSpeed, float acceleration, float damage, float AOE, float ROF, Rectangle spriteDimensions)
             : base(world, owner, tilePosition, texture, maxHealth, spriteDimensions)
         {
+            owner.PlayerUnits.Add(this);
+
             this.maxSpeed = maxSpeed;
             this.acceleration = acceleration;
             this.damage = damage;
