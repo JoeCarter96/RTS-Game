@@ -23,11 +23,28 @@ namespace RTS_Game
         #region Variables
         private Camera camera;
         private TileMap world;
-        private Player player;
+        private Player localPlayer;
         private Input input;
 
+        private List<Player> players = new List<Player>();
+
         Ore[,] oreArray;   //TEMP so find nearest ore works. This will be passed to all Unit as they are made.
+
+        //TEMP: Player tests.
+        Player player1;
+        Player player2;
         #endregion
+
+        public List<Player> Players
+        {
+            get { return players; }
+            set { players = value; }
+        }
+
+        public TileMap World
+        {
+            get { return world; }
+        }
 
         #region Function Explanation
         //Constructor.
@@ -40,7 +57,10 @@ namespace RTS_Game
             //Build the tilemap using the level
             world = new TileMap(level, GameClass.Game_Width, GameClass.Game_Height, GameClass.Tile_Width);
 
-            player = new Player(world);
+            //TEMP Player Testing.
+            player1 = new Player(this, new Color(42, 100, 52));
+            player2 = new Player(this, new Color(77, 166, 255));
+            localPlayer = player1;
 
             this.input = input;
             input.MouseClicked += MouseClicked;
@@ -66,16 +86,14 @@ namespace RTS_Game
                 {
                     oreArray[i, j].CurrentAmount = 100;
                 }
-            }
+            }   
 
-
-            new ConstructionYard(world, player, new Vector2(2, 2));
-            new PowerPlant(world, player, new Vector2(6, 3));
-            new PowerPlant(world, player, new Vector2(8, 3));
-            new Refinery(world, player, new Vector2(6, 7));
-            new Refinery(world, player, new Vector2(6, 30));
-
-            new Harvester(world, player, new Vector2(9, 9), player.PlayerBuildings, oreArray);
+            new ConstructionYard(world, localPlayer, new Vector2(2, 2));
+            new PowerPlant(world, localPlayer, new Vector2(6, 3));
+            new PowerPlant(world, localPlayer, new Vector2(8, 3));
+            new Refinery(world, localPlayer, new Vector2(6, 7));
+            new Refinery(world, localPlayer, new Vector2(6, 30));
+            new Harvester(world, localPlayer, new Vector2(9, 9), localPlayer.PlayerBuildings, oreArray);
 
             #endregion
         }
@@ -102,7 +120,7 @@ namespace RTS_Game
 
 
                 //Adds any entities whose bounding boxes contain the mouse to selected entities.
-                player.PlayerSelectedEntities.Add(player.PlayerUnits.Find(delegate(Entity entity)
+                localPlayer.PlayerSelectedEntities.Add(localPlayer.PlayerUnits.Find(delegate(Entity entity)
                 {
                     //Returns whatever unit which their bounding box contains
                     //mouse, or null if there is not one which does.
@@ -112,25 +130,25 @@ namespace RTS_Game
 
                 //If null was returned it's an empty location to move any selected units to
                 //Therefore, remove it from selected list and move any selected units to the clicked location.
-                if (player.PlayerSelectedEntities.Last() == null)
+                if (localPlayer.PlayerSelectedEntities.Last() == null)
                 {
-                    player.PlayerSelectedEntities.Remove(null);
+                    localPlayer.PlayerSelectedEntities.Remove(null);
 
                     #region Deselecting Buildings as they cannot move.
-                    foreach (Building b in player.PlayerSelectedEntities.OfType<Building>().ToList<Building>())
+                    foreach (Building b in localPlayer.PlayerSelectedEntities.OfType<Building>().ToList<Building>())
                     {
-                        player.PlayerSelectedEntities.Remove(b);
+                        localPlayer.PlayerSelectedEntities.Remove(b);
                     }
                     #endregion
 
                     #region Moving Entities which can.
-                    foreach (Unit u in player.PlayerSelectedEntities.OfType<Unit>().ToList<Unit>())
+                    foreach (Unit u in localPlayer.PlayerSelectedEntities.OfType<Unit>().ToList<Unit>())
                     {
                         //Generate Waypoints and move!.
                         u.Waypoints = WaypointsGenerator.GenerateWaypoints(u.TilePosition, mouseTile);
-                        if (!player.PlayerMovingEntities.Contains(u))
+                        if (!localPlayer.PlayerMovingEntities.Contains(u))
                         {
-                            player.PlayerMovingEntities.Add(u);
+                            localPlayer.PlayerMovingEntities.Add(u);
                             u.NextTile = u.Waypoints.Dequeue();
                         }
                     }
@@ -142,7 +160,7 @@ namespace RTS_Game
             #region Right Mouse Click
             else if (button == MouseButton.Right)
             {
-                player.PlayerSelectedEntities.Clear();
+                localPlayer.PlayerSelectedEntities.Clear();
 
             }
             #endregion
@@ -169,7 +187,7 @@ namespace RTS_Game
                 #region Heavytank
                 if (keys[0] == Keys.D1)
                 {
-                    if (player.Money >= 2500)
+                    if (localPlayer.Money >= 2500)
                     {
                         #region Calculating Mouse tile.
                         //Finds the position of the mouse within the world, not within viewport.
@@ -181,8 +199,8 @@ namespace RTS_Game
                         if (!world.TileArray[(int)mouseTile.X, (int)mouseTile.Y].Obstacle &&
                             !world.TileArray[(int)mouseTile.X, (int)mouseTile.Y].OccupiedByUnit)
                         {
-                            new HeavyTank(world, player, mouseTile);
-                            player.Money -= 2500;
+                            new HeavyTank(world, localPlayer, mouseTile);
+                            localPlayer.Money -= 2500;
                         }
                     }
                 }
@@ -191,7 +209,7 @@ namespace RTS_Game
                 #region Harvester
                 if (keys[0] == Keys.D2)
                 {
-                    if (player.Money >= 2000)
+                    if (localPlayer.Money >= 2000)
                     {
                         #region Calculating Mouse tile.
                         //Finds the position of the mouse within the world, not within viewport.
@@ -203,22 +221,22 @@ namespace RTS_Game
                         if (!world.TileArray[(int)mouseTile.X, (int)mouseTile.Y].Obstacle &&
                             !world.TileArray[(int)mouseTile.X, (int)mouseTile.Y].OccupiedByUnit)
                         {
-                            new Harvester(world, player, mouseTile, player.PlayerBuildings, oreArray);
-                            player.Money -= 2000;
+                            new Harvester(world, localPlayer, mouseTile, localPlayer.PlayerBuildings, oreArray);
+                            localPlayer.Money -= 2000;
                         }
                     }
                 }
 
                 if (keys[0] == Keys.M)
                 {
-                    player.Money += 1000;
+                    localPlayer.Money += 1000;
                 }
                 #endregion
 
                 #region Ref
                 if (keys[0] == Keys.D3)
                 {
-                    if (player.Money >= 3000)
+                    if (localPlayer.Money >= 3000)
                     {
                         #region Calculating Mouse tile.
                         //Finds the position of the mouse within the world, not within viewport.
@@ -230,15 +248,42 @@ namespace RTS_Game
                         if (!world.TileArray[(int)mouseTile.X, (int)mouseTile.Y].Obstacle &&
                             !world.TileArray[(int)mouseTile.X, (int)mouseTile.Y].OccupiedByUnit)
                         {
-                            new Refinery(world, player, mouseTile);
-                            player.Money -= 3000;
+                            new Refinery(world, localPlayer, mouseTile);
+                            localPlayer.Money -= 3000;
                         }
                     }
                 }
 
                 if (keys[0] == Keys.M)
                 {
-                    player.Money += 1000;
+                    localPlayer.Money += 1000;
+                }
+                #endregion
+
+                #region Ref
+                if (keys[0] == Keys.Escape)
+                {
+                  
+                }
+
+                if (keys[0] == Keys.M)
+                {
+                    localPlayer.Money += 1000;
+                }
+                #endregion
+
+                #region TEMP: Debug for players.
+                if (keys[0] == Keys.C)
+                {
+                    if (localPlayer.Money >= 3000)
+                    {
+                        localPlayer = player2;
+                    }
+                }
+
+                if (keys[0] == Keys.M)
+                {
+                    localPlayer.Money += 1000;
                 }
                 #endregion
             }
@@ -253,23 +298,24 @@ namespace RTS_Game
             //Update input.
             input.Update(gameTime);
 
-            
-            if (player.PlayerUnits.Count > 0)
+            foreach (Player p in players)
             {
-                #region Moving Units
-                //Moving every moving Unit which is meant to.
-                if (player.PlayerMovingEntities.Count > 0)
+                if (p.PlayerUnits.Count > 0)
                 {
-                    foreach (Unit u in player.PlayerMovingEntities.ToList())
+                    #region Moving Units
+                    //Moving every moving Unit which is meant to.
+                    if (p.PlayerMovingEntities.Count > 0)
                     {
-                        u.Move();
+                        foreach (Unit u in p.PlayerMovingEntities.ToList())
+                        {
+                            u.Move();
+                        }
                     }
-                }
-                #endregion
+                    #endregion
 
-                #region Updating Units
+                    #region Updating Units
                     //Update every Entity.
-                    foreach (Entity e in player.PlayerUnits)
+                    foreach (Entity e in p.PlayerUnits)
                     {
                         e.Update(gameTime);
                     }
@@ -277,7 +323,7 @@ namespace RTS_Game
                     #endregion
 
                     #region TEMP for shits and giggles
-                    foreach (Unit u in player.PlayerUnits)
+                    foreach (Unit u in p.PlayerUnits)
                     {
                         if (u.Turret != null)
                         {
@@ -290,8 +336,8 @@ namespace RTS_Game
                         }
                     }
                     #endregion
-            
-            }   
+                }
+            }
         }
 
         #region Function Explanation
@@ -309,22 +355,22 @@ namespace RTS_Game
                 }
             }
 
-            foreach (Entity e in player.PlayerBuildings)
+            foreach (Player p in players)
             {
-                e.Draw(spriteBatch);
-            }
+                foreach (Entity e in p.PlayerBuildings)
+                {
+                    e.Draw(spriteBatch);
+                }
 
-            foreach (Entity e in player.PlayerUnits)
-            {  
-                e.Draw(spriteBatch);
-            }
+                foreach (Entity e in p.PlayerUnits)
+                {
+                    e.Draw(spriteBatch);
+                }
 
-
-
-            foreach (Entity e in player.PlayerSelectedEntities)
-            {
-                spriteBatch.Draw(Resources.GetGUITextures("SelectedRectangle"), e.BoundingBox, null, Color.White, 0f, new Vector2(0, 0), SpriteEffects.None, 0);
-               
+                foreach (Entity e in p.PlayerSelectedEntities)
+                {
+                    spriteBatch.Draw(Resources.GetGUITextures("SelectedRectangle"), e.BoundingBox, null, Color.White, 0f, new Vector2(0, 0), SpriteEffects.None, 0);
+                }
             }
 
             //DEBUG.
@@ -344,7 +390,7 @@ namespace RTS_Game
         public void StaticDraw(SpriteBatch spriteBatch)
         {
             spriteBatch.DrawString(Resources.TestFont, camera.Position.ToString(), new Vector2(0 ,0), Color.Black);
-            spriteBatch.DrawString(Resources.TestFont, "$" + player.Money.ToString(), new Vector2(0, 30), Color.Black);
+            spriteBatch.DrawString(Resources.TestFont, "$" + localPlayer.Money.ToString(), new Vector2(0, 30), Color.Black);
         }
     }
 }
@@ -359,7 +405,7 @@ namespace RTS_Game
 
 /*
  * //parsing units in the entity list.
-            foreach (Unit u in player.Entities.OfType<Unit>())
+            foreach (Unit u in localPlayer.Entities.OfType<Unit>())
             {
                 u.Draw(spriteBatch);
             }

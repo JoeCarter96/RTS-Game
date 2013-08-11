@@ -54,6 +54,7 @@ namespace RTS_Game
             //Set the size of the game window
             graphics.PreferredBackBufferHeight = Game_Height;
             graphics.PreferredBackBufferWidth = Game_Width;
+       //     this.graphics.IsFullScreen = true;
             graphics.ApplyChanges();
 
             base.Initialize();

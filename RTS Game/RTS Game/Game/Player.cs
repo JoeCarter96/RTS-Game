@@ -20,11 +20,11 @@ namespace RTS_Game
         private List<Entity> playerSelectedEntities = new List<Entity>();
         
         //Holds the team coloured units and buildings.
-        private Dictionary<String, Texture2D> unitTextures = Resources.getColouredTextures(Resources.GetUnitTextures(), teamColour);
-        private Dictionary<String, Texture2D> buildingTextures = Resources.getColouredTextures(Resources.GetBuildingTextures(), teamColour);
+        private Dictionary<String, Texture2D> unitTextures;
+        private Dictionary<String, Texture2D> buildingTextures;
 
         private int money = 10000;
-        private static Color teamColour = new Color(42, 100, 52);
+        private Color teamColour;
         #endregion
 
         public List<Entity> PlayerMovingEntities
@@ -83,9 +83,13 @@ namespace RTS_Game
         #region Function Explanation
         //Constructor.
         #endregion
-        public Player(TileMap world)
+        public Player(GameInstance instance, Color teamColour)
         {
-            this.world = world;
+            this.world = instance.World;
+            this.TeamColour = teamColour;
+            unitTextures = Resources.getColouredTextures(Resources.GetUnitTextures(), teamColour);
+            buildingTextures = Resources.getColouredTextures(Resources.GetBuildingTextures(), teamColour);
+            instance.Players.Add(this);
         }      
     }
 }

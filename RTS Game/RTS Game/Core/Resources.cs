@@ -95,13 +95,15 @@ namespace RTS_Game
         }
         #endregion
 
-
-
         public static Dictionary<String, Texture2D> getColouredTextures(Dictionary<String, Texture2D> textures, Color teamColour)
         {
+            Dictionary<String, Texture2D> newTextures = new Dictionary<String, Texture2D>();
+
             //For each texture in texture list..
             foreach (KeyValuePair<String, Texture2D> k in textures)
             {
+                newTextures.Add(k.Key, new Texture2D(k.Value.GraphicsDevice, k.Value.Width, k.Value.Height));
+
                 //Array of Colours of each pixel. 
                 //Goes from top left to bottom right.
                 Color[] pixelRGBValues = new Color[k.Value.Width * k.Value.Height];
@@ -143,9 +145,9 @@ namespace RTS_Game
                     }
                 }
                 //Sets k.Value to the array.
-                k.Value.SetData(pixelRGBValues);
+                newTextures[k.Key].SetData(pixelRGBValues);
             }
-            return textures;
+            return newTextures;
         }
     }
 }

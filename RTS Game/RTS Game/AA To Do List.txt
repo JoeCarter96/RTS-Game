@@ -35,8 +35,6 @@ Selection Code
 Rotation System
 	32 rotations.
 
-Split out Entity List.
-
 
 
 
