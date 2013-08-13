@@ -160,21 +160,27 @@ namespace RTS_Game
             Resources.AddGUITexture(BottomRightBack);
             #endregion
 
+            #region Ingame
             //Healthbar
-            Texture2D HealthBar = Content.Load<Texture2D>("GUI/Healthbar");
+            Texture2D HealthBar = Content.Load<Texture2D>("GUI/Ingame/Healthbar");
             HealthBar.Name = "HealthBar";
             Resources.AddGUITexture(HealthBar);
 
             //SelectedRectangle
-            Texture2D SelectedRectangle = Content.Load<Texture2D>("GUI/SelectedRectangle");
+            Texture2D SelectedRectangle = Content.Load<Texture2D>("GUI/Ingame/SelectedRectangle");
             SelectedRectangle.Name = "SelectedRectangle";
             Resources.AddGUITexture(SelectedRectangle);
 
+            //TileOverlay
+            Texture2D TileOverlay = Content.Load<Texture2D>("GUI/Ingame/TileOverlay");
+            TileOverlay.Name = "TileOverlay";
+            Resources.AddGUITexture(TileOverlay);
+
             //Cursors.
-            mouseTextures.Add("Normal", Content.Load<Texture2D>("GUI/Cursors/Normal"));
+            mouseTextures.Add("Normal", Content.Load<Texture2D>("GUI/Ingame/Cursors/Normal"));
 
             currentMouseTexture = mouseTextures["Normal"];
-
+            #endregion
             #endregion
 
             #region Unit Textures

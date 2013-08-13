@@ -91,14 +91,14 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GUI\Healthbar.png">
+    <Compile Include="GUI\Ingame\Healthbar.png">
       <Name>Healthbar</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GUI\SelectedRectangle.png">
+    <Compile Include="GUI\Ingame\SelectedRectangle.png">
       <Name>SelectedRectangle</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -172,7 +172,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GUI\Cursors\Normal.png">
+    <Compile Include="GUI\Ingame\Cursors\Normal.png">
       <Name>Normal</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
@@ -195,6 +195,13 @@
   <ItemGroup>
     <Compile Include="Buildings\ConstructionYard.png">
       <Name>ConstructionYard</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="GUI\Ingame\TileOverlay.png">
+      <Name>TileOverlay</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

@@ -35,6 +35,8 @@ Selection Code
 Rotation System
 	32 rotations.
 
+Overlay when placing Buildings
+
 
 
 

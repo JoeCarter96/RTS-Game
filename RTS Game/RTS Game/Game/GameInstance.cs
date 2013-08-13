@@ -226,11 +226,6 @@ namespace RTS_Game
                         }
                     }
                 }
-
-                if (keys[0] == Keys.M)
-                {
-                    localPlayer.Money += 1000;
-                }
                 #endregion
 
                 #region Ref
@@ -253,32 +248,12 @@ namespace RTS_Game
                         }
                     }
                 }
-
-                if (keys[0] == Keys.M)
-                {
-                    localPlayer.Money += 1000;
-                }
-                #endregion
-
-                #region Ref
-                if (keys[0] == Keys.Escape)
-                {
-                  
-                }
-
-                if (keys[0] == Keys.M)
-                {
-                    localPlayer.Money += 1000;
-                }
                 #endregion
 
                 #region TEMP: Debug for players.
                 if (keys[0] == Keys.C)
                 {
-                    if (localPlayer.Money >= 3000)
-                    {
                         localPlayer = player2;
-                    }
                 }
 
                 if (keys[0] == Keys.M)
@@ -378,9 +353,14 @@ namespace RTS_Game
             {
                 if (t.Obstacle)
                 {
-                 //   spriteBatch.Draw(Resources.GetBackgroundTextures("DebugTile"), t.BoundingBox, null, Color.White, 0f, new Vector2(0, 0), SpriteEffects.None, 0);
+                 //   spriteBatch.Draw(Resources.GetGUITextures("TileOverlay"), t.BoundingBox, null, new Color(255, 0, 0, 10), 0f, new Vector2(0, 0), SpriteEffects.None, 0);
                 }
             }
+
+
+            Vector2 position = camera.relativeXY(new Vector2(0, 114));
+            Rectangle play = new Rectangle((int)position.X, (int)position.Y, 195, 320);
+            spriteBatch.Draw(Resources.GetGUITextures("LeftBack"), play, Color.White);
         }
 
         #region Function Explanation
@@ -394,8 +374,6 @@ namespace RTS_Game
         }
     }
 }
-
-
 
 /*        #region Function Explanation
 
