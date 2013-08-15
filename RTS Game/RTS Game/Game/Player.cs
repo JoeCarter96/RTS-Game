@@ -90,6 +90,22 @@ namespace RTS_Game
             unitTextures = Resources.getColouredTextures(Resources.GetUnitTextures(), teamColour);
             buildingTextures = Resources.getColouredTextures(Resources.GetBuildingTextures(), teamColour);
             instance.Players.Add(this);
-        }      
+            
+        }
+
+        public void CreateUnit(String Unit, String Building)
+        {
+            if (Building == "WarFactory")
+            {
+                foreach (WarFactory w in playerBuildings.OfType<WarFactory>())
+                {
+                    if (w.Producing == false)
+                    {
+
+                    }
+                }
+            }
+        }
+    
     }
 }

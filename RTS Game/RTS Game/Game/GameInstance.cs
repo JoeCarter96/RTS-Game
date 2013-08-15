@@ -357,7 +357,6 @@ namespace RTS_Game
                 }
             }
 
-
             Vector2 position = camera.relativeXY(new Vector2(0, 114));
             Rectangle play = new Rectangle((int)position.X, (int)position.Y, 195, 320);
             spriteBatch.Draw(Resources.GetGUITextures("LeftBack"), play, Color.White);
