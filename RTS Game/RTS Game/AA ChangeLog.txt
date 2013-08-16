@@ -89,3 +89,10 @@ drop ore. Doesn't wait nearby
 yet.
 
 Split Up Entity List.			Tom
+
+Added hotkeys for building		Tom
+and unit cycling.
+
+Group movement implimented,		Tom
+need changes to movement to stop
+crashes.

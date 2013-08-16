@@ -7,7 +7,7 @@ using System.Text;
 
 namespace RTS_Game
 {
-    class Player
+    public class Player
     {
         #region Variables
         private TileMap world;

@@ -138,13 +138,20 @@ namespace RTS_Game
         {
             if (Waypoints.Count > 0)
             {
+                //Moving as close as it can if the final target is occupied (group movement!)
+                if (World.TileArray[(int)Waypoints.Last().X, (int)Waypoints.Last().Y].OccupiedByUnit ||
+                    World.TileArray[(int)Waypoints.Last().X, (int)Waypoints.Last().Y].Obstacle)
+                {
+                    Waypoints = WaypointsGenerator.GenerateWaypoints(CurrentTile, FindNearestTile.BeginSearch(Waypoints.Last(), World.TileArray));
+                }
+
                 //If there is a unit in the way.
                 if (World.TileArray[(int)nextTile.X, (int)nextTile.Y].OccupiedByUnit == true)
                 {
                     //If it's waited more then 3 seconds for the unit to move and it has not,
                     //Make the unit an obstacle (will be made false when the unit moves) and 
                     //move around it. Set wait to 0.
-                    if (waitTimer + elapsedMills > 250)
+                    if (waitTimer + elapsedMills > 500)
                     {
                         World.TileArray[(int)nextTile.X, (int)nextTile.Y].Obstacle = true;
                         Waypoints = WaypointsGenerator.GenerateWaypoints(CurrentTile, Waypoints.Last());
@@ -198,7 +205,15 @@ namespace RTS_Game
             }
 
             else    //When the Unit has no more waypoints
-            {
+            {  
+                //Moving as close as it can if the target is occupied (group movement!)
+                if (World.TileArray[(int)nextTile.X, (int)nextTile.Y].OccupiedByUnit ||
+                    World.TileArray[(int)nextTile.X, (int)nextTile.Y].Obstacle)
+                {
+                    Waypoints = WaypointsGenerator.GenerateWaypoints(CurrentTile, FindNearestTile.BeginSearch(nextTile, World.TileArray));
+                }
+
+
                 if (DistanceToDestination < maxSpeed)   //If it's at it's target.
                 {
                     //Stops this.Move being called in GameInstance.Update

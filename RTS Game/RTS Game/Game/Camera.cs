@@ -117,9 +117,9 @@ namespace RTS_Game
         #region Function Explanation
         //Offsets the target pixelPosition by half of the screen so we can center on it.
         #endregion
-        public void CenterCameraOn(Vector2 target)
+        public void   CenterCameraOn(Vector2 targetPixel)
         {
-            Position = target - new Vector2(GameClass.Game_Width / 2, GameClass.Game_Height / 2);
+            Position = targetPixel - new Vector2(GameClass.Game_Width / 2, GameClass.Game_Height / 2);
         }
 
         #region Function Explanation
@@ -146,7 +146,7 @@ namespace RTS_Game
                 }
                 if (input.IsKeyDown(Keys.Down) || input.Y > GameClass.Game_Height - (GameClass.Game_Height / 100))
                 {
-                    movementVector.Y+=50;
+                    movementVector.Y++;
                 }
 
                 if (movementVector != Vector2.Zero)

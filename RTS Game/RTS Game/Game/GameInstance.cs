@@ -18,7 +18,7 @@ namespace RTS_Game
      * how the game instance will play out. 
      */
     #endregion
-    class GameInstance
+    public class GameInstance
     {
         #region Variables
         private Camera camera;
@@ -26,19 +26,30 @@ namespace RTS_Game
         private Player localPlayer;
         private Input input;
 
+        int cycler = 0;     //Used to cycle through anything via keypress, ie CY'S, units etc.
+
         private List<Player> players = new List<Player>();
+        private List<AI> Ais = new List<AI>();       
 
-        Ore[,] oreArray;   //TEMP so find nearest ore works. This will be passed to all Unit as they are made.
+        private Ore[,] oreArray;   //TEMP so find nearest ore works. This will be passed to all Unit as they are made.
 
-        //TEMP: Player tests.
-        Player player1;
-        Player player2;
+        public Ore[,] OreArray
+        {
+            get { return oreArray; }
+        }
+
         #endregion
 
         public List<Player> Players
         {
             get { return players; }
             set { players = value; }
+        }
+
+        public List<AI> AIs
+        {
+            get { return Ais; }
+            set { Ais = value; }
         }
 
         public TileMap World
@@ -58,9 +69,12 @@ namespace RTS_Game
             world = new TileMap(level, GameClass.Game_Width, GameClass.Game_Height, GameClass.Tile_Width);
 
             //TEMP Player Testing.
-            player1 = new Player(this, new Color(42, 100, 52));
-            player2 = new Player(this, new Color(77, 166, 255));
+            Player player1 = new Player(this, new Color(42, 100, 52));
             localPlayer = player1;
+
+            //TEMP AI Test.
+            AI AITEST = new AI(this);
+            
 
             this.input = input;
             input.MouseClicked += MouseClicked;
@@ -89,6 +103,7 @@ namespace RTS_Game
             }   
 
             new ConstructionYard(world, localPlayer, new Vector2(2, 2));
+            new ConstructionYard(world, localPlayer, new Vector2(49, 2));
             new PowerPlant(world, localPlayer, new Vector2(6, 3));
             new PowerPlant(world, localPlayer, new Vector2(8, 3));
             new Refinery(world, localPlayer, new Vector2(6, 7));
@@ -251,16 +266,66 @@ namespace RTS_Game
                 #endregion
 
                 #region TEMP: Debug for players.
-                if (keys[0] == Keys.C)
-                {
-                        localPlayer = player2;
-                }
-
                 if (keys[0] == Keys.M)
                 {
-                    localPlayer.Money += 1000;
+                    localPlayer.Money += 10000;
                 }
                 #endregion
+
+                #region Cycling through CY's
+                // Cycles through all CY's until it finds the next one in the cycle.
+                if (keys[0] == Keys.Back)
+                {
+                    int currentCY = 0;
+                    int CYNumber = localPlayer.PlayerBuildings.OfType<ConstructionYard>().Count() - 1;
+
+                    foreach (Building B in localPlayer.PlayerBuildings.OfType<ConstructionYard>())
+                    {
+                        //Go back to start if we go over the number of CY's.
+                        if (cycler > CYNumber)
+                        {
+                            cycler = 0;
+                        }
+
+                        if (currentCY == cycler)
+                        {
+                            camera.CenterCameraOn(B.PixelPosition);
+                            cycler++;
+                            break;
+                        }
+
+                        currentCY++;      
+                    }
+                }
+                #endregion
+
+                #region Cycling through Units
+                // Cycles through all CY's until it finds the next one in the cycle.
+                if (keys[0] == Keys.U)
+                {
+                    int currentUnit = 0;
+                    int UnitNumber = localPlayer.PlayerUnits.Count() - 1;
+
+                    foreach (Unit u in localPlayer.PlayerUnits)
+                    {
+                        //Go back to start if we go over the number of CY's.
+                        if (cycler > UnitNumber)
+                        {
+                            cycler = 0;
+                        }
+
+                        if (currentUnit == cycler)
+                        {
+                            camera.CenterCameraOn(u.PixelPosition);
+                            cycler++;
+                            break;
+                        }
+
+                        currentUnit++;
+                    }
+                }
+                #endregion
+                
             }
         }
 
@@ -272,6 +337,11 @@ namespace RTS_Game
         {
             //Update input.
             input.Update(gameTime);
+
+            foreach (AI a in AIs)
+            {
+                a.Update(gameTime);
+            }
 
             foreach (Player p in players)
             {
@@ -357,10 +427,6 @@ namespace RTS_Game
                 }
             }
 
-
-            Vector2 position = camera.relativeXY(new Vector2(0, 114));
-            Rectangle play = new Rectangle((int)position.X, (int)position.Y, 195, 320);
-            spriteBatch.Draw(Resources.GetGUITextures("LeftBack"), play, Color.White);
         }
 
         #region Function Explanation

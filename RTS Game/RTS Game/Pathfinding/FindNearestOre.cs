@@ -30,6 +30,7 @@ namespace RTS_Game.Pathfinding
         #endregion
         static public Vector2 BeginSearch(Harvester harvesterToMove, Tile[,] worldArray, Ore[,] OreArray)
         {
+            //Setting/resetting values as it is a static class.
             harvester = harvesterToMove;
             world = worldArray;
             oreArray = OreArray;

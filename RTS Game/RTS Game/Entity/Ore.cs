@@ -6,7 +6,7 @@ using System.Text;
 
 namespace RTS_Game
 {
-    class Ore : Entity
+    public class Ore : Entity
     {
         public const int MaxOreAmount = 1000;
 

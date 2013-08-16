@@ -72,13 +72,15 @@
     <Reference Include="System.Net" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AI\AI.cs" />
     <Compile Include="Entity\Buildings\PowerPlant.cs" />
     <Compile Include="Entity\Buildings\Refinery.cs" />
     <Compile Include="Entity\Ore.cs" />
     <Compile Include="Entity\Units\Harvester\Harvester.cs" />
     <Compile Include="Entity\Units\HeavyTank\HeavyTankTurret.cs" />
     <Compile Include="Entity\Units\Turret.cs" />
-    <Compile Include="GameState\TestState.cs" />
+    <Compile Include="Pathfinding\FindNearestTile.cs" />
+    <Compile Include="States\TestState.cs" />
     <Compile Include="GUI\Input.cs" />
     <Compile Include="Entity\Buildings\Building.cs" />
     <Compile Include="Entity\Buildings\ConstructionYard.cs" />
@@ -91,11 +93,11 @@
     <Compile Include="GUI\SquareOfDoom.cs" />
     <Compile Include="Pathfinding\FindNearestOre.cs" />
     <Compile Include="Pathfinding\WaypointsGenerator.cs" />
-    <Compile Include="GameState\BasicGameState.cs" />
-    <Compile Include="GameState\StateManager.cs" />
-    <Compile Include="GameState\InGameState.cs" />
-    <Compile Include="GameState\MainMenuState.cs" />
-    <Compile Include="GameState\SplashState.cs" />
+    <Compile Include="States\BasicGameState.cs" />
+    <Compile Include="States\StateManager.cs" />
+    <Compile Include="States\InGameState.cs" />
+    <Compile Include="States\MainMenuState.cs" />
+    <Compile Include="States\SplashState.cs" />
     <Compile Include="Game\Camera.cs" />
     <Compile Include="Game\GameOptions.cs" />
     <Compile Include="GUI\Component.cs" />
