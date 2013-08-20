@@ -57,6 +57,8 @@ namespace RTS_Game
             get { return world; }
         }
 
+
+
         #region Function Explanation
         //Constructor.
         #endregion
@@ -73,7 +75,7 @@ namespace RTS_Game
             localPlayer = player1;
 
             //TEMP AI Test.
-            AI AITEST = new AI(this);
+          //  AI AITEST = new AI(this);
             
 
             this.input = input;
@@ -108,7 +110,7 @@ namespace RTS_Game
             new PowerPlant(world, localPlayer, new Vector2(8, 3));
             new Refinery(world, localPlayer, new Vector2(6, 7));
             new Refinery(world, localPlayer, new Vector2(6, 30));
-            new Harvester(world, localPlayer, new Vector2(9, 9), localPlayer.PlayerBuildings, oreArray);
+          //  new Harvester(world, localPlayer, new Vector2(9, 9), localPlayer.PlayerBuildings, oreArray);
 
             #endregion
         }
@@ -164,7 +166,6 @@ namespace RTS_Game
                         if (!localPlayer.PlayerMovingEntities.Contains(u))
                         {
                             localPlayer.PlayerMovingEntities.Add(u);
-                            u.NextTile = u.Waypoints.Dequeue();
                         }
                     }
                     #endregion

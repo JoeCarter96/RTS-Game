@@ -31,6 +31,14 @@ namespace RTS_Game
         private Ore[,] oreArray;
         #endregion
 
+        private Vector2 nextTile;
+
+        public Vector2 NextTile
+        {
+            get { return nextTile; }
+            set { nextTile = value; }
+        }
+
         #region Function Explanation
         //Constructor.
         #endregion

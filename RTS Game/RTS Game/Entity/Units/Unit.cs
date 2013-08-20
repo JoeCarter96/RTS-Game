@@ -45,7 +45,7 @@ namespace RTS_Game
 
         #region Pathfinding
         //Next Tile Unit is moving to.
-        protected Vector2 nextTile = new Vector2();
+        //protected Vector2 nextTile = new Vector2();
         protected Vector2 currentTile = new Vector2();
         protected Queue<Vector2> WAYPOINTS = new Queue<Vector2>();
 
@@ -63,13 +63,13 @@ namespace RTS_Game
             get { return WAYPOINTS; }
             set { WAYPOINTS = value; }
         }
-
+/*
         public Vector2 NextTile
         {
             get { return nextTile; }
             set { nextTile = value; }
         }
-
+        */
         public Vector2 CurrentTile
         {
             get { return currentTile; }
@@ -125,17 +125,20 @@ namespace RTS_Game
 
         public float DistanceToDestination
         {
-            get { return Vector2.Distance(PixelPosition, new Vector2(nextTile.X * World.TileWidth, nextTile.Y * World.TileWidth)); }
+            get { return Vector2.Distance(PixelPosition, new Vector2(Waypoints.Peek().X * World.TileWidth, Waypoints.Peek().Y * World.TileWidth)); }
         }
 
+
+
         #region Function Explanation
-        //This is the code which moves the Unit to the target fluidly.
+        //This is the code which moves the unit to the target fluidly.
         //The target is just the next cell/Tile. when it reaches it,
-        //it uses waypoints.Dequeue to remove and use the next waypoint.
-        //Also changes occupied tile, and handles collisions.
+        //it uses waypoints.Dequeue to remove and use the next vector.
         #endregion
         public virtual void Move()
         {
+            World.TileArray[(int)currentTile.X, (int)currentTile.Y].Obstacle = false;
+
             if (Waypoints.Count > 0)
             {
                 //Moving as close as it can if the final target is occupied (group movement!)
@@ -146,16 +149,15 @@ namespace RTS_Game
                 }
 
                 //If there is a unit in the way.
-                if (World.TileArray[(int)nextTile.X, (int)nextTile.Y].OccupiedByUnit == true)
+                if (World.TileArray[(int)Waypoints.Peek().X, (int)Waypoints.Peek().Y].OccupiedByUnit == true)
                 {
                     //If it's waited more then 3 seconds for the unit to move and it has not,
                     //Make the unit an obstacle (will be made false when the unit moves) and 
                     //move around it. Set wait to 0.
                     if (waitTimer + elapsedMills > 500)
                     {
-                        World.TileArray[(int)nextTile.X, (int)nextTile.Y].Obstacle = true;
+                        World.TileArray[(int)Waypoints.Peek().X, (int)Waypoints.Peek().Y].Obstacle = true;
                         Waypoints = WaypointsGenerator.GenerateWaypoints(CurrentTile, Waypoints.Last());
-                        nextTile = Waypoints.Dequeue();
                         waitTimer = 0;
                     }
                     else   //If it's still waiting, increment wait timer.
@@ -164,26 +166,10 @@ namespace RTS_Game
                     }
                 }
 
-                else if (DistanceToDestination < maxSpeed)   //Changing tile target, if we can.
+                else if (DistanceToDestination < MaxSpeed)
                 {
-                    //If there is a stationary object in the way (stopped tank or newly
-                    //placed building), recalculate waypoints.
-                    if (World.TileArray[(int)nextTile.X, (int)nextTile.Y].Obstacle == true)
-                    {
-                       Waypoints = WaypointsGenerator.GenerateWaypoints(CurrentTile, Waypoints.Last());
-                       nextTile = Waypoints.Dequeue();
-                    }
-                    else    //If nothing is in the way, change the target to the next waypoint.
-                    {
-                        World.TileArray[(int)currentTile.X, (int)currentTile.Y].OccupiedByUnit = false;
-
-                        currentTile = nextTile;
-                        nextTile = Waypoints.Dequeue();
-
-                        World.TileArray[(int)currentTile.X, (int)currentTile.Y].OccupiedByUnit = true;
-                    }
+                    Waypoints.Dequeue();
                 }
-
                 else    //If there is still space to move to the next target.
                 {
                     //Accellerating.
@@ -194,7 +180,7 @@ namespace RTS_Game
                         CURRENT_SPEED = Math.Min(maxSpeed, CURRENT_SPEED += acceleration);
                     }
                     //Actually visibly moving, changing directione etc.
-                    Vector2 direction = new Vector2(nextTile.X * World.TileWidth, nextTile.Y * World.TileWidth) - PixelPosition;
+                    Vector2 direction = new Vector2(Waypoints.Peek().X * World.TileWidth, Waypoints.Peek().Y * World.TileWidth) - PixelPosition;
                     direction.Normalize();
                     Velocity = Vector2.Multiply(direction, CURRENT_SPEED);
                     PixelPosition += Velocity;
@@ -203,46 +189,15 @@ namespace RTS_Game
                     turret.Rotation = Rotation;
                 }
             }
-
-            else    //When the Unit has no more waypoints
-            {  
-                //Moving as close as it can if the target is occupied (group movement!)
-                if (World.TileArray[(int)nextTile.X, (int)nextTile.Y].OccupiedByUnit ||
-                    World.TileArray[(int)nextTile.X, (int)nextTile.Y].Obstacle)
-                {
-                    Waypoints = WaypointsGenerator.GenerateWaypoints(CurrentTile, FindNearestTile.BeginSearch(nextTile, World.TileArray));
-                }
-
-
-                if (DistanceToDestination < maxSpeed)   //If it's at it's target.
-                {
-                    //Stops this.Move being called in GameInstance.Update
-                    Owner.PlayerMovingEntities.Remove(this);
-                    CURRENT_SPEED = 0;
-                    World.TileArray[(int)currentTile.X, (int)currentTile.Y].OccupiedByUnit = false;
-                    currentTile = TilePosition;
-                    World.TileArray[(int)currentTile.X, (int)currentTile.Y].OccupiedByUnit = true;
-                }
-                else    // OR if it's not on the final tile, continue to move
-                {
-                    //Accellerating.
-                    if (CURRENT_SPEED < maxSpeed)
-                    {
-                        //If Max speed is smaller than current speed + acceleration, just make it max speed.
-                        //Stops it going faster than it's max speed.
-                        CURRENT_SPEED = Math.Min(maxSpeed, CURRENT_SPEED += acceleration);
-                    }
-                    //Actually visibly moving, changing directione etc.
-                    Vector2 direction = new Vector2(nextTile.X * World.TileWidth, nextTile.Y * World.TileWidth) - PixelPosition;
-                    direction.Normalize();
-                    Velocity = Vector2.Multiply(direction, CURRENT_SPEED);
-                    PixelPosition += Velocity;
-                    turret.PixelPosition = PixelPosition;
-                    Rotation = toAngle(direction);
-                    turret.Rotation = Rotation;
-                }
+            else    //When the unit is on the source tile.
+            {
+                //Stop this.Move being called in GameInstance.Update
+                Owner.PlayerMovingEntities.Remove(this);
+                CURRENT_SPEED = 0;
             }
         }
+
+
 
         #region Function Explanation
         //Converts a Vector2 to an angle.
