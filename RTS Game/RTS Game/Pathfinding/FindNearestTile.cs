@@ -70,78 +70,52 @@ namespace RTS_Game
             {
                 target = tileToSearch;
             }
-            
+
             //otherwise, search the surrounding tiles.
             else
             {
                 alreadySearched.Add(tileToSearch);
                 toBeSearched.Remove(tileToSearch);
 
-                if (cycler > 3)
-                    cycler = 0;
 
-                switch (cycler)
+                //if the tile is within the game world.
+                if (new Rectangle(0, 0, tileArray.GetLength(0), tileArray.GetLength(1)).Contains
+                    (new Point((int)(int)tileToSearch.TilePosition.X + 1, (int)(int)tileToSearch.TilePosition.Y)))
                 {
-                    case (0):
-                        {
-                            //if the tile is within the game world.
-                            if (new Rectangle(0, 0, tileArray.GetLength(0), tileArray.GetLength(1)).Contains
-                                (new Point((int)(int)tileToSearch.TilePosition.X + 1, (int)(int)tileToSearch.TilePosition.Y)))
-                            {
-                                //If it's not already been searched, add Tile in question to search list.
-                                if (!alreadySearched.Contains(tileArray[(int)tileToSearch.TilePosition.X + 1, (int)tileToSearch.TilePosition.Y]))
-                                {
-                                    toBeSearched.Add(tileArray[(int)tileToSearch.TilePosition.X + 1, (int)tileToSearch.TilePosition.Y]);
-                                }
-                            }
+                    //If it's not already been searched, add Tile in question to search list.
+                    if (!alreadySearched.Contains(tileArray[(int)tileToSearch.TilePosition.X + 1, (int)tileToSearch.TilePosition.Y]))
+                    {
+                        toBeSearched.Add(tileArray[(int)tileToSearch.TilePosition.X + 1, (int)tileToSearch.TilePosition.Y]);
+                    }
+                }
 
-                            cycler++;
-                            break;
-                        }
+                else if (new Rectangle(0, 0, tileArray.GetLength(0), tileArray.GetLength(1)).Contains
+                    (new Point((int)tileToSearch.TilePosition.X - 1, (int)tileToSearch.TilePosition.Y)))
+                {
+                    if (!alreadySearched.Contains(tileArray[(int)tileToSearch.TilePosition.X - 1, (int)tileToSearch.TilePosition.Y]))
+                    {
+                        toBeSearched.Add(tileArray[(int)tileToSearch.TilePosition.X - 1, (int)tileToSearch.TilePosition.Y]);
+                    }
+                }
 
-                    case (1):
-                        {
-                            if (new Rectangle(0, 0, tileArray.GetLength(0), tileArray.GetLength(1)).Contains
-                                (new Point((int)tileToSearch.TilePosition.X - 1, (int)tileToSearch.TilePosition.Y)))
-                            {
-                                if (!alreadySearched.Contains(tileArray[(int)tileToSearch.TilePosition.X - 1, (int)tileToSearch.TilePosition.Y]))
-                                {
-                                    toBeSearched.Add(tileArray[(int)tileToSearch.TilePosition.X - 1, (int)tileToSearch.TilePosition.Y]);
-                                }
-                            }
 
-                            cycler++;
-                            break;
-                        }
+                else if (new Rectangle(0, 0, tileArray.GetLength(0), tileArray.GetLength(1)).Contains
+                    (new Point((int)tileToSearch.TilePosition.X, (int)tileToSearch.TilePosition.Y + 1)))
+                {
+                    if (!alreadySearched.Contains(tileArray[(int)tileToSearch.TilePosition.X, (int)tileToSearch.TilePosition.Y + 1]))
+                    {
+                        toBeSearched.Add(tileArray[(int)tileToSearch.TilePosition.X, (int)tileToSearch.TilePosition.Y + 1]);
+                    }
+                }
 
-                    case (2):
-                        {
-                            if (new Rectangle(0, 0, tileArray.GetLength(0), tileArray.GetLength(1)).Contains
-                                (new Point((int)tileToSearch.TilePosition.X, (int)tileToSearch.TilePosition.Y + 1)))
-                            {
-                                if (!alreadySearched.Contains(tileArray[(int)tileToSearch.TilePosition.X, (int)tileToSearch.TilePosition.Y + 1]))
-                                {
-                                    toBeSearched.Add(tileArray[(int)tileToSearch.TilePosition.X, (int)tileToSearch.TilePosition.Y + 1]);
-                                }
-                            }
 
-                            cycler++;
-                            break;
-                        }
-
-                    case (3):
-                        {
-                            if (new Rectangle(0, 0, tileArray.GetLength(0), tileArray.GetLength(1)).Contains
-                                (new Point((int)tileToSearch.TilePosition.X + 1, (int)tileToSearch.TilePosition.Y)))
-                            {
-                                if (!alreadySearched.Contains(tileArray[(int)tileToSearch.TilePosition.X + 1, (int)tileToSearch.TilePosition.Y]))
-                                {
-                                    toBeSearched.Add(tileArray[(int)tileToSearch.TilePosition.X + 1, (int)tileToSearch.TilePosition.Y]);
-                                }
-                            }
-                            cycler++;
-                            break;
-                        }
+                else if (new Rectangle(0, 0, tileArray.GetLength(0), tileArray.GetLength(1)).Contains
+                    (new Point((int)tileToSearch.TilePosition.X + 1, (int)tileToSearch.TilePosition.Y)))
+                {
+                    if (!alreadySearched.Contains(tileArray[(int)tileToSearch.TilePosition.X + 1, (int)tileToSearch.TilePosition.Y]))
+                    {
+                        toBeSearched.Add(tileArray[(int)tileToSearch.TilePosition.X + 1, (int)tileToSearch.TilePosition.Y]);
+                    }
                 }
             }
         }

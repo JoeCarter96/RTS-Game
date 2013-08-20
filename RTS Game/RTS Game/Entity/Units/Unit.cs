@@ -36,15 +36,17 @@ namespace RTS_Game
         protected int waitTimer = 0;
         protected int elapsedMills = 0;
 
-        protected Turret turret;  
+        protected Turret turret;
         #endregion
 
         #region Passed Variables
         protected List<Texture2D> textures;
+        protected bool obstructed = false;
         #endregion
 
         #region Pathfinding
         protected Queue<Vector2> WAYPOINTS = new Queue<Vector2>();
+        protected bool firstMove = false;
 
         #endregion
         #endregion
@@ -59,6 +61,12 @@ namespace RTS_Game
         {
             get { return WAYPOINTS; }
             set { WAYPOINTS = value; }
+        }
+
+        public bool FirstMove
+        {
+            get { return firstMove; }
+            set { firstMove = value; }
         }
 
         public List<Texture2D> Textures
@@ -112,8 +120,6 @@ namespace RTS_Game
             get { return Vector2.Distance(PixelPosition, new Vector2(Waypoints.Peek().X * World.TileWidth, Waypoints.Peek().Y * World.TileWidth)); }
         }
 
-
-
         #region Function Explanation
         //This is the code which moves the unit to the target fluidly.
         //The target is just the next cell/Tile. when it reaches it,
@@ -121,53 +127,89 @@ namespace RTS_Game
         #endregion
         public virtual void Move()
         {
-            World.TileArray[(int)TilePosition.X, (int)TilePosition.Y].Obstacle = false;
-
-            if (Waypoints.Count > 0)
+            if (firstMove == false)
             {
+                World.TileArray[(int)TilePosition.X, (int)TilePosition.Y].OccupiedByUnit = false;
+                World.TileArray[(int)Waypoints.Peek().X, (int)Waypoints.Peek().Y].OccupiedByUnit = true;
+                firstMove = true;
+                World.TileArray[(int)TilePosition.X, (int)TilePosition.Y].Obstacle = false;
+            }
+
+            //If there is an obstacle in the way...
+            if (obstructed == true)
+            {
+                //If there is a unit in the way. 
+                if (World.TileArray[(int)Waypoints.Peek().X, (int)Waypoints.Peek().Y].OccupiedByUnit == true)
+                {
+                    //If it's waited more then 3 seconds for the unit to move and it has not,
+                    //Make the unit an obstacle (will be made false when the unit moves) and 
+                    //move around it. Set wait to 0.
+                    if (waitTimer + elapsedMills > 1000)
+                    {
+                        World.TileArray[(int)Waypoints.Peek().X, (int)Waypoints.Peek().Y].Obstacle = true;
+                        Waypoints = WaypointsGenerator.GenerateWaypoints(TilePosition, Waypoints.Last());
+                        firstMove = false;
+                        waitTimer = 0;
+                        obstructed = false;
+                    }
+                    else   //If it's still waiting, increment wait timer.
+                    {
+                        waitTimer += elapsedMills;
+                    }
+                }
+                else
+                {
+                    obstructed = false;
+                    World.TileArray[(int)TilePosition.X, (int)TilePosition.Y].OccupiedByUnit = false;
+                    World.TileArray[(int)Waypoints.Peek().X, (int)Waypoints.Peek().Y].OccupiedByUnit = true;
+                }
+            }
+
+            //If the path is clear, move as normal.
+            else
+            {
+
                 //Moving as close as it can if the final target is occupied (group movement!)
-                if (World.TileArray[(int)Waypoints.Last().X, (int)Waypoints.Last().Y].OccupiedByUnit ||
+                if (World.TileArray[(int)Waypoints.Last().X, (int)Waypoints.Last().Y].OccupiedByUnit && Waypoints.Count > 1 ||
                     World.TileArray[(int)Waypoints.Last().X, (int)Waypoints.Last().Y].Obstacle)
                 {
                     Waypoints = WaypointsGenerator.GenerateWaypoints(TilePosition, FindNearestTile.BeginSearch(Waypoints.Last(), World.TileArray));
+                    firstMove = false;
                 }
 
+                //If the final target is free and we need to, try to change tile target to next waypoint.
+                //We do this by simply using wapoints.Dequeue, as the code uses waypoints.peek for it's target.
                 else if (DistanceToDestination < MaxSpeed)
                 {
-                    
-                    Waypoints.Dequeue();
+                    Waypoints.Dequeue();    
 
                     if (Waypoints.Count > 0)
                     {
                         //If there is a unit in the way. 
                         if (World.TileArray[(int)Waypoints.Peek().X, (int)Waypoints.Peek().Y].OccupiedByUnit == true)
                         {
-                            //If it's waited more then 3 seconds for the unit to move and it has not,
-                            //Make the unit an obstacle (will be made false when the unit moves) and 
-                            //move around it. Set wait to 0.
-                            if (waitTimer + elapsedMills > 500)
-                            {
-                                World.TileArray[(int)Waypoints.Peek().X, (int)Waypoints.Peek().Y].Obstacle = true;
-                                Waypoints = WaypointsGenerator.GenerateWaypoints(TilePosition, Waypoints.Last());
-                                waitTimer = 0;
-                            }
-                            else   //If it's still waiting, increment wait timer.
-                            {
-                                waitTimer += elapsedMills;
-                            }
+                            obstructed = true;
+                        }
+                        
+                        //If there is no unit in the way, actually change target.
+                        else
+                        {
+                            World.TileArray[(int)TilePosition.X, (int)TilePosition.Y].OccupiedByUnit = false;
+                            World.TileArray[(int)Waypoints.Peek().X, (int)Waypoints.Peek().Y].OccupiedByUnit = true;
                         }
                     }
                 }
 
                 else    //If there is still space to move to the next target.
                 {
-                    //Accellerating.
+                    //Accellerating if we can.
                     if (CURRENT_SPEED < maxSpeed)
                     {
                         //If Max speed is smaller than current speed + acceleration, just make it max speed.
-                        //Stops it going faster than it's max speed.
+                        //This stops it going faster than it's max speed.
                         CURRENT_SPEED = Math.Min(maxSpeed, CURRENT_SPEED += acceleration);
                     }
+
                     //Actually visibly moving, changing directione etc.
                     Vector2 direction = new Vector2(Waypoints.Peek().X * World.TileWidth, Waypoints.Peek().Y * World.TileWidth) - PixelPosition;
                     direction.Normalize();
@@ -177,12 +219,14 @@ namespace RTS_Game
                     Rotation = toAngle(direction);
                     turret.Rotation = Rotation;
                 }
-            }
-            else    //When the unit is on the source tile.
-            {
-                //Stop this.Move being called in GameInstance.Update
-                Owner.PlayerMovingEntities.Remove(this);
-                CURRENT_SPEED = 0;
+
+                if (Waypoints.Count == 0)    //When the unit is on the source tile.
+                {
+                    //Stop this.Move being called in GameInstance.Update
+                    Owner.PlayerMovingEntities.Remove(this);
+                    CURRENT_SPEED = 0;
+                    firstMove = false;
+                }
             }
         }
 

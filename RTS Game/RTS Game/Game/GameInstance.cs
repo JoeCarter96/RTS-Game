@@ -163,6 +163,7 @@ namespace RTS_Game
                     {
                         //Generate Waypoints and move!.
                         u.Waypoints = WaypointsGenerator.GenerateWaypoints(u.TilePosition, mouseTile);
+                        u.FirstMove = false;
                         if (!localPlayer.PlayerMovingEntities.Contains(u))
                         {
                             localPlayer.PlayerMovingEntities.Add(u);
@@ -425,6 +426,11 @@ namespace RTS_Game
                 if (t.OccupiedByUnit)
                 {
                     spriteBatch.Draw(Resources.GetGUITextures("TileOverlay"), t.BoundingBox, null, new Color(255, 0, 0, 10), 0f, new Vector2(0, 0), SpriteEffects.None, 0);
+                }
+
+                if (t.Obstacle)
+                {
+                    spriteBatch.Draw(Resources.GetGUITextures("TileOverlay"), t.BoundingBox, null, new Color(0, 255, 0, 10), 0f, new Vector2(0, 0), SpriteEffects.None, 0);
                 }
             }
 
