@@ -44,9 +44,6 @@ namespace RTS_Game
         #endregion
 
         #region Pathfinding
-        //Next Tile Unit is moving to.
-        //protected Vector2 nextTile = new Vector2();
-        protected Vector2 currentTile = new Vector2();
         protected Queue<Vector2> WAYPOINTS = new Queue<Vector2>();
 
         #endregion
@@ -62,18 +59,6 @@ namespace RTS_Game
         {
             get { return WAYPOINTS; }
             set { WAYPOINTS = value; }
-        }
-/*
-        public Vector2 NextTile
-        {
-            get { return nextTile; }
-            set { nextTile = value; }
-        }
-        */
-        public Vector2 CurrentTile
-        {
-            get { return currentTile; }
-            set { currentTile = value; }
         }
 
         public List<Texture2D> Textures
@@ -119,7 +104,6 @@ namespace RTS_Game
             this.ROF = ROF;
 
             world.TileArray[(int)tilePosition.X, (int)tilePosition.Y].OccupiedByUnit = true;
-            currentTile = tilePosition;
         }
 
 
@@ -137,7 +121,7 @@ namespace RTS_Game
         #endregion
         public virtual void Move()
         {
-            World.TileArray[(int)currentTile.X, (int)currentTile.Y].Obstacle = false;
+            World.TileArray[(int)TilePosition.X, (int)TilePosition.Y].Obstacle = false;
 
             if (Waypoints.Count > 0)
             {
@@ -145,31 +129,36 @@ namespace RTS_Game
                 if (World.TileArray[(int)Waypoints.Last().X, (int)Waypoints.Last().Y].OccupiedByUnit ||
                     World.TileArray[(int)Waypoints.Last().X, (int)Waypoints.Last().Y].Obstacle)
                 {
-                    Waypoints = WaypointsGenerator.GenerateWaypoints(CurrentTile, FindNearestTile.BeginSearch(Waypoints.Last(), World.TileArray));
-                }
-
-                //If there is a unit in the way.
-                if (World.TileArray[(int)Waypoints.Peek().X, (int)Waypoints.Peek().Y].OccupiedByUnit == true)
-                {
-                    //If it's waited more then 3 seconds for the unit to move and it has not,
-                    //Make the unit an obstacle (will be made false when the unit moves) and 
-                    //move around it. Set wait to 0.
-                    if (waitTimer + elapsedMills > 500)
-                    {
-                        World.TileArray[(int)Waypoints.Peek().X, (int)Waypoints.Peek().Y].Obstacle = true;
-                        Waypoints = WaypointsGenerator.GenerateWaypoints(CurrentTile, Waypoints.Last());
-                        waitTimer = 0;
-                    }
-                    else   //If it's still waiting, increment wait timer.
-                    {
-                        waitTimer += elapsedMills;
-                    }
+                    Waypoints = WaypointsGenerator.GenerateWaypoints(TilePosition, FindNearestTile.BeginSearch(Waypoints.Last(), World.TileArray));
                 }
 
                 else if (DistanceToDestination < MaxSpeed)
                 {
+                    
                     Waypoints.Dequeue();
+
+                    if (Waypoints.Count > 0)
+                    {
+                        //If there is a unit in the way. 
+                        if (World.TileArray[(int)Waypoints.Peek().X, (int)Waypoints.Peek().Y].OccupiedByUnit == true)
+                        {
+                            //If it's waited more then 3 seconds for the unit to move and it has not,
+                            //Make the unit an obstacle (will be made false when the unit moves) and 
+                            //move around it. Set wait to 0.
+                            if (waitTimer + elapsedMills > 500)
+                            {
+                                World.TileArray[(int)Waypoints.Peek().X, (int)Waypoints.Peek().Y].Obstacle = true;
+                                Waypoints = WaypointsGenerator.GenerateWaypoints(TilePosition, Waypoints.Last());
+                                waitTimer = 0;
+                            }
+                            else   //If it's still waiting, increment wait timer.
+                            {
+                                waitTimer += elapsedMills;
+                            }
+                        }
+                    }
                 }
+
                 else    //If there is still space to move to the next target.
                 {
                     //Accellerating.

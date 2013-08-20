@@ -422,9 +422,9 @@ namespace RTS_Game
             //DEBUG.
             foreach (Tile t in world.TileArray)
             {
-                if (t.Obstacle)
+                if (t.OccupiedByUnit)
                 {
-                 //   spriteBatch.Draw(Resources.GetGUITextures("TileOverlay"), t.BoundingBox, null, new Color(255, 0, 0, 10), 0f, new Vector2(0, 0), SpriteEffects.None, 0);
+                    spriteBatch.Draw(Resources.GetGUITextures("TileOverlay"), t.BoundingBox, null, new Color(255, 0, 0, 10), 0f, new Vector2(0, 0), SpriteEffects.None, 0);
                 }
             }
 

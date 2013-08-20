@@ -32,6 +32,7 @@ namespace RTS_Game
         #endregion
 
         private Vector2 nextTile;
+        private Vector2 currentTile;
 
         public Vector2 NextTile
         {
@@ -193,7 +194,7 @@ namespace RTS_Game
                         if (waitTimer + elapsedMills > 1000)
                         {
                             World.TileArray[(int)nextTile.X, (int)nextTile.Y].Obstacle = true;
-                            Waypoints = WaypointsGenerator.GenerateWaypoints(CurrentTile, Waypoints.Last());
+                            Waypoints = WaypointsGenerator.GenerateWaypoints(currentTile, Waypoints.Last());
                             nextTile = Waypoints.Dequeue();
                             waitTimer = 0;
                         }
@@ -211,7 +212,7 @@ namespace RTS_Game
 
                         if (World.TileArray[(int)nextTile.X, (int)nextTile.Y].Obstacle == true)
                         {
-                            Waypoints = WaypointsGenerator.GenerateWaypoints(CurrentTile, Waypoints.Last());
+                            Waypoints = WaypointsGenerator.GenerateWaypoints(currentTile, Waypoints.Last());
                             nextTile = Waypoints.Dequeue();
                         }
 
