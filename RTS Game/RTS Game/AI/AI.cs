@@ -58,9 +58,9 @@ namespace RTS_Game
         public void preformAction()
         {
             //TODO: Completely replace, this is TEMP testing.
-            if (bot.PlayerBuildings.OfType<Refinery>().Count() < 1)
+            if (bot.PlayerBuildings.OfType<Refinery>().Count() < 10)
             {
-                new Refinery(gameInstance.World, bot, new Vector2(36, 40));
+                new Refinery(gameInstance.World, bot, FindNearestTile.BeginSearch(new Vector2(40, 40), gameInstance.World.TileArray));
             }
             else if (bot.PlayerUnits.OfType<Harvester>().Count() < 4)
             {

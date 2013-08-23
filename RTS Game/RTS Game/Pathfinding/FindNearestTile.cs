@@ -84,31 +84,14 @@ namespace RTS_Game
                 {
                     case (0):
                         {
-                            //if the tile is within the game world.
-                            if (new Rectangle(0, 0, tileArray.GetLength(0), tileArray.GetLength(1)).Contains
-                                (new Point((int)(int)tileToSearch.TilePosition.X + 1, (int)(int)tileToSearch.TilePosition.Y)))
-                            {
-                                //If it's not already been searched, add Tile in question to search list.
-                                if (!alreadySearched.Contains(tileArray[(int)tileToSearch.TilePosition.X + 1, (int)tileToSearch.TilePosition.Y]))
-                                {
-                                    toBeSearched.Add(tileArray[(int)tileToSearch.TilePosition.X + 1, (int)tileToSearch.TilePosition.Y]);
-                                }
-                            }
-
+                            RightFirst(tileToSearch);
                             cycler++;
                             break;
                         }
 
                     case (1):
                         {
-                            if (new Rectangle(0, 0, tileArray.GetLength(0), tileArray.GetLength(1)).Contains
-                                (new Point((int)tileToSearch.TilePosition.X - 1, (int)tileToSearch.TilePosition.Y)))
-                            {
-                                if (!alreadySearched.Contains(tileArray[(int)tileToSearch.TilePosition.X - 1, (int)tileToSearch.TilePosition.Y]))
-                                {
-                                    toBeSearched.Add(tileArray[(int)tileToSearch.TilePosition.X - 1, (int)tileToSearch.TilePosition.Y]);
-                                }
-                            }
+                            LeftFirst(tileToSearch);
 
                             cycler++;
                             break;
@@ -116,14 +99,7 @@ namespace RTS_Game
 
                     case (2):
                         {
-                            if (new Rectangle(0, 0, tileArray.GetLength(0), tileArray.GetLength(1)).Contains
-                                (new Point((int)tileToSearch.TilePosition.X, (int)tileToSearch.TilePosition.Y + 1)))
-                            {
-                                if (!alreadySearched.Contains(tileArray[(int)tileToSearch.TilePosition.X, (int)tileToSearch.TilePosition.Y + 1]))
-                                {
-                                    toBeSearched.Add(tileArray[(int)tileToSearch.TilePosition.X, (int)tileToSearch.TilePosition.Y + 1]);
-                                }
-                            }
+                            UpFirst(tileToSearch);
 
                             cycler++;
                             break;
@@ -131,19 +107,233 @@ namespace RTS_Game
 
                     case (3):
                         {
-                            if (new Rectangle(0, 0, tileArray.GetLength(0), tileArray.GetLength(1)).Contains
-                                (new Point((int)tileToSearch.TilePosition.X + 1, (int)tileToSearch.TilePosition.Y)))
-                            {
-                                if (!alreadySearched.Contains(tileArray[(int)tileToSearch.TilePosition.X + 1, (int)tileToSearch.TilePosition.Y]))
-                                {
-                                    toBeSearched.Add(tileArray[(int)tileToSearch.TilePosition.X + 1, (int)tileToSearch.TilePosition.Y]);
-                                }
-                            }
+                            DownFirst(tileToSearch);
                             cycler++;
                             break;
                         }
                 }
             }
+        }
+
+        static public void RightFirst(Tile tileToSearch)
+        {
+            #region Right
+            //if the tile is within the game world.
+            if (new Rectangle(0, 0, tileArray.GetLength(0), tileArray.GetLength(1)).Contains
+                (new Point((int)(int)tileToSearch.TilePosition.X + 1, (int)(int)tileToSearch.TilePosition.Y)))
+            {
+                //If it's not already been searched, add Tile in question to search list.
+                if (!alreadySearched.Contains(tileArray[(int)tileToSearch.TilePosition.X + 1, (int)tileToSearch.TilePosition.Y]))
+                {
+                    toBeSearched.Add(tileArray[(int)tileToSearch.TilePosition.X + 1, (int)tileToSearch.TilePosition.Y]);
+                }
+            }
+            #endregion
+
+            #region Left
+            //if the tile is within the game world.
+            if (new Rectangle(0, 0, tileArray.GetLength(0), tileArray.GetLength(1)).Contains
+                (new Point((int)(int)tileToSearch.TilePosition.X - 1, (int)(int)tileToSearch.TilePosition.Y)))
+            {
+                //If it's not already been searched, add Tile in question to search list.
+                if (!alreadySearched.Contains(tileArray[(int)tileToSearch.TilePosition.X - 1, (int)tileToSearch.TilePosition.Y]))
+                {
+                    toBeSearched.Add(tileArray[(int)tileToSearch.TilePosition.X - 1, (int)tileToSearch.TilePosition.Y]);
+                }
+            }
+            #endregion
+
+            #region Up
+            //if the tile is within the game world.
+            if (new Rectangle(0, 0, tileArray.GetLength(0), tileArray.GetLength(1)).Contains
+                (new Point((int)(int)tileToSearch.TilePosition.X, (int)(int)tileToSearch.TilePosition.Y - 1)))
+            {
+                //If it's not already been searched, add Tile in question to search list.
+                if (!alreadySearched.Contains(tileArray[(int)tileToSearch.TilePosition.X, (int)tileToSearch.TilePosition.Y - 1]))
+                {
+                    toBeSearched.Add(tileArray[(int)tileToSearch.TilePosition.X, (int)tileToSearch.TilePosition.Y - 1]);
+                }
+            }
+            #endregion
+
+            #region Down
+            //if the tile is within the game world.
+            if (new Rectangle(0, 0, tileArray.GetLength(0), tileArray.GetLength(1)).Contains
+                (new Point((int)(int)tileToSearch.TilePosition.X, (int)(int)tileToSearch.TilePosition.Y + 1)))
+            {
+                //If it's not already been searched, add Tile in question to search list.
+                if (!alreadySearched.Contains(tileArray[(int)tileToSearch.TilePosition.X, (int)tileToSearch.TilePosition.Y + 1]))
+                {
+                    toBeSearched.Add(tileArray[(int)tileToSearch.TilePosition.X, (int)tileToSearch.TilePosition.Y + 1]);
+                }
+            }
+            #endregion
+        }
+
+        static public void LeftFirst(Tile tileToSearch)
+        {
+            #region Left
+            //if the tile is within the game world.
+            if (new Rectangle(0, 0, tileArray.GetLength(0), tileArray.GetLength(1)).Contains
+                (new Point((int)(int)tileToSearch.TilePosition.X - 1, (int)(int)tileToSearch.TilePosition.Y)))
+            {
+                //If it's not already been searched, add Tile in question to search list.
+                if (!alreadySearched.Contains(tileArray[(int)tileToSearch.TilePosition.X - 1, (int)tileToSearch.TilePosition.Y]))
+                {
+                    toBeSearched.Add(tileArray[(int)tileToSearch.TilePosition.X - 1, (int)tileToSearch.TilePosition.Y]);
+                }
+            }
+            #endregion
+
+            #region Right
+            //if the tile is within the game world.
+            if (new Rectangle(0, 0, tileArray.GetLength(0), tileArray.GetLength(1)).Contains
+                (new Point((int)(int)tileToSearch.TilePosition.X + 1, (int)(int)tileToSearch.TilePosition.Y)))
+            {
+                //If it's not already been searched, add Tile in question to search list.
+                if (!alreadySearched.Contains(tileArray[(int)tileToSearch.TilePosition.X + 1, (int)tileToSearch.TilePosition.Y]))
+                {
+                    toBeSearched.Add(tileArray[(int)tileToSearch.TilePosition.X + 1, (int)tileToSearch.TilePosition.Y]);
+                }
+            }
+            #endregion
+
+            #region Up
+            //if the tile is within the game world.
+            if (new Rectangle(0, 0, tileArray.GetLength(0), tileArray.GetLength(1)).Contains
+                (new Point((int)(int)tileToSearch.TilePosition.X, (int)(int)tileToSearch.TilePosition.Y - 1)))
+            {
+                //If it's not already been searched, add Tile in question to search list.
+                if (!alreadySearched.Contains(tileArray[(int)tileToSearch.TilePosition.X, (int)tileToSearch.TilePosition.Y - 1]))
+                {
+                    toBeSearched.Add(tileArray[(int)tileToSearch.TilePosition.X, (int)tileToSearch.TilePosition.Y - 1]);
+                }
+            }
+            #endregion
+
+            #region Down
+            //if the tile is within the game world.
+            if (new Rectangle(0, 0, tileArray.GetLength(0), tileArray.GetLength(1)).Contains
+                (new Point((int)(int)tileToSearch.TilePosition.X, (int)(int)tileToSearch.TilePosition.Y + 1)))
+            {
+                //If it's not already been searched, add Tile in question to search list.
+                if (!alreadySearched.Contains(tileArray[(int)tileToSearch.TilePosition.X, (int)tileToSearch.TilePosition.Y + 1]))
+                {
+                    toBeSearched.Add(tileArray[(int)tileToSearch.TilePosition.X, (int)tileToSearch.TilePosition.Y + 1]);
+                }
+            }
+            #endregion
+        }
+
+        static public void UpFirst(Tile tileToSearch)
+        {
+            #region Up
+            //if the tile is within the game world.
+            if (new Rectangle(0, 0, tileArray.GetLength(0), tileArray.GetLength(1)).Contains
+                (new Point((int)(int)tileToSearch.TilePosition.X, (int)(int)tileToSearch.TilePosition.Y - 1)))
+            {
+                //If it's not already been searched, add Tile in question to search list.
+                if (!alreadySearched.Contains(tileArray[(int)tileToSearch.TilePosition.X, (int)tileToSearch.TilePosition.Y - 1]))
+                {
+                    toBeSearched.Add(tileArray[(int)tileToSearch.TilePosition.X, (int)tileToSearch.TilePosition.Y - 1]);
+                }
+            }
+            #endregion
+
+            #region Right
+            //if the tile is within the game world.
+            if (new Rectangle(0, 0, tileArray.GetLength(0), tileArray.GetLength(1)).Contains
+                (new Point((int)(int)tileToSearch.TilePosition.X + 1, (int)(int)tileToSearch.TilePosition.Y)))
+            {
+                //If it's not already been searched, add Tile in question to search list.
+                if (!alreadySearched.Contains(tileArray[(int)tileToSearch.TilePosition.X + 1, (int)tileToSearch.TilePosition.Y]))
+                {
+                    toBeSearched.Add(tileArray[(int)tileToSearch.TilePosition.X + 1, (int)tileToSearch.TilePosition.Y]);
+                }
+            }
+            #endregion
+
+            #region Left
+            //if the tile is within the game world.
+            if (new Rectangle(0, 0, tileArray.GetLength(0), tileArray.GetLength(1)).Contains
+                (new Point((int)(int)tileToSearch.TilePosition.X - 1, (int)(int)tileToSearch.TilePosition.Y)))
+            {
+                //If it's not already been searched, add Tile in question to search list.
+                if (!alreadySearched.Contains(tileArray[(int)tileToSearch.TilePosition.X - 1, (int)tileToSearch.TilePosition.Y]))
+                {
+                    toBeSearched.Add(tileArray[(int)tileToSearch.TilePosition.X - 1, (int)tileToSearch.TilePosition.Y]);
+                }
+            }
+            #endregion
+
+            #region Down
+            //if the tile is within the game world.
+            if (new Rectangle(0, 0, tileArray.GetLength(0), tileArray.GetLength(1)).Contains
+                (new Point((int)(int)tileToSearch.TilePosition.X, (int)(int)tileToSearch.TilePosition.Y + 1)))
+            {
+                //If it's not already been searched, add Tile in question to search list.
+                if (!alreadySearched.Contains(tileArray[(int)tileToSearch.TilePosition.X, (int)tileToSearch.TilePosition.Y + 1]))
+                {
+                    toBeSearched.Add(tileArray[(int)tileToSearch.TilePosition.X, (int)tileToSearch.TilePosition.Y + 1]);
+                }
+            }
+            #endregion
+        }
+
+        static public void DownFirst(Tile tileToSearch)
+        {
+            #region Down
+            //if the tile is within the game world.
+            if (new Rectangle(0, 0, tileArray.GetLength(0), tileArray.GetLength(1)).Contains
+                (new Point((int)(int)tileToSearch.TilePosition.X, (int)(int)tileToSearch.TilePosition.Y + 1)))
+            {
+                //If it's not already been searched, add Tile in question to search list.
+                if (!alreadySearched.Contains(tileArray[(int)tileToSearch.TilePosition.X, (int)tileToSearch.TilePosition.Y + 1]))
+                {
+                    toBeSearched.Add(tileArray[(int)tileToSearch.TilePosition.X, (int)tileToSearch.TilePosition.Y + 1]);
+                }
+            }
+            #endregion
+
+            #region Right
+            //if the tile is within the game world.
+            if (new Rectangle(0, 0, tileArray.GetLength(0), tileArray.GetLength(1)).Contains
+                (new Point((int)(int)tileToSearch.TilePosition.X + 1, (int)(int)tileToSearch.TilePosition.Y)))
+            {
+                //If it's not already been searched, add Tile in question to search list.
+                if (!alreadySearched.Contains(tileArray[(int)tileToSearch.TilePosition.X + 1, (int)tileToSearch.TilePosition.Y]))
+                {
+                    toBeSearched.Add(tileArray[(int)tileToSearch.TilePosition.X + 1, (int)tileToSearch.TilePosition.Y]);
+                }
+            }
+            #endregion
+
+            #region Left
+            //if the tile is within the game world.
+            if (new Rectangle(0, 0, tileArray.GetLength(0), tileArray.GetLength(1)).Contains
+                (new Point((int)(int)tileToSearch.TilePosition.X - 1, (int)(int)tileToSearch.TilePosition.Y)))
+            {
+                //If it's not already been searched, add Tile in question to search list.
+                if (!alreadySearched.Contains(tileArray[(int)tileToSearch.TilePosition.X - 1, (int)tileToSearch.TilePosition.Y]))
+                {
+                    toBeSearched.Add(tileArray[(int)tileToSearch.TilePosition.X - 1, (int)tileToSearch.TilePosition.Y]);
+                }
+            }
+            #endregion
+
+            #region Up
+            //if the tile is within the game world.
+            if (new Rectangle(0, 0, tileArray.GetLength(0), tileArray.GetLength(1)).Contains
+                (new Point((int)(int)tileToSearch.TilePosition.X, (int)(int)tileToSearch.TilePosition.Y - 1)))
+            {
+                //If it's not already been searched, add Tile in question to search list.
+                if (!alreadySearched.Contains(tileArray[(int)tileToSearch.TilePosition.X, (int)tileToSearch.TilePosition.Y - 1]))
+                {
+                    toBeSearched.Add(tileArray[(int)tileToSearch.TilePosition.X, (int)tileToSearch.TilePosition.Y - 1]);
+                }
+            }
+            #endregion
+         
         }
     }
 }

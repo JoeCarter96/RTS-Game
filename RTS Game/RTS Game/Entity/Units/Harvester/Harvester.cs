@@ -98,7 +98,7 @@ namespace RTS_Game
             //If there is a refinery chosen, move to it.
             if (bestChoice != null)
             {
-                Waypoints = WaypointsGenerator.GenerateWaypoints(this.TilePosition, bestChoice.MineSpot);
+                Waypoints = WaypointsGenerator.GenerateWaypoints(this.TilePosition, bestChoice.MineSpot, false);
                 Owner.PlayerMovingEntities.Add(this);
                 NextTile = Waypoints.Dequeue();
                 targetRef = bestChoice;
@@ -118,7 +118,7 @@ namespace RTS_Game
 
             if (targetRef == null)
             {
-                Waypoints = WaypointsGenerator.GenerateWaypoints(TilePosition, orePos);
+                Waypoints = WaypointsGenerator.GenerateWaypoints(TilePosition, orePos, false);
             }
             //Ignore the obstacles of the refinery, for when we move from it after unloading.
             else
@@ -185,7 +185,7 @@ namespace RTS_Game
                         if (waitTimer + elapsedMills > 1000)
                         {
                             World.TileArray[(int)nextTile.X, (int)nextTile.Y].Obstacle = true;
-                            Waypoints = WaypointsGenerator.GenerateWaypoints(CurrentTile, Waypoints.Last());
+                            Waypoints = WaypointsGenerator.GenerateWaypoints(CurrentTile, Waypoints.Last(), false);
                             nextTile = Waypoints.Dequeue();
                             waitTimer = 0;
                         }
@@ -203,7 +203,7 @@ namespace RTS_Game
 
                         if (World.TileArray[(int)nextTile.X, (int)nextTile.Y].Obstacle == true)
                         {
-                            Waypoints = WaypointsGenerator.GenerateWaypoints(CurrentTile, Waypoints.Last());
+                            Waypoints = WaypointsGenerator.GenerateWaypoints(CurrentTile, Waypoints.Last(), false);
                             nextTile = Waypoints.Dequeue();
                         }
 

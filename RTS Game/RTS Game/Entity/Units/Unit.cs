@@ -48,6 +48,7 @@ namespace RTS_Game
         protected Vector2 nextTile = new Vector2();
         protected Vector2 currentTile = new Vector2();
         protected Queue<Vector2> WAYPOINTS = new Queue<Vector2>();
+        protected bool ignoreObstacles = false;
 
         #endregion
         #endregion
@@ -102,6 +103,12 @@ namespace RTS_Game
             }
         }
 
+        public bool IgnoreObstacles
+        {
+            get { return ignoreObstacles; }
+            set { ignoreObstacles = value; }
+        }
+
         #region Function Explanation
         //Constructor, Adds Unit to entity list, passes a bunch of variables and then creates a PF array.
         //Sets Next Target to Tile Position so that when Move() is called it immediately looks for the next tile.
@@ -142,11 +149,12 @@ namespace RTS_Game
                 if (World.TileArray[(int)Waypoints.Last().X, (int)Waypoints.Last().Y].OccupiedByUnit ||
                     World.TileArray[(int)Waypoints.Last().X, (int)Waypoints.Last().Y].Obstacle)
                 {
-                    Waypoints = WaypointsGenerator.GenerateWaypoints(CurrentTile, FindNearestTile.BeginSearch(Waypoints.Last(), World.TileArray));
+                    Waypoints = WaypointsGenerator.GenerateWaypoints(CurrentTile, FindNearestTile.BeginSearch(Waypoints.Last(), World.TileArray), true);
+                    ignoreObstacles = true;
                 }
 
                 //If there is a unit in the way.
-                if (World.TileArray[(int)nextTile.X, (int)nextTile.Y].OccupiedByUnit == true)
+                if (World.TileArray[(int)nextTile.X, (int)nextTile.Y].OccupiedByUnit == true && ignoreObstacles == false)
                 {
                     //If it's waited more then 3 seconds for the unit to move and it has not,
                     //Make the unit an obstacle (will be made false when the unit moves) and 
@@ -154,7 +162,7 @@ namespace RTS_Game
                     if (waitTimer + elapsedMills > 500)
                     {
                         World.TileArray[(int)nextTile.X, (int)nextTile.Y].Obstacle = true;
-                        Waypoints = WaypointsGenerator.GenerateWaypoints(CurrentTile, Waypoints.Last());
+                        Waypoints = WaypointsGenerator.GenerateWaypoints(CurrentTile, Waypoints.Last(), false);
                         nextTile = Waypoints.Dequeue();
                         waitTimer = 0;
                     }
@@ -170,7 +178,7 @@ namespace RTS_Game
                     //placed building), recalculate waypoints.
                     if (World.TileArray[(int)nextTile.X, (int)nextTile.Y].Obstacle == true)
                     {
-                       Waypoints = WaypointsGenerator.GenerateWaypoints(CurrentTile, Waypoints.Last());
+                       Waypoints = WaypointsGenerator.GenerateWaypoints(CurrentTile, Waypoints.Last(), false);
                        nextTile = Waypoints.Dequeue();
                     }
                     else    //If nothing is in the way, change the target to the next waypoint.
@@ -210,7 +218,7 @@ namespace RTS_Game
                 if (World.TileArray[(int)nextTile.X, (int)nextTile.Y].OccupiedByUnit ||
                     World.TileArray[(int)nextTile.X, (int)nextTile.Y].Obstacle)
                 {
-                    Waypoints = WaypointsGenerator.GenerateWaypoints(CurrentTile, FindNearestTile.BeginSearch(nextTile, World.TileArray));
+                    Waypoints = WaypointsGenerator.GenerateWaypoints(CurrentTile, FindNearestTile.BeginSearch(nextTile, World.TileArray), false);
                 }
 
 
@@ -219,6 +227,7 @@ namespace RTS_Game
                     //Stops this.Move being called in GameInstance.Update
                     Owner.PlayerMovingEntities.Remove(this);
                     CURRENT_SPEED = 0;
+                    ignoreObstacles = false;
                     World.TileArray[(int)currentTile.X, (int)currentTile.Y].OccupiedByUnit = false;
                     currentTile = TilePosition;
                     World.TileArray[(int)currentTile.X, (int)currentTile.Y].OccupiedByUnit = true;

@@ -160,7 +160,7 @@ namespace RTS_Game
                     foreach (Unit u in localPlayer.PlayerSelectedEntities.OfType<Unit>().ToList<Unit>())
                     {
                         //Generate Waypoints and move!.
-                        u.Waypoints = WaypointsGenerator.GenerateWaypoints(u.TilePosition, mouseTile);
+                        u.Waypoints = WaypointsGenerator.GenerateWaypoints(u.TilePosition, mouseTile, false);
                         if (!localPlayer.PlayerMovingEntities.Contains(u))
                         {
                             localPlayer.PlayerMovingEntities.Add(u);
