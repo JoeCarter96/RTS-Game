@@ -129,7 +129,6 @@ namespace RTS_Game
             currentTile = tilePosition;
         }
 
-
         public float DistanceToDestination
         {
             get { return Vector2.Distance(PixelPosition, new Vector2(nextTile.X * World.TileWidth, nextTile.Y * World.TileWidth)); }
@@ -326,6 +325,14 @@ namespace RTS_Game
                 SourceRectangle = new Rectangle(SpriteDimensions.Width * 7, SpriteDimensions.Height * 0,
                     SpriteDimensions.Width, SpriteDimensions.Height);
             }
+        }
+
+        #region Function Explanation
+        //Handles attack code.
+        #endregion
+        public void Attack(Entity target)
+        {
+            Waypoints = WaypointsGenerator.GenerateWaypoints(TilePosition, new Vector2(target.TilePosition.X - 2, target.TilePosition.Y), false);
         }
 
         #region Function Explanation

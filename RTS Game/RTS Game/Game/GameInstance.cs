@@ -78,7 +78,9 @@ namespace RTS_Game
 
             this.input = input;
             input.MouseClicked += MouseClicked;
+            input.MouseMoved += MouseMoved;
             input.KeyPress += KeyPress;
+            input.MouseDown += MouseDown;
             
             //we tell the camera the size of the tilemap so it can adjust its range
             camera.GiveTilemap(world);
@@ -125,6 +127,7 @@ namespace RTS_Game
         #endregion
         public virtual void MouseClicked(int x, int y, MouseButton button)
         {
+            bool actionPreformed = false; //Only do one action per click.
             #region Left Mouse Click
             if (button == MouseButton.Left)
             {
@@ -133,8 +136,9 @@ namespace RTS_Game
                 Vector2 mouseTile = new Vector2((float)Math.Round((double)relativePosition.X / GameClass.Tile_Width),
                     (float)Math.Round(((double)relativePosition.Y / GameClass.Tile_Width)));
 
-
-                //Adds any entities whose bounding boxes contain the mouse to selected entities.
+                #region Adding Entities To Selected Entities.
+                #region Adding Units
+                //Adds any Units whose bounding boxes contain the mouse to selected entities.
                 localPlayer.PlayerSelectedEntities.Add(localPlayer.PlayerUnits.Find(delegate(Entity entity)
                 {
                     //Returns whatever unit which their bounding box contains
@@ -143,9 +147,127 @@ namespace RTS_Game
                         (int)relativePosition.Y));
                 }));
 
-                //If null was returned it's an empty location to move any selected units to
-                //Therefore, remove it from selected list and move any selected units to the clicked location.
+                //Remove the last entry if it's null.
                 if (localPlayer.PlayerSelectedEntities.Last() == null)
+                {
+                    localPlayer.PlayerSelectedEntities.Remove(null);
+                }
+                else
+                {
+                    actionPreformed = true;
+                }
+                #endregion
+
+                #region Adding Buildings.
+                //Adds any Buildings whose bounding boxes contain the mouse to selected entities.
+                localPlayer.PlayerSelectedEntities.Add(localPlayer.PlayerBuildings.Find(delegate(Entity entity)
+                {
+                    //Returns whatever unit which their bounding box contains
+                    //mouse, or null if there is not one which does.
+                    return entity.BoundingBox.Contains(new Point((int)relativePosition.X,
+                        (int)relativePosition.Y));
+                }));
+
+                //Remove the last entry if it's null.
+                if (localPlayer.PlayerSelectedEntities.Last() == null)
+                {
+                    localPlayer.PlayerSelectedEntities.Remove(null);
+                }
+                else
+                {
+                    actionPreformed = true;
+                }
+                #endregion
+                #endregion
+
+                #region Attacking Buildings.
+                //If no action has been preformed, search for a building 
+                //to attack. if one is found, send all selected units to attack.
+                if (actionPreformed != true)
+                {
+                    //Only do the check if there is anything here to begin with.
+                    if (world.TileArray[(int)mouseTile.X, (int)mouseTile.Y].OccupiedByUnit ||
+                        world.TileArray[(int)mouseTile.X, (int)mouseTile.Y].Obstacle)
+                    {
+                        //Search through each players units, buildings etc to see if there is something here.
+                        foreach (Player p in players)
+                        {
+                            if (!p.Equals(localPlayer))
+                            {
+                                Entity target = null;
+
+                                #region Searching through this Players units, buildings etc.
+                                #region Searching through this Players Units.
+                                target = (p.PlayerUnits.Find(delegate(Entity entity)
+                                {
+                                    return entity.BoundingBox.Contains((int)mouseTile.X,
+                                        (int)mouseTile.Y);
+                                }));
+
+                                //If we've found a target in this Player's armoury, send all selected units to attack.
+                                //We can break out of checking any more Players: we have found something.
+                                if (target != null)
+                                {
+                                    foreach (Unit u in localPlayer.PlayerSelectedEntities.OfType<Unit>())
+                                    {
+                                        u.Attack(target);
+                                    }
+                                    actionPreformed = true;
+                                    break;
+                                }
+                                #endregion
+
+                                #region Searching through this Players Buildings.
+                                target = (p.PlayerBuildings.Find(delegate(Entity entity)
+                                {
+                                    return entity.BoundingBox.Contains(new Point((int)relativePosition.X,
+                                        (int)relativePosition.Y));
+                                }));
+
+                                //If we've found a target in this Player's armoury, send all selected units to attack.
+                                //We can break out of checking any more Players: we have found something.
+                                if (target != null)
+                                {
+                                    foreach (Unit u in localPlayer.PlayerSelectedEntities.OfType<Unit>())
+                                    {
+                                        u.Attack(target);
+                                    }
+                                    actionPreformed = true;
+                                    break;
+                                }
+                                #endregion
+
+                                #region Searching through this Players Harvesters.
+                                target = (p.PlayerHarvesters.Find(delegate(Entity entity)
+                                {
+                                    return entity.BoundingBox.Contains(new Point((int)relativePosition.X,
+                                        (int)relativePosition.Y));
+                                }));
+                                
+
+                                //If we've found a target in this Player's armoury, send all selected units to attack.
+                                //We can break out of checking any more Players: we have found something.
+                                if (target != null)
+                                {
+                                    foreach (Unit u in localPlayer.PlayerSelectedEntities.OfType<Unit>())
+                                    {
+                                        u.Attack(target);
+                                    }
+                                    actionPreformed = true;
+                                    break;
+                                }
+                                #endregion
+                                #endregion
+                            }
+                        }
+                    }
+                }
+                #endregion
+
+                #region Moving units.
+                //If no  action has been preformed it's an empty location. We therefore try
+                //and move any selected units to this location.
+                if (actionPreformed != true)
                 {
                     localPlayer.PlayerSelectedEntities.Remove(null);
 
@@ -169,7 +291,8 @@ namespace RTS_Game
                     }
                     #endregion
                 }
-            }
+                #endregion
+            } 
             #endregion
 
             #region Right Mouse Click
@@ -191,6 +314,48 @@ namespace RTS_Game
         #endregion
         public virtual void MouseMoved(int x, int y)
         {
+            //If we're holding the left mouse button down.
+            if (input.IsMouseDown != false && input.Left)
+            {
+                //If it's a new rectangle, create the origin.
+                if (input.DragOrigin == Vector2.Zero)
+                {
+                    input.DragRect = Rectangle.Empty;
+                    input.DragOrigin = camera.relativeXY(new Vector2(x, y));
+                }
+                    //Otherwise work out the length/width of the rectangle.
+                else
+                {
+                    Vector2 relativeXY = camera.relativeXY(new Vector2(x, y));
+
+                            //Calculates the selection rectangle.
+                            input.DragRect = new Rectangle((int)input.DragOrigin.X, (int)input.DragOrigin.Y,
+                                (int)(relativeXY.X - input.DragOrigin.X), (int)(relativeXY.Y - input.DragOrigin.Y));
+                }
+            }
+            else
+            {
+                //Add units to selected Units. 
+                foreach (Unit u in localPlayer.PlayerUnits)
+                {
+                    if (input.DragRect.Contains(new Point((int)u.PixelPosition.X, (int)u.PixelPosition.Y)))
+                    {
+                        localPlayer.PlayerSelectedEntities.Add(u);
+                    }
+                }
+
+                input.DragRect = Rectangle.Empty;
+            }
+        }
+
+        #region Function Explanation
+        #endregion
+        public virtual void MouseDown(int x, int y, MouseButton button)
+        {
+            if (button == MouseButton.Left)
+            {
+
+            }
         }
 
         #region Function Explanation
@@ -418,9 +583,14 @@ namespace RTS_Game
                 }
             }
 
+            if (input.DragOrigin != Vector2.Zero)
+            {
+                spriteBatch.Draw(Resources.GetGUITextures("SelectedRectangle"), input.DragRect, null, Color.White, 0f, new Vector2(0, 0), SpriteEffects.None, 0);
+            }
+
             //DEBUG.
             foreach (Tile t in world.TileArray)
-            {
+             {
                 if (t.Obstacle)
                 {
                  //   spriteBatch.Draw(Resources.GetGUITextures("TileOverlay"), t.BoundingBox, null, new Color(255, 0, 0, 10), 0f, new Vector2(0, 0), SpriteEffects.None, 0);

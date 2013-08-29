@@ -42,10 +42,7 @@ Overlay when placing Buildings
 
 BUGS
 
-Harvester moving crashes game when encountering a unit in the way.
+Harvester needs to be given new move code
 
-Game crashes when unit tries to move to obstacle or its own tile
-
-Game draws all tiles a half back and up, on purpose but can this be changed?
-
-Harvester isn't perfect in movement.
+Drag code needs to work in all 4 directions.
+AI buildings are added to building list twice.

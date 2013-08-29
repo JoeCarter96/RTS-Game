@@ -27,6 +27,33 @@ namespace RTS_Game
         //Stores the mouse button that was clicked last on the MouseDown event
         private MouseButton LastMouseDown = MouseButton.None;
 
+        private bool isMouseDown;
+
+        public bool IsMouseDown
+        {
+            get { return isMouseDown; }
+            set { isMouseDown = value; }
+        }
+
+
+        private Rectangle dragRect;
+
+        public Rectangle DragRect
+        {
+            get { return dragRect; }   
+            set { dragRect = value; }
+        }
+        
+
+        private Vector2 dragOrigin = Vector2.Zero; 
+
+        public Vector2 DragOrigin
+        {
+            get { return dragOrigin; }
+            set { dragOrigin = value; }
+        }
+        
+
         //Properties
         public bool KeyDown
         {
@@ -139,35 +166,44 @@ namespace RTS_Game
                 {
                     MouseDown(X, Y, MouseButton.Left);
                     LastMouseDown = MouseButton.Left;
+                    isMouseDown = true;
                 }
-                if (mouseState.RightButton == ButtonState.Pressed && !rightLastFrame)
+                else if (mouseState.RightButton == ButtonState.Pressed && !rightLastFrame)
                 {
                     MouseDown(X, Y, MouseButton.Right);
                     LastMouseDown = MouseButton.Right;
+                    isMouseDown = true;
                 }
-                if (mouseState.MiddleButton == ButtonState.Pressed && !middleLastFrame)
+                else if (mouseState.MiddleButton == ButtonState.Pressed && !middleLastFrame)
                 {
                     MouseDown(X, Y, MouseButton.Middle);
                     LastMouseDown = MouseButton.Middle;
+                    isMouseDown = true;
                 }
             }
             #endregion
 
             #region MouseUp Triggering
-            //If the mouse is released, we fire the mouse down event
+            //If the mouse is released, we fire the mouse up event
             if (MouseUp != null)
             {
                 if (mouseState.LeftButton == ButtonState.Released && leftLastFrame)
                 {
                     MouseUp(X, Y, MouseButton.Left);
+                    isMouseDown = false;
+                    DragOrigin = Vector2.Zero;
                 }
                 if (mouseState.RightButton == ButtonState.Released && rightLastFrame)
                 {
                     MouseUp(X, Y, MouseButton.Right);
+                    isMouseDown = false;
+                    DragOrigin = Vector2.Zero;
                 }
                 if (mouseState.MiddleButton == ButtonState.Released && middleLastFrame)
                 {
                     MouseUp(X, Y, MouseButton.Middle);
+                    isMouseDown = false;
+                    DragOrigin = Vector2.Zero;
                 }
             }
             #endregion
