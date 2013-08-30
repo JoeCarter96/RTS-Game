@@ -532,7 +532,7 @@ namespace RTS_Game
 
                     #endregion
 
-                    #region TEMP for shits and giggles
+                   /* #region TEMP for shits and giggles
                     foreach (Unit u in p.PlayerUnits)
                     {
                         if (u.Turret != null)
@@ -545,7 +545,7 @@ namespace RTS_Game
                             u.Turret.Rotation = u.toAngle(angle);
                         }
                     }
-                    #endregion
+                    #endregion*/
                 }
             }
         }
@@ -569,7 +569,10 @@ namespace RTS_Game
             {
                 foreach (Entity e in p.PlayerBuildings)
                 {
-                    e.Draw(spriteBatch);
+                    e.Draw(spriteBatch);    
+
+                    //TEMP shows bounding boxes.
+                    spriteBatch.Draw(Resources.GetGUITextures("SelectedRectangle"), e.BoundingBox, null, new Color(0, 0, 200), 0f, new Vector2(0, 0), SpriteEffects.None, 0);
                 }
 
                 foreach (Entity e in p.PlayerUnits)

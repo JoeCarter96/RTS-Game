@@ -207,7 +207,7 @@ namespace RTS_Game
                     PixelPosition += Velocity;
                     turret.PixelPosition = PixelPosition;
                     Rotation = toAngle(direction);
-                    turret.Rotation = Rotation;
+                    rotateTurret(Waypoints.Last());
                 }
             }
 
@@ -240,7 +240,7 @@ namespace RTS_Game
                         //Stops it going faster than it's max speed.
                         CURRENT_SPEED = Math.Min(maxSpeed, CURRENT_SPEED += acceleration);
                     }
-                    //Actually visibly moving, changing directione etc.
+                    //Actually visibly moving, changing direction, adjusting turret etc.
                     Vector2 direction = new Vector2(nextTile.X * World.TileWidth, nextTile.Y * World.TileWidth) - PixelPosition;
                     direction.Normalize();
                     Velocity = Vector2.Multiply(direction, CURRENT_SPEED);
@@ -250,6 +250,21 @@ namespace RTS_Game
                     turret.Rotation = Rotation;
                 }
             }
+        }
+
+        #region Function Explanation
+        //Rotates the units turret to face the target tile.
+        //Used for moving, so that the turret faces the last waypoint.
+        #endregion
+        public void rotateTurret(Vector2 targetTile)
+        {
+            Vector2 target = new Vector2(targetTile.X * GameClass.Tile_Width,
+                    targetTile.Y * GameClass.Tile_Width);
+
+                Vector2 angle = new Vector2(target.X - Turret.PixelPosition.X,
+                    target.Y - Turret.PixelPosition.Y);
+
+                Turret.Rotation = toAngle(angle);
         }
 
         #region Function Explanation
@@ -332,7 +347,11 @@ namespace RTS_Game
         #endregion
         public void Attack(Entity target)
         {
-            Waypoints = WaypointsGenerator.GenerateWaypoints(TilePosition, new Vector2(target.TilePosition.X - 2, target.TilePosition.Y), false);
+            Waypoints = WaypointsGenerator.GenerateWaypoints(TilePosition, new Vector2(target.TilePosition.X - 10, target.TilePosition.Y), false);
+            if (!Owner.PlayerMovingEntities.Contains(this))
+            {
+                Owner.PlayerMovingEntities.Add(this);
+            }
         }
 
         #region Function Explanation

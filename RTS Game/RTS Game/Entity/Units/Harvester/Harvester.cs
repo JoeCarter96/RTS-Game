@@ -99,7 +99,11 @@ namespace RTS_Game
             if (bestChoice != null)
             {
                 Waypoints = WaypointsGenerator.GenerateWaypoints(this.TilePosition, bestChoice.MineSpot, false);
-                Owner.PlayerMovingEntities.Add(this);
+
+                if (!Owner.PlayerMovingEntities.Contains(this))
+                {
+                    Owner.PlayerMovingEntities.Add(this);
+                }
                 NextTile = Waypoints.Dequeue();
                 targetRef = bestChoice;
                 targetRef.NumberOfHarvesters++;
@@ -126,7 +130,10 @@ namespace RTS_Game
                 Waypoints = WaypointsGenerator.GenerateWaypoints(TilePosition, orePos, targetRef.BoundingBox);
             }
 
-            Owner.PlayerMovingEntities.Add(this);
+            if (!Owner.PlayerMovingEntities.Contains(this))
+            {
+                Owner.PlayerMovingEntities.Add(this);
+            }
             NextTile = Waypoints.Dequeue();
         }
 
