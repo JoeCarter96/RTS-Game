@@ -16,12 +16,16 @@ namespace RTS_Game
         private static bool keyDown = false;
         private static bool keyDownLastFrame = false;
 
+        private bool dragging = false;
+
         private MouseState mouseState;
         private static int x, y, dy, dx = 0;
         private static bool left, right, middle = false;
         private static bool leftLastFrame, rightLastFrame, middleLastFrame = false;
         //holds the x and y of the last frame
         private static int yLastFrame, xLastFrame = 0;
+
+        private Camera camera;
 
         //Mouse clicked event variables
         //Stores the mouse button that was clicked last on the MouseDown event
@@ -35,7 +39,6 @@ namespace RTS_Game
             set { isMouseDown = value; }
         }
 
-
         private Rectangle dragRect;
 
         public Rectangle DragRect
@@ -44,7 +47,6 @@ namespace RTS_Game
             set { dragRect = value; }
         }
         
-
         private Vector2 dragOrigin = Vector2.Zero; 
 
         public Vector2 DragOrigin
@@ -131,6 +133,12 @@ namespace RTS_Game
             mouseState = Mouse.GetState();
         }
 
+        //Passed during gameInstance initialisation.
+        public void setup(Camera camera)
+        {
+            this.camera = camera;
+        }
+
         public void Update(GameTime gameTime)
         {
             #region Storing various values
@@ -166,20 +174,25 @@ namespace RTS_Game
                 {
                     MouseDown(X, Y, MouseButton.Left);
                     LastMouseDown = MouseButton.Left;
-                    isMouseDown = true;
+                    isMouseDown = true; 
+                    dragging = true;
                 }
                 else if (mouseState.RightButton == ButtonState.Pressed && !rightLastFrame)
                 {
                     MouseDown(X, Y, MouseButton.Right);
                     LastMouseDown = MouseButton.Right;
                     isMouseDown = true;
+                    dragging = true;
                 }
                 else if (mouseState.MiddleButton == ButtonState.Pressed && !middleLastFrame)
                 {
                     MouseDown(X, Y, MouseButton.Middle);
                     LastMouseDown = MouseButton.Middle;
                     isMouseDown = true;
+                    dragging = true;
                 }
+
+                
             }
             #endregion
 
@@ -191,20 +204,38 @@ namespace RTS_Game
                 {
                     MouseUp(X, Y, MouseButton.Left);
                     isMouseDown = false;
-                    DragOrigin = Vector2.Zero;
+
+                    //Mouse is up, dragging ends.
+                    dragging = false;
+                    isMouseDown = false;
+                    dragOrigin = Vector2.Zero;
+                    dragRect = Rectangle.Empty;
                 }
                 if (mouseState.RightButton == ButtonState.Released && rightLastFrame)
                 {
                     MouseUp(X, Y, MouseButton.Right);
                     isMouseDown = false;
-                    DragOrigin = Vector2.Zero;
+
+                    //Mouse is up, dragging ends.
+                    dragging = false;
+                    isMouseDown = false;
+                    dragOrigin = Vector2.Zero;
+                    dragRect = Rectangle.Empty;
                 }
                 if (mouseState.MiddleButton == ButtonState.Released && middleLastFrame)
                 {
                     MouseUp(X, Y, MouseButton.Middle);
                     isMouseDown = false;
-                    DragOrigin = Vector2.Zero;
+
+                    //Mouse is up, dragging ends.
+                    dragging = false;
+                    isMouseDown = false;
+                    dragOrigin = Vector2.Zero;
+                    dragRect = Rectangle.Empty;
                 }
+
+
+
             }
             #endregion
 
@@ -261,6 +292,30 @@ namespace RTS_Game
                 if (dy > 0 || dy < 0 || dx > 0 || dx < 0)
                 {
                     MouseMoved(X, Y);
+
+                    if (dragging == true)
+                    {
+                        if (dragOrigin == Vector2.Zero)
+                        {
+                            //if there is a camera, use relative xy, otherwise assume a screen
+                            //sized world.
+                            if (camera != null)
+                            {
+                                dragOrigin = camera.relativeXY(new Vector2(X, Y));
+                            }
+                            else
+                            {
+                                dragOrigin = new Vector2(X, Y);
+                            }
+                        }
+                        else
+                        {
+                            Vector2 relativeXY = camera.relativeXY(new Vector2(X, Y));
+
+                            dragRect = new Rectangle((int)dragOrigin.X, (int)dragOrigin.Y,
+                                (int)(relativeXY.X - dragOrigin.X), (int)(relativeXY.Y - dragOrigin.Y));
+                        }
+                    }
                 }
             }
             #endregion

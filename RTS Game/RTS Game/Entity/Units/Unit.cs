@@ -60,7 +60,7 @@ namespace RTS_Game
         }
 
         public Queue<Vector2> Waypoints
-        {
+        { 
             get { return WAYPOINTS; }
             set { WAYPOINTS = value; }
         }
@@ -347,7 +347,7 @@ namespace RTS_Game
         #endregion
         public void Attack(Entity target)
         {
-            Waypoints = WaypointsGenerator.GenerateWaypoints(TilePosition, new Vector2(target.TilePosition.X - 10, target.TilePosition.Y), false);
+            Waypoints = WaypointsGenerator.GenerateWaypoints(TilePosition, FindNearestTile.BeginSearch(target.TilePosition, World.TileArray), false);
             if (!Owner.PlayerMovingEntities.Contains(this))
             {
                 Owner.PlayerMovingEntities.Add(this);

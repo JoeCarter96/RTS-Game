@@ -81,9 +81,12 @@ namespace RTS_Game
             input.MouseMoved += MouseMoved;
             input.KeyPress += KeyPress;
             input.MouseDown += MouseDown;
+            input.MouseUp += MouseUp;
             
             //we tell the camera the size of the tilemap so it can adjust its range
             camera.GiveTilemap(world);
+
+            input.setup(camera);
 
             #region TEMP: Unit Testing.
             oreArray = new Ore[world.TileArray.GetLength(0), world.TileArray.GetLength(1)];
@@ -185,79 +188,85 @@ namespace RTS_Game
                 //to attack. if one is found, send all selected units to attack.
                 if (actionPreformed != true)
                 {
-                    //Only do the check if there is anything here to begin with.
-                    if (world.TileArray[(int)mouseTile.X, (int)mouseTile.Y].OccupiedByUnit ||
-                        world.TileArray[(int)mouseTile.X, (int)mouseTile.Y].Obstacle)
+                    //If mouse tile is within tile array boundaries.. (Stops crashes when
+                    //clicking outside of the window)
+                    if (world.TileArray.GetLength(0) > mouseTile.X && mouseTile.X > 0
+                        && world.TileArray.GetLength(1) > mouseTile.Y && mouseTile.Y > 0)
                     {
-                        //Search through each players units, buildings etc to see if there is something here.
-                        foreach (Player p in players)
+                        //Only do the check if there is anything here to begin with.
+                        if (world.TileArray[(int)mouseTile.X, (int)mouseTile.Y].OccupiedByUnit ||
+                            world.TileArray[(int)mouseTile.X, (int)mouseTile.Y].Obstacle)
                         {
-                            if (!p.Equals(localPlayer))
+                            //Search through each players units, buildings etc to see if there is something here.
+                            foreach (Player p in players)
                             {
-                                Entity target = null;
-
-                                #region Searching through this Players units, buildings etc.
-                                #region Searching through this Players Units.
-                                target = (p.PlayerUnits.Find(delegate(Entity entity)
+                                if (!p.Equals(localPlayer))
                                 {
-                                    return entity.BoundingBox.Contains((int)mouseTile.X,
-                                        (int)mouseTile.Y);
-                                }));
+                                    Entity target = null;
 
-                                //If we've found a target in this Player's armoury, send all selected units to attack.
-                                //We can break out of checking any more Players: we have found something.
-                                if (target != null)
-                                {
-                                    foreach (Unit u in localPlayer.PlayerSelectedEntities.OfType<Unit>())
+                                    #region Searching through this Players units, buildings etc.
+                                    #region Searching through this Players Units.
+                                    target = (p.PlayerUnits.Find(delegate(Entity entity)
                                     {
-                                        u.Attack(target);
-                                    }
-                                    actionPreformed = true;
-                                    break;
-                                }
-                                #endregion
+                                        return entity.BoundingBox.Contains((int)mouseTile.X,
+                                            (int)mouseTile.Y);
+                                    }));
 
-                                #region Searching through this Players Buildings.
-                                target = (p.PlayerBuildings.Find(delegate(Entity entity)
-                                {
-                                    return entity.BoundingBox.Contains(new Point((int)relativePosition.X,
-                                        (int)relativePosition.Y));
-                                }));
-
-                                //If we've found a target in this Player's armoury, send all selected units to attack.
-                                //We can break out of checking any more Players: we have found something.
-                                if (target != null)
-                                {
-                                    foreach (Unit u in localPlayer.PlayerSelectedEntities.OfType<Unit>())
+                                    //If we've found a target in this Player's armoury, send all selected units to attack.
+                                    //We can break out of checking any more Players: we have found something.
+                                    if (target != null)
                                     {
-                                        u.Attack(target);
+                                        foreach (Unit u in localPlayer.PlayerSelectedEntities.OfType<Unit>())
+                                        {
+                                            u.Attack(target);
+                                        }
+                                        actionPreformed = true;
+                                        break;
                                     }
-                                    actionPreformed = true;
-                                    break;
-                                }
-                                #endregion
+                                    #endregion
 
-                                #region Searching through this Players Harvesters.
-                                target = (p.PlayerHarvesters.Find(delegate(Entity entity)
-                                {
-                                    return entity.BoundingBox.Contains(new Point((int)relativePosition.X,
-                                        (int)relativePosition.Y));
-                                }));
-                                
-
-                                //If we've found a target in this Player's armoury, send all selected units to attack.
-                                //We can break out of checking any more Players: we have found something.
-                                if (target != null)
-                                {
-                                    foreach (Unit u in localPlayer.PlayerSelectedEntities.OfType<Unit>())
+                                    #region Searching through this Players Buildings.
+                                    target = (p.PlayerBuildings.Find(delegate(Entity entity)
                                     {
-                                        u.Attack(target);
+                                        return entity.BoundingBox.Contains(new Point((int)relativePosition.X,
+                                            (int)relativePosition.Y));
+                                    }));
+
+                                    //If we've found a target in this Player's armoury, send all selected units to attack.
+                                    //We can break out of checking any more Players: we have found something.
+                                    if (target != null)
+                                    {
+                                        foreach (Unit u in localPlayer.PlayerSelectedEntities.OfType<Unit>())
+                                        {
+                                            u.Attack(target);
+                                        }
+                                        actionPreformed = true;
+                                        break;
                                     }
-                                    actionPreformed = true;
-                                    break;
+                                    #endregion
+
+                                    #region Searching through this Players Harvesters.
+                                    target = (p.PlayerHarvesters.Find(delegate(Entity entity)
+                                    {
+                                        return entity.BoundingBox.Contains(new Point((int)relativePosition.X,
+                                            (int)relativePosition.Y));
+                                    }));
+
+
+                                    //If we've found a target in this Player's armoury, send all selected units to attack.
+                                    //We can break out of checking any more Players: we have found something.
+                                    if (target != null)
+                                    {
+                                        foreach (Unit u in localPlayer.PlayerSelectedEntities.OfType<Unit>())
+                                        {
+                                            u.Attack(target);
+                                        }
+                                        actionPreformed = true;
+                                        break;
+                                    }
+                                    #endregion
+                                    #endregion
                                 }
-                                #endregion
-                                #endregion
                             }
                         }
                     }
@@ -314,26 +323,15 @@ namespace RTS_Game
         #endregion
         public virtual void MouseMoved(int x, int y)
         {
-            //If we're holding the left mouse button down.
-            if (input.IsMouseDown != false && input.Left)
-            {
-                //If it's a new rectangle, create the origin.
-                if (input.DragOrigin == Vector2.Zero)
-                {
-                    input.DragRect = Rectangle.Empty;
-                    input.DragOrigin = camera.relativeXY(new Vector2(x, y));
-                }
-                    //Otherwise work out the length/width of the rectangle.
-                else
-                {
-                    Vector2 relativeXY = camera.relativeXY(new Vector2(x, y));
 
-                            //Calculates the selection rectangle.
-                            input.DragRect = new Rectangle((int)input.DragOrigin.X, (int)input.DragOrigin.Y,
-                                (int)(relativeXY.X - input.DragOrigin.X), (int)(relativeXY.Y - input.DragOrigin.Y));
-                }
-            }
-            else
+        }
+
+        #region Function Explanation
+        //Called whenever the mouse button is released. Handles drag code unit selection.
+        #endregion
+        public virtual void MouseUp(int x, int y, MouseButton button)
+        {
+            if (button == MouseButton.Left)
             {
                 //Add units to selected Units. 
                 foreach (Unit u in localPlayer.PlayerUnits)
@@ -343,8 +341,6 @@ namespace RTS_Game
                         localPlayer.PlayerSelectedEntities.Add(u);
                     }
                 }
-
-                input.DragRect = Rectangle.Empty;
             }
         }
 
@@ -518,7 +514,7 @@ namespace RTS_Game
                     {
                         foreach (Unit u in p.PlayerMovingEntities.ToList())
                         {
-                            u.Move();
+                            u.Move(); 
                         }
                     }
                     #endregion
