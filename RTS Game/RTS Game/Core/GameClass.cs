@@ -17,8 +17,8 @@ namespace RTS_Game
     {
         #region Variables
         //Game constants
-        public const int Game_Width = 800;
-        public const int Game_Height = 600;
+        public const int Game_Width = 1440;
+        public const int Game_Height = 900;
         public const int Tile_Width = 24;
 
         //Game objects
@@ -54,7 +54,7 @@ namespace RTS_Game
             //Set the size of the game window
             graphics.PreferredBackBufferHeight = Game_Height;
             graphics.PreferredBackBufferWidth = Game_Width;
-         // this.graphics.IsFullScreen = true;
+            this.graphics.IsFullScreen = true;
             graphics.ApplyChanges();
 
             base.Initialize();

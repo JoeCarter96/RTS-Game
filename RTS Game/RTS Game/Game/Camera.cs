@@ -28,7 +28,7 @@ namespace RTS_Game
         private float zoom = 1f;
 
         //TODO: add support for full screen game
-        private Viewport viewport = new Viewport(new Rectangle(0, 0, 800, 600));
+        private Viewport viewport = new Viewport(new Rectangle(0, 0, GameClass.Game_Width, GameClass.Game_Height));
 
         //The value of the mouses scroll from the last frame.
         //Used to find if the mouse has beens crolled since the last frame.

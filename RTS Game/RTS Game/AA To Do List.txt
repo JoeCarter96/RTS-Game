@@ -43,6 +43,4 @@ Overlay when placing Buildings
 BUGS
 
 Harvester needs to be given new move code
-
-Drag code needs to work in all 4 directions.
 AI buildings are added to building list twice.

@@ -190,9 +190,7 @@ namespace RTS_Game
                 }   
             }
             #endregion
-
             
-
             #region MouseClicked Triggering
             if (MouseClicked != null && !dragging)
             {
@@ -282,11 +280,13 @@ namespace RTS_Game
             dx = x - xLastFrame;
             #endregion
 
-            //if we have dragged while mouse is down, begin dragging stuff.
-            if (isMouseDown && (dy != 0 || dx != 0))
+            #region Drag triggering
+            //if we have dragged while mouse is down, begin dragging code.
+            if (isMouseDown && ((dy > 2 || dy < -2) || (dx > 2 || dx < -2)))
             {
                 dragging = true;
             }
+            #endregion
 
             #region MouseMoved Triggering
             //Fires the mouse moved event if there has been a change in position of the mouse

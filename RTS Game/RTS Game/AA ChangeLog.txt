@@ -96,3 +96,10 @@ and unit cycling.
 Group movement implimented,		Tom
 need changes to movement to stop
 crashes.
+
+Drag Code now Implimented,		Tom
+buggy.
+
+Drag code now works in all		Tom
+4 directions.
+

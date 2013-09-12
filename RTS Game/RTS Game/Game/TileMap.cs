@@ -94,9 +94,9 @@ namespace RTS_Game
         public void Draw(SpriteBatch spriteBatch, Camera camera)
         {
             Vector2 relativeViewport = camera.relativeXY(new Vector2(camera.Viewport.X, camera.Viewport.Y));
-            for (int i = (int) (relativeViewport.X / GameClass.Tile_Width); i <= ((relativeViewport.X + (camera.Viewport.Width / camera.Zoom)) / (GameClass.Tile_Width)) + 1; i++)
+            for (int i = (int) (relativeViewport.X / GameClass.Tile_Width); i <= ((relativeViewport.X + (camera.Viewport.Width / camera.Zoom)) / (GameClass.Tile_Width)) + 3; i++)
             {
-                for (int j = (int)(relativeViewport.Y / GameClass.Tile_Width); j <= (relativeViewport.Y + (camera.Viewport.Height / camera.Zoom)) / (GameClass.Tile_Width) + 1; j++)
+                for (int j = (int)(relativeViewport.Y / GameClass.Tile_Width); j <= (relativeViewport.Y + (camera.Viewport.Height / camera.Zoom)) / (GameClass.Tile_Width) + 3; j++)
                 {
                     if (i < tileArray.GetLength(0) && j < tileArray.GetLength(1))
                     {
