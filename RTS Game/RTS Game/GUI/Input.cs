@@ -313,10 +313,22 @@ namespace RTS_Game
                         }
                         else
                         {
-                            Vector2 relativeXY = camera.relativeXY(new Vector2(X, Y));
+                            Vector2 relativeXY;
 
-                            dragRect = new Rectangle((int)dragOrigin.X, (int)dragOrigin.Y,
-                                (int)(relativeXY.X - dragOrigin.X), (int)(relativeXY.Y - dragOrigin.Y));
+                            try
+                            {
+                                relativeXY = camera.relativeXY(new Vector2(X, Y));
+                            }
+                            catch 
+                            {
+                                relativeXY = new Vector2(X, Y);
+                            }
+                            int xRect = Math.Min((int)dragOrigin.X, (int)(relativeXY.X));
+                            int yRect = Math.Min((int)dragOrigin.Y, (int)(relativeXY.Y));
+                            int widthRect = Math.Max((int)dragOrigin.X, (int)(relativeXY.X)) - xRect;
+                            int heightRect = Math.Max((int)dragOrigin.Y, (int)(relativeXY.Y)) - yRect;
+
+                            dragRect = new Rectangle(xRect, yRect, widthRect, heightRect);
                         }
                     }
                 }
