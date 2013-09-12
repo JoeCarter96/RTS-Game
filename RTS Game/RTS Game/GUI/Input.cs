@@ -175,72 +175,26 @@ namespace RTS_Game
                     MouseDown(X, Y, MouseButton.Left);
                     LastMouseDown = MouseButton.Left;
                     isMouseDown = true; 
-                    dragging = true;
                 }
                 else if (mouseState.RightButton == ButtonState.Pressed && !rightLastFrame)
                 {
                     MouseDown(X, Y, MouseButton.Right);
                     LastMouseDown = MouseButton.Right;
                     isMouseDown = true;
-                    dragging = true;
                 }
                 else if (mouseState.MiddleButton == ButtonState.Pressed && !middleLastFrame)
                 {
                     MouseDown(X, Y, MouseButton.Middle);
                     LastMouseDown = MouseButton.Middle;
                     isMouseDown = true;
-                    dragging = true;
-                }
-
-                
+                }   
             }
             #endregion
 
-            #region MouseUp Triggering
-            //If the mouse is released, we fire the mouse up event
-            if (MouseUp != null)
-            {
-                if (mouseState.LeftButton == ButtonState.Released && leftLastFrame)
-                {
-                    MouseUp(X, Y, MouseButton.Left);
-                    isMouseDown = false;
-
-                    //Mouse is up, dragging ends.
-                    dragging = false;
-                    isMouseDown = false;
-                    dragOrigin = Vector2.Zero;
-                    dragRect = Rectangle.Empty;
-                }
-                if (mouseState.RightButton == ButtonState.Released && rightLastFrame)
-                {
-                    MouseUp(X, Y, MouseButton.Right);
-                    isMouseDown = false;
-
-                    //Mouse is up, dragging ends.
-                    dragging = false;
-                    isMouseDown = false;
-                    dragOrigin = Vector2.Zero;
-                    dragRect = Rectangle.Empty;
-                }
-                if (mouseState.MiddleButton == ButtonState.Released && middleLastFrame)
-                {
-                    MouseUp(X, Y, MouseButton.Middle);
-                    isMouseDown = false;
-
-                    //Mouse is up, dragging ends.
-                    dragging = false;
-                    isMouseDown = false;
-                    dragOrigin = Vector2.Zero;
-                    dragRect = Rectangle.Empty;
-                }
-
-
-
-            }
-            #endregion
+            
 
             #region MouseClicked Triggering
-            if (MouseClicked != null)
+            if (MouseClicked != null && !dragging)
             {
                 if (!left && leftLastFrame)
                 {
@@ -258,6 +212,49 @@ namespace RTS_Game
                 }
             }
             #endregion
+
+            #region MouseUp Triggering
+                        //If the mouse is released, we fire the mouse up event
+                        if (MouseUp != null)
+                        {
+                            if (mouseState.LeftButton == ButtonState.Released && leftLastFrame)
+                            {
+                                MouseUp(X, Y, MouseButton.Left);
+                                isMouseDown = false;
+
+                                //Mouse is up, dragging ends.
+                                dragging = false;
+                                isMouseDown = false;
+                                dragOrigin = Vector2.Zero;
+                                dragRect = Rectangle.Empty;
+                            }
+                            if (mouseState.RightButton == ButtonState.Released && rightLastFrame)
+                            {
+                                MouseUp(X, Y, MouseButton.Right);
+                                isMouseDown = false;
+
+                                //Mouse is up, dragging ends.
+                                dragging = false;
+                                isMouseDown = false;
+                                dragOrigin = Vector2.Zero;
+                                dragRect = Rectangle.Empty;
+                            }
+                            if (mouseState.MiddleButton == ButtonState.Released && middleLastFrame)
+                            {
+                                MouseUp(X, Y, MouseButton.Middle);
+                                isMouseDown = false;
+
+                                //Mouse is up, dragging ends.
+                                dragging = false;
+                                isMouseDown = false;
+                                dragOrigin = Vector2.Zero;
+                                dragRect = Rectangle.Empty;
+                            }
+
+
+
+                        }
+                        #endregion
 
             #region KeyPress Triggering
             if (KeyPress != null)
@@ -284,6 +281,12 @@ namespace RTS_Game
             dy = y - yLastFrame;
             dx = x - xLastFrame;
             #endregion
+
+            //if we have dragged while mouse is down, begin dragging stuff.
+            if (isMouseDown && (dy != 0 || dx != 0))
+            {
+                dragging = true;
+            }
 
             #region MouseMoved Triggering
             //Fires the mouse moved event if there has been a change in position of the mouse
